@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import LogoSlider from './LogoSlider';
 
 export default function HeroBanner() {
   return (
@@ -36,12 +37,9 @@ export default function HeroBanner() {
 
         {/* Logos (Scrolling) */}
         <div className="overflow-hidden whitespace-nowrap mt-4">
-          <div className="flex scrolling-logos space-x-16 animate-scroll-x">
-            <Image src="/images/sls3.png" alt="SBS" className="h-auto grayscale opacity-80 hover:opacity-100 transition" width={100} height={48} />
-            <Image src="/images/paddock.png" alt="Paddock" className="h-auto grayscale opacity-80 hover:opacity-100 transition" width={100} height={48} />
-            <Image src="/images/nutriburst.png" alt="Nutriburst" className="h-auto grayscale opacity-80 hover:opacity-100 transition" width={100} height={48} />
-            <Image src="/images/pf.png" alt="PF" className="h-auto grayscale opacity-80 hover:opacity-100 transition" width={100} height={48} />
-          </div>
+          <>
+          <LogoSlider />
+          </>
         </div>
       </div>
 
