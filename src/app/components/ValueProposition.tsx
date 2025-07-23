@@ -1,89 +1,94 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Button } from './ui/button';
 
 const ValueProposition = () => {
   return (
-    <section className="max-w-7xl mx-auto px-6 py-16">
-      {/* Title */}
-      <div className="text-center max-w-3xl mx-auto mb-14">
-        <p className="text-blue-600 font-semibold uppercase text-sm mb-2">Why Brands Choose Valar</p>
-        <h2 className="text-4xl text-black md:text-5xl font-bold mb-4">We Don’t Just Build. We Scale.</h2>
-        <p className="text-gray-600">
-          We’re not another dev shop. We partner with founders and marketers to fix what’s broken,
-          scale what’s working, and grow what matters.
-        </p>
-      </div>
-
-      {/* Grid Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Large Card */}
-        <div className="bg-white rounded-2xl shadow-md p-6 flex flex-col justify-between lg:row-span-2">
-          <div>
-            <h3 className="text-xl text-black font-semibold mb-4">Embedded Growth Team, Aligned to Win</h3>
-            <p className="text-gray-600 mb-6">
-              We plug directly into your business, adapting to your systems, sprint cycles, and goals. No layers,
-              just fast, focused collaboration that drives results.
-            </p>
-          </div>
-          <Image src="/images/imag-1.png" alt="Team Illustration" width={400} height={300} className="rounded-md mt-auto" />
+    <section className="px-4 py-8 md:py-10 bg-background-muted">
+      <div className='container mx-auto'>
+        {/* Title */}
+        <div className="text-center max-w-3xl mx-auto mb-6 md:mb-12">
+          <p className="text-primary font-medium uppercase text-sm mb-4 tracking-[0.0175rem]">Why Brands Choose Valar</p>
+          <h2 className="text-4xl text-text-dark md:text-5xl font-medium mb-4 md:mb-6">We Don’t Just Build. We Scale.</h2>
+          <p className="text-text-dark tracking-[0.04rem]">
+            We’re not another dev shop. We partner with founders and marketers<br className='hidden md:block' /> to fix what’s broken,
+            scale what’s working, and grow what matters.
+          </p>
         </div>
 
-        {/* Top Right Cards */}
-        <div className="bg-white rounded-2xl shadow-md p-6">
-          <div className="mb-3">
-            <div className="w-10 h-10 mb-2 text-gray-500">
-              <Image src="/images/icon-1.png" alt="Icon 1" width={40} height={40} className="rounded-md" />
+        {/* Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          {/* Left Large Card */}
+          <div className="bg-white rounded-3xl p-6 md:p-10 flex flex-col justify-between gap-6 lg:row-span-2">
+            <div>
+              <h3 className="text-2xl text-text-dark font-medium mb-2 md:mb-4">Embedded Growth Team, Aligned to Win</h3>
+              <p className="text-text-light tracking-[0.04rem]">
+                We plug directly into your business, adapting to your systems, sprint cycles, and goals. No layers,
+                just fast, focused collaboration that drives results.
+              </p>
             </div>
-            <h3 className="text-lg text-black font-semibold">Full-Funnel Shopify Expertise</h3>
-            <p className="text-gray-600 mt-2 text-sm">
-              From custom builds to CRO, upsells, and retention, we support the entire ecommerce lifecycle
-              so you can scale without juggling multiple vendors.
-            </p>
+            <Image src="/images/imag-1.png" alt="Team Illustration" width={400} height={300} className="rounded-md mt-auto" />
           </div>
-        </div>
 
-        <div className="bg-white rounded-2xl shadow-md p-6">
-          <div className="mb-3">
-            <div className="w-10 h-10 mb-2 text-gray-500">
-              <Image src="/images/icon-2.png" alt="Icon 2" width={40} height={40} className="rounded-md" />
+          {/* Top Right Cards */}
+          <div className="relative rounded-3xl p-[1.5px] bg-[linear-gradient(137.84deg,#F3F8FF_0%,#EDF2F9_100%)]">
+            <div className="bg-white rounded-[calc(theme(borderRadius.3xl)-1.5px)] p-6 md:p-8 h-full">
+              <div className="size-13 mb-4">
+                <Image src="/images/icon-1.png" alt="Icon 1" width={100} height={100} className="rounded-[4px]" />
+              </div>
+              <h3 className="text-2xl text-text-dark font-medium mb-2">Full-Funnel Shopify Expertise</h3>
+              <p className="text-text-light tracking-[0.04rem]">
+                From custom builds to CRO, upsells, and retention, we support the entire ecommerce lifecycle
+                so you can scale without juggling multiple vendors.
+              </p>
             </div>
-            <h3 className="text-lg text-black font-semibold">Smarter Automation, Real ROI</h3>
-            <p className="text-gray-600 mt-2 text-sm">
-              We connect your tools and systems with purpose. No fluffy dashboards, just seamless automation
-              that reduces cost, boosts retention, and saves time.
-            </p>
           </div>
-        </div>
 
-        {/* Bottom Right Card */}
-        <div className="bg-white rounded-2xl shadow-md p-6">
-          <div className="mb-3">
-            <div className="w-10 h-10 mb-2 text-gray-500">
-              <Image src="/images/icon-3.png" alt="Icon 3" width={40} height={40} className="rounded-md" />
+          <div className="relative rounded-3xl p-[1.5px] bg-[linear-gradient(137.84deg,#F3F8FF_0%,#EDF2F9_100%)]">
+            <div className="bg-white rounded-[calc(theme(borderRadius.3xl)-1.5px)] p-6 md:p-8 h-full">
+              <div className="size-13 mb-4">
+                <Image src="/images/icon-2.png" alt="Icon 2" width={100} height={100} className="rounded-[4px]" />
+              </div>
+              <h3 className="text-2xl text-text-dark font-medium mb-2">Smarter Automation, Real ROI</h3>
+              <p className="text-text-light tracking-[0.04rem]">
+                We connect your tools and systems with purpose. No fluffy dashboards, just seamless automation
+                that reduces cost, boosts retention, and saves time.
+              </p>
             </div>
-            <h3 className="text-lg text-black font-semibold">Direct, Decisive Communication</h3>
-            <p className="text-gray-600 mt-2 text-sm">
-              You speak directly with the people doing the work. No PM maze. No long loops.
-              Fast responses, smart decisions, and clear execution, always.
-            </p>
           </div>
-        </div>
 
-        {/* CTA Card */}
-        <div className="bg-blue-800 text-white rounded-2xl shadow-md p-6 flex flex-col justify-between">
-          <div>
-            <h3 className="text-lg font-bold leading-snug mb-6">
-              Bold Ideas,<br />
-              Precise Execution,<br />
-              E-commerce That Wins
-            </h3>
+          {/* Bottom Right Card */}
+          <div className="relative rounded-3xl p-[1.5px] bg-[linear-gradient(137.84deg,#F3F8FF_0%,#EDF2F9_100%)]">
+            <div className="bg-white rounded-[calc(theme(borderRadius.3xl)-1.5px)] p-6 md:p-8 h-full">
+              <div className="size-13 mb-4">
+                <Image src="/images/icon-3.png" alt="Icon 3" width={100} height={100} className="rounded-[4px]" />
+              </div>
+              <h3 className="text-2xl text-text-dark font-medium mb-2">Direct, Decisive Communication</h3>
+              <p className="text-text-light tracking-[0.04rem]">
+                You speak directly with the people doing the work. No PM maze. No long loops.
+                Fast responses, smart decisions, and clear execution, always.
+              </p>
+            </div>
           </div>
-          <Link href="#" className="bg-white text-blue-800 font-semibold px-4 py-2 rounded-md inline-flex items-center w-max">
-            Let’s Talk Growth
-            <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
+
+          {/* CTA Card */}
+          <div className="bg-primary text-white rounded-3xl p-6 md:p-10 flex flex-col justify-end">
+            <div>
+              <h3 className="text-2xl font-bold mb-6 md:mb-7 tracking-[0.03rem]">
+                Bold Ideas,<br />
+                Precise Execution,<br />
+                E-commerce That Wins
+              </h3>
+            </div>
+            <Link href="#">
+              <Button className='bg-white border border-white text-primary hover:bg-transparent hover:text-white flex items-center gap-2 w-full md:w-max'>
+                Let’s Talk Growth
+                <svg xmlns="http://www.w3.org/2000/svg" className="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12h19m-6-6l6 6-6 6" />
+                </svg>
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </section>

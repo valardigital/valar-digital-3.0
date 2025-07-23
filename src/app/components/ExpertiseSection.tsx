@@ -36,14 +36,14 @@ export default function ExpertiseSection() {
   return (
     <section className="max-w-7xl mx-auto px-6 py-20 text-center">
       {/* Section Header */}
-      <p className="text-blue-600 text-sm font-semibold uppercase mb-2">
+      <p className="text-primary text-sm font-semibold uppercase mb-2">
         What We Do Best
       </p>
-      <h2 className="text-4xl font-bold text-black mb-4">
+      <h2 className="text-4xl font-bold text-text-dark mb-4">
         Expertise That
         <br className="hidden sm:block" /> Delivers Results
       </h2>
-      <p className="text-gray-600 max-w-2xl mx-auto mb-12">
+      <p className="text-text-light max-w-2xl mx-auto mb-12">
         We combine deep Shopify Plus development, smart automation, and
         performance-focused strategy to help ecommerce brands grow with speed,
         precision, and clarity.
@@ -64,10 +64,10 @@ export default function ExpertiseSection() {
               className="rounded-lg w-full md:w-40 object-cover"
             />
             <div>
-              <h3 className="text-lg text-black font-semibold mb-2">
+              <h3 className="text-lg text-text-dark font-semibold mb-2">
                 {service.title}
               </h3>
-              <p className="text-gray-600 mb-4 text-sm">
+              <p className="text-text-light mb-4 text-sm">
                 {service.description}
               </p>
               <div className="flex flex-wrap gap-2">

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HeroBanner from './components/hero-banner';
+import HeroBanner from './components/sections/hero-banner';
 import ValueProposition from './components/ValueProposition';
 import ExpertiseSection from './components/ExpertiseSection';
 import CaseStudiesShowcase from './components/CaseStudiesShowcase';
@@ -14,9 +14,9 @@ export default function Home() {
       <HeroBanner />
       <ValueProposition />
       <ExpertiseSection />
-      <CaseStudiesShowcase/>
+      {/* <CaseStudiesShowcase/>
       <TestimonialSlider />
-      <TrustedTools />
+      <TrustedTools /> */}
     </>
   );
 }
