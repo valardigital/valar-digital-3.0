@@ -1,20 +1,20 @@
 
 import React from "react";
 import LogoSlider from "react-slick";
-import sls3 from "../../../assets/images/sls3.png";
-import paddock from "../../../assets/images/paddock.png";
-import nutriburst from "../../../assets/images/nutriburst.png";
-import kair from "../../../assets/images/kair.png";
-import audenza from "../../../assets/images/audenza-logo.png";
-import hanx from "../../../assets/images/hanx.png";
-import pfImage from "../../../assets/images/pf.png";
-import fleet from "../../../assets/images/logo-fleet.png";
-import loveraw from "../../../assets/images/eatloveraw.png";
-import eyecon from "../../../assets/images/eyecon.png";
-import oscar from "../../../assets/images/oscar.png";
-import clasiq from "../../../assets/images/clasiq.png";
-import skinsapiens from "../../../assets/images/skin-sapiens.png";
-import ample from "../../../assets/images/ample.png";
+import sls3 from "../../../assets/images/home/sls3.png";
+import paddock from "../../../assets/images/home/paddock.png";
+import nutriburst from "../../../assets/images/home/nutriburst.png";
+import kair from "../../../assets/images/home/kair.png";
+import audenza from "../../../assets/images/home/audenza-logo.png";
+import hanx from "../../../assets/images/home/hanx.png";
+import pfImage from "../../../assets/images/home/pf.png";
+import fleet from "../../../assets/images/home/logo-fleet.png";
+import loveraw from "../../../assets/images/home/eatloveraw.png";
+import eyecon from "../../../assets/images/home/eyecon.png";
+import oscar from "../../../assets/images/home/oscar.png";
+import clasiq from "../../../assets/images/home/clasiq.png";
+import skinsapiens from "../../../assets/images/home/skin-sapiens.png";
+import ample from "../../../assets/images/home/ample.png";
 import Image from "next/image";
 
 const SlickSlider = () => {

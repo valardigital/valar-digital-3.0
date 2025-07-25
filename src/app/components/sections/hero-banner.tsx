@@ -5,7 +5,9 @@ import Link from 'next/link';
 import LogoSlider from '../home/LogoSlider';
 import { Button } from '../ui/button';
 import arrowRight from '../../../assets/images/arrow-right.png';
-import heroImageMobile from '../../../assets/images/hero-image-mobile.jpg';
+import jack from '../../../assets/images/home/jack.png';
+import heroImage from '../../../assets/images/home/Hero-Image.png';
+import heroImageMobile from '../../../assets/images/home/hero-image-mobile.jpg';
 
 export default function HeroBanner() {
   return (
@@ -24,13 +26,13 @@ export default function HeroBanner() {
           </p>
 
           <div className="flex flex-wrap gap-2 mb-25.5">
-            <Link href="#" className='flex-1'>
-              <Button className='w-full flex items-center'>
+            <Link href="#" className='md:w-[228px]'>
+              <Button className='flex items-center gap-2 w-full'>
                 <span>Schedule A Call</span>
                 <Image src={arrowRight} className='size-6 hidden md:block' alt="Arrow right icon" />
               </Button>
             </Link>
-            <Link href="#" className='flex-1'>
+            <Link href="#" className='max-w-[228px]'>
               <Button variant="outline" className='w-full'>
                 Get Free Growth Report
               </Button>
@@ -48,7 +50,7 @@ export default function HeroBanner() {
           {/* Main Image */}
           <div className="rounded-3xl h-full shadow-xl overflow-hidden [box-shadow:0px_4px_12px_0px_#FFFFFF40_inset,0px_4px_28px_0px_#FFFFFF40]">
             <Image
-              src="/images/Hero-Image.png"
+              src={heroImage}
               alt="Team Photo"
               className="w-full h-full object-cover"
               width={600}
@@ -68,7 +70,7 @@ export default function HeroBanner() {
               </p>
               <div className="flex items-center mt-2 gap-2">
                 <Image
-                  src="/images/jack.png"
+                  src={jack}
                   alt="Jack Rubin"
                   width={42}
                   height={42}
@@ -131,7 +133,7 @@ export default function HeroBanner() {
             </p>
             <div className="flex items-center justify-center gap-2">
               <Image
-                src="/images/jack.png"
+                src={jack}
                 alt="Jack Rubin"
                 width={39}
                 height={39}

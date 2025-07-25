@@ -1,6 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
+import icon1 from "../../../assets/images/home/valued-proposition-icon-1.svg";
+import icon2 from "../../../assets/images/home/valued-proposition-icon-2.svg";
+import icon3 from "../../../assets/images/home/valued-proposition-icon-3.svg";
+import cardImage from "../../../assets/images/home/valued-proposition-image.png";
 
 const ValueProposition = () => {
   return (
@@ -8,7 +12,7 @@ const ValueProposition = () => {
       <div className='container mx-auto'>
         {/* Title */}
         <div className="text-center max-w-3xl mx-auto mb-6 md:mb-12">
-          <p className="text-primary font-medium uppercase text-sm mb-4 tracking-[0.0175rem]">Why Brands Choose Valar</p>
+          <p className="text-primary font-medium uppercase text-sm mb-4 tracking-[0.02rem]">Why Brands Choose Valar</p>
           <h2 className="text-4xl text-text-dark md:text-5xl font-medium mb-4 md:mb-6">We Don’t Just Build. We Scale.</h2>
           <p className="text-text-dark tracking-[0.04rem]">
             We’re not another dev shop. We partner with founders and marketers<br className='hidden md:block' /> to fix what’s broken,
@@ -27,14 +31,14 @@ const ValueProposition = () => {
                 just fast, focused collaboration that drives results.
               </p>
             </div>
-            <Image src="/images/imag-1.png" alt="Team Illustration" width={400} height={300} className="rounded-md mt-auto" />
+            <Image src={cardImage} alt="Team Illustration" width={400} height={300} className="rounded-md mt-auto" />
           </div>
 
           {/* Top Right Cards */}
           <div className="relative rounded-3xl p-[1.5px] bg-[linear-gradient(137.84deg,#F3F8FF_0%,#EDF2F9_100%)]">
             <div className="bg-white rounded-[calc(theme(borderRadius.3xl)-1.5px)] p-6 md:p-8 h-full">
-              <div className="size-13 mb-4">
-                <Image src="/images/icon-1.png" alt="Icon 1" width={100} height={100} className="rounded-[4px]" />
+              <div className="flex items-center justify-center size-13 mb-4 bg-background-subtle rounded-[4px] border">
+                <Image src={icon1} alt="Icon 1" width={100} height={100} className="size-7" />
               </div>
               <h3 className="text-2xl text-text-dark font-medium mb-2">Full-Funnel Shopify Expertise</h3>
               <p className="text-text-light tracking-[0.04rem]">
@@ -46,8 +50,8 @@ const ValueProposition = () => {
 
           <div className="relative rounded-3xl p-[1.5px] bg-[linear-gradient(137.84deg,#F3F8FF_0%,#EDF2F9_100%)]">
             <div className="bg-white rounded-[calc(theme(borderRadius.3xl)-1.5px)] p-6 md:p-8 h-full">
-              <div className="size-13 mb-4">
-                <Image src="/images/icon-2.png" alt="Icon 2" width={100} height={100} className="rounded-[4px]" />
+              <div className="flex items-center justify-center size-13 mb-4 bg-background-subtle rounded-[4px] border">
+                <Image src={icon2} alt="Icon 2" width={100} height={100} className="size-7" />
               </div>
               <h3 className="text-2xl text-text-dark font-medium mb-2">Smarter Automation, Real ROI</h3>
               <p className="text-text-light tracking-[0.04rem]">
@@ -60,8 +64,8 @@ const ValueProposition = () => {
           {/* Bottom Right Card */}
           <div className="relative rounded-3xl p-[1.5px] bg-[linear-gradient(137.84deg,#F3F8FF_0%,#EDF2F9_100%)]">
             <div className="bg-white rounded-[calc(theme(borderRadius.3xl)-1.5px)] p-6 md:p-8 h-full">
-              <div className="size-13 mb-4">
-                <Image src="/images/icon-3.png" alt="Icon 3" width={100} height={100} className="rounded-[4px]" />
+              <div className="flex items-center justify-center size-13 mb-4 bg-background-subtle rounded-[4px] border">
+                <Image src={icon3} alt="Icon 3" width={100} height={100} className="size-7" />
               </div>
               <h3 className="text-2xl text-text-dark font-medium mb-2">Direct, Decisive Communication</h3>
               <p className="text-text-light tracking-[0.04rem]">

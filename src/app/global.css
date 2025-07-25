@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
 
 @font-face {
   font-family: "Neue Montreal";
@@ -27,15 +29,24 @@
   font-display: swap;
 }
 
+.gradient-border {
+  border: 1.5px solid;
+  border-image-source: linear-gradient(137.84deg, #f3f8ff 0%, #edf2f9 100%);
+  border-image-slice: 1;
+}
+
 :root {
-  --background-muted: #FAFBFE;
-  --background-subtle: #FCFCFC;
+  --background-muted: #fafbfe;
+  --background-subtle: #fcfcfc;
   --primary: #075099;
-  --primary-dark: #073E78;
-  --text-dark: #1E1E1E;
-  --text-light: #67747F;
-  --border: #EDF2F9;
-  --font-sans: "Neue Montreal",  ui-sans-serif, system-ui, sans-serif;
+  --primary-dark: #073e78;
+  --text-dark: #1e1e1e;
+  --text-light: #67747f;
+  --border: #edf2f9;
+  --border-50: #edf2f980;
+  --font-sans: "Neue Montreal", ui-sans-serif, system-ui, sans-serif;
+  --font-bad-script: 'Bad Script', cursive;
+  --gradient-border-image: linear-gradient(137.84deg, #f3f8ff 0%, #edf2f9 100%);
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -43,7 +54,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary-foreground: #FFFFFF;
+  --primary-foreground: #ffffff;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
@@ -72,12 +83,16 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-background-muted: var(--background-muted);
+  --color-background-subtle: var(--background-subtle);
   --color-primary: var(--primary);
   --color-primary-dark: var(--primary-dark);
   --color-text-light: var(--text-light);
   --color-text-dark: var(--text-dark);
   --color-border: var(--border);
+  --color-border-50: var(--border-50);
+  --color-gradient-border: var(--gradient-border-image);
   --font-sans: var(--font-neue-montreal);
+  --font-cursive: var(--font-bad-script);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -151,6 +166,66 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Slick slider in Home page */
+.testimonial-slider .slick-list {
+  overflow: visible;
+}
+
+.custom-dots {
+  bottom: -35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.custom-dots li {
+  margin: 0 4px;
+  width: max-content;
+   height:max-content
+}
+
+.custom-dots li button {
+  width: max-content;
+  height:max-content
+}
+
+.custom-dots li button:before {
+  font-size: 12px;
+  background-color: #0750991A;
+  opacity: 1;
+  content: ''!important;
+  border-radius: 16px;
+  height: 4px;
+  width: 6px;
+  transition: width 0.5s ease-in-out;
+}
+.custom-dots li.slick-active button:before {
+  background-color: var(--primary);
+  width:20px;
+}
+
+.custom-dots li.slick-active button {
+  width: 20px;
+}
+
+.insights-section .custom-dots {
+   bottom: -45px;
+}
+
+@media screen and (min-width:640px) {
+.testimonial-slider .slick-slider {
+  width: 95%;
+  margin-left: auto;
+}
+}
+
+@media screen and (max-width: 640px) {
+  .custom-dots {
+  bottom: -45px !important;
   }
 }
 

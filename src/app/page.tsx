@@ -1,11 +1,13 @@
 import React from 'react';
 
 import HeroBanner from './components/sections/hero-banner';
-import ValueProposition from './components/ValueProposition';
-import ExpertiseSection from './components/ExpertiseSection';
-import CaseStudiesShowcase from './components/CaseStudiesShowcase';
-import TestimonialSlider from './components/TestimonialSlider';
-import TrustedTools from './components/TrustedTools';
+import ValueProposition from './components/sections/ValueProposition';
+import ExpertiseSection from './components/sections/ExpertiseSection';
+import CaseStudiesShowcase from './components/sections/CaseStudiesShowcase';
+import TestimonialSlider from './components/sections/TestimonialSlider';
+import TrustedTools from './components/sections/TrustedTools';
+import ProcessSection from './components/sections/ProcessSection';
+import InsightsSection from './components/sections/InsightsSection';
 
 export default function Home() {
 
@@ -14,9 +16,11 @@ export default function Home() {
       <HeroBanner />
       <ValueProposition />
       <ExpertiseSection />
-      {/* <CaseStudiesShowcase/>
+      <CaseStudiesShowcase />
       <TestimonialSlider />
-      <TrustedTools /> */}
+      <ProcessSection />
+      <TrustedTools />
+      <InsightsSection />
     </>
   );
 }
