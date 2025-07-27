@@ -45,7 +45,27 @@ const insights = [
     videoUrl: '/videos/insight-3.mp4',
     readTime: '8 min read',
     date: 'September 7, 2024'
-  }
+  },
+  {
+    id: 4,
+    category: 'Strategy',
+    title: 'Why Ecommerce Brands Overthink the Homepage, and What to Fix First',
+    description: 'Common assumptions and positions you as pragmatic, not flashy.',
+    videoThumb: thumbnail1,
+    videoUrl: '/Videos/ample-video.mp4',
+    readTime: '12 min read',
+    date: 'September 7, 2024'
+  },
+  {
+    id: 5,
+    category: 'UX Strategy',
+    title: 'Subscription UX Isn\'t Just Skips and Pauses',
+    description: 'Shows depth of thinking, speaks to brands struggling with wanting sustainable LTV.',
+    videoThumb: thumbnail3,
+    videoUrl: '/videos/insight-3.mp4',
+    readTime: '8 min read',
+    date: 'September 7, 2024'
+  },
 ];
 
 const InsightsSection = () => {
@@ -75,6 +95,7 @@ const InsightsSection = () => {
   );
 
   const settings = {
+    // initialSlide: 2,
     dots: false,
     infinite: true,
     speed: 500,
@@ -107,18 +128,18 @@ const InsightsSection = () => {
   };
 
   const togglePlay = (index: number) => {
-    const video = document.getElementById(`insight-video-${index}`) as HTMLVideoElement;
-    if (!video) return;
+  const video = document.getElementById(`insight-video-${index}`) as HTMLVideoElement;
+  if (!video) return;
 
-    if (playingIndex === index) {
-      video.pause();
-      setPlayingIndex(null);
-    } else {
-      document.querySelectorAll('[id^="insight-video-"]').forEach((v) => (v as HTMLVideoElement).pause());
-      video.play();
-      setPlayingIndex(index);
-    }
-  };
+  if (playingIndex === index) {
+    video.pause();
+    setPlayingIndex(null);
+  } else {
+    document.querySelectorAll('video').forEach((v) => v.pause());
+    video.play();
+    setPlayingIndex(index);
+  }
+};
 
   return (
     <section className="insights-section py-8 md:py-10 bg-white">
