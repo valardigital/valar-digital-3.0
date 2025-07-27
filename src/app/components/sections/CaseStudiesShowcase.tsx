@@ -25,7 +25,7 @@ const CaseStudiesShowcase = () => {
       {/* Case Study 1 */}
       <div className="bg-white rounded-3xl overflow-hidden mb-14 shadow-[0px_4px_0px_0px_#F0F5FC] border-4 border-border-gradient-image">
         <div className='flex flex-col lg:flex-row items-center'>
-          <div className='flex-1 relative'>
+          <div className='flex-1 relative min-h-full'>
             <Image
               src={casepf}
               alt="Purdy & Figg Bottle"
@@ -37,15 +37,15 @@ const CaseStudiesShowcase = () => {
             <div className="absolute bottom-8 left-6 right-6 flex flex-col md:flex-row items-center justify-between tracking-[0.04rem] gap-4 md:gap-6 text-white font-medium text-[28px] md:text-[32px]">
               <div className='w-full'>
                 <p>+22%</p>
-                <p className='font-normal text-base leading-5 whitespace-nowrap'>Retention rate increase</p>
+                <p className='font-normal text-base leading-5 lg:whitespace-nowrap'>Retention rate increase</p>
               </div>
               <div className='w-full'>
                 <p>+18%</p>
-                <p className='font-normal text-base leading-5 whitespace-nowrap'>More product swaps</p>
+                <p className='font-normal text-base leading-5 lg:whitespace-nowrap'>More product swaps</p>
               </div>
               <div className='w-full'>
                 <p>&lt;60 days</p>
-                <p className='font-normal text-base leading-5 whitespace-nowrap'>To measurable impact</p>
+                <p className='font-normal text-base leading-5 lg:whitespace-nowrap'>To measurable impact</p>
               </div>
             </div>
 
@@ -92,12 +92,12 @@ const CaseStudiesShowcase = () => {
       {/* Case Study 2 */}
       <div className="bg-white rounded-3xl overflow-hidden mb-6 md:mb-12 shadow-[0px_4px_0px_0px_#F0F5FC] border-4 border-border-gradient-image">
         <div className='flex flex-col lg:flex-row-reverse items-center'>
-          <div className='flex-1 relative h-full'>
+          <div className='flex-1 relative min-h-full'>
             <Image
               src={casezima}
               alt="Dental Pod"
               width={600}
-              height={100}
+              height={400}
               className="md:rounded-bl-3xl rounded-tr-3xl object-cover w-full md:h-full h-[429px]"
             />
             <div className='bg-gradient-to-b from-transparent from-10% to-black/60 to-100% md:rounded-bl-3xl rounded-tr-3xl absolute top-0 bottom-0 left-0 right-0' />
