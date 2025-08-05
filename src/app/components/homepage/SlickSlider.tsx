@@ -17,7 +17,15 @@ import skinsapiens from "../../../assets/images/home/skin-sapiens.png";
 import ample from "../../../assets/images/home/ample.png";
 import Image from "next/image";
 
-const SlickSlider = () => {
+interface SlickSliderProps {
+  gradientFrom?: string;
+  gradientVia?: string;
+}
+
+const SlickSlider: React.FC<SlickSliderProps> = ({
+  gradientFrom = "white", 
+  gradientVia = "white/90" 
+}) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -25,7 +33,8 @@ const SlickSlider = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 0, cssEase: 'linear',
+    autoplaySpeed: 0,
+    cssEase: 'linear',
     arrows: false,
     variableWidth: true,
   };
@@ -51,18 +60,18 @@ const SlickSlider = () => {
     <div className="w-full relative">
       <LogoSlider {...settings} className="h-8">
         {slides.map((src, index) => (
-          <div key={index} className="px-[29px] h-8"> 
-            <Image src={src} alt={`Slide ${index}`} width={100} 
-            height={32} className="w-auto h-8" />
+          <div key={index} className="px-[29px] h-8">
+            <Image src={src} alt={`Slide ${index}`} width={100}
+              height={32} className="w-auto h-8" />
           </div>
         ))}
       </LogoSlider>
 
-       {/* Left fade gradient */}
-    <div className="absolute left-0 top-0 bottom-0 w-28 bg-gradient-to-r from-white via-white/90 to-transparent pointer-events-none z-10"></div>
-    
-    {/* Right fade gradient */}
-    <div className="absolute right-0 top-0 bottom-0 w-28 bg-gradient-to-l from-white via-white/90 to-transparent pointer-events-none z-10"></div>
+      {/* Left fade gradient */}
+      <div className={`absolute left-0 top-0 bottom-0 w-28 bg-gradient-to-r from-${gradientFrom} via-${gradientVia} to-transparent pointer-events-none z-10`}></div>
+      
+      {/* Right fade gradient */}
+      <div className={`absolute right-0 top-0 bottom-0 w-28 bg-gradient-to-l from-${gradientFrom} via-${gradientVia} to-transparent pointer-events-none z-10`}></div>
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '../ui/button';
-import icon1 from "../../../assets/images/home/valued-proposition-icon-1.svg";
-import icon2 from "../../../assets/images/home/valued-proposition-icon-2.svg";
-import icon3 from "../../../assets/images/home/valued-proposition-icon-3.svg";
-import cardImage from "../../../assets/images/home/valued-proposition-image.png";
+import icon1 from "@/assets/images/home/valued-proposition-icon-1.svg";
+import icon2 from "@/assets/images/home/valued-proposition-icon-2.svg";
+import icon3 from "@/assets/images/home/valued-proposition-icon-3.svg";
+import cardImage from "@/assets/images/home/valued-proposition-image.png";
 
 const ValueProposition = () => {
   return (

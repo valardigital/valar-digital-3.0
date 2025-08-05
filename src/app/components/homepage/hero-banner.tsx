@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import LogoSlider from '../home/LogoSlider';
+import LogoSlider from './SlickSlider';
 import { Button } from '../ui/button';
 import arrowRight from '../../../assets/images/arrow-right.png';
 import jack from '../../../assets/images/home/jack.png';

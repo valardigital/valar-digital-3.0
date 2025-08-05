@@ -224,8 +224,17 @@
 }
 
 @media screen and (max-width: 640px) {
-  .custom-dots {
+.testimonial-slider .custom-dots {
   bottom: -45px !important;
   }
+
+  /* Slider in Service Details Page */
+.service-testimonial-section .custom-dots {
+   bottom: -50px;
 }
+.service-testimonial-section .custom-dots li {
+   margin: 0 2px
+}
+}
+
 

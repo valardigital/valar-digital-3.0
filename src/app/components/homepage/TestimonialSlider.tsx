@@ -5,44 +5,54 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Button } from '../ui/button';
-import play from "../../../assets/images/home/play.svg";
-import pause from "../../../assets/images/home/pause.svg";
-import jacob from "../../../assets/images/home/jacob.png";
+import play from "@/assets/images/home/play.svg";
+import pause from "@/assets/images/home/pause.svg";
+import jacob from "@/assets/images/home/jacob.png";
+import JackRubin from '@/assets/images/home/Jack-Rubin.png';
+import JackRubinProfile from '@/assets/images/home/s-Jack-Rubin.png';
+import CharlieRubin from '@/assets/images/home/Charlie-Rubin.png';
+import CharlieRubinProfile from '@/assets/images/home/s-Charlie-Rubin.png';
+import SarahWelsh from "@/assets/images/home/Sarah-Welsh.png";
+import SarahWelshProfile from "@/assets/images/home/s-Sarah-Welsh.png";
+import JamesCissel from "@/assets/images/home/James-Cissel.png";
+import JamesCisselProfile from "@/assets/images/home/s-James-Cissel.png";
+import RajaDarbari from "@/assets/images/home/Raja-Darbari.png";
+import RajaDarbariProfile from "@/assets/images/home/s-Raja-Darbari.png";
 
 const testimonials = [
   {
     name: 'Jack Rubin',
     role: 'Co-Founder, Purdy & Figg',
-    videoThumb: '/images/Jack-Rubin.png',
-    avatar: '/images/s-Jack-Rubin.png',
+    videoThumb: JackRubin.src,
+    avatar: JackRubinProfile,
     videoUrl: '/videos/jack-video.mp4',
   },
   {
     name: 'Charlie Rubin',
     role: 'Co-Founder, Purdy & Figg',
-    videoThumb: '/images/Charlie-Rubin.png',
-    avatar: '/images/s-Charlie-Rubin.png',
+    videoThumb: CharlieRubin.src,
+    avatar: CharlieRubinProfile,
     videoUrl: '/videos/charlie-video.mp4',
   },
   {
     name: 'Sarah Welsh',
     role: 'Co-Founder & CPO, HANX',
-    videoThumb: '/images/Sarah-Welsh.png',
-    avatar: '/images/s-Sarah-Welsh.png',
+    videoThumb: SarahWelsh.src,
+    avatar: SarahWelshProfile,
     videoUrl: '/videos/hanx-video.mp4',
   },
   {
     name: 'James Doe',
     role: 'CEO, SLM Brand',
-    videoThumb: '/images/James-Cissel.png',
-    avatar: '/images/s-James-Cissel.png',
+    videoThumb: JamesCissel.src,
+    avatar: JamesCisselProfile,
     videoUrl: '/videos/sls3-video.mp4',
   },
   {
     name: 'Raja Darbari',
     role: 'CEO, Ample Brand',
-    videoThumb: '/images/Raja-Darbari.png',
-    avatar: '/images/s-Raja-Darbari.png',
+    videoThumb: RajaDarbari.src,
+    avatar: RajaDarbariProfile,
     videoUrl: '/videos/ample-video.mp4',
   },
   {
