@@ -12,7 +12,7 @@ const Footer = () => {
 
   return (
     <footer className="md:px-4 md:pt-4 md:pb-8">
-      <div className='bg-border/80 md:rounded-3xl px-4 md:px-0 md:py-8'>
+      <div className='bg-border/80 rounded-t-[16px] md:rounded-3xl px-4 md:px-0 md:py-8'>
         <div className='container mx-auto'>
           <div className="grid md:grid-cols-5 md:gap-10 pt-6">
             {/* Brand and CTA */}
@@ -51,7 +51,7 @@ const Footer = () => {
               <ul className={`space-y-3 md:block ${isCompanyOpen ? 'block' : 'hidden'}`}>
                 <li><Link href="#">About</Link></li>
                 <li><Link href="#">Works</Link></li>
-                <li><Link href="#">Contact</Link></li>
+                <li><Link href="/contact">Contact</Link></li>
                 <li><Link href="#">Blogs</Link></li>
                 <li><Link href="#">Our Team</Link></li>
               </ul>

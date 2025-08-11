@@ -4,11 +4,10 @@ import React, { useState } from 'react';
 import Slider from 'react-slick';
 import Image from 'next/image';
 import { Button } from '../ui/button';
-import thumbnail1 from "../../../assets/images/home/insights-img-1.png";
-import thumbnail2 from "../../../assets/images/home/insights-img-2.png";
-import thumbnail3 from "../../../assets/images/home/insights-img-3.png";
-import play from "../../../assets/images/home/play.svg";
-import pause from "../../../assets/images/home/pause.svg";
+import thumbnail1 from "@/assets/images/home/insights-img-1.png";
+import thumbnail2 from "@/assets/images/home/insights-img-2.png";
+import thumbnail3 from "@/assets/images/home/insights-img-3.png";
+import play from "@/assets/images/home/play.svg";
 import Link from 'next/link';
 
 interface ArrowProps {
@@ -21,8 +20,9 @@ const insights = [
     category: 'Strategy',
     title: 'Why Ecommerce Brands Overthink the Homepage, and What to Fix First',
     description: 'Common assumptions and positions you as pragmatic, not flashy.',
-    videoThumb: thumbnail1,
-    videoUrl: '/Videos/ample-video.mp4',
+    thumbnail: thumbnail1,
+    hasVideo: true,
+    videoPageUrl: '#',
     readTime: '12 min read',
     date: 'September 7, 2024'
   },
@@ -31,7 +31,9 @@ const insights = [
     category: 'Conversion',
     title: 'How We Lifted AOV by 16% Without a Single Discount',
     description: 'Strategic approach to increasing average order value through smart UX.',
-    videoThumb: thumbnail2,
+    thumbnail: thumbnail2,
+    hasVideo: false,
+    videoPageUrl: '#',
     videoUrl: '/videos/insight-2.mp4',
     readTime: '16 min Watch',
     date: 'September 7, 2024'
@@ -41,7 +43,9 @@ const insights = [
     category: 'UX Strategy',
     title: 'Subscription UX Isn\'t Just Skips and Pauses',
     description: 'Shows depth of thinking, speaks to brands struggling with wanting sustainable LTV.',
-    videoThumb: thumbnail3,
+    thumbnail: thumbnail3,
+    hasVideo: false,
+    videoPageUrl: '#',
     videoUrl: '/videos/insight-3.mp4',
     readTime: '8 min read',
     date: 'September 7, 2024'
@@ -51,7 +55,9 @@ const insights = [
     category: 'Strategy',
     title: 'Why Ecommerce Brands Overthink the Homepage, and What to Fix First',
     description: 'Common assumptions and positions you as pragmatic, not flashy.',
-    videoThumb: thumbnail1,
+    thumbnail: thumbnail1,
+    hasVideo: false,
+    videoPageUrl: '#',
     videoUrl: '/Videos/ample-video.mp4',
     readTime: '12 min read',
     date: 'September 7, 2024'
@@ -61,7 +67,9 @@ const insights = [
     category: 'UX Strategy',
     title: 'Subscription UX Isn\'t Just Skips and Pauses',
     description: 'Shows depth of thinking, speaks to brands struggling with wanting sustainable LTV.',
-    videoThumb: thumbnail3,
+    thumbnail: thumbnail3,
+    hasVideo: false,
+    videoPageUrl: '#',
     videoUrl: '/videos/insight-3.mp4',
     readTime: '8 min read',
     date: 'September 7, 2024'
@@ -127,20 +135,6 @@ const InsightsSection = () => {
     ]
   };
 
-  const togglePlay = (index: number) => {
-  const video = document.getElementById(`insight-video-${index}`) as HTMLVideoElement;
-  if (!video) return;
-
-  if (playingIndex === index) {
-    video.pause();
-    setPlayingIndex(null);
-  } else {
-    document.querySelectorAll('video').forEach((v) => v.pause());
-    video.play();
-    setPlayingIndex(index);
-  }
-};
-
   return (
     <section className="insights-section py-8 md:py-10 bg-white">
       <div className="text-center">
@@ -163,43 +157,35 @@ const InsightsSection = () => {
           <Slider {...settings} >
             {insights.map((insight, index) => (
               <div key={insight.id} className="px-4">
-                <div
-                  className="relative transition-all duration-500">
-                  {/* Video */}
+                <div className="relative transition-all duration-500">
+                  {/* Image/Video Thumbnail */}
                   <div className="relative aspect-[16/10]">
-                    <video
-                      id={`insight-video-${index}`}
-                      poster={insight.videoThumb.src}
+                    <Image
+                      src={insight.thumbnail}
+                      alt={insight.title}
+                      width={400}
+                      height={250}
                       className="w-full h-full object-cover rounded-[8px]"
-                      controls={false}
-                      muted
-                    >
-                      <source src={insight.videoUrl} type="video/mp4" />
-                    </video>
+                    />
 
                     {/* Gray overlay for non-active slides */}
                     <div
                       className={`
-                        absolute inset-0 bg-white/60 transition-opacity duration-500 rounded-md
-                        ${currentSlide === index ? 'opacity-0' : 'opacity-100'}
-                      `}
+                absolute inset-0 bg-white/60 transition-opacity duration-500 rounded-md
+                ${currentSlide === index ? 'opacity-0' : 'opacity-100'}
+              `}
                     />
 
-                    {/* Play Button */}
-                    <div className="absolute inset-0 flex items-center justify-center cursor-pointer">
-                      <button
-                        className="w-14 h-14 bg-white/40 border border-white backdrop-blur-sm rounded-2xl flex items-center justify-center cursor-pointer"
-                        onClick={() => togglePlay(index)}
-                      >
-                        {playingIndex === index ? (
-                          <Image src={pause} className='size-6' alt="Play icon" />
-
-                        ) : (
-                          <Image src={play} className='size-6' alt="Play icon" />
-
-                        )}
-                      </button>
-                    </div>
+                    {/* Play Button - only show if it's a video */}
+                    {insight.hasVideo && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <Link href={insight.videoPageUrl}>
+                          <button className="w-14 h-14 bg-white/40 border border-white backdrop-blur-sm rounded-2xl flex items-center justify-center cursor-pointer hover:bg-white/60 transition-colors">
+                            <Image src={play} className='size-6' alt="Play video" />
+                          </button>
+                        </Link>
+                      </div>
+                    )}
                   </div>
 
                   {/* Content */}
