@@ -1,21 +1,22 @@
 
 import React from "react";
 import LogoSlider from "react-slick";
-import sls3 from "../../../assets/images/home/sls3.png";
-import paddock from "../../../assets/images/home/paddock.png";
-import nutriburst from "../../../assets/images/home/nutriburst.png";
-import kair from "../../../assets/images/home/kair.png";
-import audenza from "../../../assets/images/home/audenza-logo.png";
-import hanx from "../../../assets/images/home/hanx.png";
-import pfImage from "../../../assets/images/home/pf.png";
-import fleet from "../../../assets/images/home/logo-fleet.png";
-import loveraw from "../../../assets/images/home/eatloveraw.png";
-import eyecon from "../../../assets/images/home/eyecon.png";
-import oscar from "../../../assets/images/home/oscar.png";
-import clasiq from "../../../assets/images/home/clasiq.png";
-import skinsapiens from "../../../assets/images/home/skin-sapiens.png";
-import ample from "../../../assets/images/home/ample.png";
+import sls3 from "@/assets/images/home/sls3.png";
+import paddock from "@/assets/images/home/paddock.png";
+import nutriburst from "@/assets/images/home/nutriburst.png";
+import kair from "@/assets/images/home/kair.png";
+import audenza from "@/assets/images/home/audenza-logo.png";
+import hanx from "@/assets/images/home/hanx.png";
+import pfImage from "@/assets/images/home/pf.png";
+import fleet from "@/assets/images/home/logo-fleet.png";
+import loveraw from "@/assets/images/home/eatloveraw.png";
+import eyecon from "@/assets/images/home/eyecon.png";
+import oscar from "@/assets/images/home/oscar.png";
+import clasiq from "@/assets/images/home/clasiq.png";
+import skinsapiens from "@/assets/images/home/skin-sapiens.png";
+import ample from "@/assets/images/home/ample.png";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 interface SlickSliderProps {
   gradientFrom?: string;
@@ -23,9 +24,10 @@ interface SlickSliderProps {
 }
 
 const SlickSlider: React.FC<SlickSliderProps> = ({
-  gradientFrom = "white", 
-  gradientVia = "white/90" 
 }) => {
+  const pathname = usePathname();
+  const isServiceDetailsPage = pathname === '/serviceDetails';
+
   const settings = {
     dots: false,
     infinite: true,
@@ -68,10 +70,10 @@ const SlickSlider: React.FC<SlickSliderProps> = ({
       </LogoSlider>
 
       {/* Left fade gradient */}
-      <div className={`absolute left-0 top-0 bottom-0 w-28 bg-gradient-to-r from-${gradientFrom} via-${gradientVia} to-transparent pointer-events-none z-10`}></div>
-      
+      <div className={`absolute left-0 top-0 bottom-0 w-28 bg-gradient-to-r from-${isServiceDetailsPage ? 'background-subtle' : 'white'} via-${isServiceDetailsPage ? 'background-subtle/90' : 'white/90'} to-transparent pointer-events-none z-10`}></div>
+
       {/* Right fade gradient */}
-      <div className={`absolute right-0 top-0 bottom-0 w-28 bg-gradient-to-l from-${gradientFrom} via-${gradientVia} to-transparent pointer-events-none z-10`}></div>
+      <div className={`absolute right-0 top-0 bottom-0 w-28 bg-gradient-to-l from-${isServiceDetailsPage ? 'background-subtle' : 'white'} via-${isServiceDetailsPage ? 'background-subtle/90' : 'white/90'} to-transparent pointer-events-none z-10`}></div>
     </div>
   );
 };

@@ -117,7 +117,7 @@ export default function FormSection() {
   };
 
   return (
-    <section className="bg-background-muted md:py-10">
+    <section id="growthReportForm" className="bg-background-muted md:py-10">
       <div className="container mx-auto px-0 tracking-[0.04rem] leading-[1.5]">
         <div className="grid grid-cols-1 lg:grid-cols-2 md:rounded-3xl overflow-hidden md:border md:border-border">
           
@@ -148,7 +148,7 @@ export default function FormSection() {
               <p>
                 You can always{' '}
                 <Link 
-                  href="/contact" 
+                  href="/#calendar" 
                   className="underline hover:no-underline font-medium underline-offset-4"
                 >
                   schedule a quick call

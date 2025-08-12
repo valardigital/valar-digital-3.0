@@ -81,7 +81,7 @@ const ProcessSection = () => {
           {/* Right Side - Process Steps */}
           <div className="relative">
             {/* Progress Line */}
-            <div className="absolute left-5 top-0 w-1 h-[90%] bg-border z-20">
+            <div className="absolute left-5 top-0 w-1 h-[95%] bg-border z-20">
               <div 
                 className="w-full bg-primary transition-all duration-500 ease-out"
                 style={{ 

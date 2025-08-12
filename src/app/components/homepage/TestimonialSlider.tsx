@@ -256,7 +256,7 @@ const TestimonialSlider = () => {
           and build smarter systems. Ready to see what we can do for you?
         </p>
         <div className="flex flex-col md:flex-row justify-center gap-2">
-          <Link href="#">
+          <Link href="#calendar">
             <Button className="w-full md:w-[266px] flex items-center justify-center gap-2">
               Schedule A Call
               <svg xmlns="http://www.w3.org/2000/svg" className="size-5 mt-[1px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -264,7 +264,7 @@ const TestimonialSlider = () => {
               </svg>
             </Button>
           </Link>
-          <Link href="#">
+          <Link href="/growth">
             <Button variant="secondary" className="w-full md:w-[266px]">
               Get Free Growth Report
             </Button>

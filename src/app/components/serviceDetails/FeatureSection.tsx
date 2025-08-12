@@ -113,7 +113,7 @@ export default function FeatureSection() {
                             </span>
                         </li>
                     </ul>
-                    <Link href="#" className='flex-1 hidden md:block'>
+                    <Link href="#calendar" className='flex-1 hidden md:block'>
                         <Button size="lg" className=' flex items-center'>
                             <span>Schedule A Call</span>
                             <Image src={arrowRight} className='size-6' alt="Arrow right icon" />
@@ -124,7 +124,7 @@ export default function FeatureSection() {
                     <div className="rounded-3xl overflow-hidden">
                         <Image src={featureImage} alt="Feature Image" className="object-cover size-full" />
                     </div>
-                    <Link href="#" className='flex-1 block md:hidden mt-4'>
+                    <Link href="#calendar" className='flex-1 block md:hidden mt-4'>
                         <Button size="lg" className='w-full flex items-center'>
                             <span>Schedule A Call</span>
                             <Image src={arrowRight} className='size-6' alt="Arrow right icon" />

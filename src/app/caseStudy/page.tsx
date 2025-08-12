@@ -1,6 +1,7 @@
 import CaseStudyCard from "../components/caseStudy/caseStudyCard";
 import purdyFiggImage from "@/assets/images/caseStudy/p&f.png";
 import zima from "@/assets/images/caseStudy/zima.png";
+import CTASection from "../components/shared/CTASection";
 
 export default function CaseStudy() {
     const ArrowDownIcon = () => (
@@ -76,6 +77,9 @@ export default function CaseStudy() {
                         ]}
                     />
                 </div>
+                
+                {/* CTA Section */}
+                <CTASection/>
             </div>
         </div>
     );

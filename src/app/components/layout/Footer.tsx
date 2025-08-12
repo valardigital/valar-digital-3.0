@@ -26,7 +26,7 @@ const Footer = () => {
                 complexity into growth, and scale with<br className='hidden md:block' /> confidence.
               </p>
               <Link
-                href="#"
+                href="/#calendar"
               >
                 <Button className="w-max flex items-center gap-2">
                   Grow Your Business
@@ -52,7 +52,7 @@ const Footer = () => {
                 <li><Link href="#">About</Link></li>
                 <li><Link href="#">Works</Link></li>
                 <li><Link href="/contact">Contact</Link></li>
-                <li><Link href="#">Blogs</Link></li>
+                <li><Link href="/blog">Blogs</Link></li>
                 <li><Link href="#">Our Team</Link></li>
               </ul>
             </div>

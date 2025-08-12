@@ -93,7 +93,7 @@ export default function ExpertiseSection() {
 
         <div className="mt-6 md:mt-12 w-full md:w-max mx-auto">
           <Link
-            href="#"
+            href="/services"
           >
             <Button className="w-full md:w-max flex items-center gap-2">
               See All Services

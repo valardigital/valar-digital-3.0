@@ -8,6 +8,7 @@ import arrowRight from '../../../assets/images/arrow-right.png';
 import jack from '../../../assets/images/home/jack.png';
 import heroImage from '../../../assets/images/home/Hero-Image.png';
 import heroImageMobile from '../../../assets/images/home/hero-image-mobile.jpg';
+import SlickSlider from './SlickSlider';
 
 export default function HeroBanner() {
   return (
@@ -26,13 +27,13 @@ export default function HeroBanner() {
           </p>
 
           <div className="flex flex-wrap gap-2 mb-25.5">
-            <Link href="#" className='md:w-[228px]'>
+            <Link href="#calendar" className='md:w-[228px]'>
               <Button className='flex items-center gap-2 w-full'>
                 <span>Schedule A Call</span>
                 <Image src={arrowRight} className='size-6 hidden md:block' alt="Arrow right icon" />
               </Button>
             </Link>
-            <Link href="#" className='max-w-[228px]'>
+            <Link href="/growth" className='max-w-[228px]'>
               <Button variant="outline" className='w-full'>
                 Get Free Growth Report
               </Button>
@@ -109,13 +110,13 @@ export default function HeroBanner() {
             </p>
             {/* Buttons */}
             <div className="flex flex-col gap-3 mb-6">
-              <Link href="#" className='flex-1'>
+              <Link href="#calendar" className='flex-1'>
               <Button size="lg" className='w-full flex items-center'>
                 <span>Schedule A Call</span>
                 <Image src={arrowRight} className='size-6' alt="Arrow right icon" />
               </Button>
             </Link>
-            <Link href="#" className='flex-1'>
+            <Link href="/growth" className='flex-1'>
               <Button size="lg" variant="outline" className='w-full'>
                 Get Free Growth Report
               </Button>
@@ -147,7 +148,7 @@ export default function HeroBanner() {
 
         {/* Mobile: Logos below the hero */}
         <div className="mt-10 mb-4 h-max overflow-hidden whitespace-nowrap">
-          <LogoSlider />
+          <SlickSlider gradientFrom="white" gradientVia="white/90" />
         </div>
       </div>
     </section>

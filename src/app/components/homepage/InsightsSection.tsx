@@ -217,7 +217,7 @@ const InsightsSection = () => {
         {/* CTA Button */}
         <div className='px-4'>
           <Link
-            href="#"
+            href="/blog"
           >
             <Button className="w-full md:w-max mx-auto flex items-center gap-2">
               Read More Insights

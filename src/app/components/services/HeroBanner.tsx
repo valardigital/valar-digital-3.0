@@ -21,7 +21,7 @@ export default function HeroBanner() {
             we bring the right strategy and execution to get you there.
           </p>
 
-          <Link href="#" className='md:w-[214px]'>
+          <Link href="#calendar" className='md:w-[214px]'>
             <Button className='flex items-center gap-2'>
               <span>Schedule A Call</span>
               <Image src={arrowRight} className='size-6 hidden md:block' alt="Arrow right icon" />
@@ -67,7 +67,7 @@ export default function HeroBanner() {
               Whether you’re migrating, scaling, or optimizing, we bring the right strategy and execution to get you there.            </p>
             {/* Buttons */}
             <div className="flex flex-col gap-3 mb-6">
-              <Link href="#" className='flex-1'>
+              <Link href="#calendar" className='flex-1'>
                 <Button size="lg" className='w-full flex items-center'>
                   <span>Schedule A Call</span>
                   <Image src={arrowRight} className='size-6' alt="Arrow right icon" />
@@ -83,7 +83,7 @@ export default function HeroBanner() {
       <div className="mt-6 md:mt-10">
         <p className='px-4 text-sm md:text-base text-center mb-6 md:mb-10 text-text-light font-medium'>Trusted by DTC brands doing $1M to $50M+ in revenue, from bold startups to global names.</p>
         <div className='overflow-hidden whitespace-nowrap'>
-          <SlickSlider gradientFrom='background-muted' gradientVia='background-muted'/>
+          <SlickSlider />
         </div>
       </div>
     </section>

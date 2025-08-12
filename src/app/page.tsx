@@ -8,6 +8,7 @@ import TestimonialSlider from './components/homepage/TestimonialSlider';
 import TrustedTools from './components/homepage/TrustedTools';
 import ProcessSection from './components/homepage/ProcessSection';
 import InsightsSection from './components/homepage/InsightsSection';
+import CTASection from './components/shared/CTASection';
 
 export default function Home() {
 
@@ -21,6 +22,7 @@ export default function Home() {
       <ProcessSection />
       <TrustedTools />
       <InsightsSection />
+      <CTASection />
     </div>
   );
 }

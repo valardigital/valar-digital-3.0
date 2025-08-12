@@ -24,7 +24,7 @@ const CaseStudiesShowcase = () => {
 
       {/* Case Study 1 */}
       <div className="bg-white rounded-3xl overflow-hidden mb-14 shadow-[0px_4px_0px_0px_#F0F5FC] border-4 border-border-gradient-image">
-        <div className='flex flex-col lg:flex-row items-center'>
+        <div className='flex flex-col lg:flex-row'>
           <div className='flex-1 relative min-h-full'>
             <Image
               src={casepf}
@@ -91,7 +91,7 @@ const CaseStudiesShowcase = () => {
 
       {/* Case Study 2 */}
       <div className="bg-white rounded-3xl overflow-hidden mb-6 md:mb-12 shadow-[0px_4px_0px_0px_#F0F5FC] border-4 border-border-gradient-image">
-        <div className='flex flex-col lg:flex-row-reverse items-center'>
+        <div className='flex flex-col lg:flex-row-reverse'>
           <div className='flex-1 relative min-h-full'>
             <Image
               src={casezima}
@@ -158,7 +158,7 @@ const CaseStudiesShowcase = () => {
       {/* CTA */}
       <div className="md:w-max mx-auto">
         <Link
-          href="#"
+          href="/caseStudy"
         >
           <Button className="w-full md:w-max flex items-center gap-2">
             View All Case Studies

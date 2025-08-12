@@ -15,7 +15,7 @@ export default function HeroBanner() {
                     Our expert team will audit your UX, conversion rate, site speed,<br className="hidden md:block" />
                     and growth opportunities- completely free.
                 </p>
-                <Link href="#" className="mx-auto w-max block">
+                <Link href="#growthReportForm" className="mx-auto w-max block">
                         <Button size="lg" className='w-max flex items-center'>
                             <span>Get Your Free Growth Report</span>
                             <Image src={arrowRight} className='size-6' alt="Arrow right icon" />
