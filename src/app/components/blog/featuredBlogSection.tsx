@@ -11,10 +11,10 @@ interface BlogPost {
   categories: string[];
   readTime: string;
   date: string;
-  featured: boolean;
+  featured?: boolean;
   hasVideo: boolean;
   videoPageUrl: string;
-  type: string;
+  type?: string;
 }
 
 interface FeaturedBlogsSectionProps {
