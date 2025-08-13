@@ -48,7 +48,7 @@ const Footer = () => {
                   <path d="M9.69328 5.62402H5.28036H1.30661C0.62661 5.62402 0.286611 4.80236 0.768277 4.32069L4.43744 0.651524C5.02536 0.0636072 5.98161 0.0636072 6.56953 0.651524L7.96494 2.04694L10.2387 4.32069C10.7133 4.80236 10.3733 5.62402 9.69328 5.62402Z" fill="#075099" />
                 </svg>
               </button>
-              <ul className={`space-y-3 md:block ${isCompanyOpen ? 'block' : 'hidden'}`}>
+              <ul className={`space-y-3 md:block overflow-hidden transition-all duration-500 md:max-h-max ${isCompanyOpen ? 'max-h-60' : 'max-h-0'}`}>
                 <li><Link href="#">About</Link></li>
                 <li><Link href="#">Works</Link></li>
                 <li><Link href="/contact">Contact</Link></li>
@@ -69,7 +69,7 @@ const Footer = () => {
                   <path d="M9.69328 5.62402H5.28036H1.30661C0.62661 5.62402 0.286611 4.80236 0.768277 4.32069L4.43744 0.651524C5.02536 0.0636072 5.98161 0.0636072 6.56953 0.651524L7.96494 2.04694L10.2387 4.32069C10.7133 4.80236 10.3733 5.62402 9.69328 5.62402Z" fill="#075099" />
                 </svg>
               </button>
-              <div className={`grid grid-cols-1 lg:grid-cols-2 gap-y-2 md:grid ${isServicesOpen ? 'block' : 'hidden'}`}>
+              <div className={`grid grid-cols-1 lg:grid-cols-2 gap-y-2 md:grid overflow-hidden transition-all duration-500 md:max-h-max ${isServicesOpen ? 'max-h-60' : 'max-h-0'}`}>
                 {[
                   'Shopify Design',
                   'Ecommerce Audit',

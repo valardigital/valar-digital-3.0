@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import LogoSlider from './SlickSlider';
 import { Button } from '../ui/button';
 import arrowRight from '@/assets/images/arrow-right.png';
 import jack from '@/assets/images/home/jack.png';
@@ -42,7 +41,7 @@ export default function HeroBanner() {
 
           {/* Logos (Scrolling) */}
           <div className="overflow-hidden whitespace-nowrap">
-            <LogoSlider />
+            <SlickSlider />
           </div>
         </div>
 
@@ -148,7 +147,7 @@ export default function HeroBanner() {
 
         {/* Mobile: Logos below the hero */}
         <div className="mt-10 mb-4 h-max overflow-hidden whitespace-nowrap">
-          <SlickSlider gradientFrom="white" gradientVia="white/90" />
+          <SlickSlider />
         </div>
       </div>
     </section>

@@ -39,7 +39,7 @@ const Header = () => {
 
               {/* CTA Button */}
               <div className='mr-3 md:mr-0'>
-                <Link href="/calendar">
+                <Link href="/#calendar">
                   <Button size="sm" className={`flex items-center gap-2 md:w-45 text-sm md:text-base ${isServiceDetailsPage ? 'bg-white text-primary hover:bg-primary hover:text-white' : ''}`}>Schedule a Call
                     <svg xmlns="http://www.w3.org/2000/svg" className="size-5.5 hidden md:block" fill="none" viewBox="0 0 24 24" stroke={isServiceDetailsPage ? 'currentColor' : 'white'}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12h19m-6-6l6 6-6 6" />
@@ -143,7 +143,7 @@ const Header = () => {
           {/* CTA Button */}
           <div className={`pb-4 transition-all duration-700 delay-500 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}>
-            <Link href="#calendar" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link href="/#calendar" onClick={() => setIsMobileMenuOpen(false)}>
               <Button size="lg" className="flex items-center justify-center gap-2 w-full">
                 Schedule a Call
                 <Image src={arrowRight} className='size-6' alt="Arrow right icon" />

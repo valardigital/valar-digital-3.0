@@ -249,4 +249,36 @@ html, body {
 }
 }
 
+/* Logo Slider Animations */
+.logo-slider {
+  overflow: hidden;
+  position: relative;
+  height: 32px; /* h-8 equivalent */
+}
+
+.logo-slider-content {
+  display: flex;
+  animation: scroll-logos 30s linear infinite;
+  width: max-content;
+  align-items: center;
+  height: 100%;
+}
+
+.logo-slider-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 29px; /* px-[29px] equivalent */
+  height: 32px; /* h-8 equivalent */
+}
+
+@keyframes scroll-logos {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%); /* Move by 1/3 since we have 3 copies */
+  }
+}
+
 
