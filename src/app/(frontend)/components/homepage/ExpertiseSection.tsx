@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import image1 from "../../../assets/images/home/e-img-1.jpg";
-import image2 from "../../../assets/images/home/e-img-2.png";
-import image3 from "../../../assets/images/home/e-img-3.png";
-import image4 from "../../../assets/images/home/e-img-4.png";
+import image1 from "@/assets/images/home/e-img-1.jpg";
+import image2 from "@/assets/images/home/e-img-2.png";
+import image3 from "@/assets/images/home/e-img-3.png";
+import image4 from "@/assets/images/home/e-img-4.png";
 
 
 const services = [

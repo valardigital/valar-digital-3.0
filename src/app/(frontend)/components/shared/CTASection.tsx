@@ -1,5 +1,5 @@
 import React from 'react';
-import CalendlyEmbed from '../shared/CalendlyEmbed';
+import CalendlyEmbed from './CalendlyEmbed';
 
 export default function CTASection() {
   return (

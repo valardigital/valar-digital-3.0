@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import casepf from '../../../assets/images/home/case-pf.png';
-import casezima from '../../../assets/images/home/case-zima.png';
+import casepf from '@/assets/images/home/case-pf.png';
+import casezima from '@/assets/images/home/case-zima.png';
 import { Button } from '../ui/button';
 
 const CaseStudiesShowcase = () => {

@@ -3,17 +3,17 @@
 import Slider from 'react-slick';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import logo1 from '../../../assets/images/home/tools-logo-1.png';
-import logo2 from '../../../assets/images/home/tools-logo-2.png';
-import logo3 from '../../../assets/images/home/tools-logo-3.png';
-import logo4 from '../../../assets/images/home/tools-logo-4.png';
-import logo5 from '../../../assets/images/home/tools-logo-5.png';
-import logo1Blue from '../../../assets/images/home/tools-logo-1-blue.png';
-import logo2Blue from '../../../assets/images/home/tools-logo-2-blue.png';
-import logo3Blue from '../../../assets/images/home/tools-logo-3-blue.png';
-import logo4Blue from '../../../assets/images/home/tools-logo-4-blue.png';
-import logo5Blue from '../../../assets/images/home/tools-logo-5-blue.png';
-import logo6Blue from '../../../assets/images/home/tools-logo-6-blue.png';
+import logo1 from '@/assets/images/home/tools-logo-1.png';
+import logo2 from '@/assets/images/home/tools-logo-2.png';
+import logo3 from '@/assets/images/home/tools-logo-3.png';
+import logo4 from '@/assets/images/home/tools-logo-4.png';
+import logo5 from '@/assets/images/home/tools-logo-5.png';
+import logo1Blue from '@/assets/images/home/tools-logo-1-blue.png';
+import logo2Blue from '@/assets/images/home/tools-logo-2-blue.png';
+import logo3Blue from '@/assets/images/home/tools-logo-3-blue.png';
+import logo4Blue from '@/assets/images/home/tools-logo-4-blue.png';
+import logo5Blue from '@/assets/images/home/tools-logo-5-blue.png';
+import logo6Blue from '@/assets/images/home/tools-logo-6-blue.png';
 
 const tools = [
   {

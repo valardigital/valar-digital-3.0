@@ -4,22 +4,22 @@ import Footer from './components/layout/Footer';
 import localFont from "next/font/local";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./global.css";
+import "../global.css";
 
 const neueMontreal = localFont({
   src: [
     {
-      path: "../assets/fonts/NeueMontreal-Regular.otf",
+      path: "../../assets/fonts/NeueMontreal-Regular.otf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../assets/fonts/NeueMontreal-Medium.otf",
+      path: "../../assets/fonts/NeueMontreal-Medium.otf",
       weight: "500",
       style: "medium",
     },
     {
-      path: "../assets/fonts/NeueMontreal-Bold.otf",
+      path: "../../assets/fonts/NeueMontreal-Bold.otf",
       weight: "700",
       style: "bold",
     },

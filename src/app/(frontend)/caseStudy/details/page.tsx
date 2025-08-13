@@ -12,7 +12,7 @@ import img7 from "@/assets/images/caseStudy/case-study-img-7.png";
 import img8 from "@/assets/images/caseStudy/case-study-img-8.png";
 import img9 from "@/assets/images/caseStudy/case-study-img-9.gif";
 import img10 from "@/assets/images/caseStudy/case-study-img-10.png";
-import CTASection from "@/app/components/shared/CTASection";
+import CTASection from "@/app/(frontend)/components/shared/CTASection";
 import Link from "next/link";
 
 export default function CaseStudyPage() {
