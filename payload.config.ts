@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url'
 import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage'
 import Users from './src/collections/Users'
 import Media from './src/collections/Media'
+import { Blog } from './src/collections/blog'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -15,7 +16,7 @@ export default buildConfig({
     user: Users.slug,
     importMap: { baseDir: path.resolve(__dirname), },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Blog],
   cors: ['http://localhost:3000',process.env.DOMAIN_NAME || ''],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
