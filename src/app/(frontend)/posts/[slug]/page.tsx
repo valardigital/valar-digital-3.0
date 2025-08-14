@@ -1,106 +1,39 @@
-'use client';
+import { getPayload } from 'payload'
+import configPromise from '@payload-config'
+import { notFound } from 'next/navigation'
+import { headers as getHeaders } from 'next/headers'
+import { LivePreviewListener } from '@/components/LivePreviewListener'
+import Image from 'next/image'
+import { RichText } from '@/components/RichText'
 
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import Image from 'next/image';
-import { RichText } from '@/components/RichText';
-
-interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  featuredImage?: {
-    url: string;
-    alt: string;
-  };
-  author?: {
-    id: string;
-    email: string;
-  };
-  publishedAt: string;
-  status: string;
-  slug: string;
+type Args = {
+  params: Promise<{ slug?: string }>
 }
 
-export default function BlogPostPage() {
-  const params = useParams();
-  const slug = params.slug as string;
-  
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export default async function BlogPostPage({ params: paramsPromise }: Args) {
+  const { slug } = await paramsPromise
+  const headers = await getHeaders()
+  const payload = await getPayload({ config: configPromise })
+  const { user } = await payload.auth({ headers })
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        // Fetch post by slug from the Payload CMS API
-        const response = await fetch(`/api/blog?where[slug][equals]=${slug}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch post');
-        }
-        const data = await response.json();
-        
-        if (data.docs && data.docs.length > 0) {
-          setPost(data.docs[0]);
-        } else {
-          setError('Post not found');
-        }
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
-      } finally {
-        setLoading(false);
-      }
-    };
+  const post = await payload.find({
+    collection: 'blog',
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
+    overrideAccess: Boolean(user),
+    draft: Boolean(user),
+  }).then(res => res.docs[0])
 
-    if (slug) {
-      fetchPost();
-    }
-  }, [slug]);
-
-  if (loading) {
-    return (
-      <div className="bg-background-muted mt-[64px] md:mt-[67px] min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-text-dark">Loading post...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error || !post) {
-    return (
-      <div className="bg-background-muted mt-[64px] md:mt-[67px] min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-red-600 mb-4">Error: {error || 'Post not found'}</p>
-          <a 
-            href="/posts"
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            Back to Posts
-          </a>
-        </div>
-      </div>
-    );
-  }
+  if (!post) return notFound()
 
   return (
     <div className="bg-background-muted mt-[64px] md:mt-[67px] min-h-screen">
+      {/* Live Preview Listener */}
+      <LivePreviewListener />
+      
       <article className="container mx-auto py-6 md:py-10 px-4 md:px-0">
         {/* Header */}
         <header className="max-w-4xl mx-auto mb-8">
@@ -131,7 +64,7 @@ export default function BlogPostPage() {
             </p>
           )}
           
-          {post.author && (
+          {post.author && typeof post.author === 'object' && 'email' in post.author && (
             <div className="flex items-center gap-3">
               <span className="text-sm text-text-muted">By {post.author.email}</span>
             </div>
@@ -139,12 +72,12 @@ export default function BlogPostPage() {
         </header>
 
         {/* Featured Image */}
-        {post.featuredImage && (
+        {post.featuredImage && typeof post.featuredImage === 'object' && 'url' in post.featuredImage && post.featuredImage.url && (
           <div className="max-w-4xl mx-auto mb-8">
             <div className="relative h-64 md:h-96 w-full rounded-lg overflow-hidden">
               <Image
-                src={post.featuredImage.url}
-                alt={post.featuredImage.alt || post.title}
+                src={post.featuredImage.url as string}
+                alt={(post.featuredImage.alt as string) || post.title}
                 fill
                 className="object-cover"
               />
@@ -182,5 +115,5 @@ export default function BlogPostPage() {
         </div>
       </article>
     </div>
-  );
+  )
 } 

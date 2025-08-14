@@ -31,7 +31,14 @@ export default buildConfig({
             height: 667,
           },
         ],
-        url: ({ collectionConfig, data }) => `/${collectionConfig?.slug === 'blog' ? data.slug !== 'home' ? data.slug : '' : '' }`,
+        url: ({ collectionConfig, data }) => {
+          if (collectionConfig?.slug === 'blog') {
+            // For blog posts, use the posts route structure
+            return `/posts/${data.slug}`;
+          }
+          // For other collections, return empty string
+          return '';
+        },
       },
   },
   collections: [Users, Media, Blog],
