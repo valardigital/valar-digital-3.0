@@ -1,7 +1,9 @@
 import { CollectionConfig } from 'payload/types'
 import { slugField } from '@/fields/slug'
-import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
-import CaseStudyContent from '@/app/blocks/CaseStudyContent/config'
+import { ContentWithMedia } from '@/blocks/ContentWithMedia/config'
+import { BlocksFeature, FixedToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+import { TableOfContents } from '@/blocks/TableOfContents/config'
+
 
 const Blog: CollectionConfig = {
   slug: 'blog',
@@ -48,7 +50,7 @@ const Blog: CollectionConfig = {
                 features: ({ defaultFeatures }) => [
                   ...defaultFeatures,
                   BlocksFeature({
-                    blocks: [CaseStudyContent],
+                    blocks: [ContentWithMedia, TableOfContents],
                   }),
                 ],
               })}
