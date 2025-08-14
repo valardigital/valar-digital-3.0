@@ -7,6 +7,15 @@ import { TableOfContents } from '@/blocks/TableOfContents/config'
 
 const Blog: CollectionConfig = {
   slug: 'blog',
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 100,
+      },
+      schedulePublish: true,
+    },
+    maxPerDoc: 100,
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'author', 'status', 'publishedAt'],

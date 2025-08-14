@@ -15,6 +15,24 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     importMap: { baseDir: path.resolve(__dirname), },
+    livePreview: {
+        collections: ['blog'],
+        breakpoints: [
+          {
+            label: 'Desktop',
+            name: 'desktop',
+            width: 1440,
+            height: 1080,
+          },
+          {
+            label: 'Mobile',
+            name: 'mobile',
+            width: 375,
+            height: 667,
+          },
+        ],
+        url: ({ collectionConfig, data }) => `/${collectionConfig?.slug === 'blog' ? data.slug !== 'home' ? data.slug : '' : '' }`,
+      },
   },
   collections: [Users, Media, Blog],
   cors: ['http://localhost:3000',process.env.DOMAIN_NAME || ''],
