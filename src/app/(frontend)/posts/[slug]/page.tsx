@@ -87,21 +87,19 @@ export default async function BlogPostPage({ params: paramsPromise }: Args) {
 
         {/* Content */}
         <div className="max-w-4xl mx-auto">
-          <div className="prose prose-lg max-w-none">
-            {post.content ? (
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <RichText data={post.content} />
-              </div>
-            ) : (
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <p className="text-text-muted text-center py-8">
-                  No content available for this post.
-                  <br />
-                  Add content in the Payload CMS admin panel.
-                </p>
-              </div>
-            )}
-          </div>
+          {post.content ? (
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <RichText data={post.content} />
+            </div>
+          ) : (
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <p className="text-text-muted text-center py-8">
+                No content available for this post.
+                <br />
+                Add content in the Payload CMS admin panel.
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Back to Posts */}

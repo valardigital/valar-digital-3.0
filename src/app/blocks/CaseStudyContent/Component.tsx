@@ -64,13 +64,11 @@ const CaseStudyContent: React.FC<CaseStudyContentProps> = ({
 
         {/* Content (right) */}
         <div className={`flex-1 flex flex-col ${!title ? 'w-full' : ''}`}>
-        <div className="text-base text-text-dark w-full max-w-none !mx-0 prose prose-p:mb-[12px] md:prose-p:mb-[16px] prose-p:mt-[0px] prose-li:marker:text-text-dark">
           <RichText data={content} />
-        </div>
 
           {blockquote?.quote && (
             <blockquote className="bg-primary/5 border-l-2 border-primary px-4 md:px-6 py-4 text-primary tracking-wider">
-              <span className="block mb-2">“{blockquote.quote}”</span>
+              <span className="block mb-2">"{blockquote.quote}"</span>
               {blockquote.attribution && (
                 <span className="block text-primary font-normal">
                   — {blockquote.attribution}
