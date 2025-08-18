@@ -13,22 +13,32 @@ const Media: CollectionConfig = {
         width: 400,
         height: 300,
         position: 'centre',
+        formatOptions: {
+          format: 'webp',
+        },
       },
       {
         name: 'card',
         width: 768,
         height: 1024,
         position: 'centre',
+        formatOptions: {
+          format: 'webp',
+        },
       },
       {
         name: 'tablet',
         width: 1024,
         height: undefined,
         position: 'centre',
+        formatOptions: {
+          format: 'webp',
+        },
       },
     ],
     adminThumbnail: 'thumbnail',
-    mimeTypes: ['image/*'],
+    // Allow both images and videos
+    mimeTypes: ['image/*', 'video/*'],
   },
   fields: [
     {

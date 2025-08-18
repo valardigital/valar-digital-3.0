@@ -34,3 +34,28 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Media storage on S3
+
+This project is configured to store Payload uploads in Amazon S3 using `@payloadcms/storage-s3`.
+
+Environment variables required:
+
+```
+PAYLOAD_SECRET=change-me
+DATABASE_URI=mongodb://localhost:27017/valar-digital
+
+S3_BUCKET=your-bucket-name
+S3_REGION=us-east-1
+S3_ACCESS_KEY_ID=YOUR_ACCESS_KEY_ID
+S3_SECRET_ACCESS_KEY=YOUR_SECRET_ACCESS_KEY
+
+# Optional: hostname used to serve images for Next.js Image optimization
+NEXT_PUBLIC_S3_PUBLIC_HOSTNAME=my-bucket.s3.amazonaws.com
+```
+
+Notes:
+
+- The `media` collection accepts both images and videos (e.g., `video/*`).
+- Deleting a media item from the Payload Admin will delete the corresponding object from S3.
+- To render S3-hosted images, `next.config.ts` includes `images.remotePatterns`. If you use a custom domain (e.g., CloudFront), set `NEXT_PUBLIC_S3_PUBLIC_HOSTNAME` accordingly and rebuild.

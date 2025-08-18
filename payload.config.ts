@@ -4,7 +4,7 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { buildConfig } from 'payload'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage'
+import { s3Storage } from '@payloadcms/storage-s3'
 import Users from './src/collections/Users'
 import Media from './src/collections/Media'
 import { Blog } from './src/collections/blog'
@@ -58,13 +58,24 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
-    // cloudStoragePlugin({
-    //   collections: {
-    //     media: {
-    //       prefix: 'media',
-    //     },
-    //   },
-    // }),
-    // storage-adapter-placeholder
+    s3Storage({
+      bucket: process.env.S3_BUCKET || '',
+      collections: {
+        media: {
+          prefix: 'media',
+          // Use presigned URLs for large video files only
+          signedDownloads: {
+            shouldUseSignedURL: ({ filename }) => filename.toLowerCase().endsWith('.mp4'),
+          },
+        },
+      },
+      config: {
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
+        },
+        region: process.env.S3_REGION || 'us-east-1',
+      },
+    }),
   ],
 })
