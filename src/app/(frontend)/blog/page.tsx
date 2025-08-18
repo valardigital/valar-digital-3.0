@@ -52,6 +52,8 @@ async function fetchBlogs() {
       date: doc.publishedAt ? new Date(doc.publishedAt).toLocaleDateString() : '',
       featured: Boolean(doc.isFeatured),
       hasVideo: Boolean(hasUploadVideo || hasEmbedVideo),
+      videoUploadUrl: hasUploadVideo ? (doc.videoUpload.url as string) : null,
+      embedUrl: hasEmbedVideo ? (doc.embedUrl as string) : null,
       videoPageUrl: doc.type === 'video' && doc.slug ? `/blog/${doc.slug}` : '#',
       type: typeLabel,
     } as any;

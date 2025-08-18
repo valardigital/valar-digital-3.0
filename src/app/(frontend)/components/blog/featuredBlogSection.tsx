@@ -1,10 +1,12 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import play from "@/assets/images/home/play.svg";
 
 interface BlogPost {
-  id: number;
+  id: string;
   title: string;
   excerpt: string;
   image: string | StaticImageData;
@@ -15,6 +17,8 @@ interface BlogPost {
   hasVideo: boolean;
   videoPageUrl: string;
   type?: string;
+  videoUploadUrl?: string | null;
+  embedUrl?: string | null;
 }
 
 interface FeaturedBlogsSectionProps {
@@ -22,6 +26,7 @@ interface FeaturedBlogsSectionProps {
 }
 
 const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) => {
+  const [playingId, setPlayingId] = useState<string | null>(null);
   const mainFeaturedPost = posts[0];
   const sidebarPosts = posts.slice(1, 4);
 
@@ -37,19 +42,43 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
               <Link href={`/blog/${mainFeaturedPost.id}`}>
                 <div className=''>
                   <div className="relative w-full h-[200px] md:h-[370px] mb-4 overflow-hidden rounded-lg">
-                    <Image
-                      src={mainFeaturedPost.image}
-                      alt={mainFeaturedPost.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    {/* Play Button - only show if it's a video */}
-                    {mainFeaturedPost.hasVideo && (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <button className="w-14 h-14 bg-white/40 border border-white backdrop-blur-sm rounded-2xl flex items-center justify-center cursor-pointer hover:bg-white/60 transition-colors">
-                          <Image src={play} className='size-6' alt="Play video" />
-                        </button>
-                      </div>
+                    {mainFeaturedPost.hasVideo && playingId === mainFeaturedPost.id && (mainFeaturedPost.videoUploadUrl || mainFeaturedPost.embedUrl) ? (
+                      mainFeaturedPost.videoUploadUrl ? (
+                        <video
+                          controls
+                          playsInline
+                          poster={typeof mainFeaturedPost.image === 'string' ? mainFeaturedPost.image : undefined}
+                          className="absolute inset-0 w-full h-full object-cover bg-black"
+                          src={mainFeaturedPost.videoUploadUrl}
+                        />
+                      ) : (
+                        <iframe
+                          src={mainFeaturedPost.embedUrl as string}
+                          title={mainFeaturedPost.title}
+                          className="absolute inset-0 w-full h-full"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                        />
+                      )
+                    ) : (
+                      <>
+                        <Image
+                          src={mainFeaturedPost.image}
+                          alt={mainFeaturedPost.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        {mainFeaturedPost.hasVideo && (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <button
+                              className="w-14 h-14 bg-white/40 border border-white backdrop-blur-sm rounded-2xl flex items-center justify-center cursor-pointer hover:bg-white/60 transition-colors"
+                              onClick={(e) => { e.preventDefault(); e.stopPropagation(); setPlayingId(mainFeaturedPost.id); }}
+                            >
+                              <Image src={play} className='size-6' alt="Play video" />
+                            </button>
+                          </div>
+                        )}
+                      </>
                     )}
                   </div>
 
@@ -90,12 +119,44 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
               <Link href={`/blog/${post.id}`}>
                 <div className="flex gap-3 md:gap-6">
                   <div className="relative h-[110px] md:h-[160px] w-[40%] md:aspect-[5/4] md:shrink-0 overflow-hidden rounded-lg">
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
+                    {post.hasVideo && playingId === post.id && (post.videoUploadUrl || post.embedUrl) ? (
+                      post.videoUploadUrl ? (
+                        <video
+                          controls
+                          playsInline
+                          poster={typeof post.image === 'string' ? post.image : undefined}
+                          className="absolute inset-0 w-full h-full object-cover bg-black"
+                          src={post.videoUploadUrl}
+                        />
+                      ) : (
+                        <iframe
+                          src={post.embedUrl as string}
+                          title={post.title}
+                          className="absolute inset-0 w-full h-full"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                        />
+                      )
+                    ) : (
+                      <>
+                        <Image
+                          src={post.image}
+                          alt={post.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        {post.hasVideo && (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <button
+                              className="w-10 h-10 md:w-14 md:h-14 bg-white/40 border border-white backdrop-blur-sm rounded-2xl flex items-center justify-center cursor-pointer hover:bg-white/60 transition-colors"
+                              onClick={(e) => { e.preventDefault(); e.stopPropagation(); setPlayingId(post.id); }}
+                            >
+                              <Image src={play} className='size-5 md:size-6' alt="Play video" />
+                            </button>
+                          </div>
+                        )}
+                      </>
+                    )}
                   </div>
 
                   <div className="flex-1">

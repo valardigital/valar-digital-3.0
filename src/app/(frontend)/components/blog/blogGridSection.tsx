@@ -7,7 +7,7 @@ import { Button } from '../ui/button';
 import play from "@/assets/images/home/play.svg";
 
 interface BlogPost {
-    id: number;
+    id: string;
     title: string;
     excerpt: string;
     image: string | StaticImageData;
@@ -18,6 +18,8 @@ interface BlogPost {
     hasVideo: boolean;
     videoPageUrl: string;
     type?: string;
+    videoUploadUrl?: string | null;
+    embedUrl?: string | null;
 }
 
 const types = [
@@ -39,6 +41,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
 }) => {
     const [selectedType, setSelectedType] = useState("All Types");
     const [searchQuery, setSearchQuery] = useState('');
+    const [playingId, setPlayingId] = useState<string | null>(null);
     const [email, setEmail] = useState('');
 
     const filteredPosts = selectedType === "All Types"
@@ -130,19 +133,43 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
                                     <Link href={`/blog/${post.id}`}>
                                         <div>
                                             <div className="relative w-full h-[220px] sm:h-[350px] lg:h-[490px] mb-4 overflow-hidden rounded-2xl">
-                                                <Image
-                                                    src={post.image}
-                                                    alt={post.title}
-                                                    fill
-                                                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                                />
-                                                {/* Play Button - only show if it's a video */}
-                                                {post.hasVideo && (
-                                                    <div className="absolute inset-0 flex items-center justify-center">
-                                                            <button className="w-14 h-14 bg-white/40 border border-white backdrop-blur-sm rounded-2xl flex items-center justify-center cursor-pointer hover:bg-white/60 transition-colors">
-                                                                <Image src={play} className='size-6' alt="Play video" />
-                                                            </button>
-                                                    </div>
+                                                {post.hasVideo && playingId === post.id && (post.videoUploadUrl || post.embedUrl) ? (
+                                                    post.videoUploadUrl ? (
+                                                        <video
+                                                            controls
+                                                            playsInline
+                                                            poster={typeof post.image === 'string' ? post.image : undefined}
+                                                            className="absolute inset-0 w-full h-full object-cover bg-black"
+                                                            src={post.videoUploadUrl}
+                                                        />
+                                                    ) : (
+                                                        <iframe
+                                                            src={post.embedUrl as string}
+                                                            title={post.title}
+                                                            className="absolute inset-0 w-full h-full"
+                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                            allowFullScreen
+                                                        />
+                                                    )
+                                                ) : (
+                                                    <>
+                                                        <Image
+                                                            src={post.image}
+                                                            alt={post.title}
+                                                            fill
+                                                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                                        />
+                                                        {post.hasVideo && (
+                                                            <div className="absolute inset-0 flex items-center justify-center">
+                                                                <button
+                                                                    className="w-14 h-14 bg-white/40 border border-white backdrop-blur-sm rounded-2xl flex items-center justify-center cursor-pointer hover:bg-white/60 transition-colors"
+                                                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); setPlayingId(post.id); }}
+                                                                >
+                                                                    <Image src={play} className='size-6' alt="Play video" />
+                                                                </button>
+                                                            </div>
+                                                        )}
+                                                    </>
                                                 )}
                                             </div>
 
