@@ -206,10 +206,41 @@ export interface Blog {
    */
   title: string;
   featuredImage?: (string | null) | Media;
+  type: 'article' | 'video';
   /**
    * Brief summary of the blog post
    */
   excerpt: string;
+  /**
+   * Choose one or more categories for this post
+   */
+  categories?:
+    | (
+        | 'AI'
+        | 'Ecommerce'
+        | 'Human Insights'
+        | 'A/B Testing'
+        | 'UX'
+        | 'Shopify'
+        | 'UX Research'
+        | 'AOV'
+        | 'Conversion'
+        | 'Case Study'
+        | 'Growth'
+        | 'Retention'
+        | 'Agency Life'
+        | 'Lean UX'
+        | 'Minimalism'
+        | 'Dev Strategy'
+        | 'Founders'
+        | 'Product Thinking'
+        | 'Checkout'
+      )[]
+    | null;
+  /**
+   * Shown only for Video type posts
+   */
+  videoUrl?: string | null;
   content?: {
     root: {
       type: string;
@@ -260,7 +291,10 @@ export interface Blog {
    * When this post should be published
    */
   publishedAt?: string | null;
-  status: 'draft' | 'published' | 'archived';
+  /**
+   * If enabled, this post can be shown in the Featured section (max 4 posts)
+   */
+  isFeatured?: boolean | null;
   /**
    * Auto-generated from title field. Click lock/unlock to control updates.
    */
@@ -511,7 +545,10 @@ export interface MediaSelect<T extends boolean = true> {
 export interface BlogSelect<T extends boolean = true> {
   title?: T;
   featuredImage?: T;
+  type?: T;
   excerpt?: T;
+  categories?: T;
+  videoUrl?: T;
   content?: T;
   meta?:
     | T
@@ -529,7 +566,7 @@ export interface BlogSelect<T extends boolean = true> {
       };
   author?: T;
   publishedAt?: T;
-  status?: T;
+  isFeatured?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;

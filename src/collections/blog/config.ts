@@ -18,7 +18,7 @@ const Blog: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', 'author', 'status', 'publishedAt'],
+    defaultColumns: ['title', 'type', 'isFeatured', 'categories', 'slug', 'author', 'publishedAt'],
   },
   access: {
     read: () => true,
@@ -44,12 +44,72 @@ const Blog: CollectionConfig = {
               relationTo: 'media',
             },
             {
+              name: 'type',
+              label: 'Post Type',
+              type: 'select',
+              required: true,
+              defaultValue: 'article',
+              options: [
+                { label: 'Article', value: 'article' },
+                { label: 'Video', value: 'video' },
+              ],
+            },
+            {
               name: 'excerpt',
               type: 'textarea',
               required: true,
               maxLength: 200,
               admin: {
                 description: 'Brief summary of the blog post',
+              },
+            },
+            {
+              name: 'categories',
+              label: 'Categories',
+              type: 'select',
+              hasMany: true,
+              admin: {
+                description: 'Choose one or more categories for this post',
+              },
+              options: [
+                { label: 'AI', value: 'AI' },
+                { label: 'Ecommerce', value: 'Ecommerce' },
+                { label: 'Human Insights', value: 'Human Insights' },
+                { label: 'A/B Testing', value: 'A/B Testing' },
+                { label: 'UX', value: 'UX' },
+                { label: 'Shopify', value: 'Shopify' },
+                { label: 'UX Research', value: 'UX Research' },
+                { label: 'AOV', value: 'AOV' },
+                { label: 'Conversion', value: 'Conversion' },
+                { label: 'Case Study', value: 'Case Study' },
+                { label: 'Growth', value: 'Growth' },
+                { label: 'Retention', value: 'Retention' },
+                { label: 'Agency Life', value: 'Agency Life' },
+                { label: 'Lean UX', value: 'Lean UX' },
+                { label: 'Minimalism', value: 'Minimalism' },
+                { label: 'Dev Strategy', value: 'Dev Strategy' },
+                { label: 'Founders', value: 'Founders' },
+                { label: 'Product Thinking', value: 'Product Thinking' },
+                { label: 'Checkout', value: 'Checkout' },
+              ],
+            },
+            
+            {
+              name: 'videoUrl',
+              label: 'Video URL',
+              type: 'text',
+              admin: {
+                description: 'Shown only for Video type posts',
+                condition: (data, siblingData) => {
+                  const source = siblingData ?? data
+                  return source?.type === 'video'
+                },
+              },
+              validate: (value: unknown, { siblingData }: { siblingData?: any }): true | string => {
+                if (siblingData?.type === 'video') {
+                  return value ? true : 'Video URL is required when Post Type is Video'
+                }
+                return true
               },
             },
             {
@@ -144,19 +204,39 @@ const Blog: CollectionConfig = {
       },
     },
     {
-      name: 'status',
-      type: 'select',
-      options: [
-        { label: 'Draft', value: 'draft' },
-        { label: 'Published', value: 'published' },
-        { label: 'Archived', value: 'archived' },
-      ],
-      defaultValue: 'draft',
-      required: true,
+      name: 'isFeatured',
+      label: 'Feature this post',
+      type: 'checkbox',
+      defaultValue: false,
       admin: {
         position: 'sidebar',
+        description: 'If enabled, this post can be shown in the Featured section (max 4 posts)',
+      },
+      validate: async (
+        value: unknown,
+        options: any
+      ): Promise<true | string> => {
+        const { req, id } = options || {}
+        if (!value) return true
+        try {
+          const constraints: any[] = [{ isFeatured: { equals: true } }]
+          if (id) constraints.push({ id: { not_equals: id } })
+          const result = await req.payload.find({
+            collection: 'blog',
+            where: { and: constraints },
+            limit: 1,
+          })
+          const total = result?.totalDocs ?? 0
+          if (total >= 4) {
+            return 'You can only feature up to 4 posts. Unfeature another post first.'
+          }
+          return true
+        } catch (e) {
+          return true
+        }
       },
     },
+    
     // Add slug field system - returns [slugField, slugLockField]
     ...slugField('title'),
   ],

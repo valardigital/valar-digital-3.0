@@ -37,16 +37,7 @@ export default async function BlogPostPage({ params: paramsPromise }: Args) {
       <article className="container mx-auto py-6 md:py-10 px-4 md:px-0">
         {/* Header */}
         <header className="max-w-4xl mx-auto mb-8">
-          <div className="flex items-center gap-2 mb-4">
-            <span className={`px-3 py-1 text-sm rounded-full ${
-              post.status === 'published' 
-                ? 'bg-green-100 text-green-800' 
-                : post.status === 'draft' 
-                ? 'bg-yellow-100 text-yellow-800' 
-                : 'bg-gray-100 text-gray-800'
-            }`}>
-              {post.status}
-            </span>
+          <div className="mb-4">
             {post.publishedAt && (
               <span className="text-sm text-text-muted">
                 {new Date(post.publishedAt).toLocaleDateString()}

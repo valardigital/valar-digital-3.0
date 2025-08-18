@@ -31,7 +31,6 @@ interface BlogPost {
     email: string;
   };
   publishedAt: string;
-  status: string;
   slug: string;
 }
 
@@ -40,7 +39,6 @@ const testPost: BlogPost = {
   id: 'test-1',
   title: 'Sample Blog Post - Test Data',
   excerpt: 'This is a sample blog post to demonstrate how the posts page will look. In a real implementation, this would be fetched from your Payload CMS blog collection. Create some blog posts in the admin panel to see real content here.',
-  status: 'published',
   publishedAt: new Date().toISOString(),
   slug: 'sample-blog-post',
   author: {
@@ -121,9 +119,6 @@ export default function PostsPage() {
                   <div className="bg-white rounded-lg shadow-md overflow-hidden">
                     <div className="p-6">
                       <div className="flex items-center gap-2 mb-3">
-                        <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
-                          {testPost.status}
-                        </span>
                         <span className="text-xs text-text-muted">
                           {new Date(testPost.publishedAt).toLocaleDateString()}
                         </span>
@@ -166,15 +161,6 @@ export default function PostsPage() {
                   )}
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-3">
-                      <span className={`px-2 py-1 text-xs rounded-full ${
-                        post.status === 'published' 
-                          ? 'bg-green-100 text-green-800' 
-                          : post.status === 'draft' 
-                          ? 'bg-yellow-100 text-yellow-800' 
-                          : 'bg-gray-100 text-gray-800'
-                      }`}>
-                        {post.status}
-                      </span>
                       {post.publishedAt && (
                         <span className="text-xs text-text-muted">
                           {new Date(post.publishedAt).toLocaleDateString()}
