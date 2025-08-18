@@ -41,16 +41,28 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
 }) => {
     const [selectedType, setSelectedType] = useState("All Types");
     const [searchQuery, setSearchQuery] = useState('');
+    const [activeTag, setActiveTag] = useState<string | null>(null);
     const [playingId, setPlayingId] = useState<string | null>(null);
     const [email, setEmail] = useState('');
 
-    const filteredPosts = selectedType === "All Types"
-        ? posts
-        : posts.filter(post => post.type === selectedType);
+    const normalize = (v: string) => v.toLowerCase();
+    const matchesText = (post: BlogPost, query: string) => {
+        if (!query) return true;
+        const q = normalize(query);
+        return (
+            normalize(post.title).includes(q) ||
+            normalize(post.excerpt).includes(q) ||
+            post.categories.some(c => normalize(c).includes(q))
+        );
+    };
+
+    const byType = selectedType === "All Types" ? posts : posts.filter(post => post.type === selectedType);
+    const bySearch = byType.filter(post => matchesText(post, searchQuery));
+    const filteredPosts = activeTag ? bySearch.filter(post => matchesText(post, activeTag)) : bySearch;
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Search:', searchQuery);
+        // Filtering happens reactively from state; nothing else to do here
     };
 
     const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -60,7 +72,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
     };
 
     const handleTagClick = (tag: string) => {
-        console.log('Tag clicked:', tag);
+        setActiveTag(prev => (prev === tag ? null : tag));
     };
 
     return (
@@ -94,7 +106,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
                                         <button
                                             key={index}
                                             onClick={() => handleTagClick(tag)}
-                                            className="px-4 py-2 bg-primary/5 text-sm text-text-dark rounded-[4px] border border-border hover:bg-primary/8 transition-colors whitespace-nowrap"
+                                            className={`px-4 py-2 text-sm rounded-[4px] border transition-colors whitespace-nowrap ${activeTag === tag ? 'bg-primary text-white border-primary' : 'bg-primary/5 text-text-dark border-border hover:bg-primary/8'}`}
                                         >
                                             {tag}
                                         </button>
