@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { slugField } from '@/fields/slug'
 import { ContentWithMedia } from '@/blocks/ContentWithMedia/config'
+import { DotSeparator } from '@/blocks/DotSeparator/config'
 import { BlocksFeature, FixedToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { TableOfContents } from '@/blocks/TableOfContents/config'
 
@@ -93,13 +94,16 @@ const Blog: CollectionConfig = {
                 { label: 'Checkout', value: 'Checkout' },
               ],
             },
-            
             {
-              name: 'videoUrl',
-              label: 'Video URL',
-              type: 'text',
+              name: 'videoSource',
+              label: 'Video Source',
+              type: 'select',
+              options: [
+                { label: 'Upload', value: 'upload' },
+                { label: 'Embed (YouTube/Vimeo/etc.)', value: 'embed' },
+              ],
               admin: {
-                description: 'Shown only for Video type posts',
+                description: 'Choose how the video is provided',
                 condition: (data, siblingData) => {
                   const source = siblingData ?? data
                   return source?.type === 'video'
@@ -107,7 +111,50 @@ const Blog: CollectionConfig = {
               },
               validate: (value: unknown, { siblingData }: { siblingData?: any }): true | string => {
                 if (siblingData?.type === 'video') {
-                  return value ? true : 'Video URL is required when Post Type is Video'
+                  return value ? true : 'Video Source is required for Video posts'
+                }
+                return true
+              },
+            },
+            {
+              name: 'videoUpload',
+              label: 'Video Upload',
+              type: 'upload',
+              relationTo: 'media',
+              admin: {
+                description: 'Upload a video file. Use a featured image as the poster/thumbnail.',
+                condition: (data, siblingData) => {
+                  const source = siblingData ?? data
+                  return source?.type === 'video' && source?.videoSource === 'upload'
+                },
+              },
+              validate: (value: unknown, { siblingData }: { siblingData?: any }): true | string => {
+                if (siblingData?.type === 'video' && siblingData?.videoSource === 'upload') {
+                  return value ? true : 'Please upload a video file or switch to Embed'
+                }
+                return true
+              },
+            },
+            {
+              name: 'embedUrl',
+              label: 'Embed URL',
+              type: 'text',
+              admin: {
+                description: 'Paste a YouTube/Vimeo/Wistia URL',
+                condition: (data, siblingData) => {
+                  const source = siblingData ?? data
+                  return source?.type === 'video' && source?.videoSource === 'embed'
+                },
+              },
+              validate: (value: unknown, { siblingData }: { siblingData?: any }): true | string => {
+                if (siblingData?.type === 'video' && siblingData?.videoSource === 'embed') {
+                  if (!value || typeof value !== 'string') return 'Embed URL is required'
+                  try {
+                    new URL(value as string)
+                    return true
+                  } catch {
+                    return 'Please enter a valid URL'
+                  }
                 }
                 return true
               },
@@ -119,7 +166,7 @@ const Blog: CollectionConfig = {
                 features: ({ defaultFeatures }) => [
                   ...defaultFeatures,
                   BlocksFeature({
-                    blocks: [ContentWithMedia, TableOfContents],
+                    blocks: [ContentWithMedia, TableOfContents, DotSeparator],
                   }),
                 ],
               })}

@@ -6,10 +6,11 @@ import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexi
 import { JSXConvertersFunction, LinkJSXConverter } from '@payloadcms/richtext-lexical/react'
 import { ContentWithMedia } from '@/blocks/ContentWithMedia/Component'
 import { TableOfContents } from '@/blocks/TableOfContents/Component'
+import { DotSeparator } from '@/blocks/DotSeparator/Component'
 import { internalDocToHref } from '@/components/RichText/converters/internalLink'
 import { headingConverter } from '@/components/RichText/converters/headingConverter'
 
-type NodeTypes = DefaultNodeTypes | SerializedBlockNode<TableOfContentsProps | ContentWithMediaProps>
+type NodeTypes = DefaultNodeTypes | SerializedBlockNode<TableOfContentsProps | ContentWithMediaProps | { id?: string }>
 
 
 export const jsxConverter: JSXConvertersFunction<NodeTypes> = ({defaultConverters}) => ({
@@ -19,5 +20,6 @@ export const jsxConverter: JSXConvertersFunction<NodeTypes> = ({defaultConverter
   blocks: {
     contentWithMedia: ({node}) => <ContentWithMedia {...node.fields} />,
     tableOfContents: ({node}) => <TableOfContents {...node.fields} />,
+    dotSeparator: () => <DotSeparator />,
   }
 })

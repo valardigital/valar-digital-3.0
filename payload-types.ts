@@ -238,9 +238,17 @@ export interface Blog {
       )[]
     | null;
   /**
-   * Shown only for Video type posts
+   * Choose how the video is provided
    */
-  videoUrl?: string | null;
+  videoSource?: ('upload' | 'embed') | null;
+  /**
+   * Upload a video file. Use a featured image as the poster/thumbnail.
+   */
+  videoUpload?: (string | null) | Media;
+  /**
+   * Paste a YouTube/Vimeo/Wistia URL
+   */
+  embedUrl?: string | null;
   content?: {
     root: {
       type: string;
@@ -548,7 +556,9 @@ export interface BlogSelect<T extends boolean = true> {
   type?: T;
   excerpt?: T;
   categories?: T;
-  videoUrl?: T;
+  videoSource?: T;
+  videoUpload?: T;
+  embedUrl?: T;
   content?: T;
   meta?:
     | T
@@ -694,6 +704,15 @@ export interface TableOfContents {
   id?: string | null;
   blockName?: string | null;
   blockType: 'tableOfContents';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DotSeparator".
+ */
+export interface DotSeparator {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'dotSeparator';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

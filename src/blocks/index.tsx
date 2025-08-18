@@ -1,15 +1,17 @@
 import { TableOfContents } from '@/blocks/TableOfContents/Component'
 import { ContentWithMedia } from '@/blocks/ContentWithMedia/Component'
+import { DotSeparator } from '@/blocks/DotSeparator/Component'
 import type { ContentWithMedia as ContentWithMediaType, TableOfContents as TableOfContentsType } from '@/payload-types'
 import { Fragment } from 'react'
 
 const blockComponents = {
   tableOfContents: TableOfContents,
   contentWithMedia: ContentWithMedia,
+  dotSeparator: DotSeparator,
 }
 
 export const RenderBlocks: React.FC<{
-  blocks: (ContentWithMediaType | TableOfContentsType)[]
+  blocks: (ContentWithMediaType | TableOfContentsType | { blockType: 'dotSeparator' })[]
 }> = (props) => {
   const {blocks} = props
 

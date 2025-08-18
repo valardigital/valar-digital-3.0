@@ -33,11 +33,9 @@ export default buildConfig({
         ],
         url: ({ collectionConfig, data }) => {
           if (collectionConfig?.slug === 'blog') {
-            // For blog posts, use the posts route structure
-            return `/posts/${data.slug}`;
+            return `/blog/${data.slug}`
           }
-          // For other collections, return empty string
-          return '';
+          return ''
         },
       },
   },
