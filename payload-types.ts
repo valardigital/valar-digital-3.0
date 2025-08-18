@@ -286,10 +286,6 @@ export interface Blog {
           id?: string | null;
         }[]
       | null;
-    /**
-     * Preferred URL for this page (leave empty to use default)
-     */
-    canonicalUrl?: string | null;
   };
   /**
    * Automatically set to the current user
@@ -572,7 +568,6 @@ export interface BlogSelect<T extends boolean = true> {
               keyword?: T;
               id?: T;
             };
-        canonicalUrl?: T;
       };
   author?: T;
   publishedAt?: T;

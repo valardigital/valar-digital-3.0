@@ -10,6 +10,7 @@ async function fetchBlogs() {
   const featuredRes = await payload.find({
     collection: 'blog',
     where: {
+      _status: { equals: 'published' },
       isFeatured: { equals: true },
     },
     sort: '-publishedAt',
@@ -19,6 +20,9 @@ async function fetchBlogs() {
   // All posts for grid
   const postsRes = await payload.find({
     collection: 'blog',
+    where: {
+      _status: { equals: 'published' },
+    },
     sort: '-publishedAt',
     limit: 24,
   });

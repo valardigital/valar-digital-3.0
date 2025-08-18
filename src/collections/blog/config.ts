@@ -19,7 +19,7 @@ const Blog: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'type', 'isFeatured', 'categories', 'slug', 'author', 'publishedAt'],
+    defaultColumns: ['title', 'type', 'isFeatured', 'categories', 'slug', 'author', '_status'],
   },
   access: {
     read: () => true,
@@ -216,14 +216,7 @@ const Blog: CollectionConfig = {
                 },
               ],
             },
-            {
-              name: 'canonicalUrl',
-              type: 'text',
-              label: 'Canonical URL',
-              admin: {
-                description: 'Preferred URL for this page (leave empty to use default)',
-              },
-            },
+            
           ],
         },
       ],

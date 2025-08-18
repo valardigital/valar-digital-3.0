@@ -6,6 +6,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { RichText } from '@/components/RichText'
+import type { Metadata } from 'next'
+import { getServerSideURL } from '@/utilities/getURL'
+import { cache } from 'react'
 
 type Args = {
   params: Promise<{ slug?: string }>
@@ -27,17 +30,7 @@ function computeReadTime(data: unknown, isVideo: boolean): string {
 export default async function BlogPostPage({ params: paramsPromise }: Args) {
   const { slug } = await paramsPromise
   const headers = await getHeaders()
-  const payload = await getPayload({ config: configPromise })
-  const { user } = await payload.auth({ headers })
-
-  const post = await payload
-    .find({
-      collection: 'blog',
-      where: { slug: { equals: slug } },
-      overrideAccess: Boolean(user),
-      draft: Boolean(user),
-    })
-    .then((res) => res.docs[0])
+  const post = await getPostBySlug(slug as string, headers)
 
   if (!post) return notFound()
 
@@ -133,4 +126,65 @@ export default async function BlogPostPage({ params: paramsPromise }: Args) {
     </div>
   )
 }
+
+export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
+  const { slug } = await paramsPromise
+  const headers = await getHeaders()
+  const post = await getPostBySlug(slug as string, headers)
+
+  if (!post) return {}
+
+  const siteUrl = getServerSideURL()
+  const canonicalPath = `/blog/${slug}`
+  const canonical = canonicalPath
+  const title = (post as any)?.meta?.title || post.title
+  const description = (post as any)?.meta?.description || post.excerpt || undefined
+  let ogImage: string | undefined
+  const metaImage = (post as any)?.meta?.image
+  if (metaImage && typeof metaImage === 'object' && 'url' in metaImage && metaImage.url) {
+    ogImage = metaImage.url as string
+  } else if (post.featuredImage && typeof post.featuredImage === 'object' && 'url' in post.featuredImage && post.featuredImage.url) {
+    ogImage = post.featuredImage.url as string
+  }
+  const ogImageAbs = ogImage && (ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`)
+  const keywords = Array.isArray((post as any)?.meta?.keywords)
+    ? (post as any).meta.keywords.map((k: any) => k?.keyword).filter(Boolean).join(', ')
+    : undefined
+
+  return {
+    title,
+    description,
+    keywords,
+    alternates: {
+      canonical: `${siteUrl}${canonical}`,
+    },
+    openGraph: {
+      type: 'article',
+      url: `${siteUrl}${canonicalPath}`,
+      title,
+      description,
+      images: ogImageAbs ? [{ url: ogImageAbs }] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ogImageAbs ? [ogImageAbs] : undefined,
+    },
+  }
+}
+
+// Shared, cached fetch so page and metadata do not issue duplicate DB calls per-request
+export const getPostBySlug = cache(async (slug: string, headers?: Headers) => {
+  const payload = await getPayload({ config: configPromise })
+  const auth = headers ? await payload.auth({ headers }) : { user: undefined as any }
+  const res = await payload.find({
+    collection: 'blog',
+    where: { slug: { equals: slug } },
+    overrideAccess: Boolean((auth as any)?.user),
+    draft: Boolean((auth as any)?.user),
+    limit: 1,
+  })
+  return res.docs[0] || null
+})
 
