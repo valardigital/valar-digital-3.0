@@ -1,6 +1,6 @@
 import { TableOfContents } from '@/blocks/TableOfContents/Component'
 import { ContentWithMedia } from '@/blocks/ContentWithMedia/Component'
-import {Post} from '@/payload-types'
+import type { ContentWithMedia as ContentWithMediaType, TableOfContents as TableOfContentsType } from '@/payload-types'
 import { Fragment } from 'react'
 
 const blockComponents = {
@@ -9,7 +9,7 @@ const blockComponents = {
 }
 
 export const RenderBlocks: React.FC<{
-  blocks: Post['blockTest']
+  blocks: (ContentWithMediaType | TableOfContentsType)[]
 }> = (props) => {
   const {blocks} = props
 

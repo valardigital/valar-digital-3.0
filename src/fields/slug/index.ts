@@ -30,7 +30,7 @@ export const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
     ...checkboxOverrides,
   }
 
-  // Main slug field with custom component and formatting
+  // @ts-expect-error - ts mismatch Partial<TextField> with TextField
   const slugField: TextField = {
     name: 'slug',
     type: 'text',

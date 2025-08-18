@@ -16,12 +16,12 @@ const neueMontreal = localFont({
     {
       path: "../../assets/fonts/NeueMontreal-Medium.otf",
       weight: "500",
-      style: "medium",
+      style: "normal", // "medium" is invalid, must be "normal"
     },
     {
       path: "../../assets/fonts/NeueMontreal-Bold.otf",
       weight: "700",
-      style: "bold",
+      style: "normal", // "bold" is invalid, must be "normal"
     },
   ],
   variable: "--font-neue-montreal",
@@ -35,14 +35,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${neueMontreal.variable} antialiased font-sans`}
-      >
+      <body className={`${neueMontreal.variable} antialiased font-sans`}>
         <Header />
         {children}
         <Footer />

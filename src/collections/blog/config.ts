@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload/types'
+import type { CollectionConfig } from 'payload'
 import { slugField } from '@/fields/slug'
 import { ContentWithMedia } from '@/blocks/ContentWithMedia/config'
 import { BlocksFeature, FixedToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
@@ -162,12 +162,10 @@ const Blog: CollectionConfig = {
   ],
   hooks: {
     beforeChange: [
-      ({ data, req }) => {
-        // Auto-fill author with current logged-in user
-        if (req.user && !data.author) {
+      ({ data, req }: { data: any; req: any }) => {
+        if (req?.user && data && !data.author) {
           data.author = req.user.id
         }
-        
         return data
       },
     ],
