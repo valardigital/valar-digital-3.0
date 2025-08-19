@@ -3,7 +3,7 @@ import configPromise from '@payload-config';
 import FeaturedBlogsSection from '../components/blog/featuredBlogSection';
 import BlogGridSection from '../components/blog/blogGridSection';
 
-async function fetchBlogs() {
+async function fetchBlogs(page: number) {
   const payload = await getPayload({ config: configPromise });
 
   // Featured posts (max 4)
@@ -18,13 +18,14 @@ async function fetchBlogs() {
   });
 
   // All posts for grid
-  const postsRes = await payload.find({
+  const postsRes: any = await payload.find({
     collection: 'blog',
     where: {
       _status: { equals: 'published' },
     },
     sort: '-publishedAt',
-    limit: 24,
+    limit: 6,
+    page,
   });
 
   const computeReadTime = (data: unknown, type: string | undefined): string => {
@@ -71,7 +72,12 @@ async function fetchBlogs() {
     .map(mapDocToCard)
     .filter(Boolean) as any[];
 
-  return { featuredPosts, posts };
+  const totalDocs = postsRes?.totalDocs ?? 0;
+  const limit = postsRes?.limit ?? 6;
+  const totalPages = Math.max(1, Math.ceil(totalDocs / limit));
+  const currentPage = postsRes?.page ?? page;
+
+  return { featuredPosts, posts, pagination: { page: currentPage, totalPages } };
 }
 
 const popularTags = [
@@ -94,8 +100,10 @@ const categories = [
   'Videos'
 ]
 
-export default async function BlogListingPage() {
-  const { featuredPosts, posts } = await fetchBlogs();
+export default async function BlogListingPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const { page: pageParam } = await searchParams;
+  const currentPage = Math.max(1, parseInt(pageParam || '1', 10) || 1);
+  const { featuredPosts, posts, pagination } = await fetchBlogs(currentPage);
 
   return (
     <div className="bg-background-muted mt-[64px] md:mt-[67px]">
@@ -121,6 +129,8 @@ export default async function BlogListingPage() {
         posts={posts}
         categories={categories}
         popularTags={popularTags}
+        page={pagination.page}
+        totalPages={pagination.totalPages}
       />
     </div>
   );

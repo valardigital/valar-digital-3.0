@@ -9,6 +9,8 @@ import { RichText } from '@/components/RichText'
 import type { Metadata } from 'next'
 import { getServerSideURL } from '@/utilities/getURL'
 import { cache } from 'react'
+import { RenderBlocks } from '@/blocks'
+import arrowLeft from "@/assets/images/arrow-left-blog.svg";
 
 type Args = {
   params: Promise<{ slug?: string }>
@@ -40,87 +42,80 @@ export default async function BlogPostPage({ params: paramsPromise }: Args) {
   return (
     <div className="bg-background-muted mt-[64px] md:mt-[67px] min-h-screen">
       <LivePreviewListener />
+      <div className="mx-auto md:px-0 px-6 pt-6 max-w-4xl">
+        <Link 
+          href="/blog" 
+          className="inline-flex items-center gap-2 text-text-dark tracking-[0.04rem] hover:font-medium transition-colors"
+        >
+          <Image src={arrowLeft} className="size-5.5" alt="Arrow right icon" />
+          Back to Blogs
+        </Link>
+      </div>
 
-      <article className="container mx-auto py-6 md:py-10 px-4 md:px-0">
-        <div className="max-w-3xl mx-auto">
-          <div className="mb-4">
-            <Link href="/blog" className="text-sm text-text-muted hover:text-text-dark">← Back to Blog</Link>
-          </div>
-
-          <div className="mb-6">
-            <div className="relative w-full h-[200px] md:h-[380px] rounded-xl overflow-hidden">
-              {isVideo ? (
-                <>
-                  {(post.videoSource === 'upload' && post.videoUpload && typeof post.videoUpload === 'object' && 'url' in post.videoUpload && post.videoUpload.url) ? (
-                    <video
-                      controls
-                      playsInline
-                      poster={post.featuredImage && typeof post.featuredImage === 'object' && 'url' in post.featuredImage ? (post.featuredImage.url as string) : undefined}
-                      className="absolute inset-0 w-full h-full object-cover bg-black"
-                      src={post.videoUpload.url as string}
-                    />
-                  ) : post.videoSource === 'embed' && post.embedUrl ? (
-                    <iframe
-                      src={post.embedUrl as string}
-                      title={post.title}
-                      className="absolute inset-0 w-full h-full"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                    />
-                  ) : (
-                    post.featuredImage && typeof post.featuredImage === 'object' && 'url' in post.featuredImage && post.featuredImage.url ? (
-                      <Image
-                        src={post.featuredImage.url as string}
-                        alt={(post.featuredImage.alt as string) || post.title}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : null
-                  )}
-                </>
-              ) : (
-                post.featuredImage && typeof post.featuredImage === 'object' && 'url' in post.featuredImage && post.featuredImage.url ? (
-                  <Image
-                    src={post.featuredImage.url as string}
-                    alt={(post.featuredImage.alt as string) || post.title}
-                    fill
-                    className="object-cover"
-                  />
-                ) : null
-              )}
-            </div>
-          </div>
-
-          <header className="mb-6">
-            <h1 className="text-2xl md:text-4xl font-medium text-text-dark leading-tight mb-3">{post.title}</h1>
-            <div className="flex items-center gap-2 text-sm text-text-light">
-              <span>{readTime}</span>
-              <span className="w-1 h-1 rounded-full bg-text-light inline-block" />
-              {post.publishedAt && (
-                <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
-              )}
-            </div>
-          </header>
-
-          <div className="prose max-w-none">
-            {post.content ? (
-              <div className="bg-white p-6 md:p-8 rounded-xl shadow-sm">
-                <RichText data={post.content} />
-              </div>
+      <article className="blogDetailsPage mx-auto px-4 lg:px-0 pt-6 md:py-8 max-w-4xl">
+        {/* Featured Media */}
+        <div className="relative w-full lg:h-[500px] md:mb-8 mb-6 rounded-lg overflow-hidden">
+          {isVideo ? (
+            (post.videoSource === 'upload' && post.videoUpload && typeof post.videoUpload === 'object' && 'url' in post.videoUpload && post.videoUpload.url) ? (
+              <video
+                controls
+                playsInline
+                poster={post.featuredImage && typeof post.featuredImage === 'object' && 'url' in post.featuredImage ? (post.featuredImage.url as string) : undefined}
+                className="absolute inset-0 w-full h-full object-cover bg-black"
+                src={post.videoUpload.url as string}
+              />
+            ) : post.videoSource === 'embed' && post.embedUrl ? (
+              <iframe
+                src={post.embedUrl as string}
+                title={post.title}
+                className="absolute inset-0 w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
             ) : (
-              <div className="bg-white p-6 rounded-xl shadow-sm text-text-muted text-center">
-                No content available for this post.
-              </div>
-            )}
-          </div>
+              post.featuredImage && typeof post.featuredImage === 'object' && 'url' in post.featuredImage ? (
+                <Image src={post.featuredImage.url as string} alt={(post.featuredImage.alt as string) || post.title} fill className="object-cover !relative" />
+              ) : null
+            )
+          ) : (
+            post.featuredImage && (
+              typeof post.featuredImage === 'string' ? (
+                <Image src={post.featuredImage} alt={post.title} fill className="object-cover relative" priority />
+              ) : (
+                <Image src={(post.featuredImage as any)?.url || '/placeholder.jpg'} alt={(post.featuredImage as any)?.alt || post.title} fill className="object-cover !relative" priority />
+              )
+            )
+          )}
+        </div>
 
-          <div className="flex items-center justify-between mt-10 pt-6 border-t border-border">
-            <div className="flex gap-2 text-xs text-text-muted">
-              {Array.isArray(post.categories) && post.categories.map((cat: string, i: number) => (
-                <span key={i} className="px-3 py-1 bg-primary/5 border rounded-[4px] text-text-dark">{cat}</span>
-              ))}
+        {/* Title */}
+        <h1 className="text-2xl md:text-5xl font-bold text-text-dark mb-2 md:mb-6 leading-[1.3] md:leading-tight">{post.title}</h1>
+
+        {/* Meta */}
+        <div className="flex flex-wrap items-center gap-2 mb-0 md:mb-8">
+          <span className="text-sm text-text-light">{readTime}</span>
+          <span className="text-text-light">•</span>
+          <time className="text-sm text-text-light">{post.createdAt ? new Date(post.createdAt).toLocaleDateString() : ''}</time>
+        </div>
+
+        {/* Content (hidden for videos) */}
+        {!isVideo && (
+          <div className="prose prose-lg max-w-none mb-12">
+            <div className="text-text-dark leading-relaxed">
+              {(post as any).layout && (post as any).layout.length > 0 ? (
+                <RenderBlocks blocks={(post as any).layout} />
+              ) : (
+                post.content && <RichText data={post.content} />
+              )}
             </div>
           </div>
+        )}
+
+        {/* Categories row */}
+        <div className="flex items-center gap-2 py-6 border-t-1 border-b-1">
+          {Array.isArray(post.categories) && post.categories.map((cat: string, i: number) => (
+            <span key={i} className="px-3 py-1 bg-primary/5 border rounded-[4px] text-text-dark">{cat}</span>
+          ))}
         </div>
       </article>
     </div>
