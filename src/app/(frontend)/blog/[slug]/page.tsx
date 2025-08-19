@@ -11,6 +11,7 @@ import { getServerSideURL } from '@/utilities/getURL'
 import { cache } from 'react'
 import { RenderBlocks } from '@/blocks'
 import arrowLeft from "@/assets/images/arrow-left-blog.svg";
+import RelatedPosts from '@/app/(frontend)/components/blog/RelatedPosts'
 
 type Args = {
   params: Promise<{ slug?: string }>
@@ -112,11 +113,14 @@ export default async function BlogPostPage({ params: paramsPromise }: Args) {
         )}
 
         {/* Categories row */}
-        <div className="flex items-center gap-2 py-6 border-t-1 border-b-1">
+        {/* <div className="flex items-center gap-2 py-6 border-t-1 border-b-1">
           {Array.isArray(post.categories) && post.categories.map((cat: string, i: number) => (
             <span key={i} className="px-3 py-1 bg-primary/5 border rounded-[4px] text-text-dark">{cat}</span>
           ))}
-        </div>
+        </div> */}
+
+        {/* Related Posts */}
+        <RelatedPosts posts={await getRelatedPosts(slug as string)} />
       </article>
     </div>
   )
@@ -182,4 +186,49 @@ export const getPostBySlug = cache(async (slug: string, headers?: Headers) => {
   })
   return res.docs[0] || null
 })
+
+// Server helper to get 3 related posts by categories (fallback to random)
+async function getRelatedPosts(slug: string) {
+  const payload = await getPayload({ config: configPromise })
+  const current = await payload.find({ collection: 'blog', where: { slug: { equals: slug } }, limit: 1 }).then(r => r.docs[0])
+  const categories: string[] = Array.isArray(current?.categories) ? current.categories : []
+
+  // Try to fetch with overlapping categories
+  const where: any = {
+    and: [
+      { _status: { equals: 'published' } },
+      { slug: { not_equals: slug } },
+    ],
+  }
+  if (categories.length > 0) {
+    where.and.push({ categories: { in: categories } })
+  }
+
+  let res = await payload.find({ collection: 'blog', where, limit: 6, sort: '-publishedAt' })
+  let docs = res.docs
+  if (!docs || docs.length === 0) {
+    // Fallback random 6 then pick 3
+    res = await payload.find({ collection: 'blog', where: { _status: { equals: 'published' } }, limit: 6, sort: '-publishedAt' })
+    docs = res.docs
+  }
+
+  const shuffled = [...(docs || [])].sort(() => Math.random() - 0.5).slice(0, 3)
+  const compute = (d: any) => {
+    const imageUrl = typeof d.featuredImage === 'object' && d.featuredImage?.url ? d.featuredImage.url : ''
+    const text = JSON.stringify(d.content ?? '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ')
+    const words = text.trim().split(' ').filter(Boolean).length
+    const minutes = Math.max(1, Math.ceil(words / 200))
+    return {
+      id: d.id,
+      slug: d.slug,
+      title: d.title,
+      excerpt: d.excerpt,
+      image: imageUrl,
+      categories: Array.isArray(d.categories) ? d.categories : [],
+      readTime: `${minutes} min ${d.type === 'video' ? 'watch' : 'read'}`,
+      date: d.publishedAt ? new Date(d.publishedAt).toLocaleDateString() : '',
+    }
+  }
+  return shuffled.map(compute)
+}
 
