@@ -174,7 +174,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
 }
 
 // Shared, cached fetch so page and metadata do not issue duplicate DB calls per-request
-export const getPostBySlug = cache(async (slug: string, headers?: Headers) => {
+const getPostBySlug = cache(async (slug: string, headers?: Headers) => {
   const payload = await getPayload({ config: configPromise })
   const auth = headers ? await payload.auth({ headers }) : { user: undefined as any }
   const res = await payload.find({
