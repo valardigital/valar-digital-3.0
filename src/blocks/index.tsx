@@ -1,17 +1,52 @@
 import { TableOfContents } from '@/blocks/TableOfContents/Component'
 import { ContentWithMedia } from '@/blocks/ContentWithMedia/Component'
 import { DotSeparator } from '@/blocks/DotSeparator/Component'
-import type { ContentWithMedia as ContentWithMediaType, TableOfContents as TableOfContentsType } from '@/payload-types'
+import { HeroSection } from '@/blocks/HeroSection/Component'
+import { ResultsSection } from '@/blocks/ResultsSection/Component'
+import { InsightsSection } from '@/blocks/InsightsSection/Component'
+import { ProcessSection } from '@/blocks/ProcessSection/Component'
+import { BeforeAfterSection } from '@/blocks/BeforeAfterSection/Component'
+import { ProcessDetailsSection } from '@/blocks/ProcessDetailsSection/Component'
+import { OutcomeSection } from '@/blocks/OutcomeSection/Component'
+import type { 
+  ContentWithMedia as ContentWithMediaType, 
+  TableOfContents as TableOfContentsType,
+  HeroSection as HeroSectionType,
+  ResultsSection as ResultsSectionType,
+  InsightsSection as InsightsSectionType,
+  ProcessSection as ProcessSectionType,
+  BeforeAfterSection as BeforeAfterSectionType,
+  ProcessDetailsSection as ProcessDetailsSectionType,
+  OutcomeSection as OutcomeSectionType
+} from '@/payload-types'
 import { Fragment } from 'react'
 
 const blockComponents = {
   tableOfContents: TableOfContents,
   contentWithMedia: ContentWithMedia,
   dotSeparator: DotSeparator,
+  heroSection: HeroSection,
+  resultsSection: ResultsSection,
+  insightsSection: InsightsSection,
+  processSection: ProcessSection,
+  beforeAfterSection: BeforeAfterSection,
+  processDetailsSection: ProcessDetailsSection,
+  outcomeSection: OutcomeSection,
 }
 
 export const RenderBlocks: React.FC<{
-  blocks: (ContentWithMediaType | TableOfContentsType | { blockType: 'dotSeparator' })[]
+  blocks: (
+    ContentWithMediaType | 
+    TableOfContentsType | 
+    { blockType: 'dotSeparator' } |
+    HeroSectionType |
+    ResultsSectionType |
+    InsightsSectionType |
+    ProcessSectionType |
+    BeforeAfterSectionType |
+    ProcessDetailsSectionType |
+    OutcomeSectionType
+  )[]
 }> = (props) => {
   const {blocks} = props
 

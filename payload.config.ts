@@ -8,6 +8,7 @@ import { s3Storage } from '@payloadcms/storage-s3'
 import Users from './src/collections/Users'
 import Media from './src/collections/Media'
 import { Blog } from './src/collections/blog'
+import { CaseStudy } from './src/collections/caseStudy'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -16,7 +17,7 @@ export default buildConfig({
     user: Users.slug,
     importMap: { baseDir: path.resolve(__dirname), },
     livePreview: {
-        collections: ['blog'],
+        collections: ['blog', 'caseStudy'],
         breakpoints: [
           {
             label: 'Desktop',
@@ -35,11 +36,14 @@ export default buildConfig({
           if (collectionConfig?.slug === 'blog') {
             return `/blog/${data.slug}`
           }
+          if (collectionConfig?.slug === 'caseStudy') {
+            return `/caseStudy/${data.slug}`
+          }
           return ''
         },
       },
   },
-  collections: [Users, Media, Blog],
+  collections: [Users, Media, Blog, CaseStudy],
   cors: ['http://localhost:3000',process.env.DOMAIN_NAME || ''],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

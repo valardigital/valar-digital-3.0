@@ -1,10 +1,34 @@
 import CaseStudyCard from "../components/caseStudy/caseStudyCard";
-import purdyFiggImage from "@/assets/images/caseStudy/p&f.png";
-import zima from "@/assets/images/caseStudy/zima.png";
 import CTASection from "../components/shared/CTASection";
-import BlogCard from "../components/blog/blog-cards";
+// No helpers needed; mirror blog: use the media.url directly
+import { getPayload } from 'payload'
+import configPromise from '@payload-config'
+import { headers as getHeaders } from 'next/headers'
+import { cache } from 'react'
 
-export default function CaseStudy() {
+const getCaseStudies = cache(async () => {
+  try {
+    const payload = await getPayload({ config: configPromise })
+    const headers = await getHeaders()
+    const auth = headers ? await payload.auth({ headers }) : { user: undefined as any }
+    const res = await payload.find({
+      collection: 'caseStudy',
+      sort: '-publishedAt',
+      overrideAccess: Boolean((auth as any)?.user),
+      draft: Boolean((auth as any)?.user),
+      depth: 2,
+      limit: 50,
+    })
+    return res.docs || []
+  } catch (error) {
+    console.error('Error fetching case studies:', error)
+    return []
+  }
+})
+
+export default async function CaseStudy() {
+    const caseStudies = await getCaseStudies()
+
     const ArrowDownIcon = () => (
         <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center shrink-0">
             <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -29,54 +53,26 @@ export default function CaseStudy() {
                     <p className="leading-[1.5] tracking-[0.04rem]">Discover how we've helped Shopify brands transform their customer experience, optimize<br className="hidden md:block" /> conversions, and scale their revenue through strategic design and development.</p>
                 </div>
                 <div className="pt-6 pb-10 space-y-6 md:space-y-10 md:px-0 px-4">
-                    <CaseStudyCard
-                        image={purdyFiggImage}
-                        imageAlt="Purdy & Figg product bottle"
-                        tags={['Retention UX', 'Shopify Rebuild', 'Custom Subscription Flow']}
-                        title="How We Helped Purdy & Figg Cut Subscription Churn by 23%"
-                        description="We replaced a clunky third-party portal with a custom, mobile-first experience. In 8 weeks, we delivered a calmer, clearer flow that cut cancellations and reduced support load."
-                        metrics={[
-                            {
-                                icon: <ArrowDownIcon />,
-                                value: '↓ 23% churn',
-                                description: ''
-                            },
-                            {
-                                icon: <ArrowUpIcon />,
-                                value: '↑ 42% engagement',
-                                description: ''
-                            },
-                            {
-                                icon: <ArrowUpIcon />,
-                                value: '↑ 35% skipped over cancelled',
-                                description: ''
-                            }
-                        ]}
-                    />
-                    <CaseStudyCard
-                        image={zima}
-                        imageAlt="Zima Dental Pod"
-                        tags={['Retention UX', 'Shopify Rebuild', 'Custom Subscription Flow']}
-                        title="Doubled Retention with a Smarter Refill Flow"
-                        description="We redesigned Zima’s post-purchase experience to better match how real customers reorder. From timing to tone, every part of the refill flow was rethought to reduce drop-off and build lasting habits."
-                        metrics={[
-                            {
-                                icon: <ArrowDownIcon />,
-                                value: '↓ 2x repeat order rate',
-                                description: ''
-                            },
-                            {
-                                icon: <ArrowUpIcon />,
-                                value: '↑ refill journey completion',
-                                description: ''
-                            },
-                            {
-                                icon: <ArrowUpIcon />,
-                                value: '↑ Support tickets around reordering',
-                                description: ''
-                            }
-                        ]}
-                    />
+                    {caseStudies.map((caseStudy: any) => (
+                        <CaseStudyCard
+                            key={caseStudy.id}
+                            image={(typeof caseStudy.featuredImage === 'object' && caseStudy.featuredImage?.url)
+                              ? (caseStudy.featuredImage.url as string)
+                              : (typeof caseStudy.featuredImage === 'string' ? caseStudy.featuredImage : '')}
+                            imageAlt={caseStudy.featuredImage?.alt || caseStudy.title}
+                            tags={(Array.isArray(caseStudy.tags) 
+                              ? caseStudy.tags.map((t: any) => typeof t === 'string' ? t : (t?.tag ?? '')).filter(Boolean)
+                              : [])}
+                            title={caseStudy.title}
+                            description={caseStudy.description}
+                            metrics={caseStudy.metrics?.map((metric: any) => ({
+                                icon: metric.value.includes('↓') ? <ArrowDownIcon /> : <ArrowUpIcon />,
+                                value: metric.value,
+                                description: metric.description || ''
+                            })) || []}
+                            slug={caseStudy.slug}
+                        />
+                    ))}
                 </div>
             </div>
 
