@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '../ui/button';
 import { useState } from 'react';
+import logo from '@/assets/images/header/logo.png';
 
 
 const Footer = () => {
@@ -19,7 +20,7 @@ const Footer = () => {
             <div className="md:col-span-2">
 
               <Link href="/">
-                <Image src="/images/logo.png" alt="Logo" width={150} height={40} />
+                <Image src={logo} alt="Logo" width={150} height={40} />
               </Link>
               <p className="text-text-dark text-sm md:text-base mb-4 md:mb-6 mt-2 md:mt-4 tracking-[0.02rem] md:tracking-[0.04rem]">
                 From custom builds to conversion strategy, we<br className='hidden md:block' /> help ambitious ecommerce brands turn<br className='hidden md:block' />
