@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { RenderBlocks } from '@/blocks'
+import RichText from '@/components/RichText'
 import CTASection from '@/app/(frontend)/components/shared/CTASection'
 import { cache } from 'react'
 import { getPayload } from 'payload'
@@ -37,8 +37,8 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
 
   return (
     <div className="bg-background-muted mt-[64px] md:mt-[67px]">
-      {caseStudy.blocks && caseStudy.blocks.length > 0 && (
-        <RenderBlocks blocks={caseStudy.blocks} />
+      {caseStudy.content && (
+        <RichText data={caseStudy.content} />
       )}
       <CTASection />
     </div>

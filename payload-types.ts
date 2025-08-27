@@ -325,22 +325,6 @@ export interface CaseStudy {
    */
   featuredImage: string | Media;
   /**
-   * Client company name
-   */
-  client: string;
-  /**
-   * Industry or business category
-   */
-  industry: string;
-  /**
-   * Services provided and scope of work
-   */
-  scope: string;
-  /**
-   * Project duration (e.g., "8 weeks")
-   */
-  timeframe: string;
-  /**
    * Brief summary for the case study card
    */
   description: string;
@@ -386,23 +370,21 @@ export interface CaseStudy {
     description?: string | null;
     id?: string | null;
   }[];
-  /**
-   * Add content blocks to build your case study
-   */
-  blocks?:
-    | (
-        | HeroSection
-        | ResultsSection
-        | InsightsSection
-        | ProcessSection
-        | BeforeAfterSection
-        | ProcessDetailsSection
-        | OutcomeSection
-        | ContentWithMedia
-        | TableOfContents
-        | DotSeparator
-      )[]
-    | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   meta?: {
     /**
      * Title that appears in search results (recommended: 50-60 characters)
@@ -438,296 +420,6 @@ export interface CaseStudy {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HeroSection".
- */
-export interface HeroSection {
-  /**
-   * Main title for the case study
-   */
-  title: string;
-  /**
-   * Client company name
-   */
-  client: string;
-  /**
-   * Industry or business category
-   */
-  industry: string;
-  /**
-   * Services provided and scope of work
-   */
-  scope: string;
-  /**
-   * Project duration (e.g., "8 weeks")
-   */
-  timeframe: string;
-  /**
-   * The main challenge the client faced
-   */
-  challenge: string;
-  /**
-   * What we did to solve the challenge
-   */
-  solution: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'heroSection';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ResultsSection".
- */
-export interface ResultsSection {
-  /**
-   * Overall results summary description
-   */
-  summary: string;
-  /**
-   * Detailed breakdown of results with metrics
-   */
-  detailedResults: {
-    /**
-     * Metric value (e.g., "23%", "5x")
-     */
-    percentage: string;
-    /**
-     * Metric label (e.g., "reduction in churn")
-     */
-    metric: string;
-    /**
-     * Additional context for the metric
-     */
-    description: string;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'resultsSection';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "InsightsSection".
- */
-export interface InsightsSection {
-  /**
-   * Main description explaining the analysis approach
-   */
-  description: string;
-  /**
-   * Main image showing the starting point
-   */
-  mainImage?: (string | null) | Media;
-  /**
-   * Caption for the main image
-   */
-  mainImageCaption?: string | null;
-  /**
-   * Points about what was already known
-   */
-  whatWeKnew: {
-    point: string;
-    id?: string | null;
-  }[];
-  /**
-   * Points about what needed to be learned
-   */
-  whatWeNeededToLearn: {
-    point: string;
-    id?: string | null;
-  }[];
-  /**
-   * Key insights discovered during analysis
-   */
-  insights?:
-    | {
-        /**
-         * Insight title
-         */
-        title: string;
-        /**
-         * Detailed description of the insight
-         */
-        description: string;
-        /**
-         * Image illustrating the insight
-         */
-        image?: (string | null) | Media;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'insightsSection';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProcessSection".
- */
-export interface ProcessSection {
-  /**
-   * Summary of the process and changes made
-   */
-  summary: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'processSection';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "BeforeAfterSection".
- */
-export interface BeforeAfterSection {
-  /**
-   * Section title
-   */
-  title: string;
-  /**
-   * Main image showing the improvement
-   */
-  mainImage?: (string | null) | Media;
-  /**
-   * Caption for the main image
-   */
-  mainImageCaption?: string | null;
-  /**
-   * Points about the before state
-   */
-  before: {
-    point: string;
-    id?: string | null;
-  }[];
-  /**
-   * Points about the after state
-   */
-  after: {
-    point: string;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'beforeAfterSection';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProcessDetailsSection".
- */
-export interface ProcessDetailsSection {
-  /**
-   * Description of the process improvements
-   */
-  description: string;
-  /**
-   * Detailed process steps with images
-   */
-  details?:
-    | {
-        /**
-         * Step title
-         */
-        title: string;
-        /**
-         * Step description
-         */
-        description: string;
-        /**
-         * Image showing the process step
-         */
-        image?: (string | null) | Media;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'processDetailsSection';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "OutcomeSection".
- */
-export interface OutcomeSection {
-  /**
-   * Summary of the overall outcome
-   */
-  summary: string;
-  /**
-   * Key results and metrics
-   */
-  keyResults: {
-    /**
-     * Result value (e.g., "23%", "5x")
-     */
-    percentage: string;
-    /**
-     * Result label (e.g., "reduction in churn")
-     */
-    metric: string;
-    /**
-     * Detailed description of the result
-     */
-    description: string;
-    id?: string | null;
-  }[];
-  /**
-   * Key takeaways and lessons learned
-   */
-  takeaways: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'outcomeSection';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentWithMedia".
- */
-export interface ContentWithMedia {
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  image?: (string | null) | Media;
-  textPosition?: ('Left' | 'Right') | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'contentWithMedia';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TableOfContents".
- */
-export interface TableOfContents {
-  contents?:
-    | {
-        header?: string | null;
-        link?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'tableOfContents';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "DotSeparator".
- */
-export interface DotSeparator {
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'dotSeparator';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1010,10 +702,6 @@ export interface BlogSelect<T extends boolean = true> {
 export interface CaseStudySelect<T extends boolean = true> {
   title?: T;
   featuredImage?: T;
-  client?: T;
-  industry?: T;
-  scope?: T;
-  timeframe?: T;
   description?: T;
   tags?: T;
   metrics?:
@@ -1024,20 +712,7 @@ export interface CaseStudySelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
-  blocks?:
-    | T
-    | {
-        heroSection?: T | HeroSectionSelect<T>;
-        resultsSection?: T | ResultsSectionSelect<T>;
-        insightsSection?: T | InsightsSectionSelect<T>;
-        processSection?: T | ProcessSectionSelect<T>;
-        beforeAfterSection?: T | BeforeAfterSectionSelect<T>;
-        processDetailsSection?: T | ProcessDetailsSectionSelect<T>;
-        outcomeSection?: T | OutcomeSectionSelect<T>;
-        contentWithMedia?: T | ContentWithMediaSelect<T>;
-        tableOfContents?: T | TableOfContentsSelect<T>;
-        dotSeparator?: T | DotSeparatorSelect<T>;
-      };
+  content?: T;
   meta?:
     | T
     | {
@@ -1057,170 +732,6 @@ export interface CaseStudySelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HeroSection_select".
- */
-export interface HeroSectionSelect<T extends boolean = true> {
-  title?: T;
-  client?: T;
-  industry?: T;
-  scope?: T;
-  timeframe?: T;
-  challenge?: T;
-  solution?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ResultsSection_select".
- */
-export interface ResultsSectionSelect<T extends boolean = true> {
-  summary?: T;
-  detailedResults?:
-    | T
-    | {
-        percentage?: T;
-        metric?: T;
-        description?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "InsightsSection_select".
- */
-export interface InsightsSectionSelect<T extends boolean = true> {
-  description?: T;
-  mainImage?: T;
-  mainImageCaption?: T;
-  whatWeKnew?:
-    | T
-    | {
-        point?: T;
-        id?: T;
-      };
-  whatWeNeededToLearn?:
-    | T
-    | {
-        point?: T;
-        id?: T;
-      };
-  insights?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        image?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProcessSection_select".
- */
-export interface ProcessSectionSelect<T extends boolean = true> {
-  summary?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "BeforeAfterSection_select".
- */
-export interface BeforeAfterSectionSelect<T extends boolean = true> {
-  title?: T;
-  mainImage?: T;
-  mainImageCaption?: T;
-  before?:
-    | T
-    | {
-        point?: T;
-        id?: T;
-      };
-  after?:
-    | T
-    | {
-        point?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProcessDetailsSection_select".
- */
-export interface ProcessDetailsSectionSelect<T extends boolean = true> {
-  description?: T;
-  details?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        image?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "OutcomeSection_select".
- */
-export interface OutcomeSectionSelect<T extends boolean = true> {
-  summary?: T;
-  keyResults?:
-    | T
-    | {
-        percentage?: T;
-        metric?: T;
-        description?: T;
-        id?: T;
-      };
-  takeaways?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentWithMedia_select".
- */
-export interface ContentWithMediaSelect<T extends boolean = true> {
-  content?: T;
-  image?: T;
-  textPosition?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TableOfContents_select".
- */
-export interface TableOfContentsSelect<T extends boolean = true> {
-  contents?:
-    | T
-    | {
-        header?: T;
-        link?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "DotSeparator_select".
- */
-export interface DotSeparatorSelect<T extends boolean = true> {
-  id?: T;
-  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1306,6 +817,296 @@ export interface TaskSchedulePublish {
     user?: (string | null) | User;
   };
   output?: unknown;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentWithMedia".
+ */
+export interface ContentWithMedia {
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  image?: (string | null) | Media;
+  textPosition?: ('Left' | 'Right') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contentWithMedia';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TableOfContents".
+ */
+export interface TableOfContents {
+  contents?:
+    | {
+        header?: string | null;
+        link?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'tableOfContents';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DotSeparator".
+ */
+export interface DotSeparator {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'dotSeparator';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroSection".
+ */
+export interface HeroSection {
+  /**
+   * Main title for the case study
+   */
+  title: string;
+  /**
+   * Client company name
+   */
+  client: string;
+  /**
+   * Industry or business category
+   */
+  industry: string;
+  /**
+   * Services provided and scope of work
+   */
+  scope: string;
+  /**
+   * Project duration (e.g., "8 weeks")
+   */
+  timeframe: string;
+  /**
+   * The main challenge the client faced
+   */
+  challenge: string;
+  /**
+   * What we did to solve the challenge
+   */
+  solution: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'heroSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ResultsSection".
+ */
+export interface ResultsSection {
+  /**
+   * Overall results summary description
+   */
+  summary: string;
+  /**
+   * Detailed breakdown of results with metrics
+   */
+  detailedResults: {
+    /**
+     * Metric value (e.g., "23%", "5x")
+     */
+    percentage: string;
+    /**
+     * Metric label (e.g., "reduction in churn")
+     */
+    metric: string;
+    /**
+     * Additional context for the metric
+     */
+    description: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'resultsSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InsightsSection".
+ */
+export interface InsightsSection {
+  /**
+   * Main description explaining the analysis approach
+   */
+  description: string;
+  /**
+   * Main image showing the starting point
+   */
+  mainImage?: (string | null) | Media;
+  /**
+   * Caption for the main image
+   */
+  mainImageCaption?: string | null;
+  /**
+   * Points about what was already known
+   */
+  whatWeKnew: {
+    point: string;
+    id?: string | null;
+  }[];
+  /**
+   * Points about what needed to be learned
+   */
+  whatWeNeededToLearn: {
+    point: string;
+    id?: string | null;
+  }[];
+  /**
+   * Key insights discovered during analysis
+   */
+  insights?:
+    | {
+        /**
+         * Insight title
+         */
+        title: string;
+        /**
+         * Detailed description of the insight
+         */
+        description: string;
+        /**
+         * Image illustrating the insight
+         */
+        image?: (string | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'insightsSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProcessSection".
+ */
+export interface ProcessSection {
+  /**
+   * Summary of the process and changes made
+   */
+  summary: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'processSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BeforeAfterSection".
+ */
+export interface BeforeAfterSection {
+  /**
+   * Section title
+   */
+  title: string;
+  /**
+   * Main image showing the improvement
+   */
+  mainImage?: (string | null) | Media;
+  /**
+   * Caption for the main image
+   */
+  mainImageCaption?: string | null;
+  /**
+   * Points about the before state
+   */
+  before: {
+    point: string;
+    id?: string | null;
+  }[];
+  /**
+   * Points about the after state
+   */
+  after: {
+    point: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'beforeAfterSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProcessDetailsSection".
+ */
+export interface ProcessDetailsSection {
+  /**
+   * Description of the process improvements
+   */
+  description: string;
+  /**
+   * Detailed process steps with images
+   */
+  details?:
+    | {
+        /**
+         * Step title
+         */
+        title: string;
+        /**
+         * Step description
+         */
+        description: string;
+        /**
+         * Image showing the process step
+         */
+        image?: (string | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'processDetailsSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "OutcomeSection".
+ */
+export interface OutcomeSection {
+  /**
+   * Summary of the overall outcome
+   */
+  summary: string;
+  /**
+   * Key results and metrics
+   */
+  keyResults: {
+    /**
+     * Result value (e.g., "23%", "5x")
+     */
+    percentage: string;
+    /**
+     * Result label (e.g., "reduction in churn")
+     */
+    metric: string;
+    /**
+     * Detailed description of the result
+     */
+    description: string;
+    id?: string | null;
+  }[];
+  /**
+   * Key takeaways and lessons learned
+   */
+  takeaways: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'outcomeSection';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

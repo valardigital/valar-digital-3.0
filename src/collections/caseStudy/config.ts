@@ -25,7 +25,7 @@ const CaseStudy: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'client', 'industry', 'scope', 'isFeatured', 'slug', '_status'],
+    defaultColumns: ['title', 'isFeatured', 'slug', '_status'],
   },
   access: {
     read: () => true,
@@ -52,38 +52,6 @@ const CaseStudy: CollectionConfig = {
               required: true,
               admin: {
                 description: 'Main image for the case study card and detail page',
-              },
-            },
-            {
-              name: 'client',
-              type: 'text',
-              required: true,
-              admin: {
-                description: 'Client company name',
-              },
-            },
-            {
-              name: 'industry',
-              type: 'text',
-              required: true,
-              admin: {
-                description: 'Industry or business category',
-              },
-            },
-            {
-              name: 'scope',
-              type: 'textarea',
-              required: true,
-              admin: {
-                description: 'Services provided and scope of work',
-              },
-            },
-            {
-              name: 'timeframe',
-              type: 'text',
-              required: true,
-              admin: {
-                description: 'Project duration (e.g., "8 weeks")',
               },
             },
             {
@@ -165,23 +133,27 @@ const CaseStudy: CollectionConfig = {
           label: 'Content',
           fields: [
             {
-              name: 'blocks',
-              type: 'blocks',
-              admin: {
-                description: 'Add content blocks to build your case study',
-              },
-              blocks: [
-                HeroSection,
-                ResultsSection,
-                InsightsSection,
-                ProcessSection,
-                BeforeAfterSection,
-                ProcessDetailsSection,
-                OutcomeSection,
-                ContentWithMedia,
-                TableOfContents,
-                DotSeparator,
-              ],
+              name: 'content',
+              type: 'richText',
+              editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                  ...defaultFeatures,
+                  BlocksFeature({
+                    blocks: [
+                      HeroSection,
+                      ResultsSection,
+                      InsightsSection,
+                      ProcessSection,
+                      BeforeAfterSection,
+                      ProcessDetailsSection,
+                      OutcomeSection,
+                      ContentWithMedia,
+                      TableOfContents,
+                      DotSeparator,
+                    ],
+                  }),
+                ],
+              })
             },
           ],
         },

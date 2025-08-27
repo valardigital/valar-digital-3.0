@@ -12,7 +12,7 @@ export function RichText(props: Props) {
   return (
     <RichTextConverter 
       {...rest} 
-      className={`prose  ${className || ''}`}
+      className={`${className || ''}`}
       // @ts-ignore
       converters={jsxConverter}
     />
