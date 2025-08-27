@@ -6,6 +6,45 @@ type Props = {
 } & ProcessDetailsSectionProps
 
 export const ProcessDetailsSection: React.FC<Props> = (block) => {
+  // Helper function to safely get image URL
+  const getImageUrl = (image: any): string => {
+    if (!image) return ''
+    
+    // If it's already a string URL, return it
+    if (typeof image === 'string') return image
+    
+    // If it's an object with url property, return the url
+    if (typeof image === 'object' && image?.url) {
+      return image.url as string
+    }
+    
+    // If it's an object but no url, try to access it safely
+    if (typeof image === 'object') {
+      // Try different possible property names
+      const possibleUrls = ['url', 'src', 'image', 'file']
+      for (const prop of possibleUrls) {
+        if (image[prop] && typeof image[prop] === 'string') {
+          return image[prop] as string
+        }
+      }
+    }
+    
+    return ''
+  }
+
+  // Helper function to safely get image alt text
+  const getImageAlt = (image: any): string => {
+    if (!image) return ''
+    
+    if (typeof image === 'string') return ''
+    
+    if (typeof image === 'object') {
+      return image.alt || image.title || image.caption || ''
+    }
+    
+    return ''
+  }
+
   return (
     <section className="bg-background-muted py-8 md:py-16 px-4 md:px-0">
       <div className="container mx-auto text-text-dark">
@@ -18,12 +57,8 @@ export const ProcessDetailsSection: React.FC<Props> = (block) => {
               {detail.image && (
                 <div className="relative border border-[#11322C] rounded-[10px] overflow-hidden shadow-[0px_15.76px_28.37px_0px_#8F9DAF40] h-max w-full md:w-max mx-auto">
                   <Image 
-                    src={
-                      typeof detail.image === 'object' && (detail.image as any)?.url
-                        ? ((detail.image as any).url as string)
-                        : (typeof detail.image === 'string' ? detail.image : '')
-                    } 
-                    alt={typeof detail.image === 'string' ? '' : detail.image.alt || ''} 
+                    src={getImageUrl(detail.image)}
+                    alt={getImageAlt(detail.image)}
                     width={400} 
                     height={350} 
                     className="h-[350px] w-full md:w-auto" 

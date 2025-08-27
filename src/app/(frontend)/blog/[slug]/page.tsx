@@ -12,6 +12,7 @@ import { cache } from 'react'
 import { RenderBlocks } from '@/blocks'
 import arrowLeft from "@/assets/images/arrow-left-blog.svg";
 import RelatedPosts from '@/app/(frontend)/components/blog/RelatedPosts'
+import { draftMode } from 'next/headers'
 
 type Args = {
   params: Promise<{ slug?: string }>
@@ -33,7 +34,7 @@ function computeReadTime(data: unknown, isVideo: boolean): string {
 export default async function BlogPostPage({ params: paramsPromise }: Args) {
   const { slug } = await paramsPromise
   const headers = await getHeaders()
-  const post = await getPostBySlug(slug as string, headers)
+  const post = await getPostBySlug(slug as string)
 
   if (!post) return notFound()
 
@@ -129,7 +130,7 @@ export default async function BlogPostPage({ params: paramsPromise }: Args) {
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { slug } = await paramsPromise
   const headers = await getHeaders()
-  const post = await getPostBySlug(slug as string, headers)
+  const post = await getPostBySlug(slug as string)
 
   if (!post) return {}
 
@@ -174,23 +175,50 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
 }
 
 // Shared, cached fetch so page and metadata do not issue duplicate DB calls per-request
-const getPostBySlug = cache(async (slug: string, headers?: Headers) => {
+const getPostBySlug = cache(async (slug: string) => {
+  const { isEnabled: draft } = await draftMode()
   const payload = await getPayload({ config: configPromise })
-  const auth = headers ? await payload.auth({ headers }) : { user: undefined as any }
-  const res = await payload.find({
+  
+  // When in draft mode, we want to fetch the draft version
+  // When not in draft mode, we only want published content
+  const result = await payload.find({
     collection: 'blog',
-    where: { slug: { equals: slug } },
-    overrideAccess: Boolean((auth as any)?.user),
-    draft: Boolean((auth as any)?.user),
-    limit: 1,
+    draft, // true in draft mode, false otherwise
+    overrideAccess: draft, // Override access control in draft mode
+    depth: 5, // Ensure media relationships are resolved
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
   })
-  return res.docs[0] || null
+
+  const post = result.docs[0] || null
+  
+  // Serialize the Payload object to a plain object
+  if (post) {
+    return JSON.parse(JSON.stringify(post))
+  }
+  
+  return null
 })
 
 // Server helper to get 3 related posts by categories (fallback to random)
 async function getRelatedPosts(slug: string) {
+  const { isEnabled: draft } = await draftMode()
   const payload = await getPayload({ config: configPromise })
-  const current = await payload.find({ collection: 'blog', where: { slug: { equals: slug } }, limit: 1 }).then(r => r.docs[0])
+  
+  // When in draft mode, we want to fetch the draft version
+  // When not in draft mode, we only want published content
+  const current = await payload.find({ 
+    collection: 'blog', 
+    draft, // true in draft mode, false otherwise
+    overrideAccess: draft, // Override access control in draft mode
+    depth: 5, // Ensure media relationships are resolved
+    where: { slug: { equals: slug } },
+    limit: 1 
+  }).then(r => r.docs[0])
+  
   const categories: string[] = Array.isArray(current?.categories) ? current.categories : []
 
   // Try to fetch with overlapping categories
@@ -204,11 +232,23 @@ async function getRelatedPosts(slug: string) {
     where.and.push({ categories: { in: categories } })
   }
 
-  let res = await payload.find({ collection: 'blog', where, limit: 6, sort: '-publishedAt' })
+  let res = await payload.find({ 
+    collection: 'blog', 
+    where, 
+    limit: 6, 
+    sort: '-publishedAt',
+    depth: 5, // Ensure media relationships are resolved
+  })
   let docs = res.docs
   if (!docs || docs.length === 0) {
     // Fallback random 6 then pick 3
-    res = await payload.find({ collection: 'blog', where: { _status: { equals: 'published' } }, limit: 6, sort: '-publishedAt' })
+    res = await payload.find({ 
+      collection: 'blog', 
+      where: { _status: { equals: 'published' } }, 
+      limit: 6, 
+      sort: '-publishedAt',
+      depth: 5, // Ensure media relationships are resolved
+    })
     docs = res.docs
   }
 

@@ -11,6 +11,8 @@ import { ContentWithMedia } from '@/blocks/ContentWithMedia/config'
 import { DotSeparator } from '@/blocks/DotSeparator/config'
 import { BlocksFeature, FixedToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { TableOfContents } from '@/blocks/TableOfContents/config'
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
+import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 
 const CaseStudy: CollectionConfig = {
   slug: 'caseStudy',
@@ -26,9 +28,24 @@ const CaseStudy: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'isFeatured', 'slug', '_status'],
+    livePreview: {
+      url: ({ data, req }) => generatePreviewPath({
+        collection: 'caseStudy',
+        slug: typeof data?.slug === 'string' ? data.slug : '',
+        req,
+      }),
+    },
+    preview: (data, { req }) => generatePreviewPath({
+      collection: 'caseStudy',
+      slug: typeof data?.slug === 'string' ? data.slug : '',
+      req,
+    }),
   },
   access: {
-    read: () => true,
+    read: authenticatedOrPublished,
+    create: ({ req: { user } }) => Boolean(user),
+    update: ({ req: { user } }) => Boolean(user),
+    delete: ({ req: { user } }) => Boolean(user),
   },
   fields: [
     {

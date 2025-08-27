@@ -4,7 +4,8 @@ import { ContentWithMedia } from '@/blocks/ContentWithMedia/config'
 import { DotSeparator } from '@/blocks/DotSeparator/config'
 import { BlocksFeature, FixedToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { TableOfContents } from '@/blocks/TableOfContents/config'
-
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
+import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 
 const Blog: CollectionConfig = {
   slug: 'blog',
@@ -20,9 +21,24 @@ const Blog: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'type', 'isFeatured', 'categories', 'slug', 'author', '_status'],
+    livePreview: {
+      url: ({ data, req }) => generatePreviewPath({
+        collection: 'blog',
+        slug: typeof data?.slug === 'string' ? data.slug : '',
+        req,
+      }),
+    },
+    preview: (data, { req }) => generatePreviewPath({
+      collection: 'blog',
+      slug: typeof data?.slug === 'string' ? data.slug : '',
+      req,
+    }),
   },
   access: {
-    read: () => true,
+    read: authenticatedOrPublished,
+    create: ({ req: { user } }) => Boolean(user),
+    update: ({ req: { user } }) => Boolean(user),
+    delete: ({ req: { user } }) => Boolean(user),
   },
   fields: [
     {

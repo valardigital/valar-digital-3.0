@@ -2,8 +2,10 @@ import { getPayload } from 'payload';
 import configPromise from '@payload-config';
 import FeaturedBlogsSection from '../components/blog/featuredBlogSection';
 import BlogGridSection from '../components/blog/blogGridSection';
+import { draftMode } from 'next/headers';
 
 async function fetchBlogs(page: number) {
+  const { isEnabled: draft } = await draftMode()
   const payload = await getPayload({ config: configPromise });
 
   // Featured posts (max 4)
@@ -14,6 +16,9 @@ async function fetchBlogs(page: number) {
       isFeatured: { equals: true },
     },
     sort: '-publishedAt',
+    draft, // true in draft mode, false otherwise
+    overrideAccess: draft, // Override access control in draft mode
+    depth: 5, // Ensure media relationships are resolved
     limit: 4,
   });
 
@@ -24,60 +29,29 @@ async function fetchBlogs(page: number) {
       _status: { equals: 'published' },
     },
     sort: '-publishedAt',
+    draft, // true in draft mode, false otherwise
+    overrideAccess: draft, // Override access control in draft mode
+    depth: 5, // Ensure media relationships are resolved
     limit: 6,
     page,
   });
 
-  const computeReadTime = (data: unknown, type: string | undefined): string => {
-    try {
-      const text = JSON.stringify(data ?? '')
-        .replace(/<[^>]*>/g, ' ')
-        .replace(/\s+/g, ' ');
-      const words = text.trim().split(' ').filter(Boolean).length;
-      const minutes = Math.max(1, Math.ceil(words / 200));
-      return `${minutes} min ${type === 'video' ? 'watch' : 'read'}`;
-    } catch {
-      return type === 'video' ? '1 min watch' : '1 min read';
-    }
-  };
-
-  const mapDocToCard = (doc: any) => {
-    const imageUrl = typeof doc.featuredImage === 'object' && doc.featuredImage?.url ? doc.featuredImage.url : null;
-    if (!imageUrl) return null; // Ensure image exists to avoid UI break
-    const typeLabel = doc.type === 'video' ? 'Videos' : 'Articles';
-    const hasUploadVideo = doc.type === 'video' && doc.videoSource === 'upload' && typeof doc.videoUpload === 'object' && doc.videoUpload?.url
-    const hasEmbedVideo = doc.type === 'video' && doc.videoSource === 'embed' && !!doc.embedUrl
-    return {
-      id: doc.slug, // used in components' href; /blog/[slug] route will handle
-      title: doc.title,
-      excerpt: doc.excerpt,
-      image: imageUrl,
-      categories: Array.isArray(doc.categories) ? doc.categories : [],
-      readTime: computeReadTime(doc.content, doc.type),
-      date: doc.publishedAt ? new Date(doc.publishedAt).toLocaleDateString() : '',
-      featured: Boolean(doc.isFeatured),
-      hasVideo: Boolean(hasUploadVideo || hasEmbedVideo),
-      videoUploadUrl: hasUploadVideo ? (doc.videoUpload.url as string) : null,
-      embedUrl: hasEmbedVideo ? (doc.embedUrl as string) : null,
-      videoPageUrl: doc.type === 'video' && doc.slug ? `/blog/${doc.slug}` : '#',
-      type: typeLabel,
-    } as any;
-  };
-
-  const featuredPosts = (featuredRes.docs || [])
-    .map(mapDocToCard)
-    .filter(Boolean) as any[];
-
-  const posts = (postsRes.docs || [])
-    .map(mapDocToCard)
-    .filter(Boolean) as any[];
+  // Serialize the Payload objects to plain objects
+  const featuredPosts = featuredRes.docs.map((post: any) => JSON.parse(JSON.stringify(post)))
+  const allPosts = postsRes.docs.map((post: any) => JSON.parse(JSON.stringify(post)))
 
   const totalDocs = postsRes?.totalDocs ?? 0;
   const limit = postsRes?.limit ?? 6;
   const totalPages = Math.max(1, Math.ceil(totalDocs / limit));
   const currentPage = postsRes?.page ?? page;
 
-  return { featuredPosts, posts, pagination: { page: currentPage, totalPages } };
+  return {
+    featuredPosts,
+    posts: allPosts,
+    totalPages,
+    totalDocs,
+    pagination: { page: currentPage, totalPages }
+  };
 }
 
 const popularTags = [
