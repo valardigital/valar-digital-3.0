@@ -3,29 +3,23 @@ import CTASection from "../components/shared/CTASection";
 // No helpers needed; mirror blog: use the media.url directly
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
+import { headers as getHeaders } from 'next/headers'
 import { cache } from 'react'
-import { draftMode } from 'next/headers'
 
 const getCaseStudies = cache(async () => {
   try {
-    const { isEnabled: draft } = await draftMode()
     const payload = await getPayload({ config: configPromise })
-    
-    // When in draft mode, we want to fetch the draft version
-    // When not in draft mode, we only want published content
-    const result = await payload.find({
+    const headers = await getHeaders()
+    const auth = headers ? await payload.auth({ headers }) : { user: undefined as any }
+    const res = await payload.find({
       collection: 'caseStudy',
-      draft, // true in draft mode, false otherwise
-      overrideAccess: draft, // Override access control in draft mode
-      depth: 5, // Ensure media relationships are resolved
       sort: '-publishedAt',
+      overrideAccess: Boolean((auth as any)?.user),
+      draft: Boolean((auth as any)?.user),
+      depth: 2,
       limit: 50,
     })
-    
-    const caseStudies = result.docs || []
-    
-    // Serialize the Payload objects to plain objects
-    return caseStudies.map(caseStudy => JSON.parse(JSON.stringify(caseStudy)))
+    return res.docs || []
   } catch (error) {
     console.error('Error fetching case studies:', error)
     return []

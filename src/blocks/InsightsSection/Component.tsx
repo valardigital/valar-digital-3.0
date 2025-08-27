@@ -8,45 +8,6 @@ type Props = {
 } & InsightsSectionProps
 
 export const InsightsSection: React.FC<Props> = (block) => {
-  // Helper function to safely get image URL
-  const getImageUrl = (image: any): string => {
-    if (!image) return ''
-    
-    // If it's already a string URL, return it
-    if (typeof image === 'string') return image
-    
-    // If it's an object with url property, return the url
-    if (typeof image === 'object' && image?.url) {
-      return image.url as string
-    }
-    
-    // If it's an object but no url, try to access it safely
-    if (typeof image === 'object') {
-      // Try different possible property names
-      const possibleUrls = ['url', 'src', 'image', 'file']
-      for (const prop of possibleUrls) {
-        if (image[prop] && typeof image[prop] === 'string') {
-          return image[prop] as string
-        }
-      }
-    }
-    
-    return ''
-  }
-
-  // Helper function to safely get image alt text
-  const getImageAlt = (image: any): string => {
-    if (!image) return ''
-    
-    if (typeof image === 'string') return ''
-    
-    if (typeof image === 'object') {
-      return image.alt || image.title || image.caption || ''
-    }
-    
-    return ''
-  }
-
   return (
     <section className="bg-white py-8 md:py-16 px-4 md:px-0">
       <div className="container mx-auto">
@@ -62,8 +23,12 @@ export const InsightsSection: React.FC<Props> = (block) => {
           <>
             <div className="mt-10 mx-auto">
               <Image 
-                src={getImageUrl(block.mainImage)}
-                alt={getImageAlt(block.mainImage)}
+                src={
+                  typeof block.mainImage === 'object' && (block.mainImage as any)?.url
+                    ? ((block.mainImage as any).url as string)
+                    : (typeof block.mainImage === 'string' ? block.mainImage : '')
+                } 
+                alt={typeof block.mainImage === 'string' ? '' : block.mainImage.alt || ''} 
                 width={800} 
                 height={600} 
                 className="size-full" 
@@ -115,8 +80,12 @@ export const InsightsSection: React.FC<Props> = (block) => {
                   {insight.image && (
                     <div>
                       <Image 
-                        src={getImageUrl(insight.image)}
-                        alt={getImageAlt(insight.image)}
+                        src={
+                          typeof insight.image === 'object' && (insight.image as any)?.url
+                            ? ((insight.image as any).url as string)
+                            : (typeof insight.image === 'string' ? insight.image : '')
+                        } 
+                        alt={typeof insight.image === 'string' ? '' : insight.image.alt || ''} 
                         width={400} 
                         height={300} 
                         className="size-full" 
@@ -129,8 +98,12 @@ export const InsightsSection: React.FC<Props> = (block) => {
                   {insight.image && (
                     <div className="border border-[#11322C] rounded-[10px] overflow-hidden w-[50%] shadow-[0px_15.76px_28.37px_0px_#8F9DAF40]">
                       <Image 
-                        src={getImageUrl(insight.image)}
-                        alt={getImageAlt(insight.image)}
+                        src={
+                          typeof insight.image === 'object' && (insight.image as any)?.url
+                            ? ((insight.image as any).url as string)
+                            : (typeof insight.image === 'string' ? insight.image : '')
+                        } 
+                        alt={typeof insight.image === 'string' ? '' : insight.image.alt || ''} 
                         width={400} 
                         height={300} 
                         className="size-full" 

@@ -40,14 +40,6 @@ const Media: CollectionConfig = {
       'image/gif', // explicitly allow GIFs, but no sharp processing
     ],
   },
-  access: {
-    // Allow public read access to media files
-    read: () => true,
-    // Only allow authenticated users to create/update/delete
-    create: ({ req: { user } }) => Boolean(user),
-    update: ({ req: { user } }) => Boolean(user),
-    delete: ({ req: { user } }) => Boolean(user),
-  },
   fields: [
     {
       name: 'alt',

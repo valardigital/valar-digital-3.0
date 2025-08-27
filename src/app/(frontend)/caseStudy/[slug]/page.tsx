@@ -5,35 +5,23 @@ import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { cache } from 'react'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
-import { draftMode } from 'next/headers'
+import { headers as getHeaders } from 'next/headers'
+
 
 const getCaseStudy = cache(async (slug: string) => {
   try {
-    const { isEnabled: draft } = await draftMode()
     const payload = await getPayload({ config: configPromise })
-    
-    // When in draft mode, we want to fetch the draft version
-    // When not in draft mode, we only want published content
-    const result = await payload.find({
+    const headers = await getHeaders()
+    const auth = headers ? await payload.auth({ headers }) : { user: undefined as any }
+    const res = await payload.find({
       collection: 'caseStudy',
-      draft, // true in draft mode, false otherwise
-      overrideAccess: draft, // Override access control in draft mode
-      depth: 5, // Ensure media relationships are resolved
-      where: {
-        slug: {
-          equals: slug,
-        },
-      },
+      where: { slug: { equals: slug } },
+      overrideAccess: Boolean((auth as any)?.user),
+      draft: Boolean((auth as any)?.user),
+      depth: 2,
+      limit: 1,
     })
-
-    const caseStudy = result.docs?.[0] || null
-    
-    // Serialize the Payload object to a plain object
-    if (caseStudy) {
-      return JSON.parse(JSON.stringify(caseStudy))
-    }
-    
-    return null
+    return res.docs?.[0] || null
   } catch (error) {
     console.error('Error fetching case study:', error)
     return null
