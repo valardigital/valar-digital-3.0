@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import RichText from '@/components/RichText'
 import CTASection from '@/app/(frontend)/components/shared/CTASection'
+import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { cache } from 'react'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
@@ -37,6 +38,7 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
 
   return (
     <div className="bg-background-muted mt-[64px] md:mt-[67px]">
+      <LivePreviewListener />
       {caseStudy.content && (
         <RichText data={caseStudy.content} />
       )}
