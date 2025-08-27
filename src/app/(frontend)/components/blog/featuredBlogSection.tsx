@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 import Link from 'next/link';
 import play from "@/assets/images/home/play.svg";
 
@@ -63,7 +64,7 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
                     ) : (
                       <>
                         <Image
-                          src={mainFeaturedPost.image}
+                          src={typeof mainFeaturedPost.image === 'string' ? getMediaUrl(mainFeaturedPost.image) : mainFeaturedPost.image}
                           alt={mainFeaturedPost.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -140,7 +141,7 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
                     ) : (
                       <>
                         <Image
-                          src={post.image}
+                          src={typeof post.image === 'string' ? getMediaUrl(post.image) : post.image}
                           alt={post.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-300"

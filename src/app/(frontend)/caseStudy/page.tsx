@@ -3,19 +3,19 @@ import CTASection from "../components/shared/CTASection";
 // No helpers needed; mirror blog: use the media.url directly
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
-import { headers as getHeaders } from 'next/headers'
+import { draftMode } from 'next/headers'
 import { cache } from 'react'
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 
 const getCaseStudies = cache(async () => {
   try {
     const payload = await getPayload({ config: configPromise })
-    const headers = await getHeaders()
-    const auth = headers ? await payload.auth({ headers }) : { user: undefined as any }
+    const { isEnabled: draft } = await draftMode()
     const res = await payload.find({
       collection: 'caseStudy',
       sort: '-publishedAt',
-      overrideAccess: Boolean((auth as any)?.user),
-      draft: Boolean((auth as any)?.user),
+      overrideAccess: draft,
+      draft,
       depth: 2,
       limit: 50,
     })
@@ -57,8 +57,8 @@ export default async function CaseStudy() {
                         <CaseStudyCard
                             key={caseStudy.id}
                             image={(typeof caseStudy.featuredImage === 'object' && caseStudy.featuredImage?.url)
-                              ? (caseStudy.featuredImage.url as string)
-                              : (typeof caseStudy.featuredImage === 'string' ? caseStudy.featuredImage : '')}
+                              ? getMediaUrl(caseStudy.featuredImage.url as string)
+                              : (typeof caseStudy.featuredImage === 'string' ? getMediaUrl(caseStudy.featuredImage) : '')}
                             imageAlt={caseStudy.featuredImage?.alt || caseStudy.title}
                             tags={(Array.isArray(caseStudy.tags) 
                               ? caseStudy.tags.map((t: any) => typeof t === 'string' ? t : (t?.tag ?? '')).filter(Boolean)

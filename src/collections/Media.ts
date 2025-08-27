@@ -2,6 +2,9 @@ import { CollectionConfig } from 'payload'
 
 const Media: CollectionConfig = {
   slug: 'media',
+  access: {
+    read: () => true,
+  },
   upload: {
     staticDir: 'media',
     formatOptions: { format: 'webp' }, // default for processed images

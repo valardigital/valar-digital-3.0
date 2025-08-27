@@ -5,19 +5,17 @@ import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { cache } from 'react'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
-import { headers as getHeaders } from 'next/headers'
+import { draftMode } from 'next/headers'
 
 
-const getCaseStudy = cache(async (slug: string) => {
+const getCaseStudy = cache(async (slug: string, draft: boolean) => {
   try {
     const payload = await getPayload({ config: configPromise })
-    const headers = await getHeaders()
-    const auth = headers ? await payload.auth({ headers }) : { user: undefined as any }
     const res = await payload.find({
       collection: 'caseStudy',
       where: { slug: { equals: slug } },
-      overrideAccess: Boolean((auth as any)?.user),
-      draft: Boolean((auth as any)?.user),
+      overrideAccess: draft,
+      draft,
       depth: 2,
       limit: 1,
     })
@@ -30,7 +28,8 @@ const getCaseStudy = cache(async (slug: string) => {
 
 export default async function CaseStudyDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const caseStudy = await getCaseStudy(slug)
+  const { isEnabled: draft } = await draftMode()
+  const caseStudy = await getCaseStudy(slug, draft)
   
   if (!caseStudy) {
     notFound()

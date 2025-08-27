@@ -1,7 +1,7 @@
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { notFound } from 'next/navigation'
-import { headers as getHeaders } from 'next/headers'
+import { draftMode } from 'next/headers'
 import Image from 'next/image'
 import Link from 'next/link'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
@@ -12,6 +12,7 @@ import { cache } from 'react'
 import { RenderBlocks } from '@/blocks'
 import arrowLeft from "@/assets/images/arrow-left-blog.svg";
 import RelatedPosts from '@/app/(frontend)/components/blog/RelatedPosts'
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 
 type Args = {
   params: Promise<{ slug?: string }>
@@ -32,8 +33,8 @@ function computeReadTime(data: unknown, isVideo: boolean): string {
 
 export default async function BlogPostPage({ params: paramsPromise }: Args) {
   const { slug } = await paramsPromise
-  const headers = await getHeaders()
-  const post = await getPostBySlug(slug as string, headers)
+  const { isEnabled: draft } = await draftMode()
+  const post = await getPostBySlug(slug as string, draft)
 
   if (!post) return notFound()
 
@@ -74,18 +75,14 @@ export default async function BlogPostPage({ params: paramsPromise }: Args) {
                 allowFullScreen
               />
             ) : (
-              post.featuredImage && typeof post.featuredImage === 'object' && 'url' in post.featuredImage ? (
-                <Image src={post.featuredImage.url as string} alt={(post.featuredImage.alt as string) || post.title} fill className="object-cover !relative" />
+              (post.featuredImage && typeof post.featuredImage === 'object' && 'url' in post.featuredImage && post.featuredImage.url) ? (
+                <Image src={getMediaUrl(post.featuredImage.url as string)} alt={((post.featuredImage as any)?.alt as string) || post.title} fill className="object-cover !relative" />
               ) : null
             )
           ) : (
-            post.featuredImage && (
-              typeof post.featuredImage === 'string' ? (
-                <Image src={post.featuredImage} alt={post.title} fill className="object-cover relative" priority />
-              ) : (
-                <Image src={(post.featuredImage as any)?.url || '/placeholder.jpg'} alt={(post.featuredImage as any)?.alt || post.title} fill className="object-cover !relative" priority />
-              )
-            )
+            post.featuredImage && typeof post.featuredImage === 'object' && 'url' in post.featuredImage && post.featuredImage.url ? (
+              <Image src={getMediaUrl((post.featuredImage as any).url as string)} alt={((post.featuredImage as any)?.alt as string) || post.title} fill className="object-cover !relative" priority />
+            ) : null
           )}
         </div>
 
@@ -128,8 +125,8 @@ export default async function BlogPostPage({ params: paramsPromise }: Args) {
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { slug } = await paramsPromise
-  const headers = await getHeaders()
-  const post = await getPostBySlug(slug as string, headers)
+  const { isEnabled: draft } = await draftMode()
+  const post = await getPostBySlug(slug as string, draft)
 
   if (!post) return {}
 
@@ -174,14 +171,14 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
 }
 
 // Shared, cached fetch so page and metadata do not issue duplicate DB calls per-request
-const getPostBySlug = cache(async (slug: string, headers?: Headers) => {
+const getPostBySlug = cache(async (slug: string, draft: boolean) => {
   const payload = await getPayload({ config: configPromise })
-  const auth = headers ? await payload.auth({ headers }) : { user: undefined as any }
   const res = await payload.find({
     collection: 'blog',
     where: { slug: { equals: slug } },
-    overrideAccess: Boolean((auth as any)?.user),
-    draft: Boolean((auth as any)?.user),
+    overrideAccess: draft,
+    draft,
+    depth: 2,
     limit: 1,
   })
   return res.docs[0] || null

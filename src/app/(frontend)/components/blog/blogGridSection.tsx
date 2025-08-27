@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 import Link from 'next/link';
 import { Button } from '../ui/button';
 import play from "@/assets/images/home/play.svg";
@@ -171,7 +172,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
                                                 ) : (
                                                     <>
                                                         <Image
-                                                            src={post.image}
+                                                            src={typeof post.image === 'string' ? getMediaUrl(post.image) : post.image}
                                                             alt={post.title}
                                                             fill
                                                             className="object-cover group-hover:scale-105 transition-transform duration-300"
