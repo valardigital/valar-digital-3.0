@@ -156,7 +156,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
                                                         <video
                                                             controls
                                                             playsInline
-                                                            poster={typeof post.image === 'string' ? post.image : undefined}
+                                                            poster={typeof post.image === 'string' ? getMediaUrl(post.image) : undefined}
                                                             className="absolute inset-0 w-full h-full object-cover bg-black"
                                                             src={post.videoUploadUrl}
                                                         />

@@ -48,7 +48,7 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
                         <video
                           controls
                           playsInline
-                          poster={typeof mainFeaturedPost.image === 'string' ? mainFeaturedPost.image : undefined}
+                          poster={typeof mainFeaturedPost.image === 'string' ? getMediaUrl(mainFeaturedPost.image) : undefined}
                           className="absolute inset-0 w-full h-full object-cover bg-black"
                           src={mainFeaturedPost.videoUploadUrl}
                         />
@@ -125,7 +125,7 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
                         <video
                           controls
                           playsInline
-                          poster={typeof post.image === 'string' ? post.image : undefined}
+                          poster={typeof post.image === 'string' ? getMediaUrl(post.image) : undefined}
                           className="absolute inset-0 w-full h-full object-cover bg-black"
                           src={post.videoUploadUrl}
                         />

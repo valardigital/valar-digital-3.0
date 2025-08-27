@@ -55,6 +55,7 @@ async function fetchBlogs(page: number) {
     const typeLabel = doc.type === 'video' ? 'Videos' : 'Articles';
     const hasUploadVideo = doc.type === 'video' && doc.videoSource === 'upload' && typeof doc.videoUpload === 'object' && doc.videoUpload?.url
     const hasEmbedVideo = doc.type === 'video' && doc.videoSource === 'embed' && !!doc.embedUrl
+    const videoUploadUrl = hasUploadVideo ? getMediaUrl((doc.videoUpload.url as string)) : null
     return {
       id: doc.slug, // used in components' href; /blog/[slug] route will handle
       title: doc.title,
@@ -65,7 +66,7 @@ async function fetchBlogs(page: number) {
       date: doc.publishedAt ? new Date(doc.publishedAt).toLocaleDateString() : '',
       featured: Boolean(doc.isFeatured),
       hasVideo: Boolean(hasUploadVideo || hasEmbedVideo),
-      videoUploadUrl: hasUploadVideo ? (doc.videoUpload.url as string) : null,
+      videoUploadUrl,
       embedUrl: hasEmbedVideo ? (doc.embedUrl as string) : null,
       videoPageUrl: doc.type === 'video' && doc.slug ? `/blog/${doc.slug}` : '#',
       type: typeLabel,
