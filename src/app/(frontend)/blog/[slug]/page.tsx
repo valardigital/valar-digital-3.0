@@ -41,7 +41,7 @@ export default async function BlogPostPage({ params: paramsPromise }: Args) {
   const readTime = computeReadTime(post.content, isVideo)
 
   return (
-    <div className="bg-background-muted mt-[64px] md:mt-[67px] min-h-screen">
+    <div className="bg-background-muted mt-[64px] md:mt-[80px] min-h-screen">
       <LivePreviewListener />
       <div className="mx-auto md:px-0 px-6 pt-6 max-w-4xl">
         <Link 

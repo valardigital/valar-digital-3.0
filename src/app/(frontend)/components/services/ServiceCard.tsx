@@ -25,7 +25,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
     return (
         <div className="rounded-2xl border border-border bg-white flex flex-col">
             {/* Card Image */}
-            <div className="aspect-[16/10] rounded-t-2xl overflow-hidden">
+            <div className="aspect-[13/10] rounded-t-2xl overflow-hidden">
                 <Image
                     src={image}
                     alt={imageAlt}
@@ -47,7 +47,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                 </p>
 
                 {/* Features List */}
-                <ul className="space-y-4 mb-6 md:mb-[50px]">
+                <ul className="space-y-4 mb-6">
                     {features.map((feature, index) => (
                         <li key={index} className="flex items-start gap-3">
                             <div className="w-5 h-5 rounded-full bg-[#292D32] flex items-center justify-center mt-0.5 shrink-0">

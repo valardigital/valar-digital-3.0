@@ -106,7 +106,7 @@ export default async function BlogListingPage({ searchParams }: { searchParams: 
   const { featuredPosts, posts, pagination } = await fetchBlogs(currentPage);
 
   return (
-    <div className="bg-background-muted mt-[64px] md:mt-[67px]">
+    <div className="bg-background-muted mt-[64px] md:mt-[80px]">
       {/* Hero Section */}
       <section>
         <div className="container mx-auto py-6 md:py-10 px-4 md:px-0">

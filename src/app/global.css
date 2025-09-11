@@ -31,7 +31,7 @@
 }
 
 html, body {
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   scroll-behavior: smooth;
 }
 
@@ -175,9 +175,13 @@ html, body {
   }
 }
 
+.container {
+  max-width: 1332px;
+}
+
 @media screen and (min-width: 640px) {
 .container {
-  width: 90%
+  width: 80%;
 }
 }
 
@@ -196,14 +200,16 @@ html, body {
 }
 
 .custom-dots li {
-  margin: 0 4px;
+  margin: 0 5px;
   width: max-content;
    height:max-content
 }
 
 .custom-dots li button {
   width: max-content;
-  height:max-content
+  height:max-content;
+  padding: 0px;
+  position: relative;
 }
 
 .custom-dots li button:before {
@@ -214,15 +220,21 @@ html, body {
   border-radius: 16px;
   height: 4px;
   width: 6px;
-  transition: width 0.5s ease-in-out;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
+
 .custom-dots li.slick-active button:before {
   background-color: var(--primary);
   width:20px;
+  opacity: 1;
+  transition: width 0.5s ease;
 }
 
 .custom-dots li.slick-active button {
-  width: 20px;
+  width: 15px;
 }
 
 .insights-section .custom-dots {
@@ -231,7 +243,7 @@ html, body {
 
 @media screen and (min-width:640px) {
 .testimonial-slider .slick-slider {
-  width: 95%;
+  width: 91%;
   margin-left: auto;
 }
 }

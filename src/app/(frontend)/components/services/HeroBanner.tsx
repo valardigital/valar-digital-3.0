@@ -17,7 +17,7 @@ export default function HeroBanner() {
             Smart Shopify<br /> Services for Every<br /> Stage of Growth
           </h1>
           <p className="text-text-dark mb-6 tracking-[0.04rem]">
-            Whether you’re migrating, scaling, or optimizing,
+            Whether you’re migrating, scaling, or optimizing,<br/>
             we bring the right strategy and execution to get you there.
           </p>
 
@@ -63,7 +63,7 @@ export default function HeroBanner() {
             <h1 className="text-[27px] font-medium mb-2 leading-9">
               Smart Shopify Services for Every Stage of Growth
             </h1>
-            <p className="mb-4">
+            <p className="mb-4 tracking-[0.04rem]">
               Whether you’re migrating, scaling, or optimizing, we bring the right strategy and execution to get you there.            </p>
             {/* Buttons */}
             <div className="flex flex-col gap-3 mb-6">
@@ -81,7 +81,7 @@ export default function HeroBanner() {
       </div>
       {/* Logos (Scrolling) */}
       <div className="mt-6 md:mt-10">
-        <p className='px-4 text-sm md:text-base text-center mb-6 md:mb-10 text-text-light font-medium'>Trusted by DTC brands doing $1M to $50M+ in revenue, from bold startups to global names.</p>
+        <p className='px-4 text-sm md:text-base text-center mb-6 md:mb-10 text-text-light font-medium tracking-[0.035rem] md:tracking-[0.04rem]'>Trusted by DTC brands doing $1M to $50M+ in revenue, from bold startups to global names.</p>
         <div className='overflow-hidden whitespace-nowrap'>
           <SlickSlider />
         </div>

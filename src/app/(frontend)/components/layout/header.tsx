@@ -16,34 +16,41 @@ const Header = () => {
 
   const isServiceDetailsPage = pathname === '/serviceDetails';
 
+  const getTextColor = (linkPath: string) => {
+    if (isServiceDetailsPage) return 'text-white';
+    if (pathname === linkPath) return 'text-primary';
+    return 'text-text-dark';
+  };
+
   return (
     <>
       <header className="container mx-auto absolute top-0 left-0 right-0 z-index-100">
         <div className="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-primary/20 after:to-transparent">
-          <div className="px-4 md:px-6 py-2 md:py-[9.5px]">
+          <div className="px-4 md:px-0 py-2 md:py-4">
             <div className="flex justify-center md:justify-between items-center md:gap-5">
               {/* Logo */}
               <div className="flex-1 md:flex-none">
                 <Link href="/">
-                  <Image src={isServiceDetailsPage ? logoWhite : logo} alt="Logo" width={150} height={40} className='cursor-pointer'/>
+                  <Image src={isServiceDetailsPage ? logoWhite : logo} alt="Logo" width={140} height={40} className='cursor-pointer' />
                 </Link>
               </div>
 
               {/* Desktop Nav */}
               <nav className="hidden md:flex xl:gap-16 sm:gap-5 font-medium uppercase">
-                <Link href="/about/"><Button className={`uppercase h-max p-0 ${isServiceDetailsPage ? 'text-white' : 'text-text-dark'}`} variant="link">About</Button></Link>
-                <Link href="/services"><Button className={`uppercase h-max p-0 ${isServiceDetailsPage ? 'text-white' : 'text-text-dark'}`} variant="link">Services</Button></Link>
-                <Link href="#"><Button className={`uppercase h-max p-0 ${isServiceDetailsPage ? 'text-white' : 'text-text-dark'}`} variant="link">Works</Button></Link>
-                <Link href="/blog"><Button className={`uppercase h-max p-0 ${isServiceDetailsPage ? 'text-white' : 'text-text-dark'}`} variant="link">Blogs</Button></Link>
+                <ul className='flex gap-16'>
+                  <Link href="/services"><li className={`uppercase h-max p-0 text-base ${getTextColor('/services')}`}>Services</li></Link>
+                  <Link href="/caseStudy"><li className={`uppercase h-max p-0 text-base ${getTextColor('/caseStudy')}`}>Case Studies</li></Link>
+                  <Link href="/blog"><li className={`uppercase h-max p-0 text-base ${getTextColor('/blog')}`}>Blogs</li></Link>
+                </ul>
               </nav>
 
               {/* CTA Button */}
-              <div className='mr-3 md:mr-0'>
+              <div className='mr-2 md:mr-0'>
                 <Link href="/#calendar">
-                  <Button size="sm" className={`flex items-center gap-2 md:w-45 text-sm md:text-base ${isServiceDetailsPage ? 'bg-white text-primary hover:bg-primary hover:text-white' : ''}`}>Schedule a Call
+                  <Button size="sm" className={`flex items-center gap-2 ${isServiceDetailsPage ? 'bg-white text-primary hover:bg-primary hover:text-white' : ''}`}>Schedule a Call
                     <svg xmlns="http://www.w3.org/2000/svg" className="size-5.5 hidden md:block" fill="none" viewBox="0 0 24 24" stroke={isServiceDetailsPage ? 'currentColor' : 'white'}>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12h19m-6-6l6 6-6 6" />
-                </svg>
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12h19m-6-6l6 6-6 6" />
+                    </svg>
                   </Button>
                 </Link>
               </div>
@@ -55,9 +62,10 @@ const Header = () => {
                   className="text-text-dark focus:outline-none transition-colors duration-300"
                   aria-label="Toggle mobile menu"
                 >
-                  <svg className="w-6 h-6" fill="none" stroke={isServiceDetailsPage ? 'white' : 'currentColor'} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                      d="M4 6h16M8 12h12M4 18h16" />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 7H21" stroke="#292D32" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M9.5 12H21" stroke="#292D32" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M3 17H21" stroke="#292D32" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
                 </button>
               </div>
@@ -74,7 +82,7 @@ const Header = () => {
         {/* Content positioned below header */}
         <div className="px-6 h-full flex flex-col bg-white">
           {/* Navigation */}
-          <nav className="flex flex-col space-y-1 flex-1">
+          <nav className="flex flex-col space-y-1 flex-1 font-medium">
             <div className="flex justify-between py-[21px] relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-primary/20 after:to-transparent">
               <Link href="/">
                 <Image src="/images/logo.png" alt="Logo" width={150} height={40} />
@@ -92,17 +100,7 @@ const Header = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block border-b border-border py-6"
               >
-                <Button className="uppercase h-max p-0" variant="link">Home</Button>
-              </Link>
-            </div>
-            <div className={`transition-all duration-700 delay-100 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-              }`}>
-              <Link
-                href="/about/"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block border-b border-border py-6"
-              >
-                <Button className="uppercase h-max p-0" variant="link">About</Button>
+                <button className={`uppercase h-max p-0 text-base ${pathname === '/' ? 'text-primary' : ''}`}>Home</button>
               </Link>
             </div>
 
@@ -113,18 +111,18 @@ const Header = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block border-b border-border py-6"
               >
-                <Button className="uppercase h-max p-0" variant="link">Services</Button>
+                <button className={`uppercase h-max p-0 text-base ${pathname === '/services' ? 'text-primary' : ''}`}>Services</button>
               </Link>
             </div>
 
             <div className={`transition-all duration-700 delay-300 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
               }`}>
               <Link
-                href="#"
+                href="/caseStudy"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block border-b border-border py-6"
               >
-                <Button className="uppercase h-max p-0" variant="link">Works</Button>
+                <button className={`uppercase h-max p-0 text-base ${pathname === '/caseStudy' ? 'text-primary' : ''}`}>Case Studies</button>
               </Link>
             </div>
 
@@ -135,7 +133,7 @@ const Header = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block border-b border-border py-6"
               >
-                <Button className="uppercase h-max p-0" variant="link">Blogs</Button>
+                <button className={`uppercase h-max p-0 text-base ${pathname === '/blog' ? 'text-primary' : ''}`}>Blogs</button>
               </Link>
             </div>
           </nav>

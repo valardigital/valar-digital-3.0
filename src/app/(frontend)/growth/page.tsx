@@ -8,7 +8,7 @@ import FormSection from '../components/growth/FormSection';
 export default function Services() {
 
   return (
-    <div className='bg-background-muted mt-[64px] md:mt-[67px]'>
+    <div className='bg-background-muted mt-[64px] md:mt-[80px]'>
       <HeroBanner />
       <StatsSection />
       <ReportFeaturesSection />

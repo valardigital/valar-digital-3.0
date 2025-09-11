@@ -22,7 +22,7 @@ export default function CaseStudy() {
     );
 
     return (
-        <div className='bg-background-muted mt-[64px] md:mt-[67px]'>
+        <div className='bg-background-muted mt-[64px] md:mt-[80px]'>
             <div className="container mx-auto">
                 <div className="text-text-dark text-center py-6 md:py-10">
                     <h1 className="text-[28px] md:text-5xl font-medium mb-2 md:mb-6 leading-[1.2]">Case Studies That<br />Speak for Themselves</h1>

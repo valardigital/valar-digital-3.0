@@ -11,9 +11,9 @@ import SlickSlider from './SlickSlider';
 
 export default function HeroBanner() {
   return (
-    <section className="container mx-auto pb-6 md:py-6">
+    <section className="container mx-auto md:py-6">
       {/* Desktop Layout */}
-      <div className="hidden md:grid md:grid-cols-2 gap-10 items-center">
+      <div className="hidden md:grid md:grid-cols-[45%_55%] gap-6 items-center w-full">
         {/* Left: Text Content */}
         <div className='my-10'>
           <h1 className="text-4xl md:text-[64px] font-medium text-text-dark mb-4">
@@ -26,13 +26,13 @@ export default function HeroBanner() {
           </p>
 
           <div className="flex flex-wrap gap-2 mb-25.5">
-            <Link href="#calendar" className='md:w-[228px]'>
+            <Link href="#calendar" className='md:w-[229px]'>
               <Button className='flex items-center gap-2 w-full'>
                 <span>Schedule A Call</span>
                 <Image src={arrowRight} className='size-6 hidden md:block' alt="Arrow right icon" />
               </Button>
             </Link>
-            <Link href="/growth" className='max-w-[228px]'>
+            <Link href="/growth" className='md:w-[251px]'>
               <Button variant="outline" className='w-full'>
                 Get Free Growth Report
               </Button>
@@ -48,7 +48,7 @@ export default function HeroBanner() {
         {/* Right: Image and Testimonial */}
         <div className="relative h-full">
           {/* Main Image */}
-          <div className="rounded-3xl h-full shadow-xl overflow-hidden [box-shadow:0px_4px_12px_0px_#FFFFFF40_inset,0px_4px_28px_0px_#FFFFFF40]">
+          <div className="rounded-r-3xl h-full shadow-xl overflow-hidden [box-shadow:0px_4px_12px_0px_#FFFFFF40_inset,0px_4px_28px_0px_#FFFFFF40]">
             <Image
               src={heroImage}
               alt="Team Photo"
@@ -56,12 +56,12 @@ export default function HeroBanner() {
               width={600}
               height={100}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/20 to-transparent pointer-events-none"></div>
+            <div className="absolute w-[25%] inset-0 bg-gradient-to-r from-white via-white/20 to-transparent pointer-events-none"></div>
           </div>
 
           {/* Testimonial Box */}
           <div
-            className="absolute bottom-3 left-6 right-6 rounded-xl bg-[linear-gradient(98.47deg,rgba(255,255,255,0.5)_0%,rgba(255,255,255,0)_100.08%)]"
+            className="absolute bottom-3 left-3 right-3 rounded-xl bg-[linear-gradient(98.47deg,rgba(255,255,255,0.5)_0%,rgba(255,255,255,0)_100.08%)]"
           >
             <div className='text-white bg-[rgba(34,33,33,0.7)] backdrop-blur-lg rounded-xl py-6 px-8 m-[1px]'>
               <p className="text-lg tracking-wider">
@@ -104,7 +104,7 @@ export default function HeroBanner() {
             <h1 className="text-[27px] font-medium mb-2 leading-9">
               Beyond an Agency, We're the Team That Builds Beside You.
             </h1>
-            <p className="mb-4">
+            <p className="mb-4 tracking-[0.04rem]">
               We work as an extension of your team, combining Shopify development, automation, and strategy to help you scale faster with less friction.
             </p>
             {/* Buttons */}
@@ -127,9 +127,9 @@ export default function HeroBanner() {
 
 
         {/* Testimonial Box - positioned at bottom */}
-          <div className='text-white bg-[linear-gradient(0deg,#201F1E,#201F1E)] backdrop-blur-3xl p-4'>
+          <div className='text-white bg-[linear-gradient(0deg,#201F1E,#201F1E)] backdrop-blur-3xl p-4 pb-6'>
             <p className="text-center tracking-wider mb-2">
-              Shashi and his team <span className='font-bold underline underline-offset-4 decoration-dotted decoration-[#48C8FF] decoration-2'>helped double our conversion rate, from 2.5% to 5%</span>, through two years of focused CRO and dev work. <span className='font-bold'>They've been a true growth partner.</span>
+              Shashi and his team <span className='font-bold underline underline-offset-4 decoration-wavy decoration-[#48C8FF] decoration-1'>helped double our conversion rate, from 2.5% to 5%</span>, through two years of focused CRO and dev work. <span className='font-bold'>They've been a true growth partner.</span>
             </p>
             <div className="flex items-center justify-center gap-2">
               <Image
@@ -139,14 +139,14 @@ export default function HeroBanner() {
                 height={39}
                 className="rounded-full"
               />
-              <div className="">
-                <span className='font-bold'>Jack Rubin</span>, <br/>Co-Founder, Purdy & Figg
+              <div className="text-sm">
+                <span className='font-bold text-base'>Jack Rubin</span>, <br/>Co-Founder, Purdy & Figg
               </div>
             </div>
           </div>
 
         {/* Mobile: Logos below the hero */}
-        <div className="mt-10 mb-4 h-max overflow-hidden whitespace-nowrap">
+        <div className="pt-10 pb-4 h-max overflow-hidden whitespace-nowrap  md:bg-transparent bg-background-subtle">
           <SlickSlider />
         </div>
       </div>

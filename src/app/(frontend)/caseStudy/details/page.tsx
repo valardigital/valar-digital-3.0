@@ -17,7 +17,7 @@ import Link from "next/link";
 
 export default function CaseStudyPage() {
   return (
-    <div className="bg-background-muted mt-[64px] md:mt-[67px]">
+    <div className="bg-background-muted mt-[64px] md:mt-[80px]">
       <section className="py-4 md:py-16 md:px-0 px-4">
         <div className="container mx-auto">
           <Link href="/caseStudy" className="flex items-center gap-2 text-text-dark hover:font-medium hover:cursor-pointer mb-6 md:mb-10 tracking-[0.04rem] text-sm md:text-lg">

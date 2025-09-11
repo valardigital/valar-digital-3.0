@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { Button } from '../ui/button';
+import CalendlyPopup from './CalendlyPopup';
+import CTASection from '../shared/CTASection';
 
 interface FormData {
   fullName: string;
@@ -33,30 +34,45 @@ export default function FormSection() {
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const handleOpenPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
+
+  const isFormComplete = () => {
+    return (
+      formData.fullName.trim() !== '' &&
+      formData.email.trim() !== '' &&
+      formData.websiteUrl.trim() !== '' &&
+      formData.budgetFrom.trim() !== '' &&
+      formData.budgetTo.trim() !== '' 
+    );
+  };
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
-    // Full Name validation
     if (!formData.fullName.trim()) {
       newErrors.fullName = 'Full name is required';
     }
 
-    // Email validation
     if (!formData.email.trim()) {
       newErrors.email = 'Email address is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
 
-    // Website URL validation
     if (!formData.websiteUrl.trim()) {
       newErrors.websiteUrl = 'Website URL is required';
     } else if (!formData.websiteUrl.includes('.')) {
       newErrors.websiteUrl = 'Please enter a valid website URL';
     }
 
-    // Budget validation
     if (!formData.budgetFrom.trim() || !formData.budgetTo.trim()) {
       newErrors.budgetFrom = 'Budget range is required';
     }
@@ -69,7 +85,6 @@ export default function FormSection() {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Clear error when user starts typing
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
@@ -85,7 +100,6 @@ export default function FormSection() {
     setIsSubmitting(true);
 
     try {
-      // Replace with your actual form submission logic
       const response = await fetch('/api/growth-report', {
         method: 'POST',
         headers: {
@@ -95,7 +109,6 @@ export default function FormSection() {
       });
 
       if (response.ok) {
-        // Handle success
         alert('Form submitted successfully!');
         setFormData({
           fullName: '',
@@ -147,12 +160,12 @@ export default function FormSection() {
               <p className="mb-2">Not sure a report is right for you?</p>
               <p>
                 You can always{' '}
-                <Link 
-                  href="/#calendar" 
-                  className="underline hover:no-underline font-medium underline-offset-4"
+                <button 
+                  className="underline hover:no-underline font-medium underline-offset-4 cursor-pointer"
+                  onClick={handleOpenPopup}
                 >
                   schedule a quick call
-                </Link>
+                </button>
                 {' '}to talk things through.
               </p>
             </div>
@@ -280,7 +293,7 @@ export default function FormSection() {
               <Button 
                 type="submit" 
                 disabled={isSubmitting}
-                className={`w-full ${isSubmitting ? 'opacity-30' : ''}`}
+                className={`w-full ${isSubmitting || !isFormComplete() ? 'opacity-30' : ''}`}
               >
                 {isSubmitting ? 'Submitting...' : 'Get My Growth Report'}
                 {!isSubmitting && (
@@ -304,6 +317,12 @@ export default function FormSection() {
           </div>
         </div>
       </div>
+
+      <CalendlyPopup
+        isOpen={isPopupOpen}
+        onClose={handleClosePopup}
+        calendlyComponent={<CTASection />}
+      />
     </section>
   );
 }
