@@ -56,11 +56,11 @@ export default function ExpertiseSection() {
           precision, and clarity.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 text-left justify-center">
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white rounded-3xl p-6 md:p-8 flex flex-col lg:flex-row items-center gap-6 shadow-[0px_12px_12px_0px_#E6EFF540]  border-gradient-border-image border-[1.5px]"
+              className="bg-white rounded-3xl p-6 md:p-8 flex flex-col lg:flex-row items-center gap-6 shadow-[0px_12px_12px_0px_#E6EFF540]  border-gradient-border-image border-[1.5px] transition-shadow duration-300 hover:shadow-[0px_7px_15px_0px_#C0D6DE1A,0px_28px_28px_0px_#C0D6DE17,0px_63px_38px_0px_#C0D6DE0D,0px_111px_45px_0px_#C0D6DE03,0px_174px_49px_0px_#C0D6DE00]"
             >
               <Image
                 src={service.image}

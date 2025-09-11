@@ -1,7 +1,7 @@
 'use client';
 
 import Slider from 'react-slick';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Button } from '../ui/button';
@@ -19,7 +19,17 @@ import JamesCisselProfile from "@/assets/images/home/s-James-Cissel.png";
 import RajaDarbari from "@/assets/images/home/Raja-Darbari.png";
 import RajaDarbariProfile from "@/assets/images/home/s-Raja-Darbari.png";
 
-const testimonials = [
+interface Testimonial {
+  name: string;
+  role: string;
+  avatar: StaticImageData;
+  videoThumb?: string;
+  videoUrl?: string;
+  testimonialText?: string;
+  isTextTestimonial?: boolean;
+}
+
+const testimonials: Testimonial[] = [
   {
     name: 'Jack Rubin',
     role: 'Co-Founder, Purdy & Figg',
@@ -55,13 +65,13 @@ const testimonials = [
     avatar: RajaDarbariProfile,
     videoUrl: '/videos/ample-video.mp4',
   },
-  {
-    name: 'Jacob Jones',
-    role: 'E-commerce Lead, Company name',
-    avatar: jacob,
-    testimonialText: 'The Valar team integrated so seamlessly, it genuinely felt like they were part of our in-house crew. From day one, they understood our goals, moved quickly, and delivered with precision. It’s rare to find a team this aligned and proactive.',
-    isTextTestimonial: true
-  }
+  // {
+  //   name: 'Jacob Jones',
+  //   role: 'E-commerce Lead, Company name',
+  //   avatar: jacob,
+  //   testimonialText: 'The Valar team integrated so seamlessly, it genuinely felt like they were part of our in-house crew. From day one, they understood our goals, moved quickly, and delivered with precision. It’s rare to find a team this aligned and proactive.',
+  //   isTextTestimonial: true
+  // }
 ];
 
 const TestimonialSlider = () => {
@@ -71,7 +81,7 @@ const TestimonialSlider = () => {
     const { onClick } = props;
     return (
       <button
-        className="absolute right-5 md:right-25 -bottom-19 md:-bottom-14 -translate-y-1/2 z-10 flex items-center justify-center cursor-pointer border-[1.5px] md:border-none rounded-[10px] size-10 md:size-max"
+        className="bg-white absolute right-5 md:right-25 -bottom-19 md:-bottom-14 -translate-y-1/2 z-10 flex items-center justify-center cursor-pointer border-[1.5px] md:border-none rounded-[10px] size-10 md:size-max"
         onClick={onClick}
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="size-6" fill="none" viewBox="0 0 24 24" stroke="#1e1e1e">
@@ -85,7 +95,7 @@ const TestimonialSlider = () => {
     const { onClick } = props;
     return (
       <button
-        className="absolute left-5 -bottom-19 md:-bottom-14 -translate-y-1/2 z-10 flex items-center justify-center cursor-pointer border-[1.5px] md:border-none rounded-[10px] size-10 md:size-max"
+        className="bg-white absolute left-5 -bottom-19 md:-bottom-14 -translate-y-1/2 z-10 flex items-center justify-center cursor-pointer border-[1.5px] md:border-none rounded-[10px] size-10 md:size-max"
         onClick={onClick}
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="size-6 rotate-180" fill="none" viewBox="0 0 24 24" stroke="#1e1e1e">
@@ -149,7 +159,7 @@ const TestimonialSlider = () => {
       </div>
 
       {/* Slider */}
-      <div className="mb-20 md:mb-14">
+      <div className="mb-20 md:mb-17">
         <Slider {...settings}>
           {testimonials.map((t, idx) => (
             <div key={idx} className="px-4">
@@ -190,7 +200,7 @@ const TestimonialSlider = () => {
                     <video
                       id={`video-${idx}`}
                       poster={t.videoThumb}
-                      className="object-cover w-full h-[482px] md:h-[500px]"
+                      className="object-cover w-full h-[482px] md:h-[528px]"
                       controls={false}
                     >
                       <source src={t.videoUrl} type="video/mp4" />
@@ -236,7 +246,7 @@ const TestimonialSlider = () => {
                     )}
 
                     {/* Text Overlay */}
-                    <div className="absolute bottom-6 left-6 text-white">
+                    <div className="absolute bottom-6 md:bottom-10 left-6 md:left-10 text-white">
                       <p className="text-[22px] md:text-xl font-cursive font-medium mb-1">{t.name}</p>
                       <p className="text-sm tracking-[0.04rem]">{t.role}</p>
                     </div>
@@ -251,9 +261,9 @@ const TestimonialSlider = () => {
       {/* CTA Section */}
       <div className="text-center px-4">
         <p className="text-text-dark text-base md:text-xl mb-6 tracking-[0.04rem]">
-          We've helped brands double conversions, lift AOV,
+          We've helped brands double conversions,<br className='md:hidden block'/> lift AOV,
           <br className="hidden md:block" />
-          and build smarter systems. Ready to see what we can do for you?
+          and build smarter systems.<br className='md:hidden block'/> Ready to see what we can do for you?
         </p>
         <div className="flex flex-col md:flex-row justify-center gap-2">
           <Link href="#calendar">
@@ -265,7 +275,7 @@ const TestimonialSlider = () => {
             </Button>
           </Link>
           <Link href="/growth">
-            <Button variant="secondary" className="w-full md:w-[266px]">
+            <Button variant="secondary" className="w-full md:w-[266px] border-border-gradient-image">
               Get Free Growth Report
             </Button>
           </Link>

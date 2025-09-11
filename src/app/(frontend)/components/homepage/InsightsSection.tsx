@@ -143,7 +143,7 @@ const InsightsSection = () => {
           <p className="text-primary text-sm font-medium uppercase mb-4 tracking-[0.02rem]">
             INSIGHTS
           </p>
-          <h2 className="text-4xl lg:text-5xl font-medium text-text-dark leading-[1.1] mb-4 md:mb-6">
+          <h2 className="text-[28px] lg:text-5xl font-medium text-text-dark leading-[1.1] mb-4 md:mb-6">
             Ideas, Experiments,
             <br />
             and Growth Notes
@@ -180,8 +180,8 @@ const InsightsSection = () => {
                     {insight.hasVideo && (
                       <div className="absolute inset-0 flex items-center justify-center">
                         <Link href={insight.videoPageUrl}>
-                          <button className="w-14 h-14 bg-white/40 border border-white backdrop-blur-sm rounded-2xl flex items-center justify-center cursor-pointer hover:bg-white/60 transition-colors">
-                            <Image src={play} className='size-6' alt="Play video" />
+                          <button className="w-10 md:w-14 h-10 md:h-14 bg-white/40 border border-white backdrop-blur-sm rounded-[12px] md:rounded-2xl flex items-center justify-center cursor-pointer hover:bg-white/60 transition-colors">
+                            <Image src={play} className='size-4 md:size-6' alt="Play video" />
                           </button>
                         </Link>
                       </div>
@@ -196,10 +196,10 @@ const InsightsSection = () => {
                         {insight.category}
                       </span>
                     </div>
-                    <h3 className="text-xl font-medium text-text-dark mb-2 line-clamp-2 leading-[1.5]">
+                    <h3 className="text-lg md:text-xl font-medium text-text-dark mb-2 line-clamp-2 leading-[1.5]">
                       {insight.title}
                     </h3>
-                    <p className="text-text-dark tracking-[0.04rem] mb-3.5 line-clamp-2 leading-[1.5]">
+                    <p className="text-text-dark tracking-[0.04rem] mb-3.5 line-clamp-1 leading-[1.5]">
                       {insight.description}
                     </p>
                     <div className="flex items-center gap-2 text-sm text-text-light tracking-[0.02rem] leading-[1.5]">

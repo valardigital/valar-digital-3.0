@@ -9,27 +9,37 @@ const ProcessSection = () => {
     {
       number: '01',
       title: 'Strategy & Planning',
-      description: 'We align around your goals and stack from tech choices to customer journey mapping.'
+      description: (
+      <>We align around your goals and stack<br/> from tech choices to customer journey mapping.</>
+      )
     },
     {
       number: '02',
       title: 'Shopify Plus Development',
-      description: 'High-performance builds tailored for growth, with clean code and custom integrations.'
+      description: (
+        <>High-performance builds tailored for growth,<br/> with clean code and custom integrations.</>
+      )
     },
     {
       number: '03',
       title: 'Automation & AI Integration',
-      description: 'Smarter systems that reduce friction, save time, and increase operational efficiency.'
+      description: (
+        <>Smarter systems that reduce friction, save time,<br/> and increase operational efficiency.</>
+      )
     },
     {
       number: '04',
       title: 'Conversion Optimization',
-      description: 'CRO-focused design and testing that turns visitors into high-value customers.'
+      description: (
+        <>CRO-focused design and testing that turns<br/> visitors into high-value customers.</>
+      )
     },
     {
       number: '05',
       title: 'Continuous Growth',
-      description: 'We stay embedded - helping you iterate, scale, and stay ahead of the curve.'
+      description: (
+        <>We stay embedded - helping you iterate,<br/> scale, and stay ahead of the curve.</>
+      )
     }
   ];
 
@@ -68,7 +78,7 @@ const ProcessSection = () => {
             <p className="text-primary text-sm font-medium uppercase mb-4 tracking-[0.02rem] text-center md:text-left">
               HOW WE DELIVER
             </p>
-            <h2 className="text-4xl lg:text-5xl font-medium text-text-dark leading-[1.2] mb-4 md:mb-6 text-center md:text-left">
+            <h2 className="text-[28px] lg:text-5xl font-medium text-text-dark leading-[1.2] mb-4 md:mb-6 text-center md:text-left">
               A Proven Process.
               <br />
               Built for Growth.
@@ -93,9 +103,9 @@ const ProcessSection = () => {
             {/* Process Steps */}
             <div className="flex flex-col gap-25 md:gap-37">
               {processSteps.map((step, index) => (
-                <div key={index} className="relative flex items-start gap-6">
+                <div key={index} className="relative flex items-start gap-4 md:gap-6">
                   {/* Step Number Circle */}
-                  <div className="relative z-40 flex-shrink-0">
+                  <div className="relative z-40 flex-shrink-0 border-b-6 border-t-6 border-background-muted">
                     <div 
                       className={`
                         w-11 h-11 rounded-full border flex items-center justify-center bg-white font-medium border-primary/10 transition-all duration-500
@@ -110,9 +120,9 @@ const ProcessSection = () => {
                   </div>
 
                   {/* Step Content */}
-                  <div className="flex-1 pb-8 text-text-dark last:pb-0">
+                  <div className="flex-1 pb-8 text-text-dark last:pb-0 mt-3">
                     <h3 
-                      className="text-2xl font-medium mb-2 text-text-dark">
+                      className="text-2xl font-medium mb-2 text-text-dark leading-[1.3]">
                       {step.title}
                     </h3>
                     <p className="leading-[1.5] tracking-[0.04rem]">

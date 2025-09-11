@@ -24,7 +24,7 @@ const CaseStudiesShowcase = () => {
 
       {/* Case Study 1 */}
       <div className="bg-white rounded-3xl overflow-hidden mb-14 shadow-[0px_4px_0px_0px_#F0F5FC] border-4 border-border-gradient-image">
-        <div className='flex flex-col lg:flex-row'>
+        <div className='grid grid-cols-1 lg:grid-cols-[55%_45%]'>
           <div className='flex-1 relative min-h-full'>
             <Image
               src={casepf}
@@ -33,7 +33,7 @@ const CaseStudiesShowcase = () => {
               height={400}
               className="md:rounded-br-3xl rounded-tl-3xl object-cover w-full md:h-full h-[429px]"
             />
-            <div className='bg-gradient-to-b from-transparent from-60% to-black/60 to-100% md:rounded-br-3xl rounded-tl-3xl  absolute top-0 bottom-0 left-0 right-0' />
+            <div className='bg-gradient-to-b from-transparent from-60% to-black/40 to-100% md:rounded-br-3xl rounded-tl-3xl  absolute top-0 bottom-0 left-0 right-0' />
             <div className="absolute bottom-8 left-6 right-6 flex flex-col md:flex-row items-center justify-between tracking-[0.04rem] gap-4 md:gap-6 text-white font-medium text-[28px] md:text-[32px]">
               <div className='w-full'>
                 <p>+22%</p>
@@ -68,9 +68,9 @@ const CaseStudiesShowcase = () => {
               <p className="text-text-light">
                 The new flow made managing a subscription feel easy, even enjoyable. Usage increased, and customers started sticking around longer.              </p>
             </div>
-            <Link href="#">
+            <Link href="/caseStudy/details">
               <Button variant="link" className='text-primary flex items-center gap-1 p-0 font-normal h-max hover:no-underline hover:font-medium'>
-                See Case Study
+                See Full Case Study
                 <svg xmlns="http://www.w3.org/2000/svg" className="size-5 mt-[2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M3 12h16m-6-6l6 6-6 6" />
                 </svg>
@@ -79,8 +79,8 @@ const CaseStudiesShowcase = () => {
           </div>
         </div>
         {/* Quote 1 */}
-        <div className="text-left md:text-center p-6 md:p-12 px-4 text-text-dark border">
-          <p className="md:text-2xl mb-2 md:mb-4 leading-[1.5]">
+        <div className="text-left md:text-center p-6 md:p-12 md:px-4 text-text-dark border">
+          <p className="md:text-2xl mb-2 md:mb-4 tracking-[0.03rem] leading-[1.5]">
             “Our conversion rate grew from 2.5% to 5%,<br className='hidden md:block' /> a clear result of smart, focused CRO and development work.”
           </p>
           <p className="font-bold">Jack Rubin<span className='font-normal'>, Co-Founder & Co-CEO</span></p>
@@ -91,31 +91,7 @@ const CaseStudiesShowcase = () => {
 
       {/* Case Study 2 */}
       <div className="bg-white rounded-3xl overflow-hidden mb-6 md:mb-12 shadow-[0px_4px_0px_0px_#F0F5FC] border-4 border-border-gradient-image">
-        <div className='flex flex-col lg:flex-row-reverse'>
-          <div className='flex-1 relative min-h-full'>
-            <Image
-              src={casezima}
-              alt="Dental Pod"
-              width={600}
-              height={400}
-              className="md:rounded-bl-3xl rounded-tr-3xl object-cover w-full md:h-full h-[429px]"
-            />
-            <div className='bg-gradient-to-b from-transparent from-10% to-black/60 to-100% md:rounded-bl-3xl rounded-tr-3xl absolute top-0 bottom-0 left-0 right-0' />
-            <div className="absolute bottom-8 left-6 right-6 flex flex-col md:flex-row items-center justify-between tracking-[0.04rem] gap-4 md:gap-6 text-white font-medium text-[28px] md:text-[32px]">
-              <div className='w-full'>
-                <p>+16%</p>
-                <p className='font-normal text-base leading-5'>AOV increase in<br className='hidden md:block'/> 30 days</p>
-              </div>
-              <div className='w-full'>
-                <p>+9%</p>
-                <p className='font-normal text-base leading-5'>Boost in post-<br className='hidden md:block' />purchase conversion</p>
-              </div>
-              <div className='w-full'>
-                <p>100%</p>
-                <p className='font-normal text-base leading-5'>Test coverage on all<br className='hidden md:block' /> key offers</p>
-              </div>
-            </div>
-          </div>
+        <div className='grid grid-cols-1 lg:grid-cols-[45%_55%]'>
           <div className='flex-1 p-6 md:p-10'>
             <h3 className="text-2xl md:text-[32px] font-medium text-primary mb-4 md:mb-6">Zima Dental</h3>
             <div className='tracking-[0.04rem] mb-6 md:mb-4'>
@@ -134,24 +110,49 @@ const CaseStudiesShowcase = () => {
               <p className="text-text-light">
                 We replaced guesswork with data, and quick wins turned into sustained AOV growth. Revenue climbed — and so did customer satisfaction.              </p>
             </div>
-            <Link href="#">
+            <Link href="/caseStudy/details">
               <Button variant="link" className='text-primary flex items-center gap-1 p-0 font-normal h-max hover:no-underline hover:font-medium'>
-                See Case Study
+                See Full Case Study
                 <svg xmlns="http://www.w3.org/2000/svg" className="size-5 mt-[2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M3 12h16m-6-6l6 6-6 6" />
                 </svg>
               </Button>
             </Link>
           </div>
+          <div className='flex-1 relative min-h-full'>
+            <Image
+              src={casezima}
+              alt="Dental Pod"
+              width={600}
+              height={400}
+              className="md:rounded-bl-3xl rounded-tr-3xl object-cover w-full md:h-full h-[429px]"
+            />
+            <div className='bg-gradient-to-b from-transparent from-10% to-black/40 to-100% md:rounded-bl-3xl rounded-tr-3xl absolute top-0 bottom-0 left-0 right-0' />
+            <div className="absolute bottom-8 left-6 right-6 flex flex-col md:flex-row items-center justify-between tracking-[0.04rem] gap-4 md:gap-6 text-white font-medium text-[28px] md:text-[32px]">
+              <div className='w-full'>
+                <p>+16%</p>
+                <p className='font-normal text-base leading-5'>AOV increase in<br className='hidden md:block'/> 30 days</p>
+              </div>
+              <div className='w-full'>
+                <p>+9%</p>
+                <p className='font-normal text-base leading-5'>Boost in post-<br className='hidden md:block' />purchase conversion</p>
+              </div>
+              <div className='w-full'>
+                <p>100%</p>
+                <p className='font-normal text-base leading-5'>Test coverage on all<br className='hidden md:block' /> key offers</p>
+              </div>
+            </div>
+          </div>
+          
         </div>
         {/* Quote 2 */}
-        <div className="text-left md:text-center p-6 md:p-12 px-4 text-text-dark border">
-          <p className="md:text-2xl mb-2 md:mb-4 leading-[1.5]">
+        <div className="text-left md:text-center p-6 md:p-12 md:px-4 text-text-dark border">
+          <p className="md:text-2xl mb-2 md:mb-4 tracking-[0.03rem] leading-[1.5]">
             “Valar came in, understood the gaps in our post-purchase flow,<br className='hidden md:block' />
             and delivered a smarter upsell system that actually worked.<br className='hidden md:block' />
             We saw the impact within weeks.”
           </p>
-          <p className="font-bold">Name Goes Here<span className='font-normal'>, Desgination</span></p>
+          <p className="font-bold">James O' Connor<span className='font-normal'>, Founder</span></p>
         </div>
       </div>
 

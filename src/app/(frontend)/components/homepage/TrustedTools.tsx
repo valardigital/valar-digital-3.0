@@ -1,7 +1,6 @@
 "use client"
 
 import Slider from 'react-slick';
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import logo1 from '@/assets/images/home/tools-logo-1.png';
 import logo2 from '@/assets/images/home/tools-logo-2.png';
@@ -52,7 +51,7 @@ const TrustedTools = () => {
   return (
     <div className="bg-background-muted px-4 py-8 md:py-10">
       <div className='container mx-auto'>
-        <section className="max-w-[920px] mx-auto md:p-16 bg-white rounded-[40px] border border-border text-center">
+        <section className="max-w-[920px] mx-auto md:p-16 bg-white rounded-3xl border border-border text-center">
           {/* Section Header */}
           <div className='p-6'>
             <p className="text-primary text-sm font-medium uppercase mb-4 tracking-[0.02rem]">
@@ -69,7 +68,7 @@ const TrustedTools = () => {
             {tools.map((tool, index) => (
               <div
                 key={index}
-                className="bg-border/30 hover:bg-white rounded-xl py-8 flex items-center justify-center transition-all duration-300 ease-in-out cursor-pointer group">
+                className="bg-border/30 hover:bg-white rounded-xl py-10 flex items-center justify-center transition-all duration-300 ease-in-out cursor-pointer group">
                 <div className="relative">
                   <Image
                     src={tool.src}
