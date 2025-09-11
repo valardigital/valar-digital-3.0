@@ -2,43 +2,46 @@ import { CollectionConfig } from 'payload'
 
 const Media: CollectionConfig = {
   slug: 'media',
+  access: {
+    read: () => true,
+  },
   upload: {
-    formatOptions:{
-      format: 'webp',
-    },
     staticDir: 'media',
+    formatOptions: { format: 'webp' }, // default for processed images
+
     imageSizes: [
       {
         name: 'thumbnail',
         width: 400,
         height: 300,
         position: 'centre',
-        formatOptions: {
-          format: 'webp',
-        },
+        formatOptions: { format: 'webp' },
       },
       {
         name: 'card',
         width: 768,
         height: 1024,
         position: 'centre',
-        formatOptions: {
-          format: 'webp',
-        },
+        formatOptions: { format: 'webp' },
       },
       {
         name: 'tablet',
         width: 1024,
-        height: undefined,
         position: 'centre',
-        formatOptions: {
-          format: 'webp',
-        },
+        formatOptions: { format: 'webp' },
       },
     ],
+
     adminThumbnail: 'thumbnail',
-    // Allow both images and videos
-    mimeTypes: ['image/*', 'video/*'],
+
+    // ✅ only process "real" images — GIFs excluded
+    mimeTypes: [
+      'image/jpeg',
+      'image/png',
+      'image/webp',
+      'video/*',   // still allow video uploads
+      'image/gif', // explicitly allow GIFs, but no sharp processing
+    ],
   },
   fields: [
     {
@@ -53,4 +56,4 @@ const Media: CollectionConfig = {
   ],
 }
 
-export default Media 
+export default Media

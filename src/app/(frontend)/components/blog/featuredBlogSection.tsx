@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 import Link from 'next/link';
 import play from "@/assets/images/home/play.svg";
 
@@ -47,7 +48,7 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
                         <video
                           controls
                           playsInline
-                          poster={typeof mainFeaturedPost.image === 'string' ? mainFeaturedPost.image : undefined}
+                          poster={typeof mainFeaturedPost.image === 'string' ? getMediaUrl(mainFeaturedPost.image) : undefined}
                           className="absolute inset-0 w-full h-full object-cover bg-black"
                           src={mainFeaturedPost.videoUploadUrl}
                         />
@@ -63,7 +64,7 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
                     ) : (
                       <>
                         <Image
-                          src={mainFeaturedPost.image}
+                          src={typeof mainFeaturedPost.image === 'string' ? getMediaUrl(mainFeaturedPost.image) : mainFeaturedPost.image}
                           alt={mainFeaturedPost.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -124,7 +125,7 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
                         <video
                           controls
                           playsInline
-                          poster={typeof post.image === 'string' ? post.image : undefined}
+                          poster={typeof post.image === 'string' ? getMediaUrl(post.image) : undefined}
                           className="absolute inset-0 w-full h-full object-cover bg-black"
                           src={post.videoUploadUrl}
                         />
@@ -140,7 +141,7 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
                     ) : (
                       <>
                         <Image
-                          src={post.image}
+                          src={typeof post.image === 'string' ? getMediaUrl(post.image) : post.image}
                           alt={post.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-300"

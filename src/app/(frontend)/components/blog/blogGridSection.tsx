@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 import Link from 'next/link';
 import { Button } from '../ui/button';
 import play from "@/assets/images/home/play.svg";
@@ -155,7 +156,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
                                                         <video
                                                             controls
                                                             playsInline
-                                                            poster={typeof post.image === 'string' ? post.image : undefined}
+                                                            poster={typeof post.image === 'string' ? getMediaUrl(post.image) : undefined}
                                                             className="absolute inset-0 w-full h-full object-cover bg-black"
                                                             src={post.videoUploadUrl}
                                                         />
@@ -171,7 +172,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
                                                 ) : (
                                                     <>
                                                         <Image
-                                                            src={post.image}
+                                                            src={typeof post.image === 'string' ? getMediaUrl(post.image) : post.image}
                                                             alt={post.title}
                                                             fill
                                                             className="object-cover group-hover:scale-105 transition-transform duration-300"

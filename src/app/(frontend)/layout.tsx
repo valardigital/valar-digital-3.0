@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from './components/layout/header';
 import Footer from './components/layout/Footer';
+import { LivePreviewListener } from "@/components/LivePreviewListener";
 import localFont from "next/font/local";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -41,6 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${neueMontreal.variable} antialiased font-sans`}>
+        <LivePreviewListener />
         <Header />
         {children}
         <Footer />

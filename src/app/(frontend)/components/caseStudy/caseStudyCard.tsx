@@ -1,5 +1,6 @@
 import React from 'react';
 import Image, { StaticImageData } from 'next/image';
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 import Link from 'next/link';
 import { Button } from '../ui/button';
 
@@ -17,6 +18,7 @@ interface CaseStudyCardProps {
     description: string;
     metrics: CaseStudyMetric[];
     className?: string;
+    slug: string;
 }
 
 const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
@@ -27,20 +29,27 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
     description,
     metrics,
     className = '',
+    slug,
 }) => {
 
+    const resolvedSrc = typeof image === 'string' ? getMediaUrl(image) : image
+
     return (
-        <Link href="/caseStudy/details" className={`grid grid-cols-1 lg:grid-cols-2 p-4 border rounded-2xl md:rounded-[40px] gap-6 md:gap-8 items-center bg-white shadow-[0px_4px_0px_0px_#F0F5FC] group ${className}`}>
+        <Link href={`/caseStudy/${slug}`} className={`grid grid-cols-1 lg:grid-cols-2 p-4 border rounded-2xl md:rounded-[40px] gap-6 md:gap-8 items-center bg-white shadow-[0px_4px_0px_0px_#F0F5FC] group ${className}`}>
 
             <div className="order-1 relative group overflow-hidden">
                 <div className="rounded-2xl md:rounded-3xl overflow-hidden">
-                    <Image
-                        src={image}
-                        alt={imageAlt}
-                        width={600}
-                        height={400}
-                        className="w-full max-h-[311px] md:max-h-[337px] object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
+                    {resolvedSrc ? (
+                      <Image
+                          src={resolvedSrc as any}
+                          alt={imageAlt}
+                          width={600}
+                          height={400}
+                          className="w-full max-h-[311px] md:max-h-[337px] object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full max-h-[311px] md:max-h-[337px] h-[337px] bg-background-muted" />
+                    )}
                 </div>
 
                 {/* Button container with proper corner curves */}
@@ -63,7 +72,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
                     {tags.map((tag, index) => (
                         <span
                             key={index}
-                            className="px-3 py-[6px] bg-primary/5 rounded-[4px] text-sm text-text-dark border border-border"
+                            className="px-3 py-1 bg-primary/5 rounded-[4px] text-sm text-text-dark border border-border"
                         >
                             {tag}
                         </span>

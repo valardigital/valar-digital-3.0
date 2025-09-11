@@ -2,30 +2,37 @@ import { getPayload } from 'payload';
 import configPromise from '@payload-config';
 import FeaturedBlogsSection from '../components/blog/featuredBlogSection';
 import BlogGridSection from '../components/blog/blogGridSection';
+import { draftMode } from 'next/headers'
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 
 async function fetchBlogs(page: number) {
   const payload = await getPayload({ config: configPromise });
+  const { isEnabled: draft } = await draftMode()
 
   // Featured posts (max 4)
   const featuredRes = await payload.find({
     collection: 'blog',
-    where: {
+    where: draft ? { isFeatured: { equals: true } } : {
       _status: { equals: 'published' },
       isFeatured: { equals: true },
     },
     sort: '-publishedAt',
     limit: 4,
+    draft,
+    overrideAccess: draft,
+    depth: 2,
   });
 
   // All posts for grid
   const postsRes: any = await payload.find({
     collection: 'blog',
-    where: {
-      _status: { equals: 'published' },
-    },
+    where: draft ? {} : { _status: { equals: 'published' } },
     sort: '-publishedAt',
     limit: 6,
     page,
+    draft,
+    overrideAccess: draft,
+    depth: 2,
   });
 
   const computeReadTime = (data: unknown, type: string | undefined): string => {
@@ -42,11 +49,13 @@ async function fetchBlogs(page: number) {
   };
 
   const mapDocToCard = (doc: any) => {
-    const imageUrl = typeof doc.featuredImage === 'object' && doc.featuredImage?.url ? doc.featuredImage.url : null;
+    const imageUrlRaw = typeof doc.featuredImage === 'object' && doc.featuredImage?.url ? doc.featuredImage.url : null;
+    const imageUrl = imageUrlRaw ? getMediaUrl(imageUrlRaw as string) : null;
     if (!imageUrl) return null; // Ensure image exists to avoid UI break
     const typeLabel = doc.type === 'video' ? 'Videos' : 'Articles';
     const hasUploadVideo = doc.type === 'video' && doc.videoSource === 'upload' && typeof doc.videoUpload === 'object' && doc.videoUpload?.url
     const hasEmbedVideo = doc.type === 'video' && doc.videoSource === 'embed' && !!doc.embedUrl
+    const videoUploadUrl = hasUploadVideo ? getMediaUrl((doc.videoUpload.url as string)) : null
     return {
       id: doc.slug, // used in components' href; /blog/[slug] route will handle
       title: doc.title,
@@ -57,7 +66,7 @@ async function fetchBlogs(page: number) {
       date: doc.publishedAt ? new Date(doc.publishedAt).toLocaleDateString() : '',
       featured: Boolean(doc.isFeatured),
       hasVideo: Boolean(hasUploadVideo || hasEmbedVideo),
-      videoUploadUrl: hasUploadVideo ? (doc.videoUpload.url as string) : null,
+      videoUploadUrl,
       embedUrl: hasEmbedVideo ? (doc.embedUrl as string) : null,
       videoPageUrl: doc.type === 'video' && doc.slug ? `/blog/${doc.slug}` : '#',
       type: typeLabel,
