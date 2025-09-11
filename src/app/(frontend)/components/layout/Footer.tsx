@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Button } from '../ui/button';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
+import logo from '@/assets/images/header/logo.png';
 
 const Footer = () => {
   const [isCompanyOpen, setIsCompanyOpen] = useState(true);
