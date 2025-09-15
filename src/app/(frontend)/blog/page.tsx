@@ -4,6 +4,7 @@ import FeaturedBlogsSection from '../components/blog/featuredBlogSection';
 import BlogGridSection from '../components/blog/blogGridSection';
 import { draftMode } from 'next/headers'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
+import { BLOG_CATEGORY_OPTIONS } from '@/collections/blog/config'
 
 async function fetchBlogs(page: number) {
   const payload = await getPayload({ config: configPromise });
@@ -35,6 +36,14 @@ async function fetchBlogs(page: number) {
     depth: 2,
   });
 
+  // Debug: inspect raw docs from backend to see available fields
+  console.log('[Blog] Featured raw docs:', featuredRes?.docs?.map?.((d: any) => ({ slug: d?.slug, publishedAt: d?.publishedAt, createdAt: d?.createdAt, _status: d?._status })) ?? featuredRes?.docs);
+  console.log('[Blog] Grid raw docs:', postsRes?.docs?.map?.((d: any) => ({ slug: d?.slug, publishedAt: d?.publishedAt, createdAt: d?.createdAt, _status: d?._status })) ?? postsRes?.docs);
+  // Full objects (all fields)
+  // Note: These can be large. Comment out after inspection.
+  console.dir({ featuredDocsFull: featuredRes?.docs }, { depth: null });
+  console.dir({ gridDocsFull: postsRes?.docs }, { depth: null });
+
   const computeReadTime = (data: unknown, type: string | undefined): string => {
     try {
       const text = JSON.stringify(data ?? '')
@@ -63,7 +72,15 @@ async function fetchBlogs(page: number) {
       image: imageUrl,
       categories: Array.isArray(doc.categories) ? doc.categories : [],
       readTime: computeReadTime(doc.content, doc.type),
-      date: doc.publishedAt ? new Date(doc.publishedAt).toLocaleDateString() : '',
+      date: (doc.updatedAt || doc.publishedAt)
+        ? (() => {
+            const d = new Date(doc.updatedAt || doc.publishedAt);
+            const month = d.toLocaleString('en-US', { month: 'long' });
+            const day = d.getDate();
+            const year = d.getFullYear();
+            return `${month} ${day}, ${year}`;
+          })()
+        : '',
       featured: Boolean(doc.isFeatured),
       hasVideo: Boolean(hasUploadVideo || hasEmbedVideo),
       videoUploadUrl,
@@ -89,19 +106,7 @@ async function fetchBlogs(page: number) {
   return { featuredPosts, posts, pagination: { page: currentPage, totalPages } };
 }
 
-const popularTags = [
-  'GrowthStrategy',
-  'Retention',
-  'Funnel Design',
-  'Lean UX',
-  'UX Audit',
-  'ShopifyTips',
-  'Liquid Code',
-  'AI UX',
-  'AI Insights',
-  'CaseStudy',
-  'Real Results'
-];
+const popularTags = BLOG_CATEGORY_OPTIONS.map(opt => opt.value)
 
 const categories = [
   'All Types',
@@ -113,6 +118,7 @@ export default async function BlogListingPage({ searchParams }: { searchParams: 
   const { page: pageParam } = await searchParams;
   const currentPage = Math.max(1, parseInt(pageParam || '1', 10) || 1);
   const { featuredPosts, posts, pagination } = await fetchBlogs(currentPage);
+  console.log('featuredPosts:', featuredPosts);
 
   return (
     <div className="bg-background-muted mt-[64px] md:mt-[80px]">

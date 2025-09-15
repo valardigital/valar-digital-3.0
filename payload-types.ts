@@ -230,13 +230,7 @@ export interface Blog {
         | 'Case Study'
         | 'Growth'
         | 'Retention'
-        | 'Agency Life'
-        | 'Lean UX'
-        | 'Minimalism'
-        | 'Dev Strategy'
-        | 'Founders'
         | 'Product Thinking'
-        | 'Checkout'
       )[]
     | null;
   /**

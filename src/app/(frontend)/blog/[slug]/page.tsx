@@ -40,6 +40,15 @@ export default async function BlogPostPage({ params: paramsPromise }: Args) {
 
   const isVideo = post.type === 'video'
   const readTime = computeReadTime(post.content, isVideo)
+  const displayDate = (() => {
+    const src: string | undefined = (post as any)?.updatedAt || (post as any)?.publishedAt || (post as any)?.createdAt
+    if (!src) return ''
+    const dateObj = new Date(src)
+    const month = dateObj.toLocaleString('en-US', { month: 'long' })
+    const day = dateObj.getDate()
+    const year = dateObj.getFullYear()
+    return `${month} ${day}, ${year}`
+  })()
 
   return (
     <div className="bg-background-muted mt-[64px] md:mt-[80px] min-h-screen">
@@ -93,7 +102,7 @@ export default async function BlogPostPage({ params: paramsPromise }: Args) {
         <div className="flex flex-wrap items-center gap-2 mb-0 md:mb-8">
           <span className="text-sm text-text-light">{readTime}</span>
           <span className="text-text-light">•</span>
-          <time className="text-sm text-text-light">{post.createdAt ? new Date(post.createdAt).toLocaleDateString() : ''}</time>
+          <time className="text-sm text-text-light">{displayDate}</time>
         </div>
 
         {/* Content (hidden for videos) */}
@@ -223,7 +232,15 @@ async function getRelatedPosts(slug: string) {
       image: imageUrl,
       categories: Array.isArray(d.categories) ? d.categories : [],
       readTime: `${minutes} min ${d.type === 'video' ? 'watch' : 'read'}`,
-      date: d.publishedAt ? new Date(d.publishedAt).toLocaleDateString() : '',
+      date: (d.updatedAt || d.publishedAt)
+        ? (() => {
+            const dateObj = new Date(d.updatedAt || d.publishedAt);
+            const month = dateObj.toLocaleString('en-US', { month: 'long' });
+            const day = dateObj.getDate();
+            const year = dateObj.getFullYear();
+            return `${month} ${day}, ${year}`;
+          })()
+        : '',
     }
   }
   return shuffled.map(compute)
