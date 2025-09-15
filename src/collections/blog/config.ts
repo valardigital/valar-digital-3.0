@@ -8,6 +8,22 @@ import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 
 
+export const BLOG_CATEGORY_OPTIONS = [
+  { label: 'AI', value: 'AI' },
+  { label: 'Ecommerce', value: 'Ecommerce' },
+  { label: 'Human Insights', value: 'Human Insights' },
+  { label: 'A/B Testing', value: 'A/B Testing' },
+  { label: 'UX', value: 'UX' },
+  { label: 'Shopify', value: 'Shopify' },
+  { label: 'UX Research', value: 'UX Research' },
+  { label: 'AOV', value: 'AOV' },
+  { label: 'Conversion', value: 'Conversion' },
+  { label: 'Case Study', value: 'Case Study' },
+  { label: 'Growth', value: 'Growth' },
+  { label: 'Retention', value: 'Retention' },
+  { label: 'Product Thinking', value: 'Product Thinking' },
+]
+
 const Blog: CollectionConfig = {
   slug: 'blog',
   versions: {
@@ -88,27 +104,7 @@ const Blog: CollectionConfig = {
               admin: {
                 description: 'Choose one or more categories for this post',
               },
-              options: [
-                { label: 'AI', value: 'AI' },
-                { label: 'Ecommerce', value: 'Ecommerce' },
-                { label: 'Human Insights', value: 'Human Insights' },
-                { label: 'A/B Testing', value: 'A/B Testing' },
-                { label: 'UX', value: 'UX' },
-                { label: 'Shopify', value: 'Shopify' },
-                { label: 'UX Research', value: 'UX Research' },
-                { label: 'AOV', value: 'AOV' },
-                { label: 'Conversion', value: 'Conversion' },
-                { label: 'Case Study', value: 'Case Study' },
-                { label: 'Growth', value: 'Growth' },
-                { label: 'Retention', value: 'Retention' },
-                { label: 'Agency Life', value: 'Agency Life' },
-                { label: 'Lean UX', value: 'Lean UX' },
-                { label: 'Minimalism', value: 'Minimalism' },
-                { label: 'Dev Strategy', value: 'Dev Strategy' },
-                { label: 'Founders', value: 'Founders' },
-                { label: 'Product Thinking', value: 'Product Thinking' },
-                { label: 'Checkout', value: 'Checkout' },
-              ],
+              options: BLOG_CATEGORY_OPTIONS,
             },
             {
               name: 'videoSource',
