@@ -17,7 +17,7 @@ type RelatedPost = {
 export function RelatedPosts({ posts }: { posts: RelatedPost[] }) {
   if (!posts || posts.length === 0) return null
   return (
-    <section className="container mx-auto px-4 md:px-0 pb-16">
+    <section className="mx-auto px-4 md:px-0 pb-16">
       <h2 className="text-2xl md:text-[32px] font-medium text-text-dark mb-6 leading-[1.5]">Related Posts</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.slice(0, 3).map((post) => (
