@@ -6,7 +6,7 @@ type Props = {
 
 export const ResultsSection: React.FC<Props> = (block) => {
   return (
-    <div className="border rounded-3xl space-y-4 py-10 px-8 mt-6 bg-white">
+    <div className="container mx-auto bg-white p-6 md:py-10 md:px-8 rounded-3xl border">
       <div className="flex md:flex-row flex-col gap-4 md:gap-8 text-text-dark">
         <h3 className="text-2xl font-medium whitespace-nowrap leading-[1.3]">The Results</h3>
         <p className="leading-[1.6] tracking-[0.04rem]">{block.summary}</p>
