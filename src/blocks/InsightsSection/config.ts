@@ -61,38 +61,5 @@ export const InsightsSection: Block = {
         },
       ],
     },
-    {
-      name: 'insights',
-      type: 'array',
-      admin: {
-        description: 'Key insights discovered during analysis',
-      },
-      fields: [
-        {
-          name: 'title',
-          type: 'text',
-          required: true,
-          admin: {
-            description: 'Insight title',
-          },
-        },
-        {
-          name: 'description',
-          type: 'textarea',
-          required: true,
-          admin: {
-            description: 'Detailed description of the insight',
-          },
-        },
-        {
-          name: 'image',
-          type: 'upload',
-          relationTo: 'media',
-          admin: {
-            description: 'Image illustrating the insight',
-          },
-        },
-      ],
-    },
   ],
 } 

@@ -962,29 +962,27 @@ export interface InsightsSection {
     point: string;
     id?: string | null;
   }[];
-  /**
-   * Key insights discovered during analysis
-   */
-  insights?:
-    | {
-        /**
-         * Insight title
-         */
-        title: string;
-        /**
-         * Detailed description of the insight
-         */
-        description: string;
-        /**
-         * Image illustrating the insight
-         */
-        image?: (string | null) | Media;
-        id?: string | null;
-      }[]
-    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'insightsSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InsightsListSection".
+ */
+export interface InsightsListSection {
+  /**
+   * Key insights discovered during analysis
+   */
+  insights: {
+    title: string;
+    description: string;
+    image?: (string | null) | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'insightsListSection';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1015,7 +1013,21 @@ export interface BeforeAfterSection {
   /**
    * Caption for the main image
    */
-  mainImageCaption?: string | null;
+  mainImageCaption?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   /**
    * Points about the before state
    */
