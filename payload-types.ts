@@ -972,11 +972,33 @@ export interface InsightsSection {
  */
 export interface InsightsListSection {
   /**
+   * Background color for the first item
+   */
+  startBackground: 'muted' | 'white';
+  /**
    * Key insights discovered during analysis
    */
-  insights: {
+  items: {
+    /**
+     * Optional small heading above the title
+     */
+    heading?: string | null;
     title: string;
-    description: string;
+    description: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
     image?: (string | null) | Media;
     id?: string | null;
   }[];

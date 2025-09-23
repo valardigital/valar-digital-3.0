@@ -63,7 +63,7 @@ export const RenderBlocks: React.FC<{
           const Block = blockComponents[blockType]
 
           if (Block) {
-            return <div key={index}>
+            return <div key={(block as any)?.id ?? index}>
               {/*@ts-expect-error*/}
               <Block {...block} />
             </div>

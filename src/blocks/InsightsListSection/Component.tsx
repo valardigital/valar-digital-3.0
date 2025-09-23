@@ -1,5 +1,7 @@
 import type { InsightsListSection as InsightsListSectionProps } from '@/payload-types'
 import Image from 'next/image'
+import RichText from '@/components/RichText'
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 type Props = {
   className?: string
@@ -8,15 +10,23 @@ type Props = {
 export const InsightsListSection: React.FC<Props> = (block) => {
   return (
     <section>
-      {block.insights?.map((insight, index) => (
-        <div key={index} className={`${index % 2 === 0 ? 'bg-background-muted' : 'bg-white'}`}>
+      {(block as any).items?.map((insight: any, index: number) => {
+        const isEven = index % 2 === 0
+        const firstBg = block.startBackground === 'white' ? 'bg-white' : 'bg-background-muted'
+        const altBg = block.startBackground === 'white' ? 'bg-background-muted' : 'bg-white'
+        return (
+        <div key={(insight as any)?.id ?? index} className={`${isEven ? firstBg : altBg}`}>
           <div className="container mx-auto flex md:flex-row flex-col items-center gap-7 md:gap-10 py-8 md:py-10 px-4 md:px-0">
-            {index % 2 === 0 ? (
+            {isEven ? (
               <>
                 <div className="flex-1">
-                  <h5 className="leading-[1.3] text-primary uppercase font-medium">Insight {index + 1}</h5>
+                  {insight.heading && (
+                    <h5 className="leading-[1.3] text-primary uppercase font-medium">{insight.heading}</h5>
+                  )}
                   <h3 className="text-text-dark font-medium text-2xl mt-4 md:mt-6 mb-4 capitalize">{insight.title}</h3>
-                  <p className="tracking-[0.04rem] text-text-light leading-[1.6]">{insight.description}</p>
+                  <div className="tracking-[0.04rem] text-text-light leading-[1.6]">
+                    <RichText data={insight.description as unknown as SerializedEditorState} />
+                  </div>
                 </div>
                 {insight.image && (
                   <div className='border border-[#11322C] rounded-[10px] overflow-hidden w-[50%] shadow-[0px_15.76px_28.37px_0px_#8F9DAF40]'>
@@ -52,15 +62,19 @@ export const InsightsListSection: React.FC<Props> = (block) => {
                   </div>
                 )}
                 <div className="flex-1">
-                  <h5 className="leading-[1.3] text-primary uppercase font-medium">Insight {index + 1}</h5>
+                  {insight.heading && (
+                    <h5 className="leading-[1.3] text-primary uppercase font-medium">{insight.heading}</h5>
+                  )}
                   <h3 className="text-text-dark font-medium text-2xl mt-4 md:mt-6 mb-4 capitalize">{insight.title}</h3>
-                  <p className="tracking-[0.04rem] text-text-light leading-[1.6]">{insight.description}</p>
+                  <div className="tracking-[0.04rem] text-text-light leading-[1.6]">
+                    <RichText data={insight.description as unknown as SerializedEditorState} />
+                  </div>
                 </div>
               </>
             )}
           </div>
         </div>
-      ))}
+      )})}
     </section>
   )
 }
