@@ -3,6 +3,7 @@ import { slugField } from '@/fields/slug'
 import { HeroSection } from '@/blocks/HeroSection/config'
 import { ResultsSection } from '@/blocks/ResultsSection/config'
 import { InsightsSection } from '@/blocks/InsightsSection/config'
+import { InsightsListSection } from '@/blocks/InsightsListSection/config'
 import { ProcessSection } from '@/blocks/ProcessSection/config'
 import { BeforeAfterSection } from '@/blocks/BeforeAfterSection/config'
 import { ProcessDetailsSection } from '@/blocks/ProcessDetailsSection/config'
@@ -159,6 +160,7 @@ const CaseStudy: CollectionConfig = {
                       HeroSection,
                       ResultsSection,
                       InsightsSection,
+                      InsightsListSection,
                       ProcessSection,
                       BeforeAfterSection,
                       ProcessDetailsSection,

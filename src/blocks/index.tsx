@@ -4,6 +4,7 @@ import { DotSeparator } from '@/blocks/DotSeparator/Component'
 import { HeroSection } from '@/blocks/HeroSection/Component'
 import { ResultsSection } from '@/blocks/ResultsSection/Component'
 import { InsightsSection } from '@/blocks/InsightsSection/Component'
+import { InsightsListSection } from '@/blocks/InsightsListSection/Component'
 import { ProcessSection } from '@/blocks/ProcessSection/Component'
 import { BeforeAfterSection } from '@/blocks/BeforeAfterSection/Component'
 import { ProcessDetailsSection } from '@/blocks/ProcessDetailsSection/Component'
@@ -28,6 +29,7 @@ const blockComponents = {
   heroSection: HeroSection,
   resultsSection: ResultsSection,
   insightsSection: InsightsSection,
+  insightsListSection: InsightsListSection,
   processSection: ProcessSection,
   beforeAfterSection: BeforeAfterSection,
   processDetailsSection: ProcessDetailsSection,
@@ -61,7 +63,7 @@ export const RenderBlocks: React.FC<{
           const Block = blockComponents[blockType]
 
           if (Block) {
-            return <div key={index}>
+            return <div key={(block as any)?.id ?? index}>
               {/*@ts-expect-error*/}
               <Block {...block} />
             </div>

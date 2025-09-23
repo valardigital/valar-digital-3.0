@@ -1,5 +1,7 @@
 import type { BeforeAfterSection as BeforeAfterSectionProps } from '@/payload-types'
 import Image from 'next/image'
+import RichText from '@/components/RichText'
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 type Props = {
   className?: string
@@ -29,9 +31,13 @@ export const BeforeAfterSection: React.FC<Props> = (block) => {
               />
             </div>
             {block.mainImageCaption && (
-              <p className="tracking-[0.04rem] leading-[1.6] text-left md:text-center mt-4 md:mt-8">
-                {block.mainImageCaption}
-              </p>
+              <div className="tracking-[0.04rem] leading-[1.6] text-left md:text-center mt-4 md:mt-8">
+                {typeof block.mainImageCaption === 'object' && (block.mainImageCaption as any)?.root ? (
+                  <RichText data={block.mainImageCaption as unknown as SerializedEditorState} />
+                ) : (
+                  <p>{String(block.mainImageCaption)}</p>
+                )}
+              </div>
             )}
           </>
         )}

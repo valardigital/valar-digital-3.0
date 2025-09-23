@@ -8,6 +8,7 @@ import type {
   BeforeAfterSection as BeforeAfterSectionProps,
   ProcessDetailsSection as ProcessDetailsSectionProps,
   OutcomeSection as OutcomeSectionProps,
+  InsightsListSection as InsightsListSectionProps,
 } from '@/payload-types'
 import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
 import { JSXConvertersFunction, LinkJSXConverter } from '@payloadcms/richtext-lexical/react'
@@ -23,6 +24,7 @@ import { ProcessSection } from '@/blocks/ProcessSection/Component'
 import { BeforeAfterSection } from '@/blocks/BeforeAfterSection/Component'
 import { ProcessDetailsSection } from '@/blocks/ProcessDetailsSection/Component'
 import { OutcomeSection } from '@/blocks/OutcomeSection/Component'
+import { InsightsListSection } from '@/blocks/InsightsListSection/Component'
 
 // Extend NodeTypes to include all block node payloads
  type NodeTypes =
@@ -37,6 +39,7 @@ import { OutcomeSection } from '@/blocks/OutcomeSection/Component'
       | BeforeAfterSectionProps
       | ProcessDetailsSectionProps
       | OutcomeSectionProps
+      | InsightsListSectionProps
       | { id?: string }
     >
 
@@ -51,6 +54,7 @@ export const jsxConverter: JSXConvertersFunction<NodeTypes> = ({defaultConverter
     heroSection: ({node}) => <HeroSection {...node.fields} />,
     resultsSection: ({node}) => <ResultsSection {...node.fields} />,
     insightsSection: ({node}) => <InsightsSection {...node.fields} />,
+    insightsListSection: ({node}) => <InsightsListSection {...{...node.fields, items: (node.fields as any).items ?? (node.fields as any).insights}} />,
     processSection: ({node}) => <ProcessSection {...node.fields} />,
     beforeAfterSection: ({node}) => <BeforeAfterSection {...node.fields} />,
     processDetailsSection: ({node}) => <ProcessDetailsSection {...node.fields} />,
