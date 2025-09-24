@@ -1,6 +1,6 @@
 import { getPayload } from 'payload';
 import configPromise from '@payload-config';
-import BlogGridSection from '../../components/blog/blogGridSection';
+import BlogGridSection from '../../../components/blog/blogGridSection';
 import { draftMode } from 'next/headers'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
 import { BLOG_CATEGORY_OPTIONS } from '@/collections/blog/config'
