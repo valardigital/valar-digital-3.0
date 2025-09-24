@@ -14,6 +14,7 @@ import { BlocksFeature, FixedToolbarFeature, lexicalEditor } from '@payloadcms/r
 import { TableOfContents } from '@/blocks/TableOfContents/config'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
+import { revalidateCaseStudy } from './hooks/revalidateCaseStudy'
 
 const CaseStudy: CollectionConfig = {
   slug: 'caseStudy',
@@ -239,10 +240,78 @@ const CaseStudy: CollectionConfig = {
     ...slugField('title'),
   ],
   hooks: {
+    beforeValidate: [
+      ({ data }) => {
+        // Normalize populated upload relations back to IDs to satisfy validation
+        const coerceUpload = (val: any) => {
+          if (!val) return val
+          if (typeof val === 'object') {
+            if ('id' in val && typeof (val as any).id === 'string') return (val as any).id
+            if ('_id' in val && typeof (val as any)._id === 'string') return (val as any)._id
+          }
+          return val
+        }
+
+        const normalizeBlock = (block: any) => {
+          if (!block || typeof block !== 'object') return block
+          const out: any = { ...block }
+
+          // Common upload fields across our blocks
+          out.mainImage = coerceUpload(out.mainImage)
+          out.image = coerceUpload(out.image)
+          out.featuredImage = coerceUpload(out.featuredImage)
+
+          // Arrays that may contain uploads
+          if (Array.isArray(out.items)) {
+            out.items = out.items.map((it: any) => ({
+              ...it,
+              image: coerceUpload(it?.image),
+            }))
+          }
+          if (Array.isArray(out.insights)) {
+            out.insights = out.insights.map((it: any) => ({
+              ...it,
+              image: coerceUpload(it?.image),
+            }))
+          }
+          if (Array.isArray(out.details)) {
+            out.details = out.details.map((it: any) => ({
+              ...it,
+              image: coerceUpload(it?.image),
+            }))
+          }
+
+          return out
+        }
+
+        const next = { ...(data as any) }
+        // Top-level featured image
+        if ('featuredImage' in next) next.featuredImage = coerceUpload(next.featuredImage)
+
+        // Normalize rich content blocks
+        if (Array.isArray(next.content)) {
+          next.content = next.content.map((blk: any) => normalizeBlock(blk))
+        }
+
+        return next
+      },
+    ],
     beforeChange: [
       ({ data, req }: { data: any; req: any }) => {
         // Add any custom logic here if needed
         return data
+      },
+    ],
+    afterChange: [
+      ({ doc, operation, req }: { doc: any; operation: 'create' | 'update' | 'delete'; req: any }) => {
+        // Revalidate routes when case study content changes
+        revalidateCaseStudy(doc, operation)
+      },
+    ],
+    afterDelete: [
+      ({ doc, req }: { doc: any; req: any }) => {
+        // Revalidate routes when case study is deleted
+        revalidateCaseStudy(doc, 'delete')
       },
     ],
   },

@@ -6,6 +6,7 @@ import configPromise from '@payload-config'
 import { draftMode } from 'next/headers'
 import { cache } from 'react'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
+import { Metadata } from 'next';
 
 const getCaseStudies = cache(async () => {
   try {
@@ -25,6 +26,18 @@ const getCaseStudies = cache(async () => {
     return []
   }
 })
+
+// Force static generation for the case study listing page
+export const dynamic = 'force-static';
+
+export const metadata: Metadata = {
+  title: "Case Studies That Speak for Themselves",
+  description: "Discover how we've helped Shopify brands transform their customer experience, optimize conversions, and scale their revenue through strategic design and development.",
+  openGraph: {
+    title: "Case Studies That Speak for Themselves",
+    description: "Discover how we've helped Shopify brands transform their customer experience, optimize conversions, and scale their revenue through strategic design and development.",
+  },
+};
 
 export default async function CaseStudy() {
     const caseStudies = await getCaseStudies()

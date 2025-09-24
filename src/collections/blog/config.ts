@@ -6,6 +6,7 @@ import { BlocksFeature, FixedToolbarFeature, lexicalEditor } from '@payloadcms/r
 import { TableOfContents } from '@/blocks/TableOfContents/config'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
+import { revalidateBlog } from './hooks/revalidateBlog'
 
 
 export const BLOG_CATEGORY_OPTIONS = [
@@ -351,6 +352,18 @@ const Blog: CollectionConfig = {
         }
 
         return doc
+      },
+    ],
+    afterChange: [
+      ({ doc, operation, req }: { doc: any; operation: 'create' | 'update' | 'delete'; req: any }) => {
+        // Revalidate routes when blog content changes
+        revalidateBlog(doc, operation)
+      },
+    ],
+    afterDelete: [
+      ({ doc, req }: { doc: any; req: any }) => {
+        // Revalidate routes when blog is deleted
+        revalidateBlog(doc, 'delete')
       },
     ],
   },

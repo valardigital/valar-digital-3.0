@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload'
+import { revalidatePath, revalidateTag } from 'next/cache'
 
 const Media: CollectionConfig = {
   slug: 'media',
@@ -54,6 +55,38 @@ const Media: CollectionConfig = {
       type: 'text',
     },
   ],
+  hooks: {
+    afterChange: [
+      ({ doc, operation }: { doc: any; operation: 'create' | 'update' | 'delete' }) => {
+        try {
+          // Revalidate global surfaces that commonly reference media
+          revalidateTag('media')
+          revalidatePath('/blog')
+          revalidatePath('/caseStudy')
+          revalidatePath('/')
+          
+          console.log(`✅ Revalidated media routes for ${operation}: ${doc.filename || 'unknown'}`)
+        } catch (error) {
+          console.error('❌ Error revalidating media routes:', error)
+        }
+      },
+    ],
+    afterDelete: [
+      ({ doc }: { doc: any }) => {
+        try {
+          // Revalidate global surfaces when media is deleted
+          revalidateTag('media')
+          revalidatePath('/blog')
+          revalidatePath('/caseStudy')
+          revalidatePath('/')
+          
+          console.log(`✅ Revalidated media routes for delete: ${doc.filename || 'unknown'}`)
+        } catch (error) {
+          console.error('❌ Error revalidating media routes:', error)
+        }
+      },
+    ],
+  },
 }
 
 export default Media
