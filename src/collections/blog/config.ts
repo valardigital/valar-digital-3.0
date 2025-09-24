@@ -302,58 +302,6 @@ const Blog: CollectionConfig = {
         return data
       },
     ],
-    afterRead: [
-      ({ doc, req }: { doc: any; req: any }) => {
-        // Only normalize for Admin requests so the front-end still receives populated media objects
-        if (!req?.user) return doc
-        // Lexical Upload nodes must contain the upload ID (string/number), not a populated object
-
-        const normalizeUploadNodes = (node: any): any => {
-          if (!node || typeof node !== 'object') return node
-          // Lexical Upload node shape: { type: 'upload', fields: { relationTo, value } }
-          if (
-            node.type === 'upload' &&
-            ((node.fields && node.fields.value) || node.value)
-          ) {
-            // Support both node.fields.value and node.value shapes
-            const current = node.fields ? node.fields.value : node.value
-            if (current && typeof current === 'object' && 'id' in current) {
-              const id = (current as any).id
-              if (node.fields) node.fields.value = id
-              else node.value = id
-            }
-          }
-
-          if (Array.isArray(node.children)) {
-            node.children = node.children.map(normalizeUploadNodes)
-          }
-          if (node.fields && typeof node.fields === 'object') {
-            // Some nodes may nest arrays/objects under fields
-            for (const key of Object.keys(node.fields)) {
-              const val = (node.fields as any)[key]
-              if (Array.isArray(val)) {
-                ;(node.fields as any)[key] = val.map((v: any) => normalizeUploadNodes(v))
-              } else if (val && typeof val === 'object') {
-                ;(node.fields as any)[key] = normalizeUploadNodes(val)
-              }
-            }
-          }
-          return node
-        }
-
-        try {
-          const content = (doc as any)?.content
-          if (content && typeof content === 'object' && content.root && Array.isArray(content.root.children)) {
-            content.root.children = content.root.children.map(normalizeUploadNodes)
-            ;(doc as any).content = content
-          }
-        } catch {
-          // no-op; keep doc as-is if structure differs
-        }
-
-        return doc
-      },
-    ],
     afterChange: [
       ({ doc, operation, req }: { doc: any; operation: 'create' | 'update' | 'delete'; req: any }) => {
         // Revalidate routes when blog content changes

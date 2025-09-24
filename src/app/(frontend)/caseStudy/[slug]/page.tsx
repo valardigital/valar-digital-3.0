@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import RichText from '@/components/RichText'
+import { RenderBlocks } from '@/blocks'
 import CTASection from '@/app/(frontend)/components/shared/CTASection'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { cache } from 'react'
@@ -55,7 +56,13 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
     <div className="bg-background-muted mt-[64px] md:mt-[67px]">
       <LivePreviewListener />
       {caseStudy.content && (
-        <RichText data={caseStudy.content} />
+        Array.isArray((caseStudy as any).content) ? (
+          // Blocks-based content
+          <RenderBlocks blocks={(caseStudy as any).content} />
+        ) : (
+          // Legacy richText content
+          <RichText data={caseStudy.content as any} />
+        )
       )}
       <CTASection />
     </div>
