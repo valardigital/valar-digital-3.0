@@ -14,6 +14,7 @@ import { BlocksFeature, FixedToolbarFeature, lexicalEditor } from '@payloadcms/r
 import { TableOfContents } from '@/blocks/TableOfContents/config'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
+import { revalidateCaseStudy } from './hooks/revalidateCaseStudy'
 
 const CaseStudy: CollectionConfig = {
   slug: 'caseStudy',
@@ -151,27 +152,23 @@ const CaseStudy: CollectionConfig = {
           fields: [
             {
               name: 'content',
-              type: 'richText',
-              editor: lexicalEditor({
-                features: ({ defaultFeatures }) => [
-                  ...defaultFeatures,
-                  BlocksFeature({
-                    blocks: [
-                      HeroSection,
-                      ResultsSection,
-                      InsightsSection,
-                      InsightsListSection,
-                      ProcessSection,
-                      BeforeAfterSection,
-                      ProcessDetailsSection,
-                      OutcomeSection,
-                      ContentWithMedia,
-                      TableOfContents,
-                      DotSeparator,
-                    ],
-                  }),
-                ],
-              })
+              type: 'blocks',
+              admin: {
+                description: 'Add content sections to build the page',
+              },
+              blocks: [
+                HeroSection,
+                ResultsSection,
+                InsightsSection,
+                InsightsListSection,
+                ProcessSection,
+                BeforeAfterSection,
+                ProcessDetailsSection,
+                OutcomeSection,
+                ContentWithMedia,
+                TableOfContents,
+                DotSeparator,
+              ],
             },
           ],
         },
@@ -239,10 +236,16 @@ const CaseStudy: CollectionConfig = {
     ...slugField('title'),
   ],
   hooks: {
-    beforeChange: [
-      ({ data, req }: { data: any; req: any }) => {
-        // Add any custom logic here if needed
-        return data
+    afterChange: [
+      ({ doc, operation, req }: { doc: any; operation: 'create' | 'update' | 'delete'; req: any }) => {
+        // Revalidate routes when case study content changes
+        revalidateCaseStudy(doc, operation)
+      },
+    ],
+    afterDelete: [
+      ({ doc, req }: { doc: any; req: any }) => {
+        // Revalidate routes when case study is deleted
+        revalidateCaseStudy(doc, 'delete')
       },
     ],
   },

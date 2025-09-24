@@ -1,7 +1,6 @@
 import { getPayload } from 'payload';
 import configPromise from '@payload-config';
-import FeaturedBlogsSection from '../components/blog/featuredBlogSection';
-import BlogGridSection from '../components/blog/blogGridSection';
+import BlogGridSection from '../../components/blog/blogGridSection';
 import { draftMode } from 'next/headers'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
 import { BLOG_CATEGORY_OPTIONS } from '@/collections/blog/config'
@@ -11,39 +10,17 @@ async function fetchBlogs(page: number) {
   const payload = await getPayload({ config: configPromise });
   const { isEnabled: draft } = await draftMode()
 
-  // Featured posts (max 4)
-  const featuredRes = await payload.find({
-    collection: 'blog',
-    where: draft ? { isFeatured: { equals: true } } : {
-      _status: { equals: 'published' },
-      isFeatured: { equals: true },
-    },
-    sort: '-publishedAt',
-    limit: 4,
-    draft,
-    overrideAccess: draft,
-    depth: 2,
-  });
-
   // All posts for grid
   const postsRes: any = await payload.find({
     collection: 'blog',
     where: draft ? {} : { _status: { equals: 'published' } },
     sort: '-publishedAt',
-    limit: 6,
+    limit: 12, // Keep in sync with generateStaticParams
     page,
     draft,
     overrideAccess: draft,
     depth: 2,
   });
-
-  // Debug: inspect raw docs from backend to see available fields
-  console.log('[Blog] Featured raw docs:', featuredRes?.docs?.map?.((d: any) => ({ slug: d?.slug, publishedAt: d?.publishedAt, createdAt: d?.createdAt, _status: d?._status })) ?? featuredRes?.docs);
-  console.log('[Blog] Grid raw docs:', postsRes?.docs?.map?.((d: any) => ({ slug: d?.slug, publishedAt: d?.publishedAt, createdAt: d?.createdAt, _status: d?._status })) ?? postsRes?.docs);
-  // Full objects (all fields)
-  // Note: These can be large. Comment out after inspection.
-  console.dir({ featuredDocsFull: featuredRes?.docs }, { depth: null });
-  console.dir({ gridDocsFull: postsRes?.docs }, { depth: null });
 
   const computeReadTime = (data: unknown, type: string | undefined): string => {
     try {
@@ -91,20 +68,29 @@ async function fetchBlogs(page: number) {
     } as any;
   };
 
-  const featuredPosts = (featuredRes.docs || [])
-    .map(mapDocToCard)
-    .filter(Boolean) as any[];
-
   const posts = (postsRes.docs || [])
     .map(mapDocToCard)
     .filter(Boolean) as any[];
 
   const totalDocs = postsRes?.totalDocs ?? 0;
-  const limit = postsRes?.limit ?? 6;
+  const limit = postsRes?.limit ?? 12;
   const totalPages = Math.max(1, Math.ceil(totalDocs / limit));
   const currentPage = postsRes?.page ?? page;
 
-  return { featuredPosts, posts, pagination: { page: currentPage, totalPages } };
+  return { posts, pagination: { page: currentPage, totalPages } };
+}
+
+// Generate static params for all paginated blog pages
+export async function generateStaticParams() {
+  const payload = await getPayload({ config: configPromise });
+  const { totalDocs } = await payload.count({ 
+    collection: 'blog', 
+    where: { _status: { equals: 'published' } },
+    overrideAccess: false 
+  });
+
+  const totalPages = Math.ceil(totalDocs / 12); // Keep in sync with the page query limit
+  return Array.from({ length: totalPages }, (_, i) => ({ pageNumber: String(i + 1) }));
 }
 
 const popularTags = BLOG_CATEGORY_OPTIONS.map(opt => opt.value)
@@ -115,44 +101,27 @@ const categories = [
   'Videos'
 ]
 
-// Force static generation for the root listing page
-export const dynamic = 'force-static';
+export async function generateMetadata({ params }: { params: Promise<{ pageNumber: string }> }): Promise<Metadata> {
+  const { pageNumber } = await params;
+  const page = parseInt(pageNumber, 10);
+  
+  return {
+    title: `Blog - Page ${page}`,
+    description: `Browse all blog posts - Page ${page}`,
+    openGraph: {
+      title: `Blog - Page ${page}`,
+      description: `Browse all blog posts - Page ${page}`,
+    },
+  };
+}
 
-export const metadata: Metadata = {
-  title: "What's Actually Working for Shopify Brands",
-  description: "Smart ideas. Clean execution. No filler. Just what you need to move faster and grow better.",
-  openGraph: {
-    title: "What's Actually Working for Shopify Brands",
-    description: "Smart ideas. Clean execution. No filler. Just what you need to move faster and grow better.",
-  },
-};
-
-export default async function BlogListingPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
-  const { page: pageParam } = await searchParams;
-  const currentPage = Math.max(1, parseInt(pageParam || '1', 10) || 1);
-  const { featuredPosts, posts, pagination } = await fetchBlogs(currentPage);
-  console.log('featuredPosts:', featuredPosts);
+export default async function BlogPaginationPage({ params }: { params: Promise<{ pageNumber: string }> }) {
+  const { pageNumber } = await params;
+  const currentPage = Math.max(1, parseInt(pageNumber, 10) || 1);
+  const { posts, pagination } = await fetchBlogs(currentPage);
 
   return (
     <div className="bg-background-muted mt-[64px] md:mt-[80px]">
-      {/* Hero Section */}
-      <section>
-        <div className="container mx-auto py-6 md:py-10 px-4 md:px-0">
-          <div className="text-center text-text-dark">
-            <h1 className="text-[28px] md:text-5xl font-medium mb-2 md:mb-6 leading-[1.2]">
-              What's Actually Working<br />
-              for Shopify Brands,<br />
-              And How You Can Use It Too
-            </h1>
-            <p className="tracking-[0.04rem] leading-[1.5]">
-              Smart ideas. Clean execution. No filler.<br className='hidden md:block' />
-              Just what you need to move faster and grow better.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <FeaturedBlogsSection posts={featuredPosts} />
       <BlogGridSection
         posts={posts}
         categories={categories}

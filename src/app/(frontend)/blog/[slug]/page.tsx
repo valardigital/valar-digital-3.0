@@ -18,6 +18,21 @@ type Args = {
   params: Promise<{ slug?: string }>
 }
 
+// Generate static params for all blog posts
+export async function generateStaticParams() {
+  const payload = await getPayload({ config: configPromise });
+  const posts = await payload.find({
+    collection: 'blog',
+    where: { _status: { equals: 'published' } },
+    limit: 1000,
+    overrideAccess: false,
+    pagination: false,
+    select: { slug: true },
+  });
+
+  return posts.docs.map(({ slug }) => ({ slug }));
+}
+
 function computeReadTime(data: unknown, isVideo: boolean): string {
   try {
     const text = JSON.stringify(data ?? '')
@@ -141,19 +156,30 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
 
   const siteUrl = getServerSideURL()
   const canonicalPath = `/blog/${slug}`
-  const canonical = canonicalPath
-  const title = (post as any)?.meta?.title || post.title
-  const description = (post as any)?.meta?.description || post.excerpt || undefined
-  let ogImage: string | undefined
+  
+  // Fetch meta data from Payload CMS
+  const metaTitle = (post as any)?.meta?.title
+  const metaDescription = (post as any)?.meta?.description
   const metaImage = (post as any)?.meta?.image
+  const metaKeywords = (post as any)?.meta?.keywords
+  
+  // Use CMS meta data, fallback to post data
+  const title = metaTitle || post.title
+  const description = metaDescription || post.excerpt || undefined
+  
+  // Handle meta image
+  let ogImage: string | undefined
   if (metaImage && typeof metaImage === 'object' && 'url' in metaImage && metaImage.url) {
     ogImage = metaImage.url as string
   } else if (post.featuredImage && typeof post.featuredImage === 'object' && 'url' in post.featuredImage && post.featuredImage.url) {
     ogImage = post.featuredImage.url as string
   }
+  
   const ogImageAbs = ogImage && (ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`)
-  const keywords = Array.isArray((post as any)?.meta?.keywords)
-    ? (post as any).meta.keywords.map((k: any) => k?.keyword).filter(Boolean).join(', ')
+  
+  // Handle keywords array from CMS
+  const keywords = Array.isArray(metaKeywords)
+    ? metaKeywords.map((k: any) => k?.keyword).filter(Boolean).join(', ')
     : undefined
 
   return {
@@ -161,7 +187,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
     description,
     keywords,
     alternates: {
-      canonical: `${siteUrl}${canonical}`,
+      canonical: `${siteUrl}${canonicalPath}`,
     },
     openGraph: {
       type: 'article',
