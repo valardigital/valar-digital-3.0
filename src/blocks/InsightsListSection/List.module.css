@@ -1,0 +1,4 @@
+.richTextContainer strong {
+  color: #1a1a1a; /* text-text-dark equivalent */
+  font-weight: 500; /* font-medium equivalent */
+}

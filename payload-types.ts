@@ -426,7 +426,21 @@ export interface HeroSection {
   /**
    * Main title for the case study
    */
-  title: string;
+  title: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   /**
    * Client company name
    */
@@ -492,9 +506,27 @@ export interface ResultsSection {
  */
 export interface InsightsSection {
   /**
+   * Main heading for the insights section
+   */
+  title: string;
+  /**
    * Main description explaining the analysis approach
    */
-  description: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   /**
    * Main image showing the starting point
    */
@@ -1105,6 +1137,7 @@ export interface ResultsSectionSelect<T extends boolean = true> {
  * via the `definition` "InsightsSection_select".
  */
 export interface InsightsSectionSelect<T extends boolean = true> {
+  title?: T;
   description?: T;
   mainImage?: T;
   mainImageCaption?: T;
