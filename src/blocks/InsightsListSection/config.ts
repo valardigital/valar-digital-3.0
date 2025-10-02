@@ -23,6 +23,21 @@ export const InsightsListSection: Block = {
       ],
     },
     {
+      name: 'textColor',
+      type: 'select',
+      required: true,
+      defaultValue: 'light',
+      admin: {
+        description: 'Text color for descriptions',
+      },
+      options: [
+        { label: 'Light', value: 'light' },
+        { label: 'Dark', value: 'dark' },
+        { label: 'Primary', value: 'primary' },
+        { label: 'Muted', value: 'muted' },
+      ],
+    },
+    {
       name: 'items',
       type: 'array',
       required: true,

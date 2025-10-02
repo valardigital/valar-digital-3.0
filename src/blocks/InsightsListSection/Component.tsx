@@ -9,6 +9,20 @@ type Props = {
 } & InsightsListSectionProps
 
 export const InsightsListSection: React.FC<Props> = (block) => {
+  const getTextColorClass = (color: string) => {
+    switch (color) {
+      case 'dark':
+        return 'text-text-dark'
+      case 'primary':
+        return 'text-primary'
+      case 'muted':
+        return 'text-text-muted'
+      case 'light':
+      default:
+        return 'text-text-light'
+    }
+  }
+
   return (
     <section>
       {(block as any).items?.map((insight: any, index: number) => {
@@ -25,7 +39,7 @@ export const InsightsListSection: React.FC<Props> = (block) => {
                     <h5 className="leading-[1.3] text-primary uppercase font-medium">{insight.heading}</h5>
                   )}
                   <h3 className="text-text-dark font-medium text-2xl mt-4 md:mt-6 mb-4 capitalize">{insight.title}</h3>
-                  <div className={`tracking-[0.04rem] text-text-light leading-[1.6] ${styles.richTextContainer}`}>
+                  <div className={`tracking-[0.04rem] ${getTextColorClass(block.textColor)} leading-[1.6] ${styles.richTextContainer}`}>
                     <RichText data={insight.description as unknown as SerializedEditorState} />
                   </div>
                 </div>
@@ -67,7 +81,7 @@ export const InsightsListSection: React.FC<Props> = (block) => {
                     <h5 className="leading-[1.3] text-primary uppercase font-medium">{insight.heading}</h5>
                   )}
                   <h3 className="text-text-dark font-medium text-2xl mt-4 md:mt-6 mb-4 capitalize">{insight.title}</h3>
-                  <div className={`tracking-[0.04rem] text-text-light leading-[1.6] ${styles.richTextContainer}`}>
+                  <div className={`tracking-[0.04rem] ${getTextColorClass(block.textColor)} leading-[1.6] ${styles.richTextContainer}`}>
                     <RichText data={insight.description as unknown as SerializedEditorState} />
                   </div>
                 </div>
