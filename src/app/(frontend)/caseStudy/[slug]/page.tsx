@@ -53,7 +53,7 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
   }
 
   return (
-    <div className="bg-background-muted mt-[64px] md:mt-[67px]">
+    <div className="bg-background-muted mt-[64px] md:mt-[80px]">
       <LivePreviewListener />
       {caseStudy.content && (
         Array.isArray((caseStudy as any).content) ? (

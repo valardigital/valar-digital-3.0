@@ -254,7 +254,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
                                         <button
                                             key={index}
                                             onClick={() => handleTagClick(tag)}
-                                            className={`px-4 py-2 rounded-[4px] border transition-colors ${activeTag === tag ? 'bg-primary text-white border-primary' : 'bg-primary/5 text-text-dark border-border hover:bg-primary/8'}`}
+                                            className={`px-4 py-2 rounded-[4px] border transition-colors cursor-pointer ${activeTag === tag ? 'bg-primary text-white border-primary' : 'bg-primary/5 text-text-dark border-border hover:bg-primary/8'}`}
                                         >
                                             {tag}
                                         </button>
