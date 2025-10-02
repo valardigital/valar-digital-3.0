@@ -2,6 +2,8 @@ import type { HeroSection as HeroSectionProps } from '@/payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
 import bulbIcon from '@/assets/images/services/lightBulb.png'
+import RichText from '@/components/RichText'
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 type Props = {
   className?: string
@@ -19,7 +21,11 @@ export const HeroSection: React.FC<Props> = (block) => {
         </Link>
 
         <h1 className="font-medium text-text-dark leading-[1.2] md:leading-[1.6] text-[28px] md:text-[40px]">
-          {block.title}
+          {typeof block.title === 'object' && (block.title as any)?.root ? (
+            <RichText data={block.title as unknown as SerializedEditorState} />
+          ) : (
+            String(block.title)
+          )}
         </h1>
 
         <div className="flex gap-6 mt-6 md:mt-10 flex-col md:flex-row">

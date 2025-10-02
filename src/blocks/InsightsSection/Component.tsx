@@ -2,6 +2,9 @@ import type { InsightsSection as InsightsSectionProps } from '@/payload-types'
 import Image from 'next/image'
 import brain from '@/assets/images/growth/brain.svg'
 import questionMark from '@/assets/images/caseStudy/question-mark.png'
+import RichText from '@/components/RichText'
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import styles from './InsightsSection.module.css'
 
 type Props = {
   className?: string
@@ -13,10 +16,15 @@ export const InsightsSection: React.FC<Props> = (block) => {
       <div className="container mx-auto">
         <h4 className="leading-[1.3] text-primary uppercase font-medium">Where we started</h4>
         <div className="flex md:flex-row flex-col mt-6 md:gap-12 gap-4">
-          <h2 className="text-2xl md:text-[32px] leading-[1.3] flex-1 font-medium">To fix the experience, we had to understand what was broken</h2>
-          <p className="text-text-light flex-1 tracking-[0.04rem] leading-[1.6]">
-            {block.description}
-          </p>
+          <h2 className="text-2xl md:text-[32px] leading-[1.3] flex-1 font-medium">{block.title}</h2>
+          <div className={`text-text-light flex-1 tracking-[0.04rem] leading-[1.6] ${styles.richTextContainer}`}>
+            {typeof block.description === 'object' && (block.description as any)?.root ? (
+              <RichText data={block.description as unknown as SerializedEditorState} />
+            ) : (
+              <p>{String(block.description)}</p>
+              
+            )}
+          </div>
         </div>
         
         {block.mainImage && (

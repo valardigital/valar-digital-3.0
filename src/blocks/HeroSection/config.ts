@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const HeroSection: Block = {
   slug: 'heroSection',
@@ -10,11 +11,48 @@ export const HeroSection: Block = {
   fields: [
     {
       name: 'title',
-      type: 'text',
+      type: 'richText',
+      editor: lexicalEditor(),
       required: true,
       admin: {
         description: 'Main title for the case study',
       },
+      hooks: {
+        afterRead: [({ value }) => {
+          if (typeof value === 'string') {
+            return {
+              root: {
+                type: 'root',
+                version: 1,
+                children: [
+                  {
+                    type: 'paragraph',
+                    version: 1,
+                    format: '',
+                    indent: 0,
+                    direction: 'ltr',
+                    children: [
+                      {
+                        type: 'text',
+                        version: 1,
+                        text: value,
+                        detail: 0,
+                        format: 0,
+                        mode: 'normal',
+                        style: ''
+                      }
+                    ]
+                  }
+                ],
+                format: '',
+                indent: 0,
+                direction: 'ltr'
+              }
+            }
+          }
+          return value
+        }]
+      }
     },
     {
       name: 'client',

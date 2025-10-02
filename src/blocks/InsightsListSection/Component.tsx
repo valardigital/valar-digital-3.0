@@ -2,6 +2,7 @@ import type { InsightsListSection as InsightsListSectionProps } from '@/payload-
 import Image from 'next/image'
 import RichText from '@/components/RichText'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import styles from './List.module.css'
 
 type Props = {
   className?: string
@@ -24,7 +25,7 @@ export const InsightsListSection: React.FC<Props> = (block) => {
                     <h5 className="leading-[1.3] text-primary uppercase font-medium">{insight.heading}</h5>
                   )}
                   <h3 className="text-text-dark font-medium text-2xl mt-4 md:mt-6 mb-4 capitalize">{insight.title}</h3>
-                  <div className="tracking-[0.04rem] text-text-light leading-[1.6]">
+                  <div className={`tracking-[0.04rem] text-text-light leading-[1.6] ${styles.richTextContainer}`}>
                     <RichText data={insight.description as unknown as SerializedEditorState} />
                   </div>
                 </div>
@@ -66,7 +67,7 @@ export const InsightsListSection: React.FC<Props> = (block) => {
                     <h5 className="leading-[1.3] text-primary uppercase font-medium">{insight.heading}</h5>
                   )}
                   <h3 className="text-text-dark font-medium text-2xl mt-4 md:mt-6 mb-4 capitalize">{insight.title}</h3>
-                  <div className="tracking-[0.04rem] text-text-light leading-[1.6]">
+                  <div className={`tracking-[0.04rem] text-text-light leading-[1.6] ${styles.richTextContainer}`}>
                     <RichText data={insight.description as unknown as SerializedEditorState} />
                   </div>
                 </div>

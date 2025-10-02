@@ -8,40 +8,39 @@ const Media: CollectionConfig = {
   },
   upload: {
     staticDir: 'media',
-    formatOptions: { format: 'webp' }, // default for processed images
+    // Removed formatOptions to prevent Sharp processing
+    // formatOptions: { format: 'webp' }, // default for processed images
 
-    imageSizes: [
-      {
-        name: 'thumbnail',
-        width: 400,
-        height: 300,
-        position: 'centre',
-        formatOptions: { format: 'webp' },
-      },
-      {
-        name: 'card',
-        width: 768,
-        height: 1024,
-        position: 'centre',
-        formatOptions: { format: 'webp' },
-      },
-      {
-        name: 'tablet',
-        width: 1024,
-        position: 'centre',
-        formatOptions: { format: 'webp' },
-      },
-    ],
+    // Disabled imageSizes to prevent Sharp processing
+    // imageSizes: [
+    //   {
+    //     name: 'thumbnail',
+    //     width: 400,
+    //     height: 300,
+    //     position: 'centre',
+    //     formatOptions: { format: 'webp' },
+    //   },
+    //   {
+    //     name: 'card',
+    //     width: 768,
+    //     height: 1024,
+    //     position: 'centre',
+    //     formatOptions: { format: 'webp' },
+    //   },
+    //   {
+    //     name: 'tablet',
+    //     width: 1024,
+    //     position: 'centre',
+    //     formatOptions: { format: 'webp' },
+    //   },
+    // ],
 
-    adminThumbnail: 'thumbnail',
+    // adminThumbnail: 'thumbnail',
 
-    // ✅ only process "real" images — GIFs excluded
+    // ✅ Allow all file types without processing
     mimeTypes: [
-      'image/jpeg',
-      'image/png',
-      'image/webp',
-      'video/*',   // still allow video uploads
-      'image/gif', // explicitly allow GIFs, but no sharp processing
+      'image/*',   // All image types including GIFs
+      'video/*',   // All video types
     ],
   },
   fields: [

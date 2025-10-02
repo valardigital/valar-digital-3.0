@@ -1,4 +1,3 @@
-import sharp from 'sharp'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { buildConfig } from 'payload'
@@ -58,7 +57,7 @@ export default buildConfig({
     // migrationDir: path.resolve(__dirname, 'migrations'),
     url: process.env.DATABASE_URI || '',
   }),
-  sharp,
+  // sharp,
   plugins: [
     s3Storage({
       bucket: process.env.S3_BUCKET || '',
