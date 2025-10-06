@@ -3,7 +3,7 @@
 import Slider from 'react-slick';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, memo, useCallback, useRef } from 'react';
 import { Button } from '../ui/button';
 import play from "@/assets/images/home/play.svg";
 import pause from "@/assets/images/home/pause.svg";
@@ -74,8 +74,9 @@ const testimonials: Testimonial[] = [
   // }
 ];
 
-const TestimonialSlider = () => {
+const TestimonialSlider = memo(() => {
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const NextArrow = (props: any) => {
     const { onClick } = props;
@@ -130,19 +131,22 @@ const TestimonialSlider = () => {
     ],
   };
 
-  const togglePlay = (index: number) => {
-    const video = document.getElementById(`video-${index}`) as HTMLVideoElement;
+  const togglePlay = useCallback((index: number) => {
+    const video = videoRefs.current[index];
     if (!video) return;
 
     if (playingIndex === index) {
       video.pause();
       setPlayingIndex(null);
     } else {
-      document.querySelectorAll('video').forEach((v) => v.pause());
+      // Pause all other videos
+      videoRefs.current.forEach((v, i) => {
+        if (v && i !== index) v.pause();
+      });
       video.play();
       setPlayingIndex(index);
     }
-  };
+  }, [playingIndex]);
 
   return (
     <section className='testimonial-slider py-8 md:py-10 bg-[#F8F8F8] overflow-hidden'>
@@ -177,6 +181,7 @@ const TestimonialSlider = () => {
                         width={56}
                         height={56}
                         className="rounded-[3.73px]"
+                        loading="lazy"
                       />
                     </div>
 
@@ -198,10 +203,12 @@ const TestimonialSlider = () => {
                   <>
                     {/* Video element */}
                     <video
-                      id={`video-${idx}`}
+                      ref={(el) => { videoRefs.current[idx] = el; }}
                       poster={t.videoThumb}
                       className="object-cover w-full h-[482px] md:h-[528px]"
                       controls={false}
+                      preload="metadata"
+                      playsInline
                     >
                       <source src={t.videoUrl} type="video/mp4" />
                       Your browser does not support the video tag.
@@ -218,6 +225,7 @@ const TestimonialSlider = () => {
                         width={56}
                         height={56}
                         className="rounded-[3.73px]"
+                        loading="lazy"
                       />
                     </div>
 
@@ -283,6 +291,6 @@ const TestimonialSlider = () => {
       </div>
     </section>
   );
-};
+});
 
 export default TestimonialSlider;

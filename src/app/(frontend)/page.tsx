@@ -1,28 +1,69 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+import dynamic from 'next/dynamic';
 
 import HeroBanner from './components/homepage/hero-banner';
-import ValueProposition from './components/homepage/ValueProposition';
-import ExpertiseSection from './components/homepage/ExpertiseSection';
-import CaseStudiesShowcase from './components/homepage/CaseStudiesShowcase';
-import TestimonialSlider from './components/homepage/TestimonialSlider';
-import TrustedTools from './components/homepage/TrustedTools';
-import ProcessSection from './components/homepage/ProcessSection';
-import InsightsSection from './components/homepage/InsightsSection';
-import CTASection from './components/shared/CTASection';
+
+// Lazy load non-critical components
+const ValueProposition = dynamic(() => import('./components/homepage/ValueProposition'), {
+  loading: () => <div className="h-96 animate-pulse bg-gray-100" />
+});
+
+const ExpertiseSection = dynamic(() => import('./components/homepage/ExpertiseSection'), {
+  loading: () => <div className="h-96 animate-pulse bg-gray-100" />
+});
+
+const CaseStudiesShowcase = dynamic(() => import('./components/homepage/CaseStudiesShowcase'), {
+  loading: () => <div className="h-96 animate-pulse bg-gray-100" />
+});
+
+const TestimonialSlider = dynamic(() => import('./components/homepage/TestimonialSlider'), {
+  loading: () => <div className="h-96 animate-pulse bg-gray-100" />
+});
+
+const TrustedTools = dynamic(() => import('./components/homepage/TrustedTools'), {
+  loading: () => <div className="h-32 animate-pulse bg-gray-100" />
+});
+
+const ProcessSection = dynamic(() => import('./components/homepage/ProcessSection'), {
+  loading: () => <div className="h-96 animate-pulse bg-gray-100" />
+});
+
+const InsightsSection = dynamic(() => import('./components/homepage/InsightsSection'), {
+  loading: () => <div className="h-96 animate-pulse bg-gray-100" />
+});
+
+const CTASection = dynamic(() => import('./components/shared/CTASection'), {
+  loading: () => <div className="h-64 animate-pulse bg-gray-100" />
+});
 
 export default function Home() {
-
   return (
     <div className='pt-[64px] md:pt-[67px]'>
       <HeroBanner />
-      <ValueProposition />
-      <ExpertiseSection />
-      <CaseStudiesShowcase />
-      <TestimonialSlider />
-      <ProcessSection />
-      <TrustedTools />
-      <InsightsSection />
-      <CTASection />
+      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100" />}>
+        <ValueProposition />
+      </Suspense>
+      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100" />}>
+        <ExpertiseSection />
+      </Suspense>
+      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100" />}>
+        <CaseStudiesShowcase />
+      </Suspense>
+      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100" />}>
+        <TestimonialSlider />
+      </Suspense>
+      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100" />}>
+        <ProcessSection />
+      </Suspense>
+      <Suspense fallback={<div className="h-32 animate-pulse bg-gray-100" />}>
+        <TrustedTools />
+      </Suspense>
+      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100" />}>
+        <InsightsSection />
+      </Suspense>
+      <Suspense fallback={<div className="h-64 animate-pulse bg-gray-100" />}>
+        <CTASection />
+      </Suspense>
     </div>
   );
 }

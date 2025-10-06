@@ -8,8 +8,9 @@ import jack from '@/assets/images/home/jack.png';
 import heroImage from '@/assets/images/home/Hero-Image.png';
 import heroImageMobile from '@/assets/images/home/hero-image-mobile.jpg';
 import SlickSlider from './SlickSlider';
+import { memo } from 'react';
 
-export default function HeroBanner() {
+const HeroBanner = memo(function HeroBanner() {
   return (
     <section className="container mx-auto md:py-6">
       {/* Desktop Layout */}
@@ -55,6 +56,8 @@ export default function HeroBanner() {
               className="w-full h-full object-cover"
               width={600}
               height={100}
+              priority
+              
             />
             <div className="absolute w-[25%] inset-0 bg-gradient-to-r from-white via-white/20 to-transparent pointer-events-none"></div>
           </div>
@@ -95,6 +98,7 @@ export default function HeroBanner() {
             className="w-full h-full object-cover"
             width={600}
             height={100}
+            priority
           />
           {/* Dark overlay for better text readability */}
           <div className="absolute inset-0 bg-[linear-gradient(180.04deg,rgba(0,0,0,0)_17.29%,#000000_92.32%)]"></div>
@@ -152,4 +156,6 @@ export default function HeroBanner() {
       </div>
     </section>
   );
-}
+});
+
+export default HeroBanner;

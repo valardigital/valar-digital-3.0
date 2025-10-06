@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, memo, useCallback } from 'react';
 import Slider from 'react-slick';
 import Image from 'next/image';
 import { Button } from '../ui/button';
@@ -76,7 +76,7 @@ const insights = [
   },
 ];
 
-const InsightsSection = () => {
+const InsightsSection = memo(() => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
 
@@ -112,7 +112,7 @@ const InsightsSection = () => {
     centerMode: true,
     centerPadding: '0px',
     focusOnSelect: true,
-    beforeChange: (_current: number, next: number) => setCurrentSlide(next),
+    beforeChange: useCallback((_current: number, next: number) => setCurrentSlide(next), []),
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
     responsive: [
@@ -166,6 +166,7 @@ const InsightsSection = () => {
                       width={400}
                       height={250}
                       className="w-full h-full object-cover rounded-[8px]"
+                      loading="lazy"
                     />
 
                     {/* Gray overlay for non-active slides */}
@@ -230,6 +231,6 @@ const InsightsSection = () => {
       </div>
     </section>
   );
-};
+});
 
 export default InsightsSection;
