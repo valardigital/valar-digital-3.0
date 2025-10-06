@@ -85,7 +85,7 @@ const Header = () => {
           <nav className="flex flex-col space-y-1 flex-1 font-medium">
             <div className="flex justify-between py-[21px] relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-primary/20 after:to-transparent">
               <Link href="/">
-                <Image src="/images/logo.png" alt="Logo" width={150} height={40} />
+                <Image src={isServiceDetailsPage ? logoWhite : logo} alt="Logo" width={150} height={40} />
               </Link>
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
