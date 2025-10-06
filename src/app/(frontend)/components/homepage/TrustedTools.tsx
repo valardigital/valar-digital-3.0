@@ -74,15 +74,15 @@ const TrustedTools = () => {
                     src={tool.src}
                     alt={tool.alt}
                     width={100}
-                    height={32}
-                    className="h-8 w-auto transition-opacity duration-300"
+                    height={tool.src === logo2Blue ? 47 : 32}
+                    className={`${tool.src === logo2Blue ? 'h-12' : 'h-8'} w-auto transition-opacity duration-300`}
                   />
                   <Image
                     src={tool.hoverSrc}
                     alt={tool.alt}
                     width={100}
-                    height={32}
-                    className="h-8 w-auto absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    height={tool.hoverSrc === logo2 ? 47 : 32}
+                    className={`${tool.hoverSrc === logo2 ? 'h-12' : 'h-8'} w-auto absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
                   />
                 </div>
               </div>
@@ -111,8 +111,8 @@ const TrustedTools = () => {
                       src={tool.hoverSrc}
                       alt={tool.alt}
                       width={100}
-                      height={32}
-                      className="h-[25px] w-auto"
+                      height={tool.src === logo2Blue ? 47 : 32}
+                      className={`${tool.src === logo2Blue ? 'h-[30px]' : 'h-[25px]'} w-auto`}
                     />
                   </div>
                 </div>

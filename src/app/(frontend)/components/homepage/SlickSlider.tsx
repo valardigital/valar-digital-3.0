@@ -13,6 +13,10 @@ import oscar from "@/assets/images/home/oscar.png";
 import clasiq from "@/assets/images/home/clasiq.png";
 import skinsapiens from "@/assets/images/home/skin-sapiens.png";
 import ample from "@/assets/images/home/ample.png";
+import zimadental from "@/assets/images/home/zima-dental-logo.png";
+import r180 from "@/assets/images/home/r180.png";
+import blueVoucher from "@/assets/images/home/blue-voucher.png";
+import philippaherbert from "@/assets/images/home/philippa-herbert.png"
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
@@ -24,6 +28,10 @@ const SlickSlider: React.FC = memo(() => {
     sls3,
     paddock,
     nutriburst,
+    zimadental,
+    r180,
+    philippaherbert,
+    blueVoucher,
     kair,
     audenza,
     hanx,

@@ -35,7 +35,7 @@ const CaseStudiesShowcase = memo(() => {
               className="md:rounded-br-3xl rounded-tl-3xl object-cover w-full md:h-full h-[429px]"
               loading="lazy"
             />
-            <div className='bg-gradient-to-b from-transparent from-60% to-black/40 to-100% md:rounded-br-3xl rounded-tl-3xl  absolute top-0 bottom-0 left-0 right-0' />
+            <div className='bg-gradient-to-b from-transparent md:from-40% from-20% to-black/40 to-100% md:rounded-br-3xl rounded-tl-3xl  absolute top-0 bottom-0 left-0 right-0' />
             <div className="absolute bottom-8 left-6 right-6 flex flex-col md:flex-row items-center justify-between tracking-[0.04rem] gap-4 md:gap-6 text-white font-medium text-[28px] md:text-[32px]">
               <div className='w-full'>
                 <p>+22%</p>
@@ -93,7 +93,7 @@ const CaseStudiesShowcase = memo(() => {
 
       {/* Case Study 2 */}
       <div className="bg-white rounded-3xl overflow-hidden mb-6 md:mb-12 shadow-[0px_4px_0px_0px_#F0F5FC] border-4 border-border-gradient-image">
-        <div className='grid grid-cols-1 lg:grid-cols-[45%_55%]'>
+        <div className='flex flex-col-reverse lg:grid lg:grid-cols-[45%_55%]'>
           <div className='flex-1 p-6 md:p-10'>
             <h3 className="text-2xl md:text-[32px] font-medium text-primary mb-4 md:mb-6">Zima Dental</h3>
             <div className='tracking-[0.04rem] mb-6 md:mb-4'>
@@ -130,7 +130,7 @@ const CaseStudiesShowcase = memo(() => {
               className="md:rounded-bl-3xl rounded-tr-3xl object-cover w-full md:h-full h-[429px]"
               loading="lazy"
             />
-            <div className='bg-gradient-to-b from-transparent from-10% to-black/40 to-100% md:rounded-bl-3xl rounded-tr-3xl absolute top-0 bottom-0 left-0 right-0' />
+            <div className='bg-gradient-to-b from-transparent md:from-40% from-20% to-black/50 to-100% md:rounded-bl-3xl rounded-tr-3xl absolute top-0 bottom-0 left-0 right-0' />
             <div className="absolute bottom-8 left-6 right-6 flex flex-col md:flex-row items-center justify-between tracking-[0.04rem] gap-4 md:gap-6 text-white font-medium text-[28px] md:text-[32px]">
               <div className='w-full'>
                 <p>+16%</p>
