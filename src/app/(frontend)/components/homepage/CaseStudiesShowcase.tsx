@@ -5,8 +5,9 @@ import Link from 'next/link';
 import casepf from '@/assets/images/home/case-pf.png';
 import casezima from '@/assets/images/home/case-zima.png';
 import { Button } from '../ui/button';
+import { memo } from 'react';
 
-const CaseStudiesShowcase = () => {
+const CaseStudiesShowcase = memo(() => {
   return (
     <section className="container mx-auto px-4 py-10">
       {/* Header */}
@@ -32,6 +33,7 @@ const CaseStudiesShowcase = () => {
               width={600}
               height={400}
               className="md:rounded-br-3xl rounded-tl-3xl object-cover w-full md:h-full h-[429px]"
+              loading="lazy"
             />
             <div className='bg-gradient-to-b from-transparent from-60% to-black/40 to-100% md:rounded-br-3xl rounded-tl-3xl  absolute top-0 bottom-0 left-0 right-0' />
             <div className="absolute bottom-8 left-6 right-6 flex flex-col md:flex-row items-center justify-between tracking-[0.04rem] gap-4 md:gap-6 text-white font-medium text-[28px] md:text-[32px]">
@@ -126,6 +128,7 @@ const CaseStudiesShowcase = () => {
               width={600}
               height={400}
               className="md:rounded-bl-3xl rounded-tr-3xl object-cover w-full md:h-full h-[429px]"
+              loading="lazy"
             />
             <div className='bg-gradient-to-b from-transparent from-10% to-black/40 to-100% md:rounded-bl-3xl rounded-tr-3xl absolute top-0 bottom-0 left-0 right-0' />
             <div className="absolute bottom-8 left-6 right-6 flex flex-col md:flex-row items-center justify-between tracking-[0.04rem] gap-4 md:gap-6 text-white font-medium text-[28px] md:text-[32px]">
@@ -171,6 +174,6 @@ const CaseStudiesShowcase = () => {
       </div>
     </section >
   );
-};
+});
 
 export default CaseStudiesShowcase;

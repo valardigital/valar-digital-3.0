@@ -104,7 +104,7 @@ async function fetchBlogs(page: number) {
   const totalPages = Math.max(1, Math.ceil(totalDocs / limit));
   const currentPage = postsRes?.page ?? page;
 
-  return { featuredPosts, posts, pagination: { page: currentPage, totalPages } };
+  return { featuredPosts, posts, pagination: { page: currentPage, totalPages, totalDocs, limit } };
 }
 
 const popularTags = BLOG_CATEGORY_OPTIONS.map(opt => opt.value)
@@ -159,6 +159,8 @@ export default async function BlogListingPage({ searchParams }: { searchParams: 
         popularTags={popularTags}
         page={pagination.page}
         totalPages={pagination.totalPages}
+        totalItems={pagination.totalDocs}
+        itemsPerPage={pagination.limit}
       />
     </div>
   );

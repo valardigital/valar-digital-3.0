@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import sls3 from "@/assets/images/home/sls3.png";
 import paddock from "@/assets/images/home/paddock.png";
 import nutriburst from "@/assets/images/home/nutriburst.png";
@@ -16,7 +16,7 @@ import ample from "@/assets/images/home/ample.png";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-const SlickSlider: React.FC = () => {
+const SlickSlider: React.FC = memo(() => {
   const pathname = usePathname();
   const isServiceDetailsPage = pathname === '/services';
 
@@ -50,6 +50,7 @@ const SlickSlider: React.FC = () => {
                 width={100}
                 height={32} 
                 className="w-auto h-8" 
+                loading="lazy"
               />
             </div>
           ))}
@@ -81,6 +82,6 @@ const SlickSlider: React.FC = () => {
       ></div>
     </div>
   );
-};
+});
 
 export default SlickSlider;

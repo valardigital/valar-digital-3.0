@@ -6,6 +6,7 @@ import { getMediaUrl } from '@/utilities/getMediaUrl'
 import Link from 'next/link';
 import { Button } from '../ui/button';
 import play from "@/assets/images/home/play.svg";
+import Pagination from '../shared/Pagination';
 
 interface BlogPost {
     id: string;
@@ -35,6 +36,8 @@ interface BlogGridSectionProps {
     popularTags: string[];
     page?: number;
     totalPages?: number;
+    totalItems?: number;
+    itemsPerPage?: number;
 }
 
 const BlogGridSection: React.FC<BlogGridSectionProps> = ({
@@ -42,7 +45,9 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
     categories,
     popularTags,
     page = 1,
-    totalPages = 1
+    totalPages = 1,
+    totalItems = 0,
+    itemsPerPage = 6
 }) => {
     const [selectedType, setSelectedType] = useState("All Types");
     const [searchQuery, setSearchQuery] = useState('');
@@ -79,6 +84,11 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
     const handleTagClick = (tag: string) => {
         setActiveTag(prev => (prev === tag ? null : tag));
     };
+
+    // Fallback total count if not provided from server
+    const effectiveTotalItems = totalItems && totalItems > 0
+        ? totalItems
+        : Math.max(posts.length, (totalPages || 1) * (itemsPerPage || 6));
 
     return (
         <>
@@ -293,26 +303,15 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
                 </div>
             </div>
         </section>
+        
         {/* Pagination */}
-        <div className="container mx-auto px-4 md:px-0 pb-12">
-            {totalPages > 1 && (
-                <div className="flex items-center justify-center gap-2">
-                    <a
-                        href={`/blog?page=${Math.max(1, page - 1)}`}
-                        className={`px-4 py-2 border rounded ${page <= 1 ? 'pointer-events-none opacity-50' : ''}`}
-                    >
-                        Prev
-                    </a>
-                    <span className="text-sm text-text-muted">Page {page} of {totalPages}</span>
-                    <a
-                        href={`/blog?page=${Math.min(totalPages, page + 1)}`}
-                        className={`px-4 py-2 border rounded ${page >= totalPages ? 'pointer-events-none opacity-50' : ''}`}
-                    >
-                        Next
-                    </a>
-                </div>
-            )}
-        </div>
+        <Pagination
+            currentPage={page}
+            totalPages={Math.max(1, totalPages)}
+            totalItems={effectiveTotalItems}
+            itemsPerPage={itemsPerPage}
+            baseUrl="/blog"
+        />
         </>
     );
 };

@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const OutcomeSection: Block = {
   slug: 'outcomeSection',
@@ -10,11 +11,48 @@ export const OutcomeSection: Block = {
   fields: [
     {
       name: 'summary',
-      type: 'textarea',
+      type: 'richText',
+      editor: lexicalEditor(),
       required: true,
       admin: {
         description: 'Summary of the overall outcome',
       },
+      hooks: {
+        afterRead: [({ value }) => {
+          if (typeof value === 'string') {
+            return {
+              root: {
+                type: 'root',
+                version: 1,
+                children: [
+                  {
+                    type: 'paragraph',
+                    version: 1,
+                    format: '',
+                    indent: 0,
+                    direction: 'ltr',
+                    children: [
+                      {
+                        type: 'text',
+                        version: 1,
+                        text: value,
+                        detail: 0,
+                        format: 0,
+                        mode: 'normal',
+                        style: ''
+                      }
+                    ]
+                  }
+                ],
+                format: '',
+                indent: 0,
+                direction: 'ltr'
+              }
+            }
+          }
+          return value
+        }]
+      }
     },
     {
       name: 'keyResults',
@@ -42,21 +80,95 @@ export const OutcomeSection: Block = {
         },
         {
           name: 'description',
-          type: 'textarea',
+          type: 'richText',
+          editor: lexicalEditor(),
           required: true,
           admin: {
             description: 'Detailed description of the result',
           },
+          hooks: {
+            afterRead: [({ value }) => {
+              if (typeof value === 'string') {
+                return {
+                  root: {
+                    type: 'root',
+                    version: 1,
+                    children: [
+                      {
+                        type: 'paragraph',
+                        version: 1,
+                        format: '',
+                        indent: 0,
+                        direction: 'ltr',
+                        children: [
+                          {
+                            type: 'text',
+                            version: 1,
+                            text: value,
+                            detail: 0,
+                            format: 0,
+                            mode: 'normal',
+                            style: ''
+                          }
+                        ]
+                      }
+                    ],
+                    format: '',
+                    indent: 0,
+                    direction: 'ltr'
+                  }
+                }
+              }
+              return value
+            }]
+          }
         },
       ],
     },
     {
       name: 'takeaways',
-      type: 'textarea',
+      type: 'richText',
+      editor: lexicalEditor(),
       required: true,
       admin: {
         description: 'Key takeaways and lessons learned',
       },
+      hooks: {
+        afterRead: [({ value }) => {
+          if (typeof value === 'string') {
+            return {
+              root: {
+                type: 'root',
+                version: 1,
+                children: [
+                  {
+                    type: 'paragraph',
+                    version: 1,
+                    format: '',
+                    indent: 0,
+                    direction: 'ltr',
+                    children: [
+                      {
+                        type: 'text',
+                        version: 1,
+                        text: value,
+                        detail: 0,
+                        format: 0,
+                        mode: 'normal',
+                        style: ''
+                      }
+                    ]
+                  }
+                ],
+                format: '',
+                indent: 0,
+                direction: 'ltr'
+              }
+            }
+          }
+          return value
+        }]
+      }
     },
   ],
 } 

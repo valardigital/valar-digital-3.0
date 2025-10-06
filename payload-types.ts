@@ -537,6 +537,10 @@ export interface InsightsListSection {
    */
   startBackground: 'muted' | 'white';
   /**
+   * Text color for descriptions
+   */
+  textColor: 'light' | 'dark' | 'primary' | 'muted';
+  /**
    * Key insights discovered during analysis
    */
   items: {
@@ -670,7 +674,21 @@ export interface OutcomeSection {
   /**
    * Summary of the overall outcome
    */
-  summary: string;
+  summary: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   /**
    * Key results and metrics
    */
@@ -686,13 +704,41 @@ export interface OutcomeSection {
     /**
      * Detailed description of the result
      */
-    description: string;
+    description: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
     id?: string | null;
   }[];
   /**
    * Key takeaways and lessons learned
    */
-  takeaways: string;
+  takeaways: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'outcomeSection';
@@ -1102,6 +1148,7 @@ export interface InsightsSectionSelect<T extends boolean = true> {
  */
 export interface InsightsListSectionSelect<T extends boolean = true> {
   startBackground?: T;
+  textColor?: T;
   items?:
     | T
     | {
