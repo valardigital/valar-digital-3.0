@@ -107,10 +107,10 @@ const InsightsSection = memo(() => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 2.3,
     slidesToScroll: 1,
     centerMode: true,
-    centerPadding: '0px',
+    centerPadding: '40px',
     focusOnSelect: true,
     beforeChange: useCallback((_current: number, next: number) => setCurrentSlide(next), []),
     prevArrow: <CustomPrevArrow />,
@@ -120,7 +120,8 @@ const InsightsSection = memo(() => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-          centerMode: false,
+          centerMode: true,
+          centerPadding: '40px',
         }
       },
       {

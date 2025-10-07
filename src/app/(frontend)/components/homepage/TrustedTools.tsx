@@ -7,6 +7,7 @@ import logo2 from '@/assets/images/home/tools-logo-2.png';
 import logo3 from '@/assets/images/home/tools-logo-3.png';
 import logo4 from '@/assets/images/home/tools-logo-4.png';
 import logo5 from '@/assets/images/home/tools-logo-5.png';
+import logo6 from '@/assets/images/home/tools-logo-6.png';
 import logo1Blue from '@/assets/images/home/tools-logo-1-blue.png';
 import logo2Blue from '@/assets/images/home/tools-logo-2-blue.png';
 import logo3Blue from '@/assets/images/home/tools-logo-3-blue.png';
@@ -41,9 +42,9 @@ const tools = [
     alt: 'Rebuy'
   },
   {
-    src: logo6Blue,
+    src: logo6,
     hoverSrc: logo6Blue,
-    alt: 'Logoipsum'
+    alt: 'Loop'
   },
 ];
 

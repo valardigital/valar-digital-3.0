@@ -42,7 +42,7 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
             <article className="group">
               <Link href={`/blog/${mainFeaturedPost.id}`}>
                 <div className=''>
-                  <div className="relative w-full h-[200px] md:h-[370px] mb-4 overflow-hidden rounded-lg">
+                  <div className="relative w-full h-[200px] md:h-[350px] mb-4 overflow-hidden rounded-lg">
                     {mainFeaturedPost.hasVideo && playingId === mainFeaturedPost.id && (mainFeaturedPost.videoUploadUrl || mainFeaturedPost.embedUrl) ? (
                       mainFeaturedPost.videoUploadUrl ? (
                         <video
@@ -100,11 +100,11 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
                       })}
                     </div>
 
-                    <h3 className="text-2xl md:text-[20px] font-medium text-text-dark mb-2 leading-[1.3] tracking-[0.04rem]">
+                    <h3 className="md:text-2xl md:text-[20px] font-medium text-text-dark mb-2 leading-[1.3] tracking-[0.04rem]">
                       {mainFeaturedPost.title}
                     </h3>
 
-                    <p className="text-text-dark tracking-[0.04rem] leading-[1.5] line-clamp-2">
+                    <p className="text-sm md:text-base text-text-dark tracking-[0.04rem] leading-[1.5] line-clamp-2">
                       {mainFeaturedPost.excerpt}
                     </p>
                   </div>

@@ -116,13 +116,13 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
                             </div>
 
                             {/* Popular Tags */}
-                            <div className='overflow-x-scroll mt-2 -mx-4 pl-4'>
+                            <div className='overflow-x-scroll mt-2 -mx-4 pl-4 [&::-webkit-scrollbar]:hidden'>
                                 <div className="flex gap-3 tracking-[0.04rem]">
                                     {popularTags.map((tag, index) => (
                                         <button
                                             key={index}
                                             onClick={() => handleTagClick(tag)}
-                                            className={`px-4 py-2 text-sm rounded-[4px] border transition-colors whitespace-nowrap ${activeTag === tag ? 'bg-primary text-white border-primary' : 'bg-primary/5 text-text-dark border-border hover:bg-primary/8'}`}
+                                            className={`px-4 py-2 h-[36px] text-sm rounded-[4px] border transition-colors whitespace-nowrap ${activeTag === tag ? 'bg-primary text-white border-primary' : 'bg-primary/5 text-text-dark border-border hover:bg-primary/8'}`}
                                         >
                                             {tag}
                                         </button>
@@ -134,7 +134,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
 
                 {/* Category Filter */}
                 <div className="mb-6 md:mb-10">
-                    <div className="flex flex-wrap gap-2 border-b-1">
+                    <div className="flex flex-wrap md:justify-start justify-center gap-2 border-b-1">
                         {types.map(type => (
                             <button
                                 key={type}
@@ -264,7 +264,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
                                         <button
                                             key={index}
                                             onClick={() => handleTagClick(tag)}
-                                            className={`px-4 py-2 rounded-[4px] border transition-colors cursor-pointer ${activeTag === tag ? 'bg-primary text-white border-primary' : 'bg-primary/5 text-text-dark border-border hover:bg-primary/8'}`}
+                                            className={`px-4 py-2 h-[38px] rounded-[4px] border transition-colors cursor-pointer ${activeTag === tag ? 'bg-primary text-white border-primary' : 'bg-primary/5 text-text-dark border-border hover:bg-primary/8'}`}
                                         >
                                             {tag}
                                         </button>
@@ -286,10 +286,10 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
                                         name="email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        placeholder="Enter your email"
+                                        placeholder="Your email address"
                                         required
                                         autoComplete='off'
-                                        className="w-full px-6 py-4 border border-border rounded-[8px] text-text-dark placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                                        className="w-full px-6 py-4 border border-border rounded-[8px] text-text-dark placeholder:tracking-[0.04rem] placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                                     />
                                     <Button type="submit" className="w-full">
                                         Subscribe
