@@ -1,33 +1,30 @@
-import { revalidatePath, revalidateTag } from 'next/cache'
+import { getServerSideURL } from '@/utilities/getURL'
 
 export const revalidateBlog = async (doc: any, operation: 'create' | 'update' | 'delete') => {
   try {
-    // Always revalidate the specific blog post
-    if (doc.slug) {
-      revalidatePath(`/blog/${doc.slug}`)
-    }
+    const baseUrl = getServerSideURL()
+    const paths: string[] = []
+    const tags: string[] = []
 
-    // Revalidate listing pages
-    revalidatePath('/blog')
-    revalidatePath('/blog/page')
-
-    // Revalidate sitemap
-    revalidatePath('/sitemap.xml')
-    revalidateTag('blog-sitemap')
-
-    // For updates/deletes, also revalidate the old slug if it changed
-    if (operation === 'update' && doc._status === 'published') {
-      // The post is published, ensure it's accessible
-      revalidatePath(`/blog/${doc.slug}`)
-    }
+    if (doc.slug) paths.push(`/blog/${doc.slug}`)
+    paths.push('/blog', '/blog/page', '/sitemap.xml')
+    tags.push('blog-sitemap')
 
     if (operation === 'delete') {
-      // Post was deleted, ensure it's removed from listings
-      revalidatePath('/blog')
-      revalidatePath('/blog/page')
+      paths.push('/blog', '/blog/page')
     }
 
-    console.log(`✅ Revalidated blog routes for ${operation}: ${doc.slug || 'unknown'}`)
+    await fetch(`${baseUrl}/api/revalidate`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-revalidate-secret': process.env.REVALIDATE_SECRET || '',
+      },
+      body: JSON.stringify({ paths, tags }),
+      cache: 'no-store',
+    })
+
+    console.log(`✅ Requested revalidation for blog ${operation}: ${doc.slug || 'unknown'}`)
   } catch (error) {
     console.error('❌ Error revalidating blog routes:', error)
   }

@@ -178,7 +178,7 @@ export interface Media {
 export interface Blog {
   id: string;
   /**
-   * Blog post title - slug will update automatically
+   * Blog post title
    */
   title: string;
   featuredImage?: (string | null) | Media;
@@ -212,7 +212,7 @@ export interface Blog {
    */
   videoSource?: ('upload' | 'embed') | null;
   /**
-   * Upload a video file. Use a featured image as the poster/thumbnail.
+   * Upload a video file. Use a featured image as poster/thumbnail.
    */
   videoUpload?: (string | null) | Media;
   /**
@@ -223,7 +223,7 @@ export interface Blog {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -235,45 +235,26 @@ export interface Blog {
     [k: string]: unknown;
   } | null;
   meta?: {
-    /**
-     * Title that appears in search results (recommended: 50-60 characters)
-     */
     title?: string | null;
     /**
-     * Description that appears in search results (recommended: 150-160 characters)
-     */
-    description?: string | null;
-    /**
-     * Image for search results and social sharing (recommended: 1200x630px)
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (string | null) | Media;
-    /**
-     * Relevant keywords for search engines
-     */
-    keywords?:
-      | {
-          keyword?: string | null;
-          id?: string | null;
-        }[]
-      | null;
+    description?: string | null;
   };
   /**
-   * Automatically set to the current user
+   * Automatically set to current user
    */
   author: string | User;
-  /**
-   * When this post should be published
-   */
   publishedAt?: string | null;
   /**
-   * If enabled, this post can be shown in the Featured section (max 4 posts)
+   * Max 4 posts can be featured
    */
   isFeatured?: boolean | null;
   /**
-   * Auto-generated from title field. Click lock/unlock to control updates.
+   * Auto-generated from title. You can edit this if needed.
    */
-  slug: string;
-  slugLock?: boolean | null;
+  slug?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -404,7 +385,7 @@ export interface HeroSection {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -490,7 +471,7 @@ export interface InsightsSection {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -553,7 +534,7 @@ export interface InsightsListSection {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -604,7 +585,7 @@ export interface BeforeAfterSection {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -678,7 +659,7 @@ export interface OutcomeSection {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -708,7 +689,7 @@ export interface OutcomeSection {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -728,7 +709,7 @@ export interface OutcomeSection {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -752,7 +733,7 @@ export interface ContentWithMedia {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -1016,20 +997,13 @@ export interface BlogSelect<T extends boolean = true> {
     | T
     | {
         title?: T;
-        description?: T;
         image?: T;
-        keywords?:
-          | T
-          | {
-              keyword?: T;
-              id?: T;
-            };
+        description?: T;
       };
   author?: T;
   publishedAt?: T;
   isFeatured?: T;
   slug?: T;
-  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

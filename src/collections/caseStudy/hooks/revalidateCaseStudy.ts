@@ -1,31 +1,30 @@
-import { revalidatePath, revalidateTag } from 'next/cache'
+import { getServerSideURL } from '@/utilities/getURL'
 
 export const revalidateCaseStudy = async (doc: any, operation: 'create' | 'update' | 'delete') => {
   try {
-    // Always revalidate the specific case study
-    if (doc.slug) {
-      revalidatePath(`/caseStudy/${doc.slug}`)
-    }
+    const baseUrl = getServerSideURL()
+    const paths: string[] = []
+    const tags: string[] = []
 
-    // Revalidate listing page
-    revalidatePath('/caseStudy')
-
-    // Revalidate sitemap
-    revalidatePath('/sitemap.xml')
-    revalidateTag('case-study-sitemap')
-
-    // For updates/deletes, also revalidate the old slug if it changed
-    if (operation === 'update' && doc._status === 'published') {
-      // The case study is published, ensure it's accessible
-      revalidatePath(`/caseStudy/${doc.slug}`)
-    }
+    if (doc.slug) paths.push(`/caseStudy/${doc.slug}`)
+    paths.push('/caseStudy', '/sitemap.xml')
+    tags.push('case-study-sitemap')
 
     if (operation === 'delete') {
-      // Case study was deleted, ensure it's removed from listings
-      revalidatePath('/caseStudy')
+      paths.push('/caseStudy')
     }
 
-    console.log(`✅ Revalidated case study routes for ${operation}: ${doc.slug || 'unknown'}`)
+    await fetch(`${baseUrl}/api/revalidate`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-revalidate-secret': process.env.REVALIDATE_SECRET || '',
+      },
+      body: JSON.stringify({ paths, tags }),
+      cache: 'no-store',
+    })
+
+    console.log(`✅ Requested revalidation for case study ${operation}: ${doc.slug || 'unknown'}`)
   } catch (error) {
     console.error('❌ Error revalidating case study routes:', error)
   }
