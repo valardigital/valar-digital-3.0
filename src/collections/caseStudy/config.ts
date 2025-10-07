@@ -192,8 +192,8 @@ const CaseStudy: CollectionConfig = {
         },
       },
     },
-    // Add slug field system - returns [slugField, slugLockField]
-    ...slugField('title'),
+    // Slug field with scoped uniqueness to this collection
+    ...slugField('title', 'caseStudy'),
   ],
   hooks: {
     afterChange: [

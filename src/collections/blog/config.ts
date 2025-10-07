@@ -183,8 +183,8 @@ const Blog: CollectionConfig = {
         return true;
       },
     },
-    // Slug field
-    ...slugField('title'),
+    // Slug field with scoped uniqueness to this collection
+    ...slugField('title', 'blog'),
   ],
   hooks: {
     beforeChange: [
