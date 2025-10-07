@@ -338,37 +338,21 @@ export interface CaseStudy {
       )[]
     | null;
   meta?: {
-    /**
-     * Title that appears in search results (recommended: 50-60 characters)
-     */
     title?: string | null;
     /**
-     * Description that appears in search results (recommended: 150-160 characters)
-     */
-    description?: string | null;
-    /**
-     * Image for search results and social sharing (recommended: 1200x630px)
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (string | null) | Media;
-    /**
-     * Relevant keywords for search engines
-     */
-    keywords?:
-      | {
-          keyword?: string | null;
-          id?: string | null;
-        }[]
-      | null;
+    description?: string | null;
   };
   /**
    * When this case study should be published
    */
   publishedAt?: string | null;
   /**
-   * Auto-generated from title field. Click lock/unlock to control updates.
+   * Auto-generated from title. You can edit this if needed.
    */
-  slug: string;
-  slugLock?: boolean | null;
+  slug?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1044,18 +1028,11 @@ export interface CaseStudySelect<T extends boolean = true> {
     | T
     | {
         title?: T;
-        description?: T;
         image?: T;
-        keywords?:
-          | T
-          | {
-              keyword?: T;
-              id?: T;
-            };
+        description?: T;
       };
   publishedAt?: T;
   slug?: T;
-  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

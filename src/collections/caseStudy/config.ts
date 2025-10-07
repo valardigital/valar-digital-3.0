@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { slugField } from '@/fields/slug'
+import { slugField } from '@/fields/slugField'
 import { HeroSection } from '@/blocks/HeroSection/config'
 import { ResultsSection } from '@/blocks/ResultsSection/config'
 import { InsightsSection } from '@/blocks/InsightsSection/config'
@@ -15,6 +15,7 @@ import { TableOfContents } from '@/blocks/TableOfContents/config'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 import { revalidateCaseStudy } from './hooks/revalidateCaseStudy'
+import { SEOFields } from '@/fields/seoFields'
 
 const CaseStudy: CollectionConfig = {
   slug: 'caseStudy',
@@ -175,48 +176,7 @@ const CaseStudy: CollectionConfig = {
         {
           name: 'meta',
           label: 'SEO',
-          fields: [
-            {
-              name: 'title',
-              type: 'text',
-              label: 'Meta Title',
-              admin: {
-                description: 'Title that appears in search results (recommended: 50-60 characters)',
-              },
-            },
-            {
-              name: 'description',
-              type: 'textarea',
-              label: 'Meta Description',
-              maxLength: 160,
-              admin: {
-                description: 'Description that appears in search results (recommended: 150-160 characters)',
-              },
-            },
-            {
-              name: 'image',
-              type: 'upload',
-              label: 'Meta Image',
-              relationTo: 'media',
-              admin: {
-                description: 'Image for search results and social sharing (recommended: 1200x630px)',
-              },
-            },
-            {
-              name: 'keywords',
-              type: 'array',
-              label: 'Keywords',
-              admin: {
-                description: 'Relevant keywords for search engines',
-              },
-              fields: [
-                {
-                  name: 'keyword',
-                  type: 'text',
-                },
-              ],
-            },
-          ],
+          fields: SEOFields,
         },
       ],
     },
