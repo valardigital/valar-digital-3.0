@@ -3,7 +3,7 @@
 import Slider from 'react-slick';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
-import { useState, memo, useCallback, useRef } from 'react';
+import { useState, memo, useCallback, useRef, useEffect } from 'react';
 import { Button } from '../ui/button';
 import play from "@/assets/images/home/play.svg";
 import pause from "@/assets/images/home/pause.svg";
@@ -77,12 +77,14 @@ const testimonials: Testimonial[] = [
 const TestimonialSlider = memo(() => {
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const sliderRef = useRef<Slider>(null);
+  const [currentTransform, setCurrentTransform] = useState(0);
 
   const NextArrow = (props: any) => {
     const { onClick } = props;
     return (
       <button
-        className="bg-white absolute right-5 md:right-25 -bottom-19 md:-bottom-14 -translate-y-1/2 z-10 flex items-center justify-center cursor-pointer border-[1.5px] md:border-none rounded-[10px] size-10 md:size-max"
+        className="absolute right-5 md:right-25 -bottom-19 md:-bottom-14 -translate-y-1/2 z-10 flex items-center justify-center cursor-pointer border-[1.5px] md:border-none rounded-[10px] size-10 md:size-max"
         onClick={onClick}
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="size-6" fill="none" viewBox="0 0 24 24" stroke="#1e1e1e">
@@ -96,7 +98,7 @@ const TestimonialSlider = memo(() => {
     const { onClick } = props;
     return (
       <button
-        className="bg-white absolute left-5 -bottom-19 md:-bottom-14 -translate-y-1/2 z-10 flex items-center justify-center cursor-pointer border-[1.5px] md:border-none rounded-[10px] size-10 md:size-max"
+        className="absolute left-5 -bottom-19 md:-bottom-14 -translate-y-1/2 z-10 flex items-center justify-center cursor-pointer border-[1.5px] md:border-none rounded-[10px] size-10 md:size-max"
         onClick={onClick}
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="size-6 rotate-180" fill="none" viewBox="0 0 24 24" stroke="#1e1e1e">
@@ -113,19 +115,31 @@ const TestimonialSlider = memo(() => {
     slidesToScroll: 1,
     variableWidth: false,
     arrows: true,
+    swipe: true,
+    swipeToSlide: true,
+    touchMove: true,
+    touchThreshold: 10,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     dotsClass: 'slick-dots custom-dots',
     responsive: [
       {
         breakpoint: 1024,
-        settings: { slidesToShow: 2 },
+        settings: { 
+          slidesToShow: 2,
+          swipe: true,
+          swipeToSlide: true,
+          touchMove: true,
+        },
       },
       {
         breakpoint: 640,
         settings: {
           slidesToShow: 1,
           dots: true,
+          swipe: true,
+          swipeToSlide: true,
+          touchMove: true,
         },
       },
     ],
@@ -148,6 +162,84 @@ const TestimonialSlider = memo(() => {
     }
   }, [playingIndex]);
 
+  // Handle trackpad/wheel scroll events with proper debouncing
+  useEffect(() => {
+    let accumulatedDelta = 0;
+    let isScrolling = false;
+    let scrollTimeout: NodeJS.Timeout | null = null;
+    let lastSlideTime = 0;
+    
+    const handleWheel = (e: Event) => {
+      const wheelEvent = e as WheelEvent;
+      
+      // Check if we're scrolling horizontally or if shift is pressed for horizontal scroll
+      if (Math.abs(wheelEvent.deltaX) > Math.abs(wheelEvent.deltaY) || wheelEvent.shiftKey) {
+        wheelEvent.preventDefault();
+        
+        if (sliderRef.current) {
+          const now = Date.now();
+          
+          // Prevent multiple slides within 300ms (cooldown period)
+          if (now - lastSlideTime < 300) {
+            return;
+          }
+          
+          // Get the scroll delta (horizontal or vertical with shift)
+          const delta = wheelEvent.deltaX || (wheelEvent.shiftKey ? wheelEvent.deltaY : 0);
+          
+          // Only accumulate if not currently in a scroll gesture
+          if (!isScrolling) {
+            accumulatedDelta = 0; // Reset at start of new gesture
+            isScrolling = true;
+          }
+          
+          // Accumulate delta with moderate sensitivity
+          accumulatedDelta += delta * 0.6;
+          
+          // Higher threshold to prevent over-sensitivity
+          const threshold = 80;
+          
+          // Clear any existing timeout
+          if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+          }
+          
+          // Check if we should trigger a slide change
+          if (Math.abs(accumulatedDelta) >= threshold) {
+            if (accumulatedDelta > 0) {
+              sliderRef.current.slickNext();
+            } else {
+              sliderRef.current.slickPrev();
+            }
+            
+            // Reset everything after slide
+            accumulatedDelta = 0;
+            isScrolling = false;
+            lastSlideTime = now;
+          } else {
+            // Set timeout to end scroll gesture if no more events
+            scrollTimeout = setTimeout(() => {
+              isScrolling = false;
+              accumulatedDelta = 0;
+            }, 100);
+          }
+        }
+      }
+    };
+
+    const sliderElement = document.querySelector('.testimonial-slider');
+    if (sliderElement) {
+      sliderElement.addEventListener('wheel', handleWheel, { passive: false });
+      
+      return () => {
+        sliderElement.removeEventListener('wheel', handleWheel);
+        if (scrollTimeout) {
+          clearTimeout(scrollTimeout);
+        }
+      };
+    }
+  }, []);
+
   return (
     <section className='testimonial-slider py-8 md:py-10 bg-[#F8F8F8] overflow-hidden'>
       {/* Header */}
@@ -164,7 +256,7 @@ const TestimonialSlider = memo(() => {
 
       {/* Slider */}
       <div className="mb-20 md:mb-17">
-        <Slider {...settings}>
+        <Slider ref={sliderRef} {...settings} className='lg:pr-22'>
           {testimonials.map((t, idx) => (
             <div key={idx} className="px-4">
               <div className="relative rounded-3xl md:rounded-4xl overflow-hidden shadow-[0px_4px_0px_0px_#F0F5FC] max-w-[376px]">
