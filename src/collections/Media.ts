@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload'
-import { revalidatePath, revalidateTag } from 'next/cache'
+import { getServerSideURL } from '@/utilities/getURL'
 
 const Media: CollectionConfig = {
   slug: 'media',
@@ -56,30 +56,46 @@ const Media: CollectionConfig = {
   ],
   hooks: {
     afterChange: [
-      ({ doc, operation }: { doc: any; operation: 'create' | 'update' | 'delete' }) => {
+      async ({ doc, operation }: { doc: any; operation: 'create' | 'update' | 'delete' }) => {
         try {
-          // Revalidate global surfaces that commonly reference media
-          revalidateTag('media')
-          revalidatePath('/blog')
-          revalidatePath('/caseStudy')
-          revalidatePath('/')
-          
-          console.log(`✅ Revalidated media routes for ${operation}: ${doc.filename || 'unknown'}`)
+          const baseUrl = getServerSideURL()
+          const paths = ['/blog', '/caseStudy', '/']
+          const tags = ['media']
+
+          await fetch(`${baseUrl}/api/revalidate`, {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+              'x-revalidate-secret': process.env.REVALIDATE_SECRET || '',
+            },
+            body: JSON.stringify({ paths, tags }),
+            cache: 'no-store',
+          })
+
+          console.log(`✅ Requested revalidation for media ${operation}: ${doc.filename || 'unknown'}`)
         } catch (error) {
           console.error('❌ Error revalidating media routes:', error)
         }
       },
     ],
     afterDelete: [
-      ({ doc }: { doc: any }) => {
+      async ({ doc }: { doc: any }) => {
         try {
-          // Revalidate global surfaces when media is deleted
-          revalidateTag('media')
-          revalidatePath('/blog')
-          revalidatePath('/caseStudy')
-          revalidatePath('/')
-          
-          console.log(`✅ Revalidated media routes for delete: ${doc.filename || 'unknown'}`)
+          const baseUrl = getServerSideURL()
+          const paths = ['/blog', '/caseStudy', '/']
+          const tags = ['media']
+
+          await fetch(`${baseUrl}/api/revalidate`, {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+              'x-revalidate-secret': process.env.REVALIDATE_SECRET || '',
+            },
+            body: JSON.stringify({ paths, tags }),
+            cache: 'no-store',
+          })
+
+          console.log(`✅ Requested revalidation for media delete: ${doc.filename || 'unknown'}`)
         } catch (error) {
           console.error('❌ Error revalidating media routes:', error)
         }

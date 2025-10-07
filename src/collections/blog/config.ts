@@ -1,13 +1,13 @@
-import type { CollectionConfig } from 'payload'
-import { slugField } from '@/fields/slug'
-import { ContentWithMedia } from '@/blocks/ContentWithMedia/config'
-import { DotSeparator } from '@/blocks/DotSeparator/config'
-import { BlocksFeature, FixedToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
-import { TableOfContents } from '@/blocks/TableOfContents/config'
-import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
-import { generatePreviewPath } from '@/utilities/generatePreviewPath'
-import { revalidateBlog } from './hooks/revalidateBlog'
-
+import type { CollectionConfig } from 'payload';
+import { ContentWithMedia } from '@/blocks/ContentWithMedia/config';
+import { DotSeparator } from '@/blocks/DotSeparator/config';
+import { TableOfContents } from '@/blocks/TableOfContents/config';
+import { BlocksFeature, lexicalEditor, FixedToolbarFeature } from '@payloadcms/richtext-lexical';
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
+import { generatePreviewPath } from '@/utilities/generatePreviewPath';
+import { revalidateBlog } from './hooks/revalidateBlog';
+import { SEOFields } from '@/fields/seoFields';
+import { slugField } from '@/fields/slugField';
 
 export const BLOG_CATEGORY_OPTIONS = [
   { label: 'AI', value: 'AI' },
@@ -23,15 +23,13 @@ export const BLOG_CATEGORY_OPTIONS = [
   { label: 'Growth', value: 'Growth' },
   { label: 'Retention', value: 'Retention' },
   { label: 'Product Thinking', value: 'Product Thinking' },
-]
+];
 
 const Blog: CollectionConfig = {
   slug: 'blog',
   versions: {
     drafts: {
-      autosave: {
-        interval: 100,
-      },
+      autosave: { interval: 100 },
       schedulePublish: true,
     },
     maxPerDoc: 100,
@@ -43,16 +41,10 @@ const Blog: CollectionConfig = {
       url: ({ data, req }) =>
         generatePreviewPath({
           collection: 'blog',
-          slug: typeof data?.slug === 'string' ? data.slug : '',
+          slug: data?.slug || '',
           req,
         }),
     },
-    preview: (data, { req }) =>
-      generatePreviewPath({
-        collection: 'blog',
-        slug: typeof data?.slug === 'string' ? data.slug : '',
-        req,
-      }),
   },
   access: {
     read: authenticatedOrPublished,
@@ -62,9 +54,7 @@ const Blog: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
-      admin: {
-        description: 'Blog post title - slug will update automatically',
-      },
+      admin: { description: 'Blog post title' },
     },
     {
       type: 'tabs',
@@ -72,11 +62,7 @@ const Blog: CollectionConfig = {
         {
           label: 'Content',
           fields: [
-            {
-              name: 'featuredImage',
-              type: 'upload',
-              relationTo: 'media',
-            },
+            { name: 'featuredImage', type: 'upload', relationTo: 'media' },
             {
               name: 'type',
               label: 'Post Type',
@@ -93,19 +79,15 @@ const Blog: CollectionConfig = {
               type: 'textarea',
               required: true,
               maxLength: 200,
-              admin: {
-                description: 'Brief summary of the blog post',
-              },
+              admin: { description: 'Brief summary of the blog post' },
             },
             {
               name: 'categories',
               label: 'Categories',
               type: 'select',
               hasMany: true,
-              admin: {
-                description: 'Choose one or more categories for this post',
-              },
               options: BLOG_CATEGORY_OPTIONS,
+              admin: { description: 'Choose one or more categories for this post' },
             },
             {
               name: 'videoSource',
@@ -117,16 +99,11 @@ const Blog: CollectionConfig = {
               ],
               admin: {
                 description: 'Choose how the video is provided',
-                condition: (data, siblingData) => {
-                  const source = siblingData ?? data
-                  return source?.type === 'video'
-                },
+                condition: (data: any) => data?.type === 'video',
               },
-              validate: (value: unknown, { siblingData }: { siblingData?: any }): true | string => {
-                if (siblingData?.type === 'video') {
-                  return value ? true : 'Video Source is required for Video posts'
-                }
-                return true
+              validate: (value: unknown, { siblingData }: { siblingData: any }) => {
+                if (siblingData?.type === 'video') return value ? true : 'Video Source is required for Video posts';
+                return true;
               },
             },
             {
@@ -135,17 +112,12 @@ const Blog: CollectionConfig = {
               type: 'upload',
               relationTo: 'media',
               admin: {
-                description: 'Upload a video file. Use a featured image as the poster/thumbnail.',
-                condition: (data, siblingData) => {
-                  const source = siblingData ?? data
-                  return source?.type === 'video' && source?.videoSource === 'upload'
-                },
+                description: 'Upload a video file. Use a featured image as poster/thumbnail.',
+                condition: (data: any) => data?.type === 'video' && data?.videoSource === 'upload',
               },
-              validate: (value: unknown, { siblingData }: { siblingData?: any }): true | string => {
-                if (siblingData?.type === 'video' && siblingData?.videoSource === 'upload') {
-                  return value ? true : 'Please upload a video file or switch to Embed'
-                }
-                return true
+              validate: (value: unknown, { siblingData }: { siblingData: any }) => {
+                if (siblingData?.type === 'video' && siblingData?.videoSource === 'upload') return value ? true : 'Please upload a video file or switch to Embed';
+                return true;
               },
             },
             {
@@ -154,22 +126,14 @@ const Blog: CollectionConfig = {
               type: 'text',
               admin: {
                 description: 'Paste a YouTube/Vimeo/Wistia URL',
-                condition: (data, siblingData) => {
-                  const source = siblingData ?? data
-                  return source?.type === 'video' && source?.videoSource === 'embed'
-                },
+                condition: (data: any) => data?.type === 'video' && data?.videoSource === 'embed',
               },
-              validate: (value: unknown, { siblingData }: { siblingData?: any }): true | string => {
+              validate: (value: unknown, { siblingData }: { siblingData: any }) => {
                 if (siblingData?.type === 'video' && siblingData?.videoSource === 'embed') {
-                  if (!value || typeof value !== 'string') return 'Embed URL is required'
-                  try {
-                    new URL(value as string)
-                    return true
-                  } catch {
-                    return 'Please enter a valid URL'
-                  }
+                  if (!value || typeof value !== 'string') return 'Embed URL is required';
+                  try { new URL(value); return true; } catch { return 'Please enter a valid URL'; }
                 }
-                return true
+                return true;
               },
             },
             {
@@ -178,59 +142,17 @@ const Blog: CollectionConfig = {
               editor: lexicalEditor({
                 features: ({ defaultFeatures }) => [
                   ...defaultFeatures,
-                  BlocksFeature({
-                    blocks: [ContentWithMedia, TableOfContents, DotSeparator],
-                  }),
+                  BlocksFeature({ blocks: [ContentWithMedia, TableOfContents, DotSeparator] }),
+                  FixedToolbarFeature(),
                 ],
-              })}
+              }),
+            },
           ],
         },
         {
           name: 'meta',
           label: 'SEO',
-          fields: [
-            {
-              name: 'title',
-              type: 'text',
-              label: 'Meta Title',
-              admin: {
-                description: 'Title that appears in search results (recommended: 50-60 characters)',
-              },
-            },
-            {
-              name: 'description',
-              type: 'textarea',
-              label: 'Meta Description',
-              maxLength: 160,
-              admin: {
-                description: 'Description that appears in search results (recommended: 150-160 characters)',
-              },
-            },
-            {
-              name: 'image',
-              type: 'upload',
-              label: 'Meta Image',
-              relationTo: 'media',
-              admin: {
-                description: 'Image for search results and social sharing (recommended: 1200x630px)',
-              },
-            },
-            {
-              name: 'keywords',
-              type: 'array',
-              label: 'Keywords',
-              admin: {
-                description: 'Relevant keywords for search engines',
-              },
-              fields: [
-                {
-                  name: 'keyword',
-                  type: 'text',
-                },
-              ],
-            },
-            
-          ],
+          fields: SEOFields,
         },
       ],
     },
@@ -239,82 +161,41 @@ const Blog: CollectionConfig = {
       type: 'relationship',
       relationTo: 'users',
       required: true,
-      admin: {
-        readOnly: true,
-        description: 'Automatically set to the current user',
-        position: 'sidebar',
-      },
+      admin: { readOnly: true, position: 'sidebar', description: 'Automatically set to current user' },
     },
     {
       name: 'publishedAt',
       type: 'date',
-      admin: {
-        description: 'When this post should be published',
-        position: 'sidebar',
-        date: {
-          pickerAppearance: 'dayAndTime',
-        },
-      },
+      admin: { position: 'sidebar', date: { pickerAppearance: 'dayAndTime' } },
     },
     {
       name: 'isFeatured',
       label: 'Feature this post',
       type: 'checkbox',
       defaultValue: false,
-      admin: {
-        position: 'sidebar',
-        description: 'If enabled, this post can be shown in the Featured section (max 4 posts)',
-      },
-      validate: async (
-        value: unknown,
-        options: any
-      ): Promise<true | string> => {
-        const { req, id } = options || {}
-        if (!value) return true
-        try {
-          const constraints: any[] = [{ isFeatured: { equals: true } }]
-          if (id) constraints.push({ id: { not_equals: id } })
-          const result = await req.payload.find({
-            collection: 'blog',
-            where: { and: constraints },
-            limit: 1,
-          })
-          const total = result?.totalDocs ?? 0
-          if (total >= 4) {
-            return 'You can only feature up to 4 posts. Unfeature another post first.'
-          }
-          return true
-        } catch (e) {
-          return true
-        }
+      admin: { position: 'sidebar', description: 'Max 4 posts can be featured' },
+      validate: async (value, { req, id }) => {
+        if (!value) return true;
+        const constraints: any[] = [{ isFeatured: { equals: true } }];
+        if (id) constraints.push({ id: { not_equals: id } });
+        const result = await req.payload.find({ collection: 'blog', where: { and: constraints }, limit: 1 });
+        if ((result?.totalDocs ?? 0) >= 4) return 'You can only feature up to 4 posts. Unfeature another first.';
+        return true;
       },
     },
-    
-    // Add slug field system - returns [slugField, slugLockField]
-    ...slugField('title'),
+    // Slug field with scoped uniqueness to this collection
+    ...slugField('title', 'blog'),
   ],
   hooks: {
     beforeChange: [
-      ({ data, req }: { data: any; req: any }) => {
-        if (req?.user && data && !data.author) {
-          data.author = req.user.id
-        }
-        return data
+      ({ data, req }) => {
+        if (req?.user && data && !data.author) data.author = req.user.id;
+        return data;
       },
     ],
-    afterChange: [
-      ({ doc, operation, req }: { doc: any; operation: 'create' | 'update' | 'delete'; req: any }) => {
-        // Revalidate routes when blog content changes
-        revalidateBlog(doc, operation)
-      },
-    ],
-    afterDelete: [
-      ({ doc, req }: { doc: any; req: any }) => {
-        // Revalidate routes when blog is deleted
-        revalidateBlog(doc, 'delete')
-      },
-    ],
+    afterChange: [({ doc, operation }) => revalidateBlog(doc, operation)],
+    afterDelete: [({ doc }) => revalidateBlog(doc, 'delete')],
   },
-}
+};
 
-export default Blog 
+export default Blog;
