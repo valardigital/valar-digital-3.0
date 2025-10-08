@@ -148,10 +148,10 @@ export default function FormSection() {
               <h6 className="font-medium mb-6">What clients say:</h6>
               <div className="border-l-2 border-white/50 pl-6">
                 <blockquote className="mb-4">
-                  "The growth report identified key issues we never saw before. After implementing the recommendations, our sales increased by 37% in just two months."
+                  "Shashi and his team have genuinely been a catalyst for our business. When we started working with them, our conversion rate sat at 2.5%. And after doing CRO and development work on our website for the last two years. It now sits at 5%. I can genuinely say they are a fantastic partner and will help transform your e-commerce business."
                 </blockquote>
                 <p >
-                  — Sarah T., Fashion Boutique
+                  — Jack Rubin, Co-Founder, Purdy & Figg
                 </p>
               </div>
             </div>
