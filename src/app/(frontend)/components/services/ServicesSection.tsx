@@ -36,7 +36,7 @@ export default function ServicesSection() {
                             "Shopify focused designs"
                         ]}
                         buttonText="Find out more"
-                        buttonHref="/serviceDetails"
+                        buttonHref="/services/shopify-design"
                     />
                     <ServiceCard
                         image={serviceImg2}
