@@ -59,3 +59,20 @@ Notes:
 - The `media` collection accepts both images and videos (e.g., `video/*`).
 - Deleting a media item from the Payload Admin will delete the corresponding object from S3.
 - To render S3-hosted images, `next.config.ts` includes `images.remotePatterns`. If you use a custom domain (e.g., CloudFront), set `NEXT_PUBLIC_S3_PUBLIC_HOSTNAME` accordingly and rebuild.
+
+## Email via AWS SES
+
+The contact form posts to `src/app/(frontend)/api/contact/route.ts`, which sends an email via AWS SES to `shashi@valardigital.com` and `tushar@valardigital.com` and sets `Reply-To` to the submitter's address.
+
+Configure the following environment variables (e.g., in `.env.local`):
+
+```
+AWS_SES_REGION=us-east-1
+AWS_ACCESS_KEY_ID=...           # Key with SES permissions
+AWS_SECRET_ACCESS_KEY=...       # Secret for the above key
+AWS_SES_SOURCE_EMAIL=...        # Verified SES identity to send from
+```
+
+Notes:
+- Ensure `AWS_SES_SOURCE_EMAIL` is verified in SES in the specified region.
+- In SES sandbox, all recipients must be verified.
