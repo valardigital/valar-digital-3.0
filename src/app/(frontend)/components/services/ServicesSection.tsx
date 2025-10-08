@@ -50,7 +50,7 @@ export default function ServicesSection() {
                             "Speed optimization"
                         ]}
                         buttonText="Find out more"
-                        buttonHref="#"
+                        buttonHref="/services/shopify-development"
                     />
                     <ServiceCard
                         image={serviceImg3}
@@ -64,7 +64,7 @@ export default function ServicesSection() {
                             "Tailored to your workflows"
                         ]}
                         buttonText="Find out more"
-                        buttonHref="#"
+                        buttonHref="/services/shopify-apps"
                     />
                     <ServiceCard
                         image={serviceImg4}
@@ -78,7 +78,7 @@ export default function ServicesSection() {
                             "Full store setup on Shopify"
                         ]}
                         buttonText="Find out more"
-                        buttonHref="#"
+                        buttonHref="/services/shopify-migration"
                     />
                     <ServiceCard
                         image={serviceImg5}
@@ -92,7 +92,7 @@ export default function ServicesSection() {
                             "Conversion-focused strategy"
                         ]}
                         buttonText="Find out more"
-                        buttonHref="#"
+                        buttonHref="/services/shopify-marketing"
                     />
                     <ServiceCard
                         image={serviceImg6}
@@ -106,7 +106,7 @@ export default function ServicesSection() {
                             "UX & CRO recommendations"
                         ]}
                         buttonText="Find out more"
-                        buttonHref="#"
+                        buttonHref="/services/ecommerce-audit"
                     />
                     <ServiceCard
                         image={serviceImg7}
@@ -120,7 +120,7 @@ export default function ServicesSection() {
                             "CRO strategy & consulting"
                         ]}
                         buttonText="Find out more"
-                        buttonHref="#"
+                        buttonHref="/services/conversion-rate-optimization"
                     />
                     <ServiceCard
                         image={serviceImg8}
@@ -134,7 +134,7 @@ export default function ServicesSection() {
                             "React / Gatsby / Next.js"
                         ]}
                         buttonText="Find out more"
-                        buttonHref="#"
+                        buttonHref="/services/headless-commerce"
                     />
                     <ServiceCard
                         image={serviceImg9}
@@ -147,7 +147,7 @@ export default function ServicesSection() {
                             "Real-user performance testing",
                         ]}
                         buttonText="Find out more"
-                        buttonHref="#"
+                        buttonHref="/services/integration-services"
                     />
                     <ServiceCard
                         image={serviceImg3}
@@ -161,7 +161,7 @@ export default function ServicesSection() {
                             "End-to-end setup & support"
                         ]}
                         buttonText="Find out more"
-                        buttonHref="#"
+                        buttonHref="/services/creative-and-branding"
                     />
                     <ServiceCard
                         image={serviceImg10}

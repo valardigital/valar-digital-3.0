@@ -14,7 +14,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const isServiceDetailsPage = pathname === '/services/shopify-design';
+  const isServiceDetailsPage = pathname?.startsWith('/services/');
 
   const getTextColor = (linkPath: string) => {
     if (isServiceDetailsPage) return 'text-white';
