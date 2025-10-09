@@ -19,6 +19,7 @@
     "@payloadcms/storage-s3": "^3.51.0",
     "@payloadcms/ui": "^3.51.0",
     "@radix-ui/react-slot": "^1.2.3",
+    "@sendgrid/mail": "^8.1.6",
     "@tailwindcss/typography": "^0.5.16",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
