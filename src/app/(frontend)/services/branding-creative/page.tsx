@@ -3,7 +3,15 @@ import HeroBanner from '../../components/serviceDetails/HeroBanner';
 import StepByStepSection from '../../components/serviceDetails/ProcessStepSection';
 import TestimonialSection from '../../components/serviceDetails/TestimonialSection';
 import CTASection from '../../components/shared/CTASection';
+import { Metadata } from 'next';
 
+export const metadata: Metadata = {
+  title: 'Branding & Creative Services for E-Commerce Growth',
+  description: 'Build a unique brand identity with our branding, creative direction, copywriting, and style guides to engage customers and drive e-commerce growth.',
+  alternates: {
+    canonical: '/services/branding-creative',
+  },
+};
 
 export default function ServiceDetails() {
 

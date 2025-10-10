@@ -27,7 +27,7 @@ export default function ProcessStepSection({
     return (
         <section className="bg-white">
             <div className="container mx-auto text-text-dark py-8 md:py-16 px-4 text-center">
-                <h1 className="text-[28px] md:text-5xl font-medium mb-4 md:mb-6 leading-[1.2]" dangerouslySetInnerHTML={{ __html: heading }} />
+                <h2 className="text-[28px] md:text-5xl font-medium mb-4 md:mb-6 leading-[1.2]" dangerouslySetInnerHTML={{ __html: heading }} />
                 <p className="tracking-[0.04rem] leading-[1.5]" dangerouslySetInnerHTML={{ __html: description }} />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mt-6 md:mt-8">

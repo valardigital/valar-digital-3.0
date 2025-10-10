@@ -3,7 +3,15 @@ import HeroBanner from '../../components/serviceDetails/HeroBanner';
 import StepByStepSection from '../../components/serviceDetails/ProcessStepSection';
 import TestimonialSection from '../../components/serviceDetails/TestimonialSection';
 import CTASection from '../../components/shared/CTASection';
+import { Metadata } from 'next';
 
+export const metadata: Metadata = {
+  title: 'Shopify Integration Services for Seamless Operations',
+  description: 'Connect your entire tech stack with seamless integrations. From ERP and CRM to SaaS apps, we deliver smooth, scalable e-commerce connectivity solutions.',
+  alternates: {
+    canonical: '/services/integration',
+  },
+};
 
 export default function ServiceDetails() {
 
