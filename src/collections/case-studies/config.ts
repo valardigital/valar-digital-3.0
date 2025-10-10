@@ -15,7 +15,7 @@ import { BlocksFeature, FixedToolbarFeature, lexicalEditor } from '@payloadcms/r
 import { TableOfContents } from '@/blocks/TableOfContents/config'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
-import { revalidateCaseStudy } from './hooks/revalidateCaseStudy'
+import { revalidateCaseStudy } from '@/collections/case-studies/hooks/revalidateCaseStudy'
 import { SEOFields } from '@/fields/seoFields'
 
 const CaseStudy: CollectionConfig = {
