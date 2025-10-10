@@ -9,11 +9,21 @@ type Props = {
 } & OutcomeSectionProps
 
 export const OutcomeSection: React.FC<Props> = (block) => {
+  const getBackgroundClass = (color: string) => {
+    switch (color) {
+      case 'muted':
+        return 'bg-background-muted'
+      case 'white':
+      default:
+        return 'bg-white'
+    }
+  }
+
   return (
-    <section className="bg-white">
+    <section className={getBackgroundClass(block.backgroundColor || 'white')}>
       <div className="container mx-auto py-8 md:py-16 px-4 md:px-0 space-y-8 md:space-y-12">
         <div className="space-y-4">
-          <h2 className="uppercase text-text-dark text-2xl md:text-[32px] font-medium">Outcome</h2>
+          <h2 className="text-text-dark text-2xl md:text-[32px] font-medium">Outcome</h2>
           
           <div className={`text-text-light tracking-[0.04rem] leading-[1.6] ${styles.richTextContainer}`}>
             {typeof block.summary === 'object' && (block.summary as any)?.root ? (
@@ -52,7 +62,7 @@ export const OutcomeSection: React.FC<Props> = (block) => {
         )}
 
         <div className="space-y-4">
-          <h2 className="uppercase text-text-dark text-2xl md:text-[32px] font-medium">Key Takeaways</h2>
+          <h2 className="text-text-dark text-2xl md:text-[32px] font-medium">Key Takeaways</h2>
           <div className={`text-text-dark tracking-[0.04rem] leading-[1.6] ${styles.richTextContainer}`}>
             {typeof block.takeaways === 'object' && (block.takeaways as any)?.root ? (
               <RichText data={block.takeaways as unknown as SerializedEditorState} />

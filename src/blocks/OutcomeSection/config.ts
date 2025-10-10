@@ -10,6 +10,19 @@ export const OutcomeSection: Block = {
   },
   fields: [
     {
+      name: 'backgroundColor',
+      type: 'select',
+      required: true,
+      defaultValue: 'white',
+      admin: {
+        description: 'Background color for the outcome section',
+      },
+      options: [
+        { label: 'White', value: 'white' },
+        { label: 'Muted', value: 'muted' },
+      ],
+    },
+    {
       name: 'summary',
       type: 'richText',
       editor: lexicalEditor(),

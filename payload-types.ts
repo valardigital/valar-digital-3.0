@@ -728,6 +728,10 @@ export interface ProcessDetailsSection {
  */
 export interface OutcomeSection {
   /**
+   * Background color for the outcome section
+   */
+  backgroundColor: 'white' | 'muted';
+  /**
    * Summary of the overall outcome
    */
   summary: {
@@ -1291,6 +1295,7 @@ export interface ProcessDetailsSectionSelect<T extends boolean = true> {
  * via the `definition` "OutcomeSection_select".
  */
 export interface OutcomeSectionSelect<T extends boolean = true> {
+  backgroundColor?: T;
   summary?: T;
   keyResults?:
     | T
