@@ -752,35 +752,37 @@ export interface OutcomeSection {
   /**
    * Key results and metrics
    */
-  keyResults: {
-    /**
-     * Result value (e.g., "23%", "5x")
-     */
-    percentage: string;
-    /**
-     * Result label (e.g., "reduction in churn")
-     */
-    metric: string;
-    /**
-     * Detailed description of the result
-     */
-    description: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
+  keyResults?:
+    | {
+        /**
+         * Result value (e.g., "23%", "5x")
+         */
+        percentage: string;
+        /**
+         * Result label (e.g., "reduction in churn")
+         */
+        metric: string;
+        /**
+         * Detailed description of the result
+         */
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
           [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
-    id?: string | null;
-  }[];
+        };
+        id?: string | null;
+      }[]
+    | null;
   /**
    * Key takeaways and lessons learned
    */

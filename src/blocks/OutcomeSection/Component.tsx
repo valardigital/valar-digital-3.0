@@ -53,7 +53,7 @@ export const OutcomeSection: React.FC<Props> = (block) => {
                     )}
                   </div>
                 </div>
-                {index < (block.keyResults.length || 0) - 1 && (
+                {index < (block.keyResults?.length || 0) - 1 && (
                   <div className="my-[28px] md:mx-8 relative after:content-[''] after:absolute after:left-0 after:right-0 md:after:top-0 md:after:bottom-0 after:h-[1px] md:after:h-full after:w-full md:after:w-[1px] after:bg-border" />
                 )}
               </React.Fragment>

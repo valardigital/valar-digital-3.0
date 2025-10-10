@@ -70,7 +70,6 @@ export const OutcomeSection: Block = {
     {
       name: 'keyResults',
       type: 'array',
-      required: true,
       admin: {
         description: 'Key results and metrics',
       },
