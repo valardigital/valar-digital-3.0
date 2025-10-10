@@ -38,17 +38,14 @@ const CaseStudiesShowcase = memo(() => {
             <div className='bg-gradient-to-b from-transparent md:from-50% from-20% to-black/40 to-100% md:rounded-br-3xl rounded-tl-3xl  absolute top-0 bottom-0 left-0 right-0' />
             <div className="absolute bottom-8 left-6 right-6 flex flex-col md:flex-row items-center justify-between tracking-[0.04rem] gap-4 md:gap-6 text-white font-medium text-[28px] md:text-[32px]">
               <div className='w-full'>
-                <p>+22%</p>
-                <p className='font-normal text-base leading-5 lg:whitespace-nowrap'>Retention rate increase</p>
+                <p>2x</p>
+                <p className='font-normal text-base leading-5 lg:whitespace-nowrap'>Growth in conversion rates</p>
               </div>
               <div className='w-full'>
-                <p>+18%</p>
-                <p className='font-normal text-base leading-5 lg:whitespace-nowrap'>More product swaps</p>
+                <p>2%</p>
+                <p className='font-normal text-base leading-5 lg:whitespace-nowrap'>Improved GA4 tracking accuracy</p>
               </div>
-              <div className='w-full'>
-                <p>&lt;60 days</p>
-                <p className='font-normal text-base leading-5 lg:whitespace-nowrap'>To measurable impact</p>
-              </div>
+
             </div>
 
           </div>
@@ -57,18 +54,18 @@ const CaseStudiesShowcase = memo(() => {
             <div className='tracking-[0.04rem] mb-6 md:mb-4'>
               <h6 className="font-medium text-text-dark mb-1 md:mb-2">The Problem</h6>
               <p className="text-text-light">
-                Customers struggled to manage their subscriptions. Skipping, swapping, or editing felt clunky – and retention was dropping fast.
+              Purdy & Figg (P&F), a fast-growing eco-friendly cleaning brand on Shopify Plus, faced high bounce rates and low conversions despite steady traffic, compounded by inconsistent user behavior data between GA4 and Shopify.
               </p>
             </div>
             <div className='tracking-[0.04rem] mb-6 md:mb-4'>
               <h6 className="font-medium text-text-dark mb-1 md:mb-2">What We Did</h6>
               <p className="text-text-light">
-                We redesigned the entire subscription flow with a clean, branded Ul. We simplified the logic, improved speed, and made every action friction-free.              </p>
+              We fixed user data discrepancies for accurate insights, redesigned the storefront with stronger CTAs and better readability, and validated changes through A/B testing.</p>
             </div>
             <div className='tracking-[0.04rem] mb-4 md:mb-6'>
               <h6 className="font-medium text-text-dark mb-1 md:mb-2">Why It Worked</h6>
               <p className="text-text-light">
-                The new flow made managing a subscription feel easy, even enjoyable. Usage increased, and customers started sticking around longer.              </p>
+              The new Shopify experience delivered a smoother customer journey and boosted sales. Redesigning the storefront and key pages improved conversions, while returning visitor engagement strengthened brand loyalty.</p>
             </div>
             <Link href="/case-studies/purdy-figg-conversion-optimization">
               <Button variant="link" className='text-primary flex items-center gap-1 p-0 font-normal h-max hover:no-underline hover:font-medium'>
@@ -99,20 +96,20 @@ const CaseStudiesShowcase = memo(() => {
             <div className='tracking-[0.04rem] mb-6 md:mb-4'>
               <h6 className="font-medium text-text-dark mb-1 md:mb-2">The Problem</h6>
               <p className="text-text-light">
-                Zima had no structured post-purchase strategy — leaving upsell revenue on the table and missing key retention moments.
+              Zimadental, a dental and oral care brand, faced a collapsing Shopify Plus store riddled with broken code, conflicting fixes, and technical instability. Years of patchwork left it fragile, halting CRO testing, wasting marketing spend, and stalling growth.
               </p>
             </div>
             <div className='tracking-[0.04rem] mb-6 md:mb-4'>
               <h6 className="font-medium text-text-dark mb-1 md:mb-2">What We Did</h6>
               <p className="text-text-light">
-                We implemented custom post-purchase flows using Upsell Master, paired with real-time A/B testing to find what actually converts. Offers were personalized, UX was optimized, and testing was continuous.              </p>
+              ValarDigital rebuilt Zimadental’s Shopify Plus store from the ground up, removing technical debt, streamlining vendor workflows, and implementing a structured CRO testing program.</p>
             </div>
             <div className='tracking-[0.04rem] mb-4 md:mb-6'>
               <h6 className="font-medium text-text-dark mb-1 md:mb-2">Why It Worked</h6>
               <p className="text-text-light">
-                We replaced guesswork with data, and quick wins turned into sustained AOV growth. Revenue climbed — and so did customer satisfaction.              </p>
+              The rebuilt Shopify Plus ecosystem delivered measurable results across all storefronts with stability, improved conversions, and scalability—all powered by a clean technical foundation and integrated team execution.</p>
             </div>
-            <Link href="/case-studies/how-we-helped-purdy-figg-cut-subscription-churn-by-23">
+            <Link href="/case-studies/zimadental-shopify-plus-rebuild">
               <Button variant="link" className='text-primary flex items-center gap-1 p-0 font-normal h-max hover:no-underline hover:font-medium'>
                 See Full Case Study
                 <svg xmlns="http://www.w3.org/2000/svg" className="size-5 mt-[2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -133,17 +130,17 @@ const CaseStudiesShowcase = memo(() => {
             <div className='bg-gradient-to-b from-transparent md:from-50% from-20% to-black/50 to-100% md:rounded-bl-3xl rounded-tr-3xl absolute top-0 bottom-0 left-0 right-0' />
             <div className="absolute bottom-8 left-6 right-6 flex flex-col md:flex-row items-center justify-between tracking-[0.04rem] gap-4 md:gap-6 text-white font-medium text-[28px] md:text-[32px]">
               <div className='w-full'>
-                <p>+16%</p>
-                <p className='font-normal text-base leading-5'>AOV increase in<br className='hidden md:block'/> 30 days</p>
+                <p>32%</p>
+                <p className='font-normal text-base leading-5'>increase in conversion rate<br className='hidden md:block'/></p>
+              </div>
+              {/* <div className='w-full'>
+                <p>&nbsp;</p>
+                <p className='font-normal text-base leading-5'>Near-perfect site uptime-<br className='hidden md:block' /></p>
               </div>
               <div className='w-full'>
-                <p>+9%</p>
-                <p className='font-normal text-base leading-5'>Boost in post-<br className='hidden md:block' />purchase conversion</p>
-              </div>
-              <div className='w-full'>
-                <p>100%</p>
-                <p className='font-normal text-base leading-5'>Test coverage on all<br className='hidden md:block' /> key offers</p>
-              </div>
+                <p>&nbsp;</p>
+                <p className='font-normal text-base leading-5'>Faster development cycles<br className='hidden md:block' /></p>
+              </div> */}
             </div>
           </div>
           
