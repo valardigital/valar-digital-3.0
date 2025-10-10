@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import sgMail from '@sendgrid/mail';
 
-// const RECIPIENTS = ['shashi@valardigital.com', 'tushar@valardigital.com'];
-const RECIPIENTS = ['utkarsh@valardigital.com'];
+const RECIPIENTS = ['shashi@valardigital.com', 'tushar@valardigital.com'];
+// const RECIPIENTS = ['utkarsh@valardigital.com'];
 
 export async function POST(req: NextRequest) {
   try {
