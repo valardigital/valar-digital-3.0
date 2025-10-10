@@ -13,15 +13,15 @@ const Footer = () => {
   const pathname = usePathname();
   const services = [
     { name: 'Shopify Design', href: '/services/shopify-design' },
-    { name: 'Ecommerce Audit', href: '/services/ecommerce-audit' },
+    { name: 'Ecommerce Audit', href: '/services/shopify-audit' },
     { name: 'Shopify Development', href: '/services/shopify-development' },
     { name: 'Conversion Rate Optimization', href: '/services/conversion-rate-optimization' },
-    { name: 'Shopify Apps', href: '/services/shopify-apps' },
-    { name: 'Integration Services', href: '/services/integration-services' },
+    { name: 'Shopify Apps', href: '/services/shopify-app-development' },
+    { name: 'Integration Services', href: '/services/integration' },
     { name: 'Shopify Migration', href: '/services/shopify-migration' },
     { name: 'Creative-and-Branding', href: '/services/creative-and-branding' },
     { name: 'Shopify Marketing', href: '/services/shopify-marketing' },
-    { name: 'Headless Commerce', href: '/services/headless-commerce' },
+    { name: 'Headless Commerce', href: '/services/headless-commerce-development' },
   ];
 
   return (

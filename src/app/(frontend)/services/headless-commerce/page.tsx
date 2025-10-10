@@ -1,3 +1,12 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Headless Commerce Development Services',
+  description: 'Future-proof your store with headless commerce. We build fast, flexible, and scalable JAMStack websites powered by Shopify Plus and Contentful CMS.',
+  alternates: {
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/services/headless-commerce-development',
+  },
+};
 import FeatureSection from '../../components/serviceDetails/FeatureSection';
 import HeroBanner from '../../components/serviceDetails/HeroBanner';
 import StepByStepSection from '../../components/serviceDetails/ProcessStepSection';

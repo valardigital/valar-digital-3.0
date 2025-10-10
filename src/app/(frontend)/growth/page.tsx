@@ -1,3 +1,12 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Get Your Free Shopify Growth Report',
+  description: 'Discover your Shopify store’s potential with a free growth report. Get insights on UX, CRO, site speed, and actionable tactics to boost revenue.',
+  alternates: {
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/growth',
+  },
+};
 import React from 'react';
 import HeroBanner from '../components/growth/HeroBanner';
 import StatsSection from '../components/growth/StatsSection';

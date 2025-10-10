@@ -1,3 +1,12 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Shopify Development Services for Fast, Scalable Stores',
+  description: 'Build a high-performing Shopify store with custom themes, integrations, and optimized performance to boost conversions and scale your business.',
+  alternates: {
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/services/shopify-design',
+  },
+};
 import FeatureSection from '../../components/serviceDetails/FeatureSection';
 import HeroBanner from '../../components/serviceDetails/HeroBanner';
 import StepByStepSection from '../../components/serviceDetails/ProcessStepSection';

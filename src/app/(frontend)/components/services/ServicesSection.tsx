@@ -64,7 +64,7 @@ export default function ServicesSection() {
                             "Workflow automation tools"
                         ]}
                         buttonText="Find out more"
-                        buttonHref="/services/shopify-apps"
+                        buttonHref="/services/shopify-app-development"
                     />
                     <ServiceCard
                         image={serviceImg4}
@@ -106,7 +106,7 @@ export default function ServicesSection() {
                             "UX & CRO Recommendations"
                         ]}
                         buttonText="Find out more"
-                        buttonHref="/services/ecommerce-audit"
+                        buttonHref="/services/shopify-audit"
                     />
                     <ServiceCard
                         image={serviceImg7}
@@ -135,12 +135,13 @@ export default function ServicesSection() {
                             "React / Gatsby / Next.js Frontends"
                         ]}
                         buttonText="Find out more"
-                        buttonHref="/services/headless-commerce"
+                        buttonHref="/services/headless-commerce-development
+"
                     />
                     <ServiceCard
                         image={serviceImg9}
                         imageAlt="Shopify design mockups"
-                        title="Speed Optimization"
+                        title="Website Speed Optimization"
                         description="We design and optimize high-performing Shopify Plus websites that are lightweight and have faster load times. Faster websites not only improve the customer experience but also boost engagement and conversions. Our team ensures your Shopify store is fast, responsive, and built to excel."
                         features={[
                             "Shopify Plus Speed Optimization",
@@ -149,7 +150,7 @@ export default function ServicesSection() {
                             "Performance Audits & Fixes",
                         ]}
                         buttonText="Find out more"
-                        buttonHref="/services/integration-services"
+                        buttonHref="/services/website-speed-optimization"
                     />
                     <ServiceCard
                         image={serviceImg3}
@@ -163,7 +164,7 @@ export default function ServicesSection() {
                             "End-to-end setup, support, and maintenance"
                         ]}
                         buttonText="Find out more"
-                        buttonHref="/services/creative-and-branding"
+                        buttonHref="/services/integration"
                     />
                     <ServiceCard
                         image={serviceImg10}
@@ -177,7 +178,7 @@ export default function ServicesSection() {
                             "Brand Guidelines & Style Systems"
                         ]}
                         buttonText="Find out more"
-                        buttonHref="#"
+                        buttonHref="/services/branding-creative"
                     />
                 </div>
             </div>
