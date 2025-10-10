@@ -335,6 +335,7 @@ export interface CaseStudy {
         | ContentWithMedia
         | TableOfContents
         | DotSeparator
+        | RichTextSection
       )[]
     | null;
   meta?: {
@@ -761,6 +762,30 @@ export interface DotSeparator {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextSection".
+ */
+export interface RichTextSection {
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'richTextSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-jobs".
  */
 export interface PayloadJob {
@@ -1023,6 +1048,7 @@ export interface CaseStudySelect<T extends boolean = true> {
         contentWithMedia?: T | ContentWithMediaSelect<T>;
         tableOfContents?: T | TableOfContentsSelect<T>;
         dotSeparator?: T | DotSeparatorSelect<T>;
+        richTextSection?: T | RichTextSectionSelect<T>;
       };
   meta?:
     | T
@@ -1210,6 +1236,15 @@ export interface TableOfContentsSelect<T extends boolean = true> {
  * via the `definition` "DotSeparator_select".
  */
 export interface DotSeparatorSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextSection_select".
+ */
+export interface RichTextSectionSelect<T extends boolean = true> {
+  content?: T;
   id?: T;
   blockName?: T;
 }

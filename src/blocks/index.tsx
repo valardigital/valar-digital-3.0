@@ -9,6 +9,7 @@ import { ProcessSection } from '@/blocks/ProcessSection/Component'
 import { BeforeAfterSection } from '@/blocks/BeforeAfterSection/Component'
 import { ProcessDetailsSection } from '@/blocks/ProcessDetailsSection/Component'
 import { OutcomeSection } from '@/blocks/OutcomeSection/Component'
+import { RichTextSection } from '@/blocks/RichTextSection/Component'
 import type { 
   ContentWithMedia as ContentWithMediaType, 
   TableOfContents as TableOfContentsType,
@@ -34,6 +35,7 @@ const blockComponents = {
   beforeAfterSection: BeforeAfterSection,
   processDetailsSection: ProcessDetailsSection,
   outcomeSection: OutcomeSection,
+  richTextSection: RichTextSection,
 }
 
 export const RenderBlocks: React.FC<{
