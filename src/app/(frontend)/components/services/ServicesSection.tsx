@@ -28,12 +28,12 @@ export default function ServicesSection() {
                         image={serviceImg1}
                         imageAlt="Shopify design mockups"
                         title="Shopify Design"
-                        description="We create clean, high-converting designs built for ecommerce. Every layout is tailored for clarity, speed, and mobile-first shopping."
+                        description="We design professional Shopify stores that convert visitors into loyal customers. Our designs combine stunning visuals with proven UX principles. From sitemaps to pixel-perfect prototypes for desktop and mobile, our focus is on clarity, usability, and high-converting layouts."
                         features={[
-                            "UX/UI Designs",
-                            "Mobile-optimized layouts",
-                            "High-converting PDPs",
-                            "Shopify focused designs"
+                            "UX/UI design & research",
+                            "Custom Shopify layouts",
+                            "Mobile-first responsive design",
+                            "Conversion-focused creative direction"
                         ]}
                         buttonText="Find out more"
                         buttonHref="/services/shopify-design"
@@ -42,12 +42,12 @@ export default function ServicesSection() {
                         image={serviceImg2}
                         imageAlt="Shopify design mockups"
                         title="Shopify Development"
-                        description="We build fast, flexible storefronts that are easy to manage and built to convert. From Shopify Plus themes to custom integrations, everything is tailored to perform."
+                        description="We build fast, flexible Shopify storefronts that are easy to manage and designed to maximize conversions. From custom Shopify Plus themes to bespoke integrations, our services are engineered with one goal in mind – performance."
                         features={[
-                            "Shopify Plus development",
-                            "Bespoke integrations",
-                            "Solution architecture",
-                            "Speed optimization"
+                            "Custom Shopify Plus themes",
+                            "Third-party integrations",
+                            "Performance optimization",
+                            "Scalable technical architecture"
                         ]}
                         buttonText="Find out more"
                         buttonHref="/services/shopify-development"
@@ -56,12 +56,12 @@ export default function ServicesSection() {
                         image={serviceImg3}
                         imageAlt="Shopify design mockups"
                         title="Shopify Apps"
-                        description="We build and customize apps that extend your store’s functionality — from boosting AOV to streamlining checkout and loyalty."
+                        description="We create and customize Shopify apps that improve checkout flow, increase average order value, and boost customer experience. Whether you need custom features or tailored solutions, our team can help you scale your business."
                         features={[
-                            "Custom Shopify apps",
-                            "Checkout extensions",
-                            "Loyalty & retention tools",
-                            "Tailored to your workflows"
+                            "Customer Checkout Extensions",
+                            "Loyalty & Retention Features",
+                            "Post-purchase upsells",
+                            "Workflow automation tools"
                         ]}
                         buttonText="Find out more"
                         buttonHref="/services/shopify-apps"
@@ -70,12 +70,12 @@ export default function ServicesSection() {
                         image={serviceImg4}
                         imageAlt="Shopify design mockups"
                         title="Shopify Migration"
-                        description="We handle complex migrations with zero data loss or SEO drop. From products to customers and order history, everything moves cleanly to Shopify."
+                        description="We provide expert Shopify migration services with zero data loss. From products and customer information to order history and content, everything is migrated seamlessly."
                         features={[
-                            "Magento, WooCommerce, BigCommerce",
-                            "Secure data migration",
-                            "SEO & 301 redirect handling",
-                            "Full store setup on Shopify"
+                            "Magento, WooCommerce, BigCommerce & more",
+                            "Secure Data Migration",
+                            "SEO & 301 redirects",
+                            "Shopify Store Setup & Maintenance"
                         ]}
                         buttonText="Find out more"
                         buttonHref="/services/shopify-migration"
@@ -84,12 +84,12 @@ export default function ServicesSection() {
                         image={serviceImg5}
                         imageAlt="Shopify design mockups"
                         title="Shopify Marketing"
-                        description="We craft full-funnel strategies tailored to your brand and goals, from paid ads to retention flows, everything is built to drive results."
+                        description="We provide tailored Shopify marketing strategies aligned with your business goals. From paid ads to email campaigns, our result-driven framework helps you attract, convert, and retain more customers."
                         features={[
                             "SEO & PPC for Shopify",
-                            "Paid social campaigns",
-                            "Email & content marketing",
-                            "Conversion-focused strategy"
+                            "Shopify Social Media Marketing",
+                            "Email & Content Marketing for Shopify",
+                            "Conversion Rate Optimisation"
                         ]}
                         buttonText="Find out more"
                         buttonHref="/services/shopify-marketing"
@@ -98,12 +98,12 @@ export default function ServicesSection() {
                         image={serviceImg6}
                         imageAlt="Shopify design mockups"
                         title="Ecommerce Audit"
-                        description="We analyze your store from all angles — brand, data, UX, and CRO — to uncover what’s working and what needs fixing"
+                        description="We conduct a thorough end-to-end audit of your Shopify store, analyzing brand, data, UX, CRO, and SEO to uncover growth opportunities and areas for improvement."
                         features={[
-                            "SEO & performance review",
-                            "Stakeholder workshops",
-                            "Data-driven insights",
-                            "UX & CRO recommendations"
+                            "SEO & Performance Review",
+                            "Stakeholder Interviews & Workshops",
+                            "Data-Driven Insights",
+                            "UX & CRO Recommendations"
                         ]}
                         buttonText="Find out more"
                         buttonHref="/services/ecommerce-audit"
@@ -112,12 +112,13 @@ export default function ServicesSection() {
                         image={serviceImg7}
                         imageAlt="Shopify design mockups"
                         title="Conversion Rate Optimization"
-                        description="We turn more traffic into revenue through data-backed design, testing, and strategy — all focused on sustainable growth."
+                        description="We transform your Shopify store into a revenue machine by turning more visitors into paying customers. By improving functionality, testing new ideas, and enhancing the customer journeys, our CRO strategies are designed to boost sales and revenue while improving the customer experience."
                         features={[
-                            "A/B testing",
-                            "Personalization",
-                            "Heatmaps & analytics",
-                            "CRO strategy & consulting"
+                            "CRO audits & strategy",
+                            "A/B testing & experimentation",
+                            "On-site personalization",
+                            "Analytics & user behavior tracking",
+                            "Heat maps optimization"
                         ]}
                         buttonText="Find out more"
                         buttonHref="/services/conversion-rate-optimization"
@@ -126,12 +127,12 @@ export default function ServicesSection() {
                         image={serviceImg8}
                         imageAlt="Shopify design mockups"
                         title="Headless Commerce"
-                        description="For brands that need speed, control, and flexibility. We build fast, scalable storefronts using Shopify’s backend and modern frameworks."
+                        description="For enterprise brands and unique applications, headless commerce might be the right approach. By decoupling the front end from the back end, it enables lightning-fast page loads and gives you unlimited control over content, code, and creative. We build JAMStack websites using e-commerce platform APIs like Shopify Plus and headless CMS platforms such as Contentful."
                         features={[
-                            "Headless Shopify builds",
-                            "JAMStack architecture",
-                            "Contentful & custom CMS",
-                            "React / Gatsby / Next.js"
+                            "Headless Shopify Development",
+                            "JAMStack Architecture",
+                            "Contentful CMS Integration",
+                            "React / Gatsby / Next.js Frontends"
                         ]}
                         buttonText="Find out more"
                         buttonHref="/services/headless-commerce"
@@ -140,11 +141,12 @@ export default function ServicesSection() {
                         image={serviceImg9}
                         imageAlt="Shopify design mockups"
                         title="Speed Optimization"
-                        description="We optimize your store to load faster, run smoother, and convert better — without sacrificing design or functionality."
+                        description="We design and optimize high-performing Shopify Plus websites that are lightweight and have faster load times. Faster websites not only improve the customer experience but also boost engagement and conversions. Our team ensures your Shopify store is fast, responsive, and built to excel."
                         features={[
-                            "Theme and code cleanup",
-                            "Image & script optimization",
-                            "Real-user performance testing",
+                            "Shopify Plus Speed Optimization",
+                            "Code & Image Optimization",
+                            "Server & CDN Integration",
+                            "Performance Audits & Fixes",
                         ]}
                         buttonText="Find out more"
                         buttonHref="/services/integration-services"
@@ -153,12 +155,12 @@ export default function ServicesSection() {
                         image={serviceImg3}
                         imageAlt="Shopify design mockups"
                         title="Integration Services"
-                        description="We connect your tech stack for smooth, scalable operations — from leading Shopify apps to custom backend systems."
+                        description="We streamline your entire tech stack with seamless integration services, from leading Shopify apps to custom backend solutions. Whether you need CRM, ERP, or PIM integrations, our team ensures smooth connectivity and scalability across platforms."
                         features={[
-                            "Klaviyo, ReCharge, Gorgias, Rebuy, etc.",
+                            "Klaviyo, ReCharge, Gorgias, Rebuy, Okendo, and more",
                             "ERP, CRM, and PIM integrations",
-                            "Custom API connections",
-                            "End-to-end setup & support"
+                            "Custom API and data integrations",
+                            "End-to-end setup, support, and maintenance"
                         ]}
                         buttonText="Find out more"
                         buttonHref="/services/creative-and-branding"
@@ -166,13 +168,13 @@ export default function ServicesSection() {
                     <ServiceCard
                         image={serviceImg10}
                         imageAlt="Shopify design mockups"
-                        title="Creative and Branding"
-                        description="We craft visual identities and creative assets that connect with your audience and elevate your brand presence across every touchpoint."
+                        title="Branding and Creative"
+                        description="Build a unique brand identity with our tailored branding and creative services designed for e-commerce growth. From Shopify branding and identity creation to compelling copywriting, creative direction, and style guides, we help your store stand out and drive engagement across all channels."
                         features={[
-                            "Branding & identity",
-                            "Copywriting & messaging",
-                            "Creative direction",
-                            "Style guides & assets"
+                            "Brand Identity & Strategy",
+                            "Copywriting & Content Creation Services",
+                            "Creative Direction for Campaigns",
+                            "Brand Guidelines & Style Systems"
                         ]}
                         buttonText="Find out more"
                         buttonHref="#"

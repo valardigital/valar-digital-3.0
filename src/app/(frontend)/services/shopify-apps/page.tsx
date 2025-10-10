@@ -9,9 +9,33 @@ export default function ServiceDetails() {
 
   return (
     <>
-      <HeroBanner />
-      <FeatureSection />
-      <StepByStepSection />
+      <HeroBanner 
+        title={"Shopify App Development Services"}
+        description={"Custom Shopify apps built to fit your business needs."}
+      />
+      <FeatureSection 
+        heading={"What We Offer?"}
+        description={"We create and customize Shopify apps that elevate your store’s performance and customer experience. From optimizing checkout flows to building buyer trust, we create apps designed to unlock growth and streamline your operations. Whether you need tailored extensions or fully custom apps, we are here to help."}
+        features={[
+          { text: "Custom Shopify Apps" },
+          { text: "Built for Scalability" },
+          { text: "Checkout & Conversion Tools" },
+          { text: "Loyalty & Retention Features" },
+          { text: "Custom Business Workflows" },
+        ]}
+        ctaText={"Schedule A Call"}
+      />
+      <StepByStepSection 
+        heading={'Our Shopify Apps Process'}
+        description={'We design apps that integrate seamlessly with your Shopify store. Here’s how we solve real business challenges and improve customer experience:'}
+        steps={[
+          { title: 'Exploration & Scoping', description: 'We identify your business requirements, challenges, and customer pain points to define the right app and extension.' },
+          { title: 'Custom App Design', description: 'Wireframes and user flows are designed to create intuitive, practical solutions that enhance the customer experience.' },
+          { title: 'Development & Integration', description: 'Our team builds custom Shopify apps not only to solve problems but also to extend your business capabilities, ensuring your store is reliable and high-performing.' },
+          { title: 'Testing & QA', description: 'Our team of meticulous QA experts ensures your app is bug-free, high-performing, and compatible across all devices.' },
+          { title: 'Deployment & Support', description: 'We provide continuous support and updates so your apps adapt to business needs and future Shopify upgrades.' },
+        ]}
+      />
       <TestimonialSection />
       <CTASection />
     </>
