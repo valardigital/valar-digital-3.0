@@ -31,11 +31,14 @@ const getCaseStudies = cache(async () => {
 export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
-  title: "Case Studies That Speak for Themselves",
-  description: "Discover how we've helped Shopify brands transform their customer experience, optimize conversions, and scale their revenue through strategic design and development.",
+  title: "Case Studies – Conversions & Revenue Growth",
+  description: "See how we help Shopify brands improve conversions, UX, and scale revenue through strategic design, development, and CRO solutions.",
   openGraph: {
-    title: "Case Studies That Speak for Themselves",
-    description: "Discover how we've helped Shopify brands transform their customer experience, optimize conversions, and scale their revenue through strategic design and development.",
+    title: "Case Studies – Conversions & Revenue Growth",
+    description: "See how we help Shopify brands improve conversions, UX, and scale revenue through strategic design, development, and CRO solutions.",
+  },
+  alternates: {
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/case-studies',
   },
 };
 
