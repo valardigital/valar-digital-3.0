@@ -1,7 +1,7 @@
 import type { InsightsSection as InsightsSectionProps } from '@/payload-types'
 import Image from 'next/image'
 import brain from '@/assets/images/growth/brain.svg'
-import questionMark from '@/assets/images/caseStudy/question-mark.png'
+import questionMark from '@/assets/images/case-studies/question-mark.png'
 import RichText from '@/components/RichText'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import styles from './InsightsSection.module.css'

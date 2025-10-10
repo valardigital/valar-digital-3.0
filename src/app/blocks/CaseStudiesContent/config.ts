@@ -2,7 +2,7 @@ import type { Block } from "payload";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 
 const CaseStudyContent: Block = {
-  slug: "caseStudyContent",
+  slug: "caseStudiesContent",
   labels: {
     singular: "Case Study Content",
     plural: "Case Study Contents",

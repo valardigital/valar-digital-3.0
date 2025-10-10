@@ -17,7 +17,7 @@ export const HeroSection: React.FC<Props> = (block) => {
   return (
     <section className="py-4 md:py-6 md:px-0 px-4">
       <div className="container mx-auto">
-        <Link href="/caseStudy" className="flex items-center gap-2 text-text-dark hover:font-medium hover:cursor-pointer mb-6 md:mb-10 tracking-[0.04rem] text-sm md:text-lg">
+        <Link href="/case-studies" className="flex items-center gap-2 text-text-dark hover:font-medium hover:cursor-pointer mb-6 md:mb-10 tracking-[0.04rem] text-sm md:text-lg">
           <svg xmlns="http://www.w3.org/2000/svg" className="size-5 mt-[2px] rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M3 12h16m-6-6l6 6-6 6" />
           </svg>

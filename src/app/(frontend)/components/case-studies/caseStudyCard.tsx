@@ -35,7 +35,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
     const resolvedSrc = typeof image === 'string' ? getMediaUrl(image) : image
 
     return (
-        <Link href={`/caseStudy/${slug}`} className={`grid grid-cols-1 lg:grid-cols-2 p-4 border rounded-2xl md:rounded-[40px] gap-6 md:gap-8 items-center bg-white shadow-[0px_4px_0px_0px_#F0F5FC] group ${className}`}>
+        <Link href={`/case-studies/${slug}`} className={`grid grid-cols-1 lg:grid-cols-2 p-4 border rounded-2xl md:rounded-[40px] gap-6 md:gap-8 items-center bg-white shadow-[0px_4px_0px_0px_#F0F5FC] group ${className}`}>
 
             <div className="order-1 relative group overflow-hidden">
                 <div className="rounded-2xl md:rounded-3xl overflow-hidden">

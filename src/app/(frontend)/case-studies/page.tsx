@@ -1,4 +1,4 @@
-import CaseStudyCard from "../components/caseStudy/caseStudyCard";
+import CaseStudyCard from "../components/case-studies/caseStudyCard";
 import CTASection from "../components/shared/CTASection";
 // No helpers needed; mirror blog: use the media.url directly
 import { getPayload } from 'payload'

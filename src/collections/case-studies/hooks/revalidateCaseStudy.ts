@@ -6,12 +6,12 @@ export const revalidateCaseStudy = async (doc: any, operation: 'create' | 'updat
     const paths: string[] = []
     const tags: string[] = []
 
-    if (doc.slug) paths.push(`/caseStudy/${doc.slug}`)
-    paths.push('/caseStudy', '/sitemap.xml')
+    if (doc.slug) paths.push(`/case-studies/${doc.slug}`)
+    paths.push('/case-studies', '/sitemap.xml')
     tags.push('case-study-sitemap')
 
     if (operation === 'delete') {
-      paths.push('/caseStudy')
+      paths.push('/case-studies')
     }
 
     await fetch(`${baseUrl}/api/revalidate`, {

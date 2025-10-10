@@ -19,7 +19,7 @@ import { revalidateCaseStudy } from './hooks/revalidateCaseStudy'
 import { SEOFields } from '@/fields/seoFields'
 
 const CaseStudy: CollectionConfig = {
-  slug: 'case-studies',
+  slug: 'caseStudy',
   versions: {
     drafts: {
       autosave: {
@@ -35,14 +35,14 @@ const CaseStudy: CollectionConfig = {
     livePreview: {
       url: ({ data, req }) =>
         generatePreviewPath({
-          collection: 'case-studies',
+          collection: 'caseStudy',
           slug: typeof data?.slug === 'string' ? data.slug : '',
           req,
         }),
     },
     preview: (data, { req }) =>
       generatePreviewPath({
-        collection: 'case-studies',
+        collection: 'caseStudy',
         slug: typeof data?.slug === 'string' ? data.slug : '',
         req,
       }),
@@ -195,7 +195,7 @@ const CaseStudy: CollectionConfig = {
       },
     },
     // Slug field with scoped uniqueness to this collection
-    ...slugField('title', 'case-studies'),
+    ...slugField('title', 'caseStudy'),
   ],
   hooks: {
     afterChange: [

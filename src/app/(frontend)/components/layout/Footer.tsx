@@ -63,7 +63,7 @@ const Footer = () => {
                 </svg>
               </button>
               <ul className={`space-y-2 md:block overflow-hidden transition-all duration-500 md:max-h-max tracking-[0.04rem] ${isCompanyOpen ? 'max-h-60 mb-4' : 'max-h-0'}`}>
-                <li className='hover:text-primary'><Link href="/caseStudy" className={`transition-colors ${pathname === '/caseStudy' ? 'text-primary' : 'hover:text-primary'}`}>Case Studies</Link></li>
+                <li className='hover:text-primary'><Link href="/case-studies" className={`transition-colors ${pathname === '/case-studies' ? 'text-primary' : 'hover:text-primary'}`}>Case Studies</Link></li>
                 <li className='hover:text-primary'><Link href="/contact" className={`transition-colors ${pathname === '/contact' ? 'text-primary' : 'hover:text-primary'}`}>Contact</Link></li>
                 <li className='hover:text-primary'><Link href="/blog" className={`transition-colors ${pathname === '/blog' ? 'text-primary' : 'hover:text-primary'}`}>Blogs</Link></li>
               </ul>

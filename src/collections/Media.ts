@@ -59,7 +59,7 @@ const Media: CollectionConfig = {
       async ({ doc, operation }: { doc: any; operation: 'create' | 'update' | 'delete' }) => {
         try {
           const baseUrl = getServerSideURL()
-          const paths = ['/blog', '/caseStudy', '/']
+          const paths = ['/blog', '/case-studies', '/']
           const tags = ['media']
 
           await fetch(`${baseUrl}/api/revalidate`, {
@@ -82,7 +82,7 @@ const Media: CollectionConfig = {
       async ({ doc }: { doc: any }) => {
         try {
           const baseUrl = getServerSideURL()
-          const paths = ['/blog', '/caseStudy', '/']
+          const paths = ['/blog', '/case-studies', '/']
           const tags = ['media']
 
           await fetch(`${baseUrl}/api/revalidate`, {

@@ -17,7 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/privacyPolicy',
     '/cookiePolicy',
     '/blog',
-    '/caseStudy',
+    '/case-studies',
     // Services detail routes
     '/services/shopify-design',
     '/services/shopify-development',
@@ -60,7 +60,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const caseStudyItems: MetadataRoute.Sitemap = (csRes?.docs || [])
     .filter((d: any) => d?.slug)
     .map((doc: any) => ({
-      url: `${BASE_URL}/caseStudy/${doc.slug}`,
+      url: `${BASE_URL}/case-studies/${doc.slug}`,
       lastModified: doc.updatedAt || doc.publishedAt || doc.createdAt || undefined,
       changeFrequency: 'monthly',
     }));

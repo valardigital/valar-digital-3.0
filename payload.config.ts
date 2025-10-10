@@ -7,7 +7,7 @@ import { s3Storage } from '@payloadcms/storage-s3'
 import Users from './src/collections/Users'
 import Media from './src/collections/Media'
 import { Blog } from './src/collections/blog'
-import { CaseStudy } from './src/collections/caseStudy'
+import { CaseStudy } from './src/collections/case-studies'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -36,7 +36,7 @@ export default buildConfig({
             return `/blog/${data.slug}`
           }
           if (collectionConfig?.slug === 'caseStudy') {
-            return `/caseStudy/${data.slug}`
+            return `/case-studies/${data.slug}`
           }
           return ''
         },

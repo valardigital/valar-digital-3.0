@@ -70,7 +70,7 @@ const CaseStudiesShowcase = memo(() => {
               <p className="text-text-light">
                 The new flow made managing a subscription feel easy, even enjoyable. Usage increased, and customers started sticking around longer.              </p>
             </div>
-            <Link href="/caseStudy/how-we-helped-purdy-figg-cut-subscription-churn-by-23">
+            <Link href="/case-studies/purdy-figg-conversion-optimization">
               <Button variant="link" className='text-primary flex items-center gap-1 p-0 font-normal h-max hover:no-underline hover:font-medium'>
                 See Full Case Study
                 <svg xmlns="http://www.w3.org/2000/svg" className="size-5 mt-[2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -112,7 +112,7 @@ const CaseStudiesShowcase = memo(() => {
               <p className="text-text-light">
                 We replaced guesswork with data, and quick wins turned into sustained AOV growth. Revenue climbed — and so did customer satisfaction.              </p>
             </div>
-            <Link href="/caseStudy/how-we-helped-purdy-figg-cut-subscription-churn-by-23">
+            <Link href="/case-studies/how-we-helped-purdy-figg-cut-subscription-churn-by-23">
               <Button variant="link" className='text-primary flex items-center gap-1 p-0 font-normal h-max hover:no-underline hover:font-medium'>
                 See Full Case Study
                 <svg xmlns="http://www.w3.org/2000/svg" className="size-5 mt-[2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -162,7 +162,7 @@ const CaseStudiesShowcase = memo(() => {
       {/* CTA */}
       <div className="md:w-max mx-auto">
         <Link
-          href="/caseStudy"
+          href="/case-studies"
         >
           <Button className="w-full md:w-max flex items-center gap-2">
             View All Case Studies

@@ -77,7 +77,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!caseStudy) return {}
 
   const siteUrl = getServerSideURL()
-  const canonicalPath = `/caseStudy/${slug}`
+  const canonicalPath = `/case-studies/${slug}`
   
   // Fetch meta data from Payload CMS
   const metaTitle = (caseStudy as any)?.meta?.title

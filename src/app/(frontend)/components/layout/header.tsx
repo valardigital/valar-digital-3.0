@@ -39,7 +39,7 @@ const Header = () => {
               <nav className="hidden md:flex xl:gap-16 sm:gap-5 font-medium uppercase">
                 <ul className='flex gap-16'>
                   <Link href="/services"><li className={`uppercase h-max p-0 text-base ${getTextColor('/services')}`}>Services</li></Link>
-                  <Link href="/caseStudy"><li className={`uppercase h-max p-0 text-base ${getTextColor('/caseStudy')}`}>Case Studies</li></Link>
+                  <Link href="/case-studies"><li className={`uppercase h-max p-0 text-base ${getTextColor('/case-studies')}`}>Case Studies</li></Link>
                   <Link href="/blog"><li className={`uppercase h-max p-0 text-base ${getTextColor('/blog')}`}>Blogs</li></Link>
                 </ul>
               </nav>
@@ -118,11 +118,11 @@ const Header = () => {
             <div className={`transition-all duration-700 delay-300 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
               }`}>
               <Link
-                href="/caseStudy"
+                href="/case-studies"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block border-b border-border py-6"
               >
-                <button className={`uppercase h-max p-0 text-base ${pathname === '/caseStudy' ? 'text-primary' : ''}`}>Case Studies</button>
+                <button className={`uppercase h-max p-0 text-base ${pathname === '/case-studies' ? 'text-primary' : ''}`}>Case Studies</button>
               </Link>
             </div>
 
