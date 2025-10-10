@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const ResultsSection: Block = {
   slug: 'resultsSection',
@@ -25,27 +26,21 @@ export const ResultsSection: Block = {
       },
       fields: [
         {
-          name: 'percentage',
-          type: 'text',
-          required: true,
-          admin: {
-            description: 'Metric value (e.g., "23%", "5x")',
-          },
-        },
-        {
           name: 'metric',
-          type: 'text',
+          type: 'richText',
+          editor: lexicalEditor(),
           required: true,
           admin: {
-            description: 'Metric label (e.g., "reduction in churn")',
+            description: 'Metric label (rich text, supports emphasis, lists, etc.)',
           },
         },
         {
           name: 'description',
-          type: 'text',
+          type: 'richText',
+          editor: lexicalEditor(),
           required: true,
           admin: {
-            description: 'Additional context for the metric',
+            description: 'Additional context (rich text)',
           },
         },
       ],

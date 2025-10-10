@@ -54,6 +54,35 @@ export const HeroSection: Block = {
         }]
       }
     },
+    // Optional label overrides for left info card
+    {
+      name: 'clientLabel',
+      type: 'text',
+      required: false,
+      defaultValue: 'Client',
+      admin: { description: 'Override label for Client' },
+    },
+    {
+      name: 'industryLabel',
+      type: 'text',
+      required: false,
+      defaultValue: 'Industry',
+      admin: { description: 'Override label for Industry' },
+    },
+    {
+      name: 'scopeLabel',
+      type: 'text',
+      required: false,
+      defaultValue: 'Scope',
+      admin: { description: 'Override label for Scope' },
+    },
+    {
+      name: 'timeframeLabel',
+      type: 'text',
+      required: false,
+      defaultValue: 'Timeframe',
+      admin: { description: 'Override label for Timeframe' },
+    },
     {
       name: 'client',
       type: 'text',
@@ -88,7 +117,8 @@ export const HeroSection: Block = {
     },
     {
       name: 'challenge',
-      type: 'textarea',
+      type: 'richText',
+      editor: lexicalEditor(),
       required: true,
       admin: {
         description: 'The main challenge the client faced',
@@ -96,7 +126,8 @@ export const HeroSection: Block = {
     },
     {
       name: 'solution',
-      type: 'textarea',
+      type: 'richText',
+      editor: lexicalEditor(),
       required: true,
       admin: {
         description: 'What we did to solve the challenge',

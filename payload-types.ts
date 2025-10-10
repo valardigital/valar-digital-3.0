@@ -382,6 +382,22 @@ export interface HeroSection {
     [k: string]: unknown;
   };
   /**
+   * Override label for Client
+   */
+  clientLabel?: string | null;
+  /**
+   * Override label for Industry
+   */
+  industryLabel?: string | null;
+  /**
+   * Override label for Scope
+   */
+  scopeLabel?: string | null;
+  /**
+   * Override label for Timeframe
+   */
+  timeframeLabel?: string | null;
+  /**
    * Client company name
    */
   client: string;
@@ -400,11 +416,39 @@ export interface HeroSection {
   /**
    * The main challenge the client faced
    */
-  challenge: string;
+  challenge: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   /**
    * What we did to solve the challenge
    */
-  solution: string;
+  solution: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'heroSection';
@@ -423,17 +467,41 @@ export interface ResultsSection {
    */
   detailedResults: {
     /**
-     * Metric value (e.g., "23%", "5x")
+     * Metric label (rich text, supports emphasis, lists, etc.)
      */
-    percentage: string;
+    metric: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
     /**
-     * Metric label (e.g., "reduction in churn")
+     * Additional context (rich text)
      */
-    metric: string;
-    /**
-     * Additional context for the metric
-     */
-    description: string;
+    description: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
     id?: string | null;
   }[];
   id?: string | null;
@@ -1069,6 +1137,10 @@ export interface CaseStudySelect<T extends boolean = true> {
  */
 export interface HeroSectionSelect<T extends boolean = true> {
   title?: T;
+  clientLabel?: T;
+  industryLabel?: T;
+  scopeLabel?: T;
+  timeframeLabel?: T;
   client?: T;
   industry?: T;
   scope?: T;
@@ -1087,7 +1159,6 @@ export interface ResultsSectionSelect<T extends boolean = true> {
   detailedResults?:
     | T
     | {
-        percentage?: T;
         metric?: T;
         description?: T;
         id?: T;

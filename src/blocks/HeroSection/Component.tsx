@@ -7,6 +7,10 @@ import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical
 
 type Props = {
   className?: string
+  clientLabel?: string
+  industryLabel?: string
+  scopeLabel?: string
+  timeframeLabel?: string
 } & HeroSectionProps
 
 export const HeroSection: React.FC<Props> = (block) => {
@@ -31,19 +35,19 @@ export const HeroSection: React.FC<Props> = (block) => {
         <div className="flex gap-6 mt-6 md:mt-10 flex-col md:flex-row">
           <div className="bg-primary p-6 md:py-10 md:px-8 rounded-3xl space-y-4 md:space-y-[47px] line-height-[1.6] text-white sm:min-w-[408px]">
             <div className="space-y-2">
-              <p>Client</p>
+              <p>{block.clientLabel || 'Client'}</p>
               <p className="font-medium tracking-[0.04rem]">{block.client}</p>
             </div>
             <div className="space-y-2">
-              <p>Industry</p>
+              <p>{block.industryLabel || 'Industry'}</p>
               <p className="font-medium tracking-[0.04rem]">{block.industry}</p>
             </div>
             <div className="space-y-2">
-              <p>Scope</p>
+              <p>{block.scopeLabel || 'Scope'}</p>
               <p className="font-medium tracking-[0.04rem]">{block.scope}</p>
             </div>
             <div className="space-y-2">
-              <p>Timeframe</p>
+              <p>{block.timeframeLabel || 'Timeframe'}</p>
               <p className="font-medium tracking-[0.04rem]">{block.timeframe}</p>
             </div>
           </div>
@@ -54,11 +58,19 @@ export const HeroSection: React.FC<Props> = (block) => {
             <h3 className="font-medium text-2xl leading-[1.3] mb-4">The Context</h3>
             <div className="space-y-2 tracking-[0.04rem] leading-[1.6]">
               <h4 className="text-primary font-medium">The challenge</h4>
-              <p>{block.challenge}</p>
+              {typeof block.challenge === 'object' && (block.challenge as any)?.root ? (
+                <RichText data={block.challenge as unknown as SerializedEditorState} />
+              ) : (
+                <p>{String(block.challenge ?? '')}</p>
+              )}
             </div>
             <div className="space-y-2 tracking-[0.04rem] leading-[1.6]">
               <h4 className="text-primary font-medium">What we did</h4>
-              <p>{block.solution}</p>
+              {typeof block.solution === 'object' && (block.solution as any)?.root ? (
+                <RichText data={block.solution as unknown as SerializedEditorState} />
+              ) : (
+                <p>{String(block.solution ?? '')}</p>
+              )}
             </div>
           </div>
         </div>
