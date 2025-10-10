@@ -7,10 +7,10 @@ import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical
 
 type Props = {
   className?: string
-  clientLabel?: string
-  industryLabel?: string
-  scopeLabel?: string
-  timeframeLabel?: string
+  clientLabel?: string | null
+  industryLabel?: string | null
+  scopeLabel?: string | null
+  timeframeLabel?: string | null
 } & HeroSectionProps
 
 export const HeroSection: React.FC<Props> = (block) => {
