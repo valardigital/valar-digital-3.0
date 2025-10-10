@@ -12,8 +12,8 @@ export function RichText(props: Props) {
   return (
     <RichTextConverter 
       {...rest} 
-      className={`${className || ''}`}
-      // className={`prose prose-neutral max-w-none ${className || ''}`}
+      // className={`${className || ''}`}
+      className={`prose prose-neutral max-w-none ${className || ''}`}
       // @ts-ignore
       converters={jsxConverter}
     />
