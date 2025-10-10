@@ -22,6 +22,7 @@ const Footer = () => {
     { name: 'Creative-and-Branding', href: '/services/creative-and-branding' },
     { name: 'Shopify Marketing', href: '/services/shopify-marketing' },
     { name: 'Headless Commerce', href: '/services/headless-commerce-development' },
+    { name: 'Speed Optimization', href: '/services/website-speed-optimization' },
   ];
 
   return (
