@@ -18,18 +18,21 @@ export const ResultsSection: React.FC<Props> = (block) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto">
           {block.detailedResults?.map((result, index) => (
             <div key={index}>
-              <div className="text-text-dark">
-                {typeof (result as any).metric === 'object' && ((result as any).metric as any)?.root ? (
-                  <RichText data={(result as any).metric as unknown as SerializedEditorState} />
+              <h3 className="text-[28px] font-medium leading-[1.5] text-text-dark min-h-[36px]">
+                {result.percentage || <span>&nbsp;</span>}
+              </h3>
+              <div className="text-xl text-text-dark">
+                {typeof result.metric === 'object' && (result.metric as any)?.root ? (
+                  <RichText data={result.metric as unknown as SerializedEditorState} />
                 ) : (
-                  <h3 className="text-xl">{String((result as any).metric ?? '')}</h3>
+                  <h3 className="text-xl">{String(result.metric ?? '')}</h3>
                 )}
               </div>
               <div className="text-text-light mt-1 leading-[1.4] tracking-[0.04rem]">
-                {typeof (result as any).description === 'object' && ((result as any).description as any)?.root ? (
-                  <RichText data={(result as any).description as unknown as SerializedEditorState} />
+                {typeof result.description === 'object' && (result.description as any)?.root ? (
+                  <RichText data={result.description as unknown as SerializedEditorState} />
                 ) : (
-                  <p>{String((result as any).description ?? '')}</p>
+                  <p>{String(result.description ?? '')}</p>
                 )}
               </div>
             </div>

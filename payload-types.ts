@@ -467,7 +467,11 @@ export interface ResultsSection {
    */
   detailedResults: {
     /**
-     * Metric label (rich text, supports emphasis, lists, etc.)
+     * Metric value (e.g., "23%", "5x")
+     */
+    percentage?: string | null;
+    /**
+     * Metric label (e.g., "reduction in churn")
      */
     metric: {
       root: {
@@ -485,7 +489,7 @@ export interface ResultsSection {
       [k: string]: unknown;
     };
     /**
-     * Additional context (rich text)
+     * Additional context for the metric
      */
     description: {
       root: {
@@ -1159,6 +1163,7 @@ export interface ResultsSectionSelect<T extends boolean = true> {
   detailedResults?:
     | T
     | {
+        percentage?: T;
         metric?: T;
         description?: T;
         id?: T;

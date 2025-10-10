@@ -26,12 +26,20 @@ export const ResultsSection: Block = {
       },
       fields: [
         {
+          name: 'percentage',
+          type: 'text',
+          required: false,
+          admin: {
+            description: 'Metric value (e.g., "23%", "5x")',
+          },
+        },
+        {
           name: 'metric',
           type: 'richText',
           editor: lexicalEditor(),
           required: true,
           admin: {
-            description: 'Metric label (rich text, supports emphasis, lists, etc.)',
+            description: 'Metric label (e.g., "reduction in churn")',
           },
         },
         {
@@ -40,7 +48,7 @@ export const ResultsSection: Block = {
           editor: lexicalEditor(),
           required: true,
           admin: {
-            description: 'Additional context (rich text)',
+            description: 'Additional context for the metric',
           },
         },
       ],
