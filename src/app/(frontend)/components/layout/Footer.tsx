@@ -19,7 +19,7 @@ const Footer = () => {
     { name: 'Shopify Apps', href: '/services/shopify-app-development' },
     { name: 'Integration Services', href: '/services/integration' },
     { name: 'Shopify Migration', href: '/services/shopify-migration' },
-    { name: 'Creative-and-Branding', href: '/services/creative-and-branding' },
+    { name: 'Creative-and-Branding', href: '/services/branding-creative' },
     { name: 'Shopify Marketing', href: '/services/shopify-marketing' },
     { name: 'Headless Commerce', href: '/services/headless-commerce-development' },
     { name: 'Speed Optimization', href: '/services/website-speed-optimization' },
