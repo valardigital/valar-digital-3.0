@@ -24,30 +24,32 @@ export const OutcomeSection: React.FC<Props> = (block) => {
           </div>
         </div>
 
-        <div className="border border-border rounded-3xl p-6 flex md:flex-row flex-col">
-          {block.keyResults?.map((result, index) => (
-            <React.Fragment key={index}>
-              <div>
-                <div className="bg-primary/5 py-2 px-4 mb-4 rounded-[8px] leading-[1.5]">
-                  <h3 className="text-[28px] font-medium leading-8">
-                    {result.percentage}<br/>
-                    <span className="font-normal text-xl">{result.metric}</span>
-                  </h3>
+        {Array.isArray(block.keyResults) && block.keyResults.length > 0 && (
+          <div className="border border-border rounded-3xl p-6 flex md:flex-row flex-col">
+            {block.keyResults.map((result, index) => (
+              <React.Fragment key={index}>
+                <div>
+                  <div className="bg-primary/5 py-2 px-4 mb-4 rounded-[8px] leading-[1.5]">
+                    <h3 className="text-[28px] font-medium leading-8">
+                      {result.percentage}<br/>
+                      <span className="font-normal text-xl">{result.metric}</span>
+                    </h3>
+                  </div>
+                  <div className={`text-text-light tracking-[0.04rem] leading-[1.6] ${styles.richTextContainer}`}>
+                    {typeof result.description === 'object' && (result.description as any)?.root ? (
+                      <RichText data={result.description as unknown as SerializedEditorState} />
+                    ) : (
+                      <p>{String(result.description)}</p>
+                    )}
+                  </div>
                 </div>
-                <div className={`text-text-light tracking-[0.04rem] leading-[1.6] ${styles.richTextContainer}`}>
-                  {typeof result.description === 'object' && (result.description as any)?.root ? (
-                    <RichText data={result.description as unknown as SerializedEditorState} />
-                  ) : (
-                    <p>{String(result.description)}</p>
-                  )}
-                </div>
-              </div>
-              {index < (block.keyResults?.length || 0) - 1 && (
-                <div className="my-[28px] md:mx-8 relative after:content-[''] after:absolute after:left-0 after:right-0 md:after:top-0 md:after:bottom-0 after:h-[1px] md:after:h-full after:w-full md:after:w-[1px] after:bg-border" />
-              )}
-            </React.Fragment>
-          ))}
-        </div>
+                {index < (block.keyResults.length || 0) - 1 && (
+                  <div className="my-[28px] md:mx-8 relative after:content-[''] after:absolute after:left-0 after:right-0 md:after:top-0 md:after:bottom-0 after:h-[1px] md:after:h-full after:w-full md:after:w-[1px] after:bg-border" />
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+        )}
 
         <div className="space-y-4">
           <h2 className="uppercase text-text-dark text-2xl md:text-[32px] font-medium">TAKEAWAYS</h2>

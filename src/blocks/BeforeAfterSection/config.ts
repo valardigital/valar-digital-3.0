@@ -17,6 +17,15 @@ export const BeforeAfterSection: Block = {
         description: 'Section title',
       },
     },
+    // New rich text field below title
+    {
+      name: 'description',
+      type: 'richText',
+      editor: lexicalEditor(),
+      admin: {
+        description: 'Optional rich text shown under the title',
+      },
+    },
     {
       name: 'mainImage',
       type: 'upload',

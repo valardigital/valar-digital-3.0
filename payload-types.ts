@@ -632,6 +632,24 @@ export interface BeforeAfterSection {
    */
   title: string;
   /**
+   * Optional rich text shown under the title
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
    * Main image showing the improvement
    */
   mainImage?: (string | null) | Media;
@@ -1229,6 +1247,7 @@ export interface ProcessSectionSelect<T extends boolean = true> {
  */
 export interface BeforeAfterSectionSelect<T extends boolean = true> {
   title?: T;
+  description?: T;
   mainImage?: T;
   mainImageCaption?: T;
   before?:

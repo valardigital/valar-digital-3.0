@@ -15,6 +15,16 @@ export const BeforeAfterSection: React.FC<Props> = (block) => {
           {block.title}
         </h2>
         
+        {block.description && (
+          <div className="mt-4 md:mt-6 text-left md:text-center tracking-[0.04rem] leading-[1.6]">
+            {typeof block.description === 'object' && (block.description as any)?.root ? (
+              <RichText data={block.description as unknown as SerializedEditorState} />
+            ) : (
+              <p>{String(block.description)}</p>
+            )}
+          </div>
+        )}
+        
         {block.mainImage && (
           <>
             <div className="mt-6 md:mt-10 mx-auto text-center">
