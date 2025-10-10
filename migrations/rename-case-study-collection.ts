@@ -1,44 +1,29 @@
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 
-export default async function renameCaseStudyCollection() {
+export default async function checkCaseStudyCollection() {
   const payload = await getPayload({ config: configPromise })
   
   try {
-    console.log('🔄 Starting case study collection rename migration...')
+    console.log('🔄 Checking case study collection status...')
     
-    // Check if old collection exists
-    const oldCollection = await payload.find({
+    // Check if caseStudy collection exists and has data
+    const collection = await payload.find({
       collection: 'caseStudy',
       limit: 1,
       depth: 0,
     })
     
-    if (oldCollection.docs.length > 0) {
-      console.log(`📊 Found ${oldCollection.totalDocs} documents in old 'caseStudy' collection`)
-      console.log('⚠️  Manual database migration required:')
-      console.log('   1. Connect to your MongoDB database')
-      console.log('   2. Rename the collection from "caseStudy" to "case-studies"')
-      console.log('   3. Or copy all documents from "caseStudy" to "case-studies"')
-      console.log('')
-      console.log('   MongoDB commands:')
-      console.log('   db.caseStudy.renameCollection("case-studies")')
-      console.log('   OR')
-      console.log('   db.caseStudy.find().forEach(function(doc) { db["case-studies"].insertOne(doc); });')
+    console.log(`📊 Found ${collection.totalDocs} documents in 'caseStudy' collection`)
+    
+    if (collection.totalDocs > 0) {
+      console.log('✅ Case studies are available and should display on /case-studies page')
+      console.log('📝 Note: Collection name is "caseStudy" but URLs use "/case-studies/" for SEO')
     } else {
-      console.log('✅ No documents found in old collection - migration not needed')
+      console.log('⚠️  No case studies found in the collection')
     }
     
-    // Check if new collection exists
-    const newCollection = await payload.find({
-      collection: 'case-studies',
-      limit: 1,
-      depth: 0,
-    })
-    
-    console.log(`📊 Found ${newCollection.totalDocs} documents in new 'case-studies' collection`)
-    
   } catch (error) {
-    console.error('❌ Error during migration check:', error)
+    console.error('❌ Error checking case study collection:', error)
   }
 }
