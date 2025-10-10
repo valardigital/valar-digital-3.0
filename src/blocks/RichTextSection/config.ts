@@ -10,6 +10,19 @@ export const RichTextSection: Block = {
   },
   fields: [
     {
+      name: 'backgroundColor',
+      type: 'select',
+      required: true,
+      defaultValue: 'white',
+      admin: {
+        description: 'Background color for the rich text section',
+      },
+      options: [
+        { label: 'White', value: 'white' },
+        { label: 'Muted', value: 'muted' },
+      ],
+    },
+    {
       type: 'richText',
       name: 'content',
       required: true,

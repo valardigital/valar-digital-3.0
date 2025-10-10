@@ -52,7 +52,7 @@ export const OutcomeSection: React.FC<Props> = (block) => {
         )}
 
         <div className="space-y-4">
-          <h2 className="uppercase text-text-dark text-2xl md:text-[32px] font-medium">TAKEAWAYS</h2>
+          <h2 className="uppercase text-text-dark text-2xl md:text-[32px] font-medium">Key Takeaways</h2>
           <div className={`text-text-dark tracking-[0.04rem] leading-[1.6] ${styles.richTextContainer}`}>
             {typeof block.takeaways === 'object' && (block.takeaways as any)?.root ? (
               <RichText data={block.takeaways as unknown as SerializedEditorState} />

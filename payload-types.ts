@@ -855,6 +855,10 @@ export interface DotSeparator {
  * via the `definition` "RichTextSection".
  */
 export interface RichTextSection {
+  /**
+   * Background color for the rich text section
+   */
+  backgroundColor: 'white' | 'muted';
   content: {
     root: {
       type: string;
@@ -1339,6 +1343,7 @@ export interface DotSeparatorSelect<T extends boolean = true> {
  * via the `definition` "RichTextSection_select".
  */
 export interface RichTextSectionSelect<T extends boolean = true> {
+  backgroundColor?: T;
   content?: T;
   id?: T;
   blockName?: T;

@@ -5,11 +5,22 @@ import styles from './RichTextSection.module.css'
 type Props = {
   className?: string
   content?: SerializedEditorState | string
+  backgroundColor?: 'white' | 'muted'
 }
 
 export const RichTextSection: React.FC<Props> = (block) => {
+  const getBackgroundClass = (color: string) => {
+    switch (color) {
+      case 'muted':
+        return 'bg-background-muted'
+      case 'white':
+      default:
+        return 'bg-white'
+    }
+  }
+
   return (
-    <section className="py-4 md:py-8 md:px-0 px-4">
+    <section className={`py-4 md:py-8 md:px-0 px-4 ${getBackgroundClass(block.backgroundColor || 'white')}`}>
       <div className="container mx-auto text-text-dark">
         {typeof block.content === 'object' && (block.content as any)?.root ? (
           <RichText data={block.content as unknown as SerializedEditorState} className={`${styles.richText} tracking-[0.04rem] leading-[1.6]`} />
