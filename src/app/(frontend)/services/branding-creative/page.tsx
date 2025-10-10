@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Branding & Creative Services for E-Commerce Growth',
   description: 'Build a unique brand identity with our branding, creative direction, copywriting, and style guides to engage customers and drive e-commerce growth.',
   alternates: {
-    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') +'/services/branding-creative',
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') +'/services/branding-creative',
   },
 };
 

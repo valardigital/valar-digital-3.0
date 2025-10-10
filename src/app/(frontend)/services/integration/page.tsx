@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Shopify Integration Services for Seamless Operations',
   description: 'Connect your entire tech stack with seamless integrations. From ERP and CRM to SaaS apps, we deliver smooth, scalable e-commerce connectivity solutions.',
   alternates: {
-    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') +'/services/integration',
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') +'/services/integration',
   },
 };
 

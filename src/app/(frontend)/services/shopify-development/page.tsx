@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Shopify Development Services for Fast, Scalable Stores',
   description: 'Build a high-performing Shopify store with custom themes, integrations, and optimized performance to boost conversions and scale your business.',
   alternates: {
-    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/services/shopify-development',
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/services/shopify-development',
   },
 };
 import FeatureSection from '../../components/serviceDetails/FeatureSection';

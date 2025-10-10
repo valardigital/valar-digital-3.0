@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Shopify Migration Services with Zero Data Loss',
   description: 'Seamlessly migrate your store to Shopify from Magento, WooCommerce, and more. Preserve data, integrations, and SEO for a smooth transition.',
   alternates: {
-    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/services/shopify-migration',
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/services/shopify-migration',
   },
 };
 import FeatureSection from '../../components/serviceDetails/FeatureSection';

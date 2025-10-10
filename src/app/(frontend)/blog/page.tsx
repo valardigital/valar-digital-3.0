@@ -123,12 +123,12 @@ export const metadata: Metadata = {
   title: 'Valar Digital Blog – Shopify Insights & Strategies',
   description: "Valar Digital's Blog covers everything you need to know about Shopify. Learn what’s working, improve performance, and grow your e-commerce business.",
   alternates: {
-    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/blog',
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/blog',
   },
   openGraph: {
     title: 'Valar Digital Blog – Shopify Insights & Strategies',
     description: "Valar Digital's Blog covers everything you need to know about Shopify. Learn what’s working, improve performance, and grow your e-commerce business.",
-    url: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/blog',
+    url: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/blog',
   },
 };
 

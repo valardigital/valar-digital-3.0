@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Shopify Audit Services for SEO, UX & Performance',
   description: 'Get a full Shopify audit analyzing SEO, UX, CRO, and performance. Identify growth opportunities and optimize your store for higher conversions.',
   alternates: {
-    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/services/shopify-audit',
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/services/shopify-audit',
   },
 };
 import FeatureSection from '../../components/serviceDetails/FeatureSection';

@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description: "See how we help Shopify brands improve conversions, UX, and scale revenue through strategic design, development, and CRO solutions.",
   },
   alternates: {
-    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/case-studies',
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/case-studies',
   },
 };
 

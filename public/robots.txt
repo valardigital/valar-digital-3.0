@@ -1,4 +1,4 @@
-Sitemap: https://v2.valardigital.com/sitemap.xml
+Sitemap: https://valardigital.com/sitemap.xml
 
 User-agent: *
-Disallow: / 
+Disallow: /admin/

@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Shopify Marketing Services to Grow Your Online Store',
   description: 'Improve your Shopify store’s visibility and revenue with our strategic marketing approach. From SEO to paid ads, we help you drive growth across all channels.',
   alternates: {
-    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/services/shopify-marketing',
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/services/shopify-marketing',
   },
 };
 import FeatureSection from '../../components/serviceDetails/FeatureSection';

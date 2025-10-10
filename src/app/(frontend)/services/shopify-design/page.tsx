@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Shopify Website Design Services That Convert',
   description: 'Get custom Shopify designs that blend UX, CRO, and brand storytelling. We create stunning, mobile-first layouts built to engage customers and drive sales.',
   alternates: {
-    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/services/shopify-design',
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/services/shopify-design',
   },
 };
 import FeatureSection from '../../components/serviceDetails/FeatureSection';

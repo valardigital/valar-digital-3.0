@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { getPayload } from 'payload';
 import configPromise from '@payload-config';
 
-const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com';
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const payload = await getPayload({ config: configPromise });

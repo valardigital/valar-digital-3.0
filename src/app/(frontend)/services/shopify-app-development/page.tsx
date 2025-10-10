@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Custom Shopify App Development Services',
   description: 'Create and customize Shopify apps to improve checkout, increase AOV, streamline workflows, and enhance customer experience for scalable growth.',
   alternates: {
-    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/services/shopify-app-development',
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/services/shopify-app-development',
   },
 };
 import FeatureSection from '../../components/serviceDetails/FeatureSection';

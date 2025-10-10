@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Website Speed Optimization for Fast Shopify Stores',
   description: 'Improve your Shopify site speed for better SEO and conversions. Our experts optimize code, images, and servers to deliver lightning-fast load times.',
   alternates: {
-    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/services/website-speed-optimization',
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/services/website-speed-optimization',
   },
 };
 import FeatureSection from '../../components/serviceDetails/FeatureSection';

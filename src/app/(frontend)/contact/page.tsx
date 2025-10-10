@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Contact Valar Digital | Get in Touch Today',
   description: "Reach out to Valar Digital for Shopify insights, questions, or expert advice. Fill the form or email us, and we'll get back to you promptly.",
   alternates: {
-    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/contact',
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/contact',
   },
 };
 import Image from "next/image";

@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Shopify Development & Growth Partner | Valar Digital',
   description: 'We build and scale Shopify stores with expert development, CRO, and automation. Partner with Valar Digital to grow faster and smarter with less friction.',
     alternates: {
-    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/',
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/',
   },
 };
 import React, { Suspense } from 'react';

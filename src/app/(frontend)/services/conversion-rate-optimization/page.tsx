@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Conversion Rate Optimization Services for Shopify',
   description: 'Increase your Shopify store’s revenue with CRO audits, A/B testing, personalization, and analytics to turn more visitors into paying customers.',
   alternates: {
-    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/services/conversion-rate-optimization',
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/services/conversion-rate-optimization',
   },
 };
 import FeatureSection from '../../components/serviceDetails/FeatureSection';
