@@ -55,7 +55,7 @@ export const HeroSection: React.FC<Props> = (block) => {
             <div className="flex items-center justify-center size-13 bg-background-subtle rounded-[4px] border mb-4">
               <Image src={bulbIcon} alt="Icon 3" width={100} height={100} className="size-7" />
             </div>
-            <h3 className="font-medium text-2xl leading-[1.3] mb-4">The Context</h3>
+            <h3 className="font-medium text-2xl leading-[1.3] mb-4">Quick Overview</h3>
             <div className="space-y-2 tracking-[0.04rem] leading-[1.6]">
               <h4 className="text-primary font-medium">The challenge</h4>
               {typeof block.challenge === 'object' && (block.challenge as any)?.root ? (

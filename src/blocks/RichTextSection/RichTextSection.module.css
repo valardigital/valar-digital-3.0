@@ -39,4 +39,12 @@
 .richText li + li {
   margin-top: .25rem;
 }
-
+.richText h1{
+  font-size: 36px !important;
+}
+.richText h2{
+  font-size: 32px !important;
+}
+.richText h3{
+  font-size: 24px !important;
+}
