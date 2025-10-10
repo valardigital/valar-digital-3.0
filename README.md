@@ -59,3 +59,17 @@ Notes:
 - The `media` collection accepts both images and videos (e.g., `video/*`).
 - Deleting a media item from the Payload Admin will delete the corresponding object from S3.
 - To render S3-hosted images, `next.config.ts` includes `images.remotePatterns`. If you use a custom domain (e.g., CloudFront), set `NEXT_PUBLIC_S3_PUBLIC_HOSTNAME` accordingly and rebuild.
+
+## Email via SendGrid
+
+The contact form posts to `src/app/(frontend)/api/contact/route.ts`, which sends an email via SendGrid to `shashi@valardigital.com` and `tushar@valardigital.com` and sets `Reply-To` to the submitter's address.
+
+Configure the following environment variables (e.g., in `.env.local`):
+
+```
+SENDGRID_API_KEY=...
+DEFAULT_FROM_EMAIL=...
+```
+
+Notes:
+- `DEFAULT_FROM_EMAIL` should be a verified sender/domain in your SendGrid account.

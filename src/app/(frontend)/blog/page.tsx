@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { getPayload } from 'payload';
 import configPromise from '@payload-config';
 import FeaturedBlogsSection from '../components/blog/featuredBlogSection';
@@ -5,7 +6,7 @@ import BlogGridSection from '../components/blog/blogGridSection';
 import { draftMode } from 'next/headers'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
 import { BLOG_CATEGORY_OPTIONS } from '@/collections/blog/config'
-import { Metadata } from 'next';
+// remove duplicate Metadata import (we already imported the type above)
 
 async function fetchBlogs(page: number) {
   const payload = await getPayload({ config: configPromise });
@@ -119,11 +120,15 @@ const categories = [
 export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
-  title: "What's Actually Working for Shopify Brands",
-  description: "Smart ideas. Clean execution. No filler. Just what you need to move faster and grow better.",
+  title: 'Valar Digital Blog – Shopify Insights & Strategies',
+  description: "Valar Digital's Blog covers everything you need to know about Shopify. Learn what’s working, improve performance, and grow your e-commerce business.",
+  alternates: {
+    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/blog',
+  },
   openGraph: {
-    title: "What's Actually Working for Shopify Brands",
-    description: "Smart ideas. Clean execution. No filler. Just what you need to move faster and grow better.",
+    title: 'Valar Digital Blog – Shopify Insights & Strategies',
+    description: "Valar Digital's Blog covers everything you need to know about Shopify. Learn what’s working, improve performance, and grow your e-commerce business.",
+    url: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://v2.valardigital.com') + '/blog',
   },
 };
 

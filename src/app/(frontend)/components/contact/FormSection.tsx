@@ -90,8 +90,8 @@ export default function FormSection() {
     setIsSubmitting(true);
 
     try {
-      // Replace with your actual form submission logic
-      const response = await fetch('/api/growth-report', {
+      // Submit to contact API
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
