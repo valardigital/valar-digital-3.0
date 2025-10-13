@@ -43,7 +43,7 @@ export default function ServiceDetails() {
           { title: 'Social Media Marketing', description: 'Build engagement and customer loyalty through paid and organic strategies.' },
           { title: 'Content Marketing', description: 'Engage your target audience with compelling content, visuals, and brand storytelling.' },
           { title: 'Email Marketing', description: 'Automated, personalized email campaigns to build long-lasting relationships with your customers.' },
-          { title: 'Conversion Rate Optimisation', description: 'A/B testing, UX design, personalization, and analytics to consistently improve your store’s performance.' },
+          { title: 'Conversion Rate Optimization', description: 'A/B testing, UX design, personalization, and analytics to consistently improve your store’s performance.' },
         ]}
       />
       <TestimonialSection />

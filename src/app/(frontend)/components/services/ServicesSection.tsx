@@ -84,12 +84,12 @@ export default function ServicesSection() {
                         image={serviceImg5}
                         imageAlt="Shopify design mockups"
                         title="Shopify Marketing"
-                        description="We provide tailored Shopify marketing strategies aligned with your business goals. From paid ads to email campaigns, our result-driven framework helps you attract, convert, and retain more customers."
+                        description="We provide tailored Shopify marketing strategies aligned with your business goals. From paid ads to email campaigns, our results-driven framework helps you attract, convert, and retain more customers."
                         features={[
                             "SEO & PPC for Shopify",
                             "Shopify Social Media Marketing",
                             "Email & Content Marketing for Shopify",
-                            "Conversion Rate Optimisation"
+                            "Conversion Rate Optimization"
                         ]}
                         buttonText="Find out more"
                         buttonHref="/services/shopify-marketing"
@@ -112,13 +112,13 @@ export default function ServicesSection() {
                         image={serviceImg7}
                         imageAlt="Shopify design mockups"
                         title="Conversion Rate Optimization"
-                        description="We transform your Shopify store into a revenue machine by turning more visitors into paying customers. By improving functionality, testing new ideas, and enhancing the customer journeys, our CRO strategies are designed to boost sales and revenue while improving the customer experience."
+                        description="We transform your Shopify store into a revenue machine by turning more visitors into paying customers. By improving functionality, testing new ideas, and enhancing the customer journey, our CRO strategies are designed to boost sales and revenue while improving the customer experience."
                         features={[
                             "CRO audits & strategy",
                             "A/B testing & experimentation",
                             "On-site personalization",
                             "Analytics & user behavior tracking",
-                            "Heat maps optimization"
+                            "Heatmap optimization"
                         ]}
                         buttonText="Find out more"
                         buttonHref="/services/conversion-rate-optimization"

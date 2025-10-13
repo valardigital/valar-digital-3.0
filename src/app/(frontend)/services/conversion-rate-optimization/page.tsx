@@ -36,7 +36,7 @@ export default function ServiceDetails() {
       />
       <StepByStepSection 
         heading={'Our CRO Process'}
-        description={'Here’s how our conversion rate optimisation services drive measurable results:'}
+        description={'Here’s how our conversion rate optimization services drive measurable results:'}
         steps={[
           { title: 'Audit & Analysis', description: 'We analyze your funnel to identify conversion blockers, friction points, and opportunities using analytics, heatmaps, and user recordings.' },
           { title: 'Hypothesis & Testing', description: 'We develop data-backed hypotheses and run A/B tests on key elements—layouts, copy, CTAs, checkout flow, and more.' },
