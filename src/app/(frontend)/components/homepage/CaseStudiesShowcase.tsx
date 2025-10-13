@@ -152,7 +152,7 @@ const CaseStudiesShowcase = memo(() => {
             and delivered a smarter upsell system that actually worked.<br className='hidden md:block' />
             We saw the impact within weeks.”
           </p>
-          <p className="font-bold">James O' Connor<span className='font-normal'>, Founder</span></p>
+          <p className="font-bold">James O'Connor<span className='font-normal'>, Founder</span></p>
         </div>
       </div>
 

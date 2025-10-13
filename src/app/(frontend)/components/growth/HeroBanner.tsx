@@ -13,7 +13,7 @@ export default function HeroBanner() {
                 <p className="tracking-[0.04rem] leading-[1.5] mb-4 md:mb-8">
                     Discover exactly what's holding your store back from its next revenue milestone.<br className="hidden md:block" />
                     Our expert team will audit your UX, conversion rate, site speed,<br className="hidden md:block" />
-                    and growth opportunities- completely free.
+                    and growth opportunities-completely free.
                 </p>
                 <Link href="#growthReportForm" className="mx-auto w-max block">
                         <Button size="lg" className='w-max flex items-center'>

@@ -6,7 +6,7 @@ export default function HowItWorks() {
         <section className="bg-white py-8 md:py-10 px-4 md:px-0">
             <div className="container mx-auto">
                 <h2 className="text-text-dark font-medium leading-[1.2] text-5xl mb-4 md:mb-6 text-center">How It Works</h2>
-                <p className="text-text-dark tracking-[0.04rem] leading-[1.5] text-center">Getting your growth report is simple and straight forward</p>
+                <p className="text-text-dark tracking-[0.04rem] leading-[1.5] text-center">Getting your growth report is simple and straightforward</p>
                 <div className="grid grid-cols-1 lg:grid-cols-4 mt-6 md:mt-[60px] md:mb-[30px] gap-4 md:gap-6">
                     <div className="rounded-2xl border relative">
                         <div className="bg-primary text-white rounded-tl-2xl rounded-br-2xl font-bold text-2xl md:text-[32px] size-[61px] md:size-[70px] flex items-center justify-center">01</div>
