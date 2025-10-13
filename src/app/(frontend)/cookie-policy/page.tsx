@@ -4,6 +4,9 @@ import React from 'react';
 export const metadata = {
     title: 'Cookie Policy | Valar Digital',
     description: 'Learn about how Valar Digital uses cookies to improve your browsing experience and website functionality.',
+    alternates: {
+        canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/cookie-policy',
+    },
 };
 
 export default function CookiePolicy() {
@@ -289,3 +292,5 @@ export default function CookiePolicy() {
         </div>
     );
 }
+
+

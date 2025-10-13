@@ -32,6 +32,13 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns,
   },
+  async redirects() {
+    return [
+      { source: '/privacyPolicy', destination: '/privacy-policy', permanent: true },
+      { source: '/cookiePolicy', destination: '/cookie-policy', permanent: true },
+      { source: '/services/headless-commerce', destination: '/services/headless-commerce-development', permanent: true },
+    ]
+  },
 };
 
 export default withPayload(nextConfig) 

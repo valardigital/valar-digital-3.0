@@ -104,10 +104,10 @@ const Footer = () => {
           <div className="flex md:flex-row flex-col-reverse items-center justify-between text-xs md:text-sm text-text-dark pb-6 md:pb-0 tracking-[0.04rem]">
             <p className='md:mt-0 mt-2'>Copyright © 2025 Valar Digital. All rights reserved</p>
             <div className="flex gap-2 md:gap-4">
-              <Link href="/privacyPolicy" className={`transition-colors ${pathname === '/privacyPolicy' ? 'underline' : 'hover:underline'
+              <Link href="/privacy-policy" className={`transition-colors ${pathname === '/privacy-policy' ? 'underline' : 'hover:underline'
                 }`}>Privacy Policy</Link>
               <span className="text-text-dark hidden md:block">|</span>
-              <Link href="/cookiePolicy" className={`transition-colors ${pathname === '/cookiePolicy' ? 'underline' : 'hover:underline'
+              <Link href="/cookie-policy" className={`transition-colors ${pathname === '/cookie-policy' ? 'underline' : 'hover:underline'
                 }`}>Cookie Policy</Link>
             </div>
           </div>

@@ -4,6 +4,9 @@ import React from 'react';
 export const metadata = {
     title: 'Privacy Policy | Valar Digital',
     description: 'Learn how Valar Digital collects, uses, and protects your personal information.',
+    alternates: {
+        canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/privacy-policy',
+    },
 };
 
 export default function PrivacyPolicy() {
@@ -402,3 +405,5 @@ export default function PrivacyPolicy() {
         </div>
     );
 }
+
+
