@@ -17,6 +17,7 @@ const testimonials = [
         role: 'Co-Founder, Purdy & Figg',
         quote: "Their expertise in design, UX, and Shopify has been game-changing for our brand. Reliable, capable, and always great to work with.",
         buttonLink: "[Read the Purdy & Figg Case Study]",
+        link: '/case-studies/purdy-figg-conversion-optimization',
         avatar: CharlieRubin,
     },
     {
@@ -31,6 +32,7 @@ const testimonials = [
         role: 'Co-Founder, Purdy & Figg',
         quote: "Working with this team has transformed our online presence. Their attention to detail and user experience expertise is unmatched.",
         buttonLink: "[Read the Purdy & Figg Case Study]",
+        link: '/case-studies/purdy-figg-conversion-optimization',
         avatar: JackRubin,
     },
     {
@@ -126,7 +128,7 @@ export const TestimonialSlider = () => {
                                                 <p className="text-text-light">{testimonial.role}</p>
                                             </div>
                                             <Link
-                                                href="#" >
+                                                href={(testimonials[index] as any).link || '#'} >
                                                 <Button variant="link" className='font-normal text-primary p-0'>
                                                     {testimonial.buttonLink}
                                                 </Button>
@@ -164,7 +166,7 @@ export const TestimonialSlider = () => {
                                     </div>
                                     <div className='flex-1 content-end'>
                                     <Link
-                                        href="#" >
+                                        href={(testimonials[index] as any).link || '#'} >
                                         <Button variant="link" className='font-normal text-primary p-0'>
                                             {testimonial.buttonLink}
                                         </Button>
