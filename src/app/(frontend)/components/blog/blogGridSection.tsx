@@ -160,7 +160,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
                                 <article key={post.id} className="group">
                                     <Link href={`/blog/${post.id}`}>
                                         <div>
-                                            <div className="relative w-full h-[220px] sm:h-[350px] lg:h-[490px] mb-4 overflow-hidden rounded-2xl">
+                                            <div className="relative w-full aspect-[16/9] mb-4 overflow-hidden rounded-2xl">
                                                 {post.hasVideo && playingId === post.id && (post.videoUploadUrl || post.embedUrl) ? (
                                                     post.videoUploadUrl ? (
                                                         <video
@@ -186,6 +186,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
                                                             alt={post.title}
                                                             fill
                                                             className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 65vw, 50vw"
                                                         />
                                                         {post.hasVideo && (
                                                             <div className="absolute inset-0 flex items-center justify-center">
