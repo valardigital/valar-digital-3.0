@@ -1,140 +1,59 @@
-"use client"
+import React from 'react';
+import { getPayload } from 'payload';
+import configPromise from '@payload-config';
+import { getMediaUrl } from '@/utilities/getMediaUrl';
+import InsightsSlider from './InsightsSlider';
 
-import React, { useState, memo, useCallback } from 'react';
-import Slider from 'react-slick';
-import Image from 'next/image';
-import { Button } from '../ui/button';
-import thumbnail1 from "@/assets/images/home/insights-img-1.png";
-import thumbnail2 from "@/assets/images/home/insights-img-2.png";
-import thumbnail3 from "@/assets/images/home/insights-img-3.png";
-import play from "@/assets/images/home/play.svg";
-import Link from 'next/link';
-
-interface ArrowProps {
-  onClick?: () => void;
+interface BlogPost {
+  id: string;
+  title: string;
+  excerpt: string;
+  slug: string;
+  featuredImage?: {
+    url: string;
+    alt?: string;
+  };
+  categories?: string[];
+  readTime?: string;
+  publishedAt: string;
+  hasVideo?: boolean;
+  videoUploadUrl?: string;
+  embedUrl?: string;
+  type?: string;
 }
 
-const insights = [
-  {
-    id: 1,
-    category: 'Strategy',
-    title: 'Why Ecommerce Brands Overthink the Homepage, and What to Fix First',
-    description: 'Common assumptions and positions you as pragmatic, not flashy.',
-    thumbnail: thumbnail1,
-    hasVideo: true,
-    videoPageUrl: '#',
-    readTime: '12 min read',
-    date: 'September 7, 2024'
-  },
-  {
-    id: 2,
-    category: 'Conversion',
-    title: 'How We Lifted AOV by 16% Without a Single Discount',
-    description: 'Strategic approach to increasing average order value through smart UX.',
-    thumbnail: thumbnail2,
-    hasVideo: false,
-    videoPageUrl: '#',
-    videoUrl: '/videos/insight-2.mp4',
-    readTime: '16 min Watch',
-    date: 'September 7, 2024'
-  },
-  {
-    id: 3,
-    category: 'UX Strategy',
-    title: 'Subscription UX Isn\'t Just Skips and Pauses',
-    description: 'Shows depth of thinking, speaks to brands struggling with wanting sustainable LTV.',
-    thumbnail: thumbnail3,
-    hasVideo: false,
-    videoPageUrl: '#',
-    videoUrl: '/videos/insight-3.mp4',
-    readTime: '8 min read',
-    date: 'September 7, 2024'
-  },
-  {
-    id: 4,
-    category: 'Strategy',
-    title: 'Why Ecommerce Brands Overthink the Homepage, and What to Fix First',
-    description: 'Common assumptions and positions you as pragmatic, not flashy.',
-    thumbnail: thumbnail1,
-    hasVideo: false,
-    videoPageUrl: '#',
-    videoUrl: '/Videos/ample-video.mp4',
-    readTime: '12 min read',
-    date: 'September 7, 2024'
-  },
-  {
-    id: 5,
-    category: 'UX Strategy',
-    title: 'Subscription UX Isn\'t Just Skips and Pauses',
-    description: 'Shows depth of thinking, speaks to brands struggling with wanting sustainable LTV.',
-    thumbnail: thumbnail3,
-    hasVideo: false,
-    videoPageUrl: '#',
-    videoUrl: '/videos/insight-3.mp4',
-    readTime: '8 min read',
-    date: 'September 7, 2024'
-  },
-];
+const InsightsSection = async () => {
+  let featuredBlogs: BlogPost[] = [];
 
-const InsightsSection = memo(() => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [playingIndex, setPlayingIndex] = useState<number | null>(null);
-
-  const CustomPrevArrow = ({ onClick }: ArrowProps) => (
-    <button
-      className="absolute left-4 md:left-24 -bottom-17 md:bottom-1/2 -translate-y-1/2 z-10 size-8 md:size-12 bg-white border border-border md:border-none rounded-md flex items-center justify-center cursor-pointer"
-      onClick={onClick}
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" className="size-4 md:size-6 rotate-180" fill="none" viewBox="0 0 24 24" stroke="#1e1e1e">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M3 12h16m-6-6l6 6-6 6" />
-      </svg>
-    </button>
-  );
-
-  const CustomNextArrow = ({ onClick }: ArrowProps) => (
-    <button
-      className="absolute right-4 md:right-24 -bottom-17 md:bottom-1/2 -translate-y-1/2 z-10 size-8 md:size-12 bg-white border border-border md:border-none  rounded-md flex items-center justify-center cursor-pointer"
-      onClick={onClick}
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" className="size-4 md:size-6" fill="none" viewBox="0 0 24 24" stroke="#1e1e1e">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M3 12h16m-6-6l6 6-6 6" />
-      </svg>
-    </button>
-  );
-
-  const settings = {
-    // initialSlide: 2,
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 2.3,
-    slidesToScroll: 1,
-    centerMode: true,
-    centerPadding: '40px',
-    focusOnSelect: true,
-    beforeChange: useCallback((_current: number, next: number) => setCurrentSlide(next), []),
-    prevArrow: <CustomPrevArrow />,
-    nextArrow: <CustomNextArrow />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          centerMode: true,
-          centerPadding: '40px',
-        }
+  try {
+    const payload = await getPayload({ config: configPromise });
+    const result = await payload.find({
+      collection: 'blog',
+      where: { 
+        _status: { equals: 'published' },
+        isFeatured: { equals: true }
       },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          centerMode: false,
-          dots: true,
-          dotsClass: 'slick-dots custom-dots',
-        }
-      }
-    ]
-  };
+      limit: 6,
+      sort: '-publishedAt',
+    });
+
+    featuredBlogs = result.docs.map((post: any) => ({
+      id: post.id,
+      title: post.title,
+      excerpt: post.excerpt || '',
+      slug: post.slug,
+      featuredImage: post.featuredImage,
+      categories: post.categories || [],
+      readTime: '5 min read', // Default since readTime isn't in the schema
+      publishedAt: post.publishedAt || post.createdAt,
+      hasVideo: post.type === 'video',
+      videoUploadUrl: post.videoUpload?.url,
+      embedUrl: post.embedUrl,
+      type: post.type,
+    }));
+  } catch (error) {
+    console.error('Error fetching featured blogs:', error);
+  }
 
   return (
     <section className="insights-section py-8 md:py-10 bg-white">
@@ -153,85 +72,12 @@ const InsightsSection = memo(() => {
             A behind-the-scenes look at how we think, test, and scale ecommerce brands.
           </p>
         </div>
-        {/* Video Slider */}
-        <div className="relative mb-18 md:mb-12">
-          <Slider {...settings} >
-            {insights.map((insight, index) => (
-              <div key={insight.id} className="px-4">
-                <div className="relative transition-all duration-500">
-                  {/* Image/Video Thumbnail */}
-                  <div className="relative aspect-[16/10]">
-                    <Image
-                      src={insight.thumbnail}
-                      alt={insight.title}
-                      width={400}
-                      height={250}
-                      className="w-full h-full object-cover rounded-[8px]"
-                      loading="lazy"
-                    />
-
-                    {/* Gray overlay for non-active slides */}
-                    <div
-                      className={`
-                absolute inset-0 bg-white/60 transition-opacity duration-500 rounded-md
-                ${currentSlide === index ? 'opacity-0' : 'opacity-100'}
-              `}
-                    />
-
-                    {/* Play Button - only show if it's a video */}
-                    {insight.hasVideo && (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Link href={insight.videoPageUrl}>
-                          <button className="w-10 md:w-14 h-10 md:h-14 bg-white/40 border border-white backdrop-blur-sm rounded-[12px] md:rounded-2xl flex items-center justify-center cursor-pointer hover:bg-white/60 transition-colors">
-                            <Image src={play} className='size-4 md:size-6' alt="Play video" />
-                          </button>
-                        </Link>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Content */}
-                  <div className="pt-4 bg-white text-left">
-                    {/* Category Badge */}
-                    <div className="mb-6">
-                      <span className="bg-primary/5 px-3 py-2 rounded-[4px] border border-border text-sm text-text-dark">
-                        {insight.category}
-                      </span>
-                    </div>
-                    <h3 className="text-lg md:text-xl font-medium text-text-dark mb-2 line-clamp-2 leading-[1.5]">
-                      {insight.title}
-                    </h3>
-                    <p className="text-text-dark tracking-[0.04rem] mb-3.5 line-clamp-1 leading-[1.5]">
-                      {insight.description}
-                    </p>
-                    <div className="flex items-center gap-2 text-sm text-text-light tracking-[0.02rem] leading-[1.5]">
-                      <span>{insight.readTime}</span>
-                      <span className='bg-text-light size-1 rounded-full'></span>
-                      <span>{insight.date}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </Slider>
-        </div>
-
-        {/* CTA Button */}
-        <div className='px-4'>
-          <Link
-            href="/blog"
-          >
-            <Button className="w-full md:w-max mx-auto flex items-center gap-2">
-              Read More Insights
-              <svg xmlns="http://www.w3.org/2000/svg" className="size-5 mt-[1px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12h19m-6-6l6 6-6 6" />
-              </svg>
-            </Button>
-          </Link>
-        </div>
+        
+        {/* Featured Blogs Slider */}
+        <InsightsSlider blogs={featuredBlogs} />
       </div>
     </section>
   );
-});
+};
 
 export default InsightsSection;
