@@ -47,7 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .map((doc: any) => ({
       url: `${BASE_URL}/blog/${doc.slug}`,
       lastModified: doc.updatedAt || doc.publishedAt || doc.createdAt || undefined,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
     }));
 
   // Dynamic case studies
