@@ -7,7 +7,6 @@ import Link from 'next/link'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { RichText } from '@/components/RichText'
 import type { Metadata } from 'next'
-import { getServerSideURL } from '@/utilities/getURL'
 import { cache } from 'react'
 import { RenderBlocks } from '@/blocks'
 import arrowLeft from "@/assets/images/arrow-left-blog.svg";
@@ -154,7 +153,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
 
   if (!post) return {}
 
-  const siteUrl = getServerSideURL()
+  const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com'
   const canonicalPath = `/blog/${slug}`
   
   // Fetch meta data from Payload CMS
