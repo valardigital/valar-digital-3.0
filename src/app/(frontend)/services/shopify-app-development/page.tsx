@@ -12,7 +12,7 @@ import HeroBanner from '../../components/serviceDetails/HeroBanner';
 import StepByStepSection from '../../components/serviceDetails/ProcessStepSection';
 import TestimonialSection from '../../components/serviceDetails/TestimonialSection';
 import CTASection from '../../components/shared/CTASection';
-
+import serviceImg3 from "@/assets/images/services/service-img-3.png";
 
 export default function ServiceDetails() {
 
@@ -33,6 +33,8 @@ export default function ServiceDetails() {
           { text: "Custom Business Workflows" },
         ]}
         ctaText={"Schedule A Call"}
+        image={serviceImg3}
+        imageAlt="Shopify app"
       />
       <StepByStepSection 
         heading={'Our Shopify Apps Process'}

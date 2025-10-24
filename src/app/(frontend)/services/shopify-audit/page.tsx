@@ -12,7 +12,7 @@ import HeroBanner from '../../components/serviceDetails/HeroBanner';
 import StepByStepSection from '../../components/serviceDetails/ProcessStepSection';
 import TestimonialSection from '../../components/serviceDetails/TestimonialSection';
 import CTASection from '../../components/shared/CTASection';
-
+import serviceImg6 from "@/assets/images/services/service-img-6.png";
 
 export default function ServiceDetails() {
 
@@ -32,6 +32,8 @@ export default function ServiceDetails() {
           { text: "High-impact conversion rate optimization (CRO) tactics" },
           { text: "Conduct user testing to improve customer experience" },
         ]}
+        image={serviceImg6}
+        imageAlt="Shopify audit"
       />
       <StepByStepSection 
         heading={'End-to-End Shopify Audit and Improvement'}

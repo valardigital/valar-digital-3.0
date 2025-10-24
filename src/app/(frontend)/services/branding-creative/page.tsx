@@ -4,6 +4,7 @@ import StepByStepSection from '../../components/serviceDetails/ProcessStepSectio
 import TestimonialSection from '../../components/serviceDetails/TestimonialSection';
 import CTASection from '../../components/shared/CTASection';
 import { Metadata } from 'next';
+import serviceImg11 from "@/assets/images/services/service-img-10.png";
 
 export const metadata: Metadata = {
   title: 'Branding & Creative Services for E-Commerce Growth',
@@ -30,6 +31,8 @@ export default function ServiceDetails() {
           { text: "Creative direction for product launches and campaigns" },
           { text: "Visual identity design(logos, colors, typography) that ensures consistent brand identity across platforms" },
         ]}
+        image={serviceImg11}
+        imageAlt="Branding Creative"
       />
       <StepByStepSection 
         heading={'Our Branding and Creative Process'}

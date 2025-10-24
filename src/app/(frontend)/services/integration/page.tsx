@@ -4,6 +4,7 @@ import StepByStepSection from '../../components/serviceDetails/ProcessStepSectio
 import TestimonialSection from '../../components/serviceDetails/TestimonialSection';
 import CTASection from '../../components/shared/CTASection';
 import { Metadata } from 'next';
+import serviceImg10 from "@/assets/images/services/service-img-3.png";
 
 export const metadata: Metadata = {
   title: 'Shopify Integration Services for Seamless Operations',
@@ -30,6 +31,8 @@ export default function ServiceDetails() {
           { text: "Smooth integrations with high cohesion and low coupling" },
           { text: "End-to-end setup, support, and guidance." },
         ]}
+        image={serviceImg10}
+        imageAlt="Integration"
       />
       <StepByStepSection 
         heading={'Shopify Integration Services Tailored for Your Business'}

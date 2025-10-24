@@ -12,7 +12,7 @@ import HeroBanner from '../../components/serviceDetails/HeroBanner';
 import StepByStepSection from '../../components/serviceDetails/ProcessStepSection';
 import TestimonialSection from '../../components/serviceDetails/TestimonialSection';
 import CTASection from '../../components/shared/CTASection';
-
+import serviceImg4 from "@/assets/images/services/service-img-4.png";
 
 export default function ServiceDetails() {
 
@@ -32,6 +32,8 @@ export default function ServiceDetails() {
           { text: "Preserve integrations with apps and software during migration." },
           { text: "Retain and improve SEO with 301 redirects & metadata optimization." },
         ]}
+        image={serviceImg4}
+        imageAlt="Shopify Migration"
       />
       <StepByStepSection 
         heading={'Our Shopify Migration Process'}

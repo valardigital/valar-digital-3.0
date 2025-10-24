@@ -12,7 +12,7 @@ import HeroBanner from '../../components/serviceDetails/HeroBanner';
 import StepByStepSection from '../../components/serviceDetails/ProcessStepSection';
 import TestimonialSection from '../../components/serviceDetails/TestimonialSection';
 import CTASection from '../../components/shared/CTASection';
-
+import serviceImg7 from "@/assets/images/services/service-img-7.png";
 
 export default function ServiceDetails() {
 
@@ -33,6 +33,8 @@ export default function ServiceDetails() {
           { text: "Consulting for Long-Term CRO Growth Strategies" },
         ]}
         ctaText={"Schedule a Call"}
+        image={serviceImg7}
+        imageAlt="Conversion rate optimization"
       />
       <StepByStepSection 
         heading={'Our CRO Process'}

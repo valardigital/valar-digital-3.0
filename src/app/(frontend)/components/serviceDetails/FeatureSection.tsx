@@ -10,11 +10,13 @@ interface FeatureSectionProps {
     description?: string;
     features?: FeatureItem[];
     ctaText?: string;
+    image?: any;
+    imageAlt?: string;
 }
 
 export default function FeatureSection({
     heading = "What We <span class=\"text-primary\">Offer?</span>",
-    description = "From creative direction to high-fidelity layouts, we handle the full design process — always guided by UX best practices and CRO insights. Whether you’re launching or rebranding, we’ll make sure your store looks good and performs better.",
+    description = "From creative direction to high-fidelity layouts, we handle the full design process — always guided by UX best practices and CRO insights. Whether you're launching or rebranding, we'll make sure your store looks good and performs better.",
     features = [
         { text: "UX research & wireframes" },
         { text: "Mobile-first, responsive layouts" },
@@ -23,6 +25,8 @@ export default function FeatureSection({
         { text: "Ready-to-build developer handoff" },
     ],
     ctaText = "Schedule A Call",
+    image = featureImage,
+    imageAlt = "Feature Image",
 }: FeatureSectionProps) {
     return (
         <section className="bg-background-muted py-8 md:py-[64px]">
@@ -61,7 +65,7 @@ export default function FeatureSection({
                 </div>
                 <div className="flex-1">
                     <div className="rounded-3xl overflow-hidden">
-                        <Image src={featureImage} alt="Feature Image" className="object-cover size-full" />
+                        <Image src={image} alt={imageAlt} className="object-cover size-full" />
                     </div>
                     <Link href="#calendar" className='flex-1 block md:hidden mt-4'>
                         <Button size="lg" className='w-full flex items-center'>

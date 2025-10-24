@@ -12,7 +12,7 @@ import HeroBanner from '../../components/serviceDetails/HeroBanner';
 import StepByStepSection from '../../components/serviceDetails/ProcessStepSection';
 import TestimonialSection from '../../components/serviceDetails/TestimonialSection';
 import CTASection from '../../components/shared/CTASection';
-
+import serviceImg9 from "@/assets/images/services/service-img-9.png";
 
 export default function ServiceDetails() {
 
@@ -33,6 +33,8 @@ export default function ServiceDetails() {
           { text: "CDN Integration for Global Reach" },
         ]}
         ctaText={"Schedule A Call"}
+        image={serviceImg9}
+        imageAlt="Website speed optimization"
       />
       <StepByStepSection 
         heading={'Our Speed Optimization Process'}

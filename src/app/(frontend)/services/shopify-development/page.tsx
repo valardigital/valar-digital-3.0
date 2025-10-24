@@ -12,7 +12,7 @@ import HeroBanner from '../../components/serviceDetails/HeroBanner';
 import StepByStepSection from '../../components/serviceDetails/ProcessStepSection';
 import TestimonialSection from '../../components/serviceDetails/TestimonialSection';
 import CTASection from '../../components/shared/CTASection';
-
+import serviceImg2 from "@/assets/images/services/service-img-2.png";
 
 export default function ServiceDetails() {
 
@@ -32,6 +32,8 @@ export default function ServiceDetails() {
           { text: "Scalable technical architecture" },
           { text: "Shopify headless commerce" },
         ]}
+        image={serviceImg2}
+        imageAlt="Shopify Devlopment"
       />
       <StepByStepSection 
         heading={'Our Shopify Development Process'}

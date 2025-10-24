@@ -12,6 +12,7 @@ import HeroBanner from '../../components/serviceDetails/HeroBanner';
 import StepByStepSection from '../../components/serviceDetails/ProcessStepSection';
 import TestimonialSection from '../../components/serviceDetails/TestimonialSection';
 import CTASection from '../../components/shared/CTASection';
+import serviceImg1 from "@/assets/images/services/service-img-1.png";
 
 
 export default function ServiceDetails() {
@@ -24,7 +25,7 @@ export default function ServiceDetails() {
       />
       <FeatureSection 
         heading={"What We Do"}
-        description={"From audits to full-scale builds, we create visually stunning Shopify websites designed to sell. Whether you’re launching a new brand, migrating from another platform, or improving your customer experience, our team ensures your store looks great and performs even better. With our best UX and CRO insights, we promise an engaging experience from the first click to checkout."}
+        description={"From audits to full-scale builds, we create visually stunning Shopify websites designed to sell. Whether you're launching a new brand, migrating from another platform, or improving your customer experience, our team ensures your store looks great and performs even better. With our best UX and CRO insights, we promise an engaging experience from the first click to checkout."}
         features={[
           { text: "UX research & user flow mapping" },
           { text: "Mobile-first responsive design" },
@@ -32,6 +33,8 @@ export default function ServiceDetails() {
           { text: "Conversion-focused design systems" },
           { text: "Developer-ready Figma handoffs" },
         ]}
+        image={serviceImg1}
+        imageAlt="Shopify Design Services"
       />
       <StepByStepSection 
         heading={'How Our Shopify Design Process Works'}

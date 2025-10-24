@@ -12,7 +12,7 @@ import HeroBanner from '../../components/serviceDetails/HeroBanner';
 import StepByStepSection from '../../components/serviceDetails/ProcessStepSection';
 import TestimonialSection from '../../components/serviceDetails/TestimonialSection';
 import CTASection from '../../components/shared/CTASection';
-
+import serviceImg8 from "@/assets/images/services/service-img-8.png";
 
 export default function ServiceDetails() {
 
@@ -33,6 +33,8 @@ export default function ServiceDetails() {
           { text: "Seamless API Integrations" },
         ]}
         ctaText={"Schedule A Call"}
+        image={serviceImg8}
+        imageAlt="Headless commerce"
       />
       <StepByStepSection 
         heading={'Our Headless Commerce Process'}

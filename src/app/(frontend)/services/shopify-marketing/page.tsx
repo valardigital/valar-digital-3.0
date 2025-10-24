@@ -12,7 +12,7 @@ import HeroBanner from '../../components/serviceDetails/HeroBanner';
 import StepByStepSection from '../../components/serviceDetails/ProcessStepSection';
 import TestimonialSection from '../../components/serviceDetails/TestimonialSection';
 import CTASection from '../../components/shared/CTASection';
-
+import serviceImg5 from "@/assets/images/services/service-img-5.png";
 
 export default function ServiceDetails() {
 
@@ -33,6 +33,8 @@ export default function ServiceDetails() {
           { text: "Email marketing to nurture leads and convert customers." },
           { text: "A/B testing, personalization, and analytics to boost conversion." },
         ]}
+        image={serviceImg5}
+        imageAlt="Shopify Marketing"
       />
       <StepByStepSection 
         heading={'Our All-in-One Shopify Marketing Framework'}
