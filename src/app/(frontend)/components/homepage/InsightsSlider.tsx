@@ -118,14 +118,14 @@ const InsightsSlider = memo(({ blogs }: InsightsSliderProps) => {
             <div key={blog.id} className="px-4">
               <div className="relative transition-all duration-500">
                 {/* Image/Video Thumbnail */}
-                <div className="relative aspect-[16/10]">
+                <div className="relative aspect-[16/9] bg-gray-100">
                   <Image
                     src={blog.featuredImage?.url ? getMediaUrl(blog.featuredImage.url) : '/placeholder-image.jpg'}
                     alt={blog.featuredImage?.alt || blog.title}
-                    width={400}
-                    height={250}
-                    className="w-full h-full object-cover rounded-[8px]"
+                    fill
+                    className="w-full h-full object-contain rounded-[8px]"
                     loading="lazy"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
 
                   {/* Gray overlay for non-active slides */}
