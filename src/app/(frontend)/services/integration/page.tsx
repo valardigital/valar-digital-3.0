@@ -4,7 +4,7 @@ import StepByStepSection from '../../components/serviceDetails/ProcessStepSectio
 import TestimonialSection from '../../components/serviceDetails/TestimonialSection';
 import CTASection from '../../components/shared/CTASection';
 import { Metadata } from 'next';
-import serviceImg10 from "@/assets/images/services/service-img-3.png";
+import serviceImg10 from "@/assets/images/services/service-img-10.png";
 
 export const metadata: Metadata = {
   title: 'Shopify Integration Services for Seamless Operations',

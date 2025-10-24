@@ -4,7 +4,7 @@ import StepByStepSection from '../../components/serviceDetails/ProcessStepSectio
 import TestimonialSection from '../../components/serviceDetails/TestimonialSection';
 import CTASection from '../../components/shared/CTASection';
 import { Metadata } from 'next';
-import serviceImg11 from "@/assets/images/services/service-img-10.png";
+import serviceImg11 from "@/assets/images/services/service-img-11.png";
 
 export const metadata: Metadata = {
   title: 'Branding & Creative Services for E-Commerce Growth',
