@@ -67,7 +67,7 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
                           src={typeof mainFeaturedPost.image === 'string' ? getMediaUrl(mainFeaturedPost.image) : mainFeaturedPost.image}
                           alt={mainFeaturedPost.title}
                           fill
-                          className="object-contain group-hover:scale-105 transition-transform duration-300"
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                         {mainFeaturedPost.hasVideo && (
                           <div className="absolute inset-0 flex items-center justify-center">
