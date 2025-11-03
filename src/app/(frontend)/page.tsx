@@ -18,11 +18,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    title: 'Shopify Development & Growth Partner | Valar Digital',
-    description: 'We build and scale Shopify stores with expert development, CRO, and automation. Partner with Valar Digital to grow faster and smarter with less friction.',
-    images: ['/Images/valar_logo.png?v=2'],
-  },
 };
 import React, { Suspense } from 'react';
 import dynamic from 'next/dynamic';

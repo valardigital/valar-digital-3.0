@@ -47,11 +47,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    title: 'Valar Digital',
-    description: "Beyond an Agency, We're the Team That Builds Beside You.",
-    images: ['/Images/valar_logo.png?v=4'],
-  },
 };
 
 export default function RootLayout({
