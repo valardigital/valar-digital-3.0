@@ -32,6 +32,20 @@ const neueMontreal = localFont({
 export const metadata: Metadata = {
   title: "Valar Digital",
   description: "Beyond an Agency, We're the Team That Builds Beside You.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com'),
+  openGraph: {
+    title: "Valar Digital",
+    description: "Beyond an Agency, We're the Team That Builds Beside You.",
+    url: '/',
+    siteName: 'Valar Digital',
+    images: ['/Images/valar_logo.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Valar Digital',
+    description: "Beyond an Agency, We're the Team That Builds Beside You.",
+    images: ['/Images/valar_logo.png'],
+  },
 };
 
 export default function RootLayout({
