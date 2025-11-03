@@ -36,15 +36,22 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Valar Digital",
     description: "Beyond an Agency, We're the Team That Builds Beside You.",
+    type: 'website',
     url: '/',
     siteName: 'Valar Digital',
-    images: ['/Images/valar_logo.png'],
+    images: [
+      {
+        url: '/Images/valar_logo.png?v=2',
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Valar Digital',
     description: "Beyond an Agency, We're the Team That Builds Beside You.",
-    images: ['/Images/valar_logo.png'],
+    images: ['/Images/valar_logo.png?v=2'],
   },
 };
 
