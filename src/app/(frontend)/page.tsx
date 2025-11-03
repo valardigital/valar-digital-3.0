@@ -10,11 +10,18 @@ export const metadata: Metadata = {
     title: 'Shopify Development & Growth Partner | Valar Digital',
     description: 'We build and scale Shopify stores with expert development, CRO, and automation. Partner with Valar Digital to grow faster and smarter with less friction.',
     url: '/',
+    images: [
+      {
+        url: '/Images/valar_logo.png?v=4',
+        width: 1200,
+        height: 600,
+      },
+    ],
   },
   twitter: {
-    card: 'summary_large_image',
     title: 'Shopify Development & Growth Partner | Valar Digital',
     description: 'We build and scale Shopify stores with expert development, CRO, and automation. Partner with Valar Digital to grow faster and smarter with less friction.',
+    images: ['/Images/valar_logo.png?v=2'],
   },
 };
 import React, { Suspense } from 'react';

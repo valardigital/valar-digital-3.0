@@ -41,13 +41,17 @@ export const metadata: Metadata = {
     siteName: 'Valar Digital',
     images: [
       {
-        url: '/Images/valar_logo.png?v=2',
+        url: '/Images/valar_logo.png?v=4',
         width: 1200,
         height: 630,
       },
     ],
   },
-
+  twitter: {
+    title: 'Valar Digital',
+    description: "Beyond an Agency, We're the Team That Builds Beside You.",
+    images: ['/Images/valar_logo.png?v=4'],
+  },
 };
 
 export default function RootLayout({
