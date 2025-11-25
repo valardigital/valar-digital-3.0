@@ -37,9 +37,9 @@ const testimonials = [
     },
     {
         name: 'James Doe',
-        role: 'CEO, SLM Brand',
+        role: 'CEO, SLS3 Brand',
         quote: "The results speak for themselves. Our conversion rate doubled within months of working with them.",
-        buttonLink: "[Read the SLM Case Study]",
+        buttonLink: "[Read the SLS3 Case Study]",
         avatar: JamesCissel,
     },
     {

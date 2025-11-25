@@ -53,7 +53,7 @@ const testimonials: Testimonial[] = [
   },
   {
     name: 'James Doe',
-    role: 'CEO, SLM Brand',
+    role: 'CEO, SLS3 Brand',
     videoThumb: JamesCissel.src,
     avatar: JamesCisselProfile,
     videoUrl: '/Videos/sls3-video.mp4',
