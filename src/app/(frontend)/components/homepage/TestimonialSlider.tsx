@@ -79,6 +79,7 @@ const TestimonialSlider = memo(() => {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const sliderRef = useRef<Slider>(null);
   const [currentTransform, setCurrentTransform] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
 
   const NextArrow = (props: any) => {
     const { onClick } = props;
@@ -161,6 +162,11 @@ const TestimonialSlider = memo(() => {
       setPlayingIndex(index);
     }
   }, [playingIndex]);
+
+  // Ensure component only renders on client to avoid hydration issues
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Handle trackpad/wheel scroll events with proper debouncing
   useEffect(() => {
@@ -256,8 +262,17 @@ const TestimonialSlider = memo(() => {
 
       {/* Slider */}
       <div className="mb-20 md:mb-17">
-        <Slider ref={sliderRef} {...settings} className='lg:pr-22'>
-          {testimonials.map((t, idx) => (
+        {!isMounted ? (
+          <div className="flex gap-4 px-4">
+            {testimonials.map((t, idx) => (
+              <div key={idx} className="px-4">
+                <div className="relative rounded-3xl md:rounded-4xl overflow-hidden shadow-[0px_4px_0px_0px_#F0F5FC] max-w-[376px] h-[482px] md:h-[528px] bg-gray-200 animate-pulse" />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <Slider ref={sliderRef} {...settings} className='lg:pr-22'>
+            {testimonials.map((t, idx) => (
             <div key={idx} className="px-4">
               <div className="relative rounded-3xl md:rounded-4xl overflow-hidden shadow-[0px_4px_0px_0px_#F0F5FC] max-w-[376px]">
 
@@ -303,7 +318,6 @@ const TestimonialSlider = memo(() => {
                       playsInline
                     >
                       <source src={t.videoUrl} type="video/mp4" />
-                      Your browser does not support the video tag.
                     </video>
 
                     {/* Gradient overlay */}
@@ -355,7 +369,8 @@ const TestimonialSlider = memo(() => {
               </div>
             </div>
           ))}
-        </Slider>
+          </Slider>
+        )}
       </div>
 
       {/* CTA Section */}

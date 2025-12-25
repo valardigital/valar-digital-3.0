@@ -54,10 +54,9 @@ const HeroBanner = memo(function HeroBanner() {
               src={heroImage}
               alt="Team Photo"
               className="w-full h-full object-cover"
-              width={600}
-              height={100}
+              width={1424}
+              height={1326}
               priority
-              
             />
             <div className="absolute w-[25%] inset-0 bg-gradient-to-r from-white via-white/20 to-transparent pointer-events-none"></div>
           </div>
@@ -96,8 +95,8 @@ const HeroBanner = memo(function HeroBanner() {
             src={heroImageMobile}
             alt="Team Photo"
             className="w-full h-full object-cover object-[55%_center]"
-            width={600}
-            height={100}
+            width={4096}
+            height={2731}
             priority
           />
           {/* Dark overlay for better text readability */}
