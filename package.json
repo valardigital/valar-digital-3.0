@@ -25,7 +25,7 @@
     "clsx": "^2.1.1",
     "graphql": "^16.11.0",
     "lucide-react": "^0.525.0",
-    "next": "15.3.5",
+    "next": "15.3.6",
     "payload": "^3.51.0",
     "payload-webp": "^1.1.6",
     "react": "^19.0.0",
