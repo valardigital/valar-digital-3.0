@@ -102,7 +102,7 @@ const Footer = () => {
 
           {/* Bottom Row */}
           <div className="flex md:flex-row flex-col-reverse items-center justify-between text-xs md:text-sm text-text-dark pb-6 md:pb-0 tracking-[0.04rem]">
-            <p className='md:mt-0 mt-2'>Copyright © 2025 Valar Digital. All rights reserved</p>
+            <p className='md:mt-0 mt-2'>Copyright © {new Date().getFullYear()} Valar Digital. All rights reserved</p>
             <div className="flex gap-2 md:gap-4">
               <Link href="/privacy-policy" className={`transition-colors ${pathname === '/privacy-policy' ? 'underline' : 'hover:underline'
                 }`}>Privacy Policy</Link>
