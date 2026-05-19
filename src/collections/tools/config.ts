@@ -14,8 +14,11 @@ export const TOOL_CATEGORY_OPTIONS = [
 ];
 
 export const TOOL_COMPONENT_OPTIONS = [
-  { label: 'True ROAS Calculator', value: 'roas-calculator' },
+  { label: 'Custom HTML (paste body + CSS + JS)', value: 'custom-html' },
+  { label: 'True ROAS Calculator (built-in)', value: 'roas-calculator' },
 ] as const;
+
+const isCustomHtml = (data: { toolComponent?: string }) => data?.toolComponent === 'custom-html';
 
 export type ToolComponentType = (typeof TOOL_COMPONENT_OPTIONS)[number]['value'];
 
@@ -79,9 +82,51 @@ const Tools: CollectionConfig = {
               label: 'Tool Type',
               type: 'select',
               required: true,
+              defaultValue: 'custom-html',
               options: [...TOOL_COMPONENT_OPTIONS],
               admin: {
-                description: 'Which interactive tool to render on the detail page',
+                description:
+                  'Custom HTML: paste your tool markup in the fields below. Built-in: uses a pre-built React tool. Site header and footer are added automatically.',
+              },
+            },
+            {
+              name: 'customHtml',
+              label: 'HTML (body content)',
+              type: 'textarea',
+              admin: {
+                description:
+                  'Paste the inner body HTML only (no site header/footer). You may include <style> and <script> tags here—they will be extracted automatically.',
+                condition: isCustomHtml,
+                rows: 16,
+              },
+              validate: (value: unknown, { siblingData }: { siblingData: { toolComponent?: string } }) => {
+                if (siblingData?.toolComponent === 'custom-html') {
+                  if (!value || typeof value !== 'string' || !value.trim()) {
+                    return 'HTML content is required for custom tools';
+                  }
+                }
+                return true;
+              },
+            },
+            {
+              name: 'customCss',
+              label: 'CSS (optional)',
+              type: 'textarea',
+              admin: {
+                description: 'Optional CSS. Paste rules only, or full <style>...</style> blocks.',
+                condition: isCustomHtml,
+                rows: 12,
+              },
+            },
+            {
+              name: 'customJs',
+              label: 'JavaScript (optional)',
+              type: 'textarea',
+              admin: {
+                description:
+                  'Optional JavaScript. Paste script content only, or full <script>...</script> blocks. Runs after the HTML is mounted.',
+                condition: isCustomHtml,
+                rows: 12,
               },
             },
             {

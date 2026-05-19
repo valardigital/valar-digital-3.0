@@ -2,6 +2,7 @@
 
 import { Suspense } from 'react';
 import RoasCalculator from './RoasCalculator';
+import CustomToolContent from './CustomToolContent';
 import type { ToolComponentType } from '@/collections/tools';
 
 function ToolLoading() {
@@ -12,8 +13,24 @@ function ToolLoading() {
   );
 }
 
-export default function ToolRenderer({ toolComponent }: { toolComponent: ToolComponentType | string }) {
+export type ToolRendererProps = {
+  toolComponent: ToolComponentType | string;
+  customHtml?: string | null;
+  customCss?: string | null;
+  customJs?: string | null;
+};
+
+export default function ToolRenderer({
+  toolComponent,
+  customHtml,
+  customCss,
+  customJs,
+}: ToolRendererProps) {
   switch (toolComponent) {
+    case 'custom-html':
+      return (
+        <CustomToolContent html={customHtml || ''} css={customCss} js={customJs} />
+      );
     case 'roas-calculator':
       return (
         <Suspense fallback={<ToolLoading />}>

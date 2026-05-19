@@ -36,7 +36,12 @@ export default async function ToolDetailPage({ params: paramsPromise }: Args) {
   return (
     <div className="bg-background-muted mt-[64px] md:mt-[80px] min-h-screen">
       <LivePreviewListener />
-      <ToolRenderer toolComponent={tool.toolComponent as string} />
+      <ToolRenderer
+        toolComponent={tool.toolComponent as string}
+        customHtml={tool.customHtml}
+        customCss={tool.customCss}
+        customJs={tool.customJs}
+      />
     </div>
   );
 }

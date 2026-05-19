@@ -905,9 +905,21 @@ export interface Tool {
    */
   excerpt: string;
   /**
-   * Which interactive tool to render on the detail page
+   * Custom HTML: paste your tool markup in the fields below. Built-in: uses a pre-built React tool. Site header and footer are added automatically.
    */
-  toolComponent: 'roas-calculator';
+  toolComponent: 'custom-html' | 'roas-calculator';
+  /**
+   * Paste the inner body HTML only (no site header/footer). You may include <style> and <script> tags here—they will be extracted automatically.
+   */
+  customHtml?: string | null;
+  /**
+   * Optional CSS. Paste rules only, or full <style>...</style> blocks.
+   */
+  customCss?: string | null;
+  /**
+   * Optional JavaScript. Paste script content only, or full <script>...</script> blocks. Runs after the HTML is mounted.
+   */
+  customJs?: string | null;
   /**
    * Shown on cards, e.g. "5 min" or "Free calculator"
    */
@@ -1422,6 +1434,9 @@ export interface ToolsSelect<T extends boolean = true> {
   featuredImage?: T;
   excerpt?: T;
   toolComponent?: T;
+  customHtml?: T;
+  customCss?: T;
+  customJs?: T;
   durationLabel?: T;
   categories?: T;
   meta?:
