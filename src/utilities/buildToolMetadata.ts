@@ -7,9 +7,9 @@ const DEFAULT_OG_IMAGE = '/Images/valar_logo.png?v=4';
 
 /** Defaults for the ROAS calculator (matches original standalone tool). */
 export const ROAS_CALCULATOR_META = {
-  title: 'The True ROAS Calculator — by Valar Digital',
+  title: 'Free ROAS Calculator | Break-Even ROAS for Ecommerce',
   description:
-    'Find your true break-even ROAS and the target MER your Shopify brand actually needs. Built by Valar Digital.',
+    "Find the ROAS your ads team won't show you. Plug in your costs and instantly see your true break-even ROAS and the Target MER you actually need. Free for ecommerce brands.",
   openGraphDescription:
     "Most brands don't know their break-even ROAS. Plug in your numbers and find out in 60 seconds.",
 } as const;

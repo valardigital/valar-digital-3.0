@@ -10,18 +10,18 @@ const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com'
 const toolsListingUrl = `${siteUrl}/tools`;
 
 export const metadata: Metadata = {
-  title: 'Free Shopify Tools — Valar Digital',
+  title: 'Free Ecommerce Tools for Shopify Brands | Valar Digital',
   description:
-    'Interactive calculators and tools for Shopify brands. Find your true break-even ROAS, unit economics, and more.',
+    'Free calculators and tools built for ecommerce brands. Measure true profitability, calculate break-even ROAS, and make smarter decisions with real unit economics.',
   alternates: {
     canonical: toolsListingUrl,
   },
   openGraph: {
     type: 'website',
     siteName: 'Valar Digital',
-    title: 'Free Shopify Tools — Valar Digital',
+    title: 'Free Ecommerce Tools for Shopify Brands | Valar Digital',
     description:
-      'Interactive calculators and tools for Shopify brands. Find your true break-even ROAS, unit economics, and more.',
+      'Free calculators and tools built for ecommerce brands. Measure true profitability, calculate break-even ROAS, and make smarter decisions with real unit economics.',
     url: toolsListingUrl,
     images: [
       {
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free Shopify Tools — Valar Digital',
+    title: 'Free Ecommerce Tools for Shopify Brands | Valar Digital',
     description:
-      'Interactive calculators and tools for Shopify brands. Find your true break-even ROAS, unit economics, and more.',
+      'Free calculators and tools built for ecommerce brands. Measure true profitability, calculate break-even ROAS, and make smarter decisions with real unit economics.',
     images: [`${siteUrl}/Images/valar_logo.png?v=4`],
   },
 };
