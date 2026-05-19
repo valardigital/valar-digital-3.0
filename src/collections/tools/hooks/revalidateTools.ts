@@ -8,7 +8,7 @@ export const revalidateTools = async (doc: any, operation: 'create' | 'update' |
 
     if (doc.slug) paths.push(`/tools/${doc.slug}`)
     paths.push('/tools', '/tools/page', '/sitemap.xml')
-    tags.push('tools-sitemap')
+    tags.push('tools-sitemap', 'tools')
 
     if (operation === 'delete') {
       paths.push('/tools', '/tools/page')

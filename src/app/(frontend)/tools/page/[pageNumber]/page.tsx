@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
+import { getPayload } from 'payload';
+import configPromise from '@payload-config';
 import { TOOL_CATEGORY_OPTIONS } from '@/collections/tools';
-import { fetchToolsGridOnly } from '@/utilities/fetchTools';
+import { fetchToolsGridOnly, TOOLS_GRID_LIMIT } from '@/utilities/fetchTools';
 import ToolsGridSection from '../../../components/tools/toolsGridSection';
 
-const GRID_LIMIT = 6;
+export const revalidate = 60;
 
 export async function generateStaticParams() {
-  const { getPayload } = await import('payload');
-  const configPromise = (await import('@payload-config')).default;
   const payload = await getPayload({ config: configPromise });
   const { totalDocs } = await payload.count({
     collection: 'tools',
@@ -15,8 +16,10 @@ export async function generateStaticParams() {
     overrideAccess: false,
   });
 
-  const totalPages = Math.ceil(totalDocs / GRID_LIMIT);
-  return Array.from({ length: totalPages }, (_, i) => ({ pageNumber: String(i + 1) }));
+  const totalPages = Math.ceil(totalDocs / TOOLS_GRID_LIMIT);
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => ({
+    pageNumber: String(i + 2),
+  }));
 }
 
 export async function generateMetadata({
@@ -46,7 +49,12 @@ export default async function ToolsPaginationPage({
 }) {
   const { pageNumber } = await params;
   const currentPage = Math.max(1, parseInt(pageNumber, 10) || 1);
-  const { tools, pagination } = await fetchToolsGridOnly(currentPage, GRID_LIMIT);
+
+  if (currentPage <= 1) {
+    redirect('/tools');
+  }
+
+  const { tools, pagination } = await fetchToolsGridOnly(currentPage);
 
   return (
     <div className="bg-background-muted mt-[64px] md:mt-[80px]">
@@ -55,6 +63,9 @@ export default async function ToolsPaginationPage({
         popularTags={popularTags}
         page={pagination.page}
         totalPages={pagination.totalPages}
+        totalItems={pagination.totalDocs}
+        itemsPerPage={pagination.limit}
+        paginationMode="path"
       />
     </div>
   );

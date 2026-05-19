@@ -1,5 +1,19 @@
 import { getMediaUrl } from '@/utilities/getMediaUrl';
 
+export const TOOL_LISTING_SELECT = {
+  title: true,
+  slug: true,
+  excerpt: true,
+  featuredImage: true,
+  categories: true,
+  durationLabel: true,
+  isFeatured: true,
+  publishedAt: true,
+  updatedAt: true,
+  createdAt: true,
+  toolComponent: true,
+} as const;
+
 export type ToolCardData = {
   id: string;
   title: string;

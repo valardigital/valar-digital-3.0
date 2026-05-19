@@ -15,6 +15,7 @@ interface ToolsGridSectionProps {
   totalPages?: number;
   totalItems?: number;
   itemsPerPage?: number;
+  paginationMode?: 'query' | 'path';
 }
 
 export default function ToolsGridSection({
@@ -24,6 +25,7 @@ export default function ToolsGridSection({
   totalPages = 1,
   totalItems = 0,
   itemsPerPage = 6,
+  paginationMode = 'query',
 }: ToolsGridSectionProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTag, setActiveTag] = useState<string | null>(null);
@@ -220,6 +222,7 @@ export default function ToolsGridSection({
         itemsPerPage={itemsPerPage}
         baseUrl="/tools"
         itemLabel="Tools"
+        paginationMode={paginationMode}
       />
     </>
   );

@@ -4,7 +4,7 @@ import { fetchToolsListing } from '@/utilities/fetchTools';
 import FeaturedToolsSection from '../components/tools/featuredToolsSection';
 import ToolsGridSection from '../components/tools/toolsGridSection';
 
-/** ISR — avoid force-dynamic so nav prefetch from /blog does not hammer the server */
+/** Page 1 only — no searchParams so this route can be ISR-cached on client navigation. */
 export const revalidate = 60;
 
 const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com';
@@ -44,14 +44,8 @@ export const metadata: Metadata = {
 
 const popularTags = TOOL_CATEGORY_OPTIONS.map((opt) => opt.value);
 
-export default async function ToolsListingPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ page?: string }>;
-}) {
-  const { page: pageParam } = await searchParams;
-  const currentPage = Math.max(1, parseInt(pageParam || '1', 10) || 1);
-  const { featuredTools, tools, pagination } = await fetchToolsListing(currentPage);
+export default async function ToolsListingPage() {
+  const { featuredTools, tools, pagination } = await fetchToolsListing(1);
 
   return (
     <div className="bg-background-muted mt-[64px] md:mt-[80px]">
@@ -59,16 +53,14 @@ export default async function ToolsListingPage({
         <div className="container mx-auto py-6 md:py-10 px-4 md:px-0">
           <div className="text-center text-text-dark">
             <h1 className="text-[28px] md:text-5xl font-medium mb-2 md:mb-6 leading-[1.2]">
-            Real Tools. Real Numbers.
-            <br />
-             Better Decisions.
-              
+              Real Tools. Real Numbers.
+              <br />
+              Better Decisions.
             </h1>
             <p className="tracking-[0.04rem] leading-[1.5] max-w-2xl mx-auto">
-            A collection of free tools designed to help ecommerce brands measure profitability, 
-            <br />
-            improve efficiency, and scale with confidence.
-             
+              A collection of free tools designed to help ecommerce brands measure profitability,
+              <br />
+              improve efficiency, and scale with confidence.
             </p>
           </div>
         </div>
@@ -82,6 +74,7 @@ export default async function ToolsListingPage({
         totalPages={pagination.totalPages}
         totalItems={pagination.totalDocs}
         itemsPerPage={pagination.limit}
+        paginationMode="path"
       />
     </div>
   );

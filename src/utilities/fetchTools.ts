@@ -1,18 +1,23 @@
+import { unstable_cache } from 'next/cache';
+import { draftMode } from 'next/headers';
 import { getPayload } from 'payload';
 import configPromise from '@payload-config';
-import { draftMode } from 'next/headers';
-import { mapToolDocToCard, type ToolCardData } from '@/utilities/mapToolToCard';
+import {
+  mapToolDocToCard,
+  TOOL_LISTING_SELECT,
+  type ToolCardData,
+} from '@/utilities/mapToolToCard';
 
-const GRID_LIMIT = 6;
+export const TOOLS_GRID_LIMIT = 6;
 
-export async function fetchToolsListing(page: number) {
+async function fetchToolsListingData(page: number, draft: boolean) {
   const payload = await getPayload({ config: configPromise });
-  const { isEnabled: draft } = await draftMode();
 
   const publishedWhere = { _status: { equals: 'published' as const } };
   const featuredWhere = draft
     ? { isFeatured: { equals: true } }
     : { ...publishedWhere, isFeatured: { equals: true } };
+  const gridWhere = draft ? {} : publishedWhere;
 
   const [featuredRes, toolsRes] = await Promise.all([
     payload.find({
@@ -23,16 +28,18 @@ export async function fetchToolsListing(page: number) {
       draft,
       overrideAccess: draft,
       depth: 1,
+      select: TOOL_LISTING_SELECT,
     }),
     payload.find({
       collection: 'tools',
-      where: draft ? {} : publishedWhere,
+      where: gridWhere,
       sort: '-publishedAt',
-      limit: GRID_LIMIT,
+      limit: TOOLS_GRID_LIMIT,
       page,
       draft,
       overrideAccess: draft,
       depth: 1,
+      select: TOOL_LISTING_SELECT,
     }),
   ]);
 
@@ -43,7 +50,7 @@ export async function fetchToolsListing(page: number) {
   const tools = (toolsRes.docs || []).map(mapToolDocToCard).filter(Boolean) as ToolCardData[];
 
   const totalDocs = toolsRes?.totalDocs ?? 0;
-  const limit = toolsRes?.limit ?? GRID_LIMIT;
+  const limit = toolsRes?.limit ?? TOOLS_GRID_LIMIT;
   const totalPages = Math.max(1, Math.ceil(totalDocs / limit));
   const currentPage = toolsRes?.page ?? page;
 
@@ -54,28 +61,43 @@ export async function fetchToolsListing(page: number) {
   };
 }
 
-export async function fetchToolsGridOnly(page: number, limit = GRID_LIMIT) {
-  const payload = await getPayload({ config: configPromise });
+const getCachedToolsListing = unstable_cache(
+  async (page: number) => fetchToolsListingData(page, false),
+  ['tools-listing'],
+  { revalidate: 60, tags: ['tools'] },
+);
+
+export async function fetchToolsListing(page: number) {
   const { isEnabled: draft } = await draftMode();
+  if (draft) return fetchToolsListingData(page, true);
+  return getCachedToolsListing(page);
+}
+
+export async function fetchToolsGridOnly(page: number) {
+  const { isEnabled: draft } = await draftMode();
+  const payload = await getPayload({ config: configPromise });
+  const publishedWhere = { _status: { equals: 'published' as const } };
+  const gridWhere = draft ? {} : publishedWhere;
 
   const toolsRes = await payload.find({
     collection: 'tools',
-    where: draft ? {} : { _status: { equals: 'published' } },
+    where: gridWhere,
     sort: '-publishedAt',
-    limit,
+    limit: TOOLS_GRID_LIMIT,
     page,
     draft,
     overrideAccess: draft,
-    depth: 2,
+    depth: 1,
+    select: TOOL_LISTING_SELECT,
   });
 
   const tools = (toolsRes.docs || []).map(mapToolDocToCard).filter(Boolean) as ToolCardData[];
   const totalDocs = toolsRes?.totalDocs ?? 0;
-  const pageLimit = toolsRes?.limit ?? limit;
-  const totalPages = Math.max(1, Math.ceil(totalDocs / pageLimit));
+  const limit = toolsRes?.limit ?? TOOLS_GRID_LIMIT;
+  const totalPages = Math.max(1, Math.ceil(totalDocs / limit));
 
   return {
     tools,
-    pagination: { page: toolsRes?.page ?? page, totalPages },
+    pagination: { page: toolsRes?.page ?? page, totalPages, totalDocs, limit },
   };
 }
