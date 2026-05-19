@@ -66,7 +66,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
     }));
 
-  return [...staticRoutes, ...blogItems, ...caseStudyItems];
+  const toolsRes = await payload.find({
+    collection: 'tools',
+    where: { _status: { equals: 'published' } },
+    limit: 500,
+    sort: '-updatedAt',
+  });
+  const toolItems: MetadataRoute.Sitemap = (toolsRes?.docs || [])
+    .filter((d: any) => d?.slug)
+    .map((doc: any) => ({
+      url: `${BASE_URL}/tools/${doc.slug}`,
+      lastModified: doc.updatedAt || doc.publishedAt || doc.createdAt || undefined,
+      changeFrequency: 'weekly',
+    }));
+
+  return [...staticRoutes, ...blogItems, ...caseStudyItems, ...toolItems];
 }
 
 

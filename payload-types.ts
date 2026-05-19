@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     blog: Blog;
     caseStudy: CaseStudy;
+    tools: Tool;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +83,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     blog: BlogSelect<false> | BlogSelect<true>;
     caseStudy: CaseStudySelect<false> | CaseStudySelect<true>;
+    tools: ToolsSelect<false> | ToolsSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -886,6 +888,58 @@ export interface RichTextSection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tools".
+ */
+export interface Tool {
+  id: string;
+  /**
+   * Tool name shown on listing and detail pages
+   */
+  title: string;
+  /**
+   * Thumbnail for the tools listing grid
+   */
+  featuredImage: string | Media;
+  /**
+   * Short description for listing cards
+   */
+  excerpt: string;
+  /**
+   * Which interactive tool to render on the detail page
+   */
+  toolComponent: 'roas-calculator';
+  /**
+   * Shown on cards, e.g. "5 min" or "Free calculator"
+   */
+  durationLabel?: string | null;
+  categories?: ('Unit Economics' | 'Growth' | 'Shopify' | 'Marketing' | 'Analytics')[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  /**
+   * Automatically set to current user
+   */
+  author: string | User;
+  publishedAt?: string | null;
+  /**
+   * Max 4 tools can be featured on the listing page
+   */
+  isFeatured?: boolean | null;
+  /**
+   * Auto-generated from title. You can edit this if needed.
+   */
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-jobs".
  */
 export interface PayloadJob {
@@ -998,6 +1052,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'caseStudy';
         value: string | CaseStudy;
+      } | null)
+    | ({
+        relationTo: 'tools';
+        value: string | Tool;
       } | null)
     | ({
         relationTo: 'payload-jobs';
@@ -1357,6 +1415,32 @@ export interface RichTextSectionSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tools_select".
+ */
+export interface ToolsSelect<T extends boolean = true> {
+  title?: T;
+  featuredImage?: T;
+  excerpt?: T;
+  toolComponent?: T;
+  durationLabel?: T;
+  categories?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  author?: T;
+  publishedAt?: T;
+  isFeatured?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-jobs_select".
  */
 export interface PayloadJobsSelect<T extends boolean = true> {
@@ -1434,6 +1518,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'caseStudy';
           value: string | CaseStudy;
+        } | null)
+      | ({
+          relationTo: 'tools';
+          value: string | Tool;
         } | null);
     global?: string | null;
     user?: (string | null) | User;

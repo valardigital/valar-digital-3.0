@@ -8,6 +8,7 @@ import Users from './src/collections/Users'
 import Media from './src/collections/Media'
 import { Blog } from './src/collections/blog'
 import { CaseStudy } from './src/collections/case-studies'
+import { Tools } from './src/collections/tools'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -16,7 +17,7 @@ export default buildConfig({
     user: Users.slug,
     importMap: { baseDir: path.resolve(__dirname), },
     livePreview: {
-        collections: ['blog', 'caseStudy'],
+        collections: ['blog', 'caseStudy', 'tools'],
         breakpoints: [
           {
             label: 'Desktop',
@@ -38,11 +39,14 @@ export default buildConfig({
           if (collectionConfig?.slug === 'caseStudy') {
             return `/case-studies/${data.slug}`
           }
+          if (collectionConfig?.slug === 'tools') {
+            return `/tools/${data.slug}`
+          }
           return ''
         },
       },
   },
-  collections: [Users, Media, Blog, CaseStudy],
+  collections: [Users, Media, Blog, CaseStudy, Tools],
   cors: ['http://localhost:3000',process.env.DOMAIN_NAME || ''],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
