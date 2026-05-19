@@ -9,6 +9,7 @@ interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;
   baseUrl: string;
+  itemLabel?: string;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
@@ -16,7 +17,8 @@ const Pagination: React.FC<PaginationProps> = ({
   totalPages,
   totalItems,
   itemsPerPage,
-  baseUrl
+  baseUrl,
+  itemLabel = 'Posts',
 }) => {
   // Calculate the range of items being shown
   const startItem = (currentPage - 1) * itemsPerPage + 1;
@@ -69,7 +71,7 @@ const Pagination: React.FC<PaginationProps> = ({
     <div className="flex items-center justify-center gap-4 py-8">
       {/* Post count indicator */}
       <div className="text-text-light text-sm tracking-[0.04rem]">
-        Showing {startItem}-{endItem} of {totalItems} Posts
+        Showing {startItem}-{endItem} of {totalItems} {itemLabel}
       </div>
 
       {/* Pagination buttons */}

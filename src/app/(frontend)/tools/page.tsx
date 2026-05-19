@@ -6,18 +6,38 @@ import ToolsGridSection from '../components/tools/toolsGridSection';
 
 export const dynamic = 'force-dynamic';
 
+const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com';
+const toolsListingUrl = `${siteUrl}/tools`;
+
 export const metadata: Metadata = {
   title: 'Free Shopify Tools — Valar Digital',
   description:
-    'Interactive calculators and tools for Shopify brands. Find your true ROAS, unit economics, and more.',
+    'Interactive calculators and tools for Shopify brands. Find your true break-even ROAS, unit economics, and more.',
   alternates: {
-    canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/tools',
+    canonical: toolsListingUrl,
   },
   openGraph: {
+    type: 'website',
+    siteName: 'Valar Digital',
     title: 'Free Shopify Tools — Valar Digital',
     description:
-      'Interactive calculators and tools for Shopify brands. Find your true ROAS, unit economics, and more.',
-    url: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/tools',
+      'Interactive calculators and tools for Shopify brands. Find your true break-even ROAS, unit economics, and more.',
+    url: toolsListingUrl,
+    images: [
+      {
+        url: `${siteUrl}/Images/valar_logo.png?v=4`,
+        width: 1200,
+        height: 630,
+        alt: 'Valar Digital',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Free Shopify Tools — Valar Digital',
+    description:
+      'Interactive calculators and tools for Shopify brands. Find your true break-even ROAS, unit economics, and more.',
+    images: [`${siteUrl}/Images/valar_logo.png?v=4`],
   },
 };
 
@@ -38,13 +58,16 @@ export default async function ToolsListingPage({
         <div className="container mx-auto py-6 md:py-10 px-4 md:px-0">
           <div className="text-center text-text-dark">
             <h1 className="text-[28px] md:text-5xl font-medium mb-2 md:mb-6 leading-[1.2]">
-              Free Tools for
-              <br className="hidden md:block" /> Shopify Brands
+            Real Tools. Real Numbers.
+            <br />
+             Better Decisions.
+              
             </h1>
             <p className="tracking-[0.04rem] leading-[1.5] max-w-2xl mx-auto">
-              Calculators and frameworks built from real client work.
-              <br />
-              Plug in your numbers. Get answers you can act on.
+            A collection of free tools designed to help ecommerce brands measure profitability, 
+            <br />
+            improve efficiency, and scale with confidence.
+             
             </p>
           </div>
         </div>

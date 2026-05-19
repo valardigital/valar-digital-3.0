@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getMediaUrl } from '@/utilities/getMediaUrl';
 import Pagination from '../shared/Pagination';
+import { Button } from '../ui/button';
 import type { ToolCardData } from '@/utilities/mapToolToCard';
 
 interface ToolsGridSectionProps {
@@ -26,6 +27,7 @@ export default function ToolsGridSection({
 }: ToolsGridSectionProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [email, setEmail] = useState('');
 
   const normalize = (v: string) => v.toLowerCase();
   const matchesText = (tool: ToolCardData, query: string) => {
@@ -46,6 +48,12 @@ export default function ToolsGridSection({
 
   const handleTagClick = (tag: string) => {
     setActiveTag((prev) => (prev === tag ? null : tag));
+  };
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Newsletter signup:', email);
+    setEmail('');
   };
 
   return (
@@ -173,6 +181,32 @@ export default function ToolsGridSection({
                     ))}
                   </div>
                 </div>
+
+                <hr className="my-8 bg-border hidden lg:block" />
+
+                <div>
+                  <h3 className="text-xl font-medium text-text-dark mb-1 leading-[1.5] tracking-[0.025rem]">
+                    Stay Updated
+                  </h3>
+                  <p className="text-text-light mb-4 leading-[1.4] tracking-[0.04rem]">
+                    Get the latest insights and strategies delivered to your inbox.
+                  </p>
+                  <form onSubmit={handleNewsletterSubmit} className="space-y-4">
+                    <input
+                      type="email"
+                      name="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Your email address"
+                      required
+                      autoComplete="off"
+                      className="w-full px-6 py-4 border border-border rounded-[8px] text-text-dark placeholder:tracking-[0.04rem] placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                    />
+                    <Button type="submit" className="w-full">
+                      Subscribe
+                    </Button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -185,6 +219,7 @@ export default function ToolsGridSection({
         totalItems={effectiveTotalItems}
         itemsPerPage={itemsPerPage}
         baseUrl="/tools"
+        itemLabel="Tools"
       />
     </>
   );
