@@ -209,7 +209,7 @@ export default function RoasCalculator() {
     p.set('cur', currency);
     p.set('cogsMode', cogsMode);
     INPUT_IDS.forEach((id) => p.set(id, values[id]));
-    return `${window.location.origin}/tools?${p.toString()}`;
+    return `${window.location.origin}/tools/roas-calculator?${p.toString()}`;
   };
 
   const handleShare = async () => {
