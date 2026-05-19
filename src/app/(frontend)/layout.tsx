@@ -56,8 +56,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${neueMontreal.variable} antialiased font-sans`}>
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning className={`${neueMontreal.variable} antialiased font-sans`}>
         <Script id="linkedin-insight-tag" strategy="afterInteractive">
           {`_linkedin_partner_id = "9044801";
 window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];

@@ -41,6 +41,7 @@ const Header = () => {
                   <Link href="/services"><li className={`uppercase h-max p-0 text-base ${getTextColor('/services')}`}>Services</li></Link>
                   <Link href="/case-studies"><li className={`uppercase h-max p-0 text-base ${getTextColor('/case-studies')}`}>Case Studies</li></Link>
                   <Link href="/blog"><li className={`uppercase h-max p-0 text-base ${getTextColor('/blog')}`}>Blogs</li></Link>
+                  <Link href="/tools"><li className={`uppercase h-max p-0 text-base ${getTextColor('/tools')}`}>Tools</li></Link>
                 </ul>
               </nav>
 
@@ -129,11 +130,22 @@ const Header = () => {
             <div className={`transition-all duration-700 delay-400 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
               }`}>
               <Link
-                href="#"
+                href="/blog"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block border-b border-border py-6"
               >
                 <button className={`uppercase h-max p-0 text-base ${pathname === '/blog' ? 'text-primary' : ''}`}>Blogs</button>
+              </Link>
+            </div>
+
+            <div className={`transition-all duration-700 delay-500 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+              }`}>
+              <Link
+                href="/tools"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block border-b border-border py-6"
+              >
+                <button className={`uppercase h-max p-0 text-base ${pathname === '/tools' ? 'text-primary' : ''}`}>Tools</button>
               </Link>
             </div>
           </nav>
