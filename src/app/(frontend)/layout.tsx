@@ -3,6 +3,7 @@ import Script from "next/script";
 import Header from "./components/layout/header";
 import Footer from "./components/layout/Footer";
 import { LivePreviewGate } from "@/components/LivePreviewListener/LivePreviewGate";
+import { ChunkLoadRecovery, chunkLoadRecoveryScript } from "@/components/ChunkLoadRecovery";
 import localFont from "next/font/local";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -58,6 +59,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning className={`${neueMontreal.variable} antialiased font-sans`}>
+        <Script
+          id="chunk-load-recovery"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: chunkLoadRecoveryScript }}
+        />
+        <ChunkLoadRecovery />
         <Script id="linkedin-insight-tag" strategy="afterInteractive">
           {`_linkedin_partner_id = "9044801";
 window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];

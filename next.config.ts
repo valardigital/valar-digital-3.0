@@ -29,8 +29,30 @@ if (siteHostname) {
 }
 
 const nextConfig: NextConfig = {
+  // Unique id per build — stale HTML must not be served after deploy
+  generateBuildId: async () => {
+    return process.env.VERCEL_GIT_COMMIT_SHA || process.env.BUILD_ID || `build-${Date.now()}`
+  },
   images: {
     remotePatterns,
+  },
+  async headers() {
+    return [
+      {
+        // Hashed JS/CSS — safe to cache forever (listed first so it wins over the catch-all)
+        source: '/_next/static/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      {
+        // HTML / RSC — never serve stale document that points at removed chunks
+        source: '/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'no-store, must-revalidate' },
+        ],
+      },
+    ]
   },
   async redirects() {
     return [
