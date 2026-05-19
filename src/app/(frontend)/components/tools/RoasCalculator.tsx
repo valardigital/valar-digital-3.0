@@ -595,7 +595,7 @@ export default function RoasCalculator() {
             We <span className="text-primary">scale</span> the brand.
           </h2>
           <p className="mt-5 text-text-light max-w-2xl mx-auto leading-relaxed text-lg">
-            Valar is the embedded growth team behind brands like Podiumfig (scaled to $75M), Zima
+            Valar is the embedded growth team behind brands like Purdy & Figg (scaled to $75M), Zima
             Dental (10+ regions, B2B + DTC), Soto Gardens, and The Ward Society (doubled revenue). If
             your numbers above look ugly — we&apos;ve fixed worse.
           </p>
