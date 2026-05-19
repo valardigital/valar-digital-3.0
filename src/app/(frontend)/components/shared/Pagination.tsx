@@ -10,6 +10,13 @@ interface PaginationProps {
   itemsPerPage: number;
   baseUrl: string;
   itemLabel?: string;
+  /** `path` → /blog, /blog/page/2 — keeps /blog statically cacheable */
+  paginationMode?: 'query' | 'path';
+}
+
+function pageHref(baseUrl: string, page: number, mode: 'query' | 'path'): string {
+  if (page <= 1) return baseUrl;
+  return mode === 'path' ? `${baseUrl}/page/${page}` : `${baseUrl}?page=${page}`;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
@@ -19,6 +26,7 @@ const Pagination: React.FC<PaginationProps> = ({
   itemsPerPage,
   baseUrl,
   itemLabel = 'Posts',
+  paginationMode = 'query',
 }) => {
   // Calculate the range of items being shown
   const startItem = (currentPage - 1) * itemsPerPage + 1;
@@ -78,7 +86,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <div className="flex items-center gap-2">
         {/* Previous button */}
         <Link
-          href={currentPage > 1 ? `${baseUrl}?page=${currentPage - 1}` : '#'}
+          href={currentPage > 1 ? pageHref(baseUrl, currentPage - 1, paginationMode) : '#'}
           className={`flex items-center justify-center w-8 h-8 border border-border rounded text-text-dark transition-colors ${
             currentPage <= 1 
               ? 'opacity-50 cursor-not-allowed pointer-events-none' 
@@ -110,7 +118,7 @@ const Pagination: React.FC<PaginationProps> = ({
           return (
             <Link
               key={pageNum}
-              href={`${baseUrl}?page=${pageNum}`}
+              href={pageHref(baseUrl, pageNum, paginationMode)}
               className={`flex items-center justify-center w-8 h-8 border rounded text-sm font-medium transition-colors ${
                 isActive
                   ? 'bg-primary text-white border-primary'
@@ -126,7 +134,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
         {/* Next button */}
         <Link
-          href={currentPage < totalPages ? `${baseUrl}?page=${currentPage + 1}` : '#'}
+          href={currentPage < totalPages ? pageHref(baseUrl, currentPage + 1, paginationMode) : '#'}
           className={`flex items-center justify-center w-8 h-8 border border-border rounded text-text-dark transition-colors ${
             currentPage >= totalPages 
               ? 'opacity-50 cursor-not-allowed pointer-events-none' 

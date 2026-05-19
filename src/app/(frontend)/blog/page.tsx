@@ -1,147 +1,51 @@
 import type { Metadata } from 'next';
-import { getPayload } from 'payload';
-import configPromise from '@payload-config';
+import { BLOG_CATEGORY_OPTIONS } from '@/collections/blog/config';
+import { fetchBlogListing } from '@/utilities/fetchBlogListing';
 import FeaturedBlogsSection from '../components/blog/featuredBlogSection';
 import BlogGridSection from '../components/blog/blogGridSection';
-import { draftMode } from 'next/headers'
-import { getMediaUrl } from '@/utilities/getMediaUrl'
-import { BLOG_CATEGORY_OPTIONS } from '@/collections/blog/config'
-// remove duplicate Metadata import (we already imported the type above)
 
-async function fetchBlogs(page: number) {
-  const payload = await getPayload({ config: configPromise });
-  const { isEnabled: draft } = await draftMode()
+const popularTags = BLOG_CATEGORY_OPTIONS.map((opt) => opt.value);
 
-  // Featured posts (max 4)
-  const featuredRes = await payload.find({
-    collection: 'blog',
-    where: draft ? { isFeatured: { equals: true } } : {
-      _status: { equals: 'published' },
-      isFeatured: { equals: true },
-    },
-    sort: '-publishedAt',
-    limit: 4,
-    draft,
-    overrideAccess: draft,
-    depth: 2,
-  });
+const categories = ['All Types', 'Articles', 'Videos'];
 
-  // All posts for grid
-  const postsRes: any = await payload.find({
-    collection: 'blog',
-    where: draft ? {} : { _status: { equals: 'published' } },
-    sort: '-publishedAt',
-    limit: 6,
-    page,
-    draft,
-    overrideAccess: draft,
-    depth: 2,
-  });
-
-  const computeReadTime = (data: unknown, type: string | undefined): string => {
-    try {
-      const text = JSON.stringify(data ?? '')
-        .replace(/<[^>]*>/g, ' ')
-        .replace(/\s+/g, ' ');
-      const words = text.trim().split(' ').filter(Boolean).length;
-      const minutes = Math.max(1, Math.ceil(words / 200));
-      return `${minutes} min ${type === 'video' ? 'watch' : 'read'}`;
-    } catch {
-      return type === 'video' ? '1 min watch' : '1 min read';
-    }
-  };
-
-  const mapDocToCard = (doc: any) => {
-    const imageUrlRaw = typeof doc.featuredImage === 'object' && doc.featuredImage?.url ? doc.featuredImage.url : null;
-    const imageUrl = imageUrlRaw ? getMediaUrl(imageUrlRaw as string) : null;
-    if (!imageUrl) return null; // Ensure image exists to avoid UI break
-    const typeLabel = doc.type === 'video' ? 'Videos' : 'Articles';
-    const hasUploadVideo = doc.type === 'video' && doc.videoSource === 'upload' && typeof doc.videoUpload === 'object' && doc.videoUpload?.url
-    const hasEmbedVideo = doc.type === 'video' && doc.videoSource === 'embed' && !!doc.embedUrl
-    const videoUploadUrl = hasUploadVideo ? getMediaUrl((doc.videoUpload.url as string)) : null
-    return {
-      id: doc.slug, // used in components' href; /blog/[slug] route will handle
-      title: doc.title,
-      excerpt: doc.excerpt,
-      image: imageUrl,
-      categories: Array.isArray(doc.categories) ? doc.categories : [],
-      readTime: computeReadTime(doc.content, doc.type),
-      date: (doc.updatedAt || doc.publishedAt)
-        ? (() => {
-            const d = new Date(doc.updatedAt || doc.publishedAt);
-            const month = d.toLocaleString('en-US', { month: 'long' });
-            const day = d.getDate();
-            const year = d.getFullYear();
-            return `${month} ${day}, ${year}`;
-          })()
-        : '',
-      featured: Boolean(doc.isFeatured),
-      hasVideo: Boolean(hasUploadVideo || hasEmbedVideo),
-      videoUploadUrl,
-      embedUrl: hasEmbedVideo ? (doc.embedUrl as string) : null,
-      videoPageUrl: doc.type === 'video' && doc.slug ? `/blog/${doc.slug}` : '#',
-      type: typeLabel,
-    } as any;
-  };
-
-  const featuredPosts = (featuredRes.docs || [])
-    .map(mapDocToCard)
-    .filter(Boolean) as any[];
-
-  const posts = (postsRes.docs || [])
-    .map(mapDocToCard)
-    .filter(Boolean) as any[];
-
-  const totalDocs = postsRes?.totalDocs ?? 0;
-  const limit = postsRes?.limit ?? 6;
-  const totalPages = Math.max(1, Math.ceil(totalDocs / limit));
-  const currentPage = postsRes?.page ?? page;
-
-  return { featuredPosts, posts, pagination: { page: currentPage, totalPages, totalDocs, limit } };
-}
-
-const popularTags = BLOG_CATEGORY_OPTIONS.map(opt => opt.value)
-
-const categories = [
-  'All Types',
-  'Articles',
-  'Videos'
-]
-
+/** Page 1 only — no searchParams so this route can be ISR-cached on client navigation. */
 export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Valar Digital Blog – Shopify Insights & Strategies',
-  description: "Valar Digital's Blog covers everything you need to know about Shopify. Learn what’s working, improve performance, and grow your e-commerce business.",
+  description:
+    "Valar Digital's Blog covers everything you need to know about Shopify. Learn what's working, improve performance, and grow your e-commerce business.",
   alternates: {
     canonical: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/blog',
   },
   openGraph: {
     title: 'Valar Digital Blog – Shopify Insights & Strategies',
-    description: "Valar Digital's Blog covers everything you need to know about Shopify. Learn what’s working, improve performance, and grow your e-commerce business.",
+    description:
+      "Valar Digital's Blog covers everything you need to know about Shopify. Learn what's working, improve performance, and grow your e-commerce business.",
     url: (process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com') + '/blog',
   },
 };
 
-export default async function BlogListingPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
-  const { page: pageParam } = await searchParams;
-  const currentPage = Math.max(1, parseInt(pageParam || '1', 10) || 1);
-  const { featuredPosts, posts, pagination } = await fetchBlogs(currentPage);
+export default async function BlogListingPage() {
+  const { featuredPosts, posts, pagination } = await fetchBlogListing(1);
 
   return (
     <div className="bg-background-muted mt-[64px] md:mt-[80px]">
-      {/* Hero Section */}
       <section>
         <div className="container mx-auto py-6 md:py-10 px-4 md:px-0">
           <div className="text-center text-text-dark">
             <h1 className="text-[28px] md:text-5xl font-medium mb-2 md:mb-6 leading-[1.2]">
-              What's Actually Working <br className='hidden md:block'/>
-              for<br className='block md:hidden'/> Shopify Brands, <br className='hidden md:block' />
-              And<br className='block md:hidden'/> How You Can Use It Too
+              What&apos;s Actually Working <br className="hidden md:block" />
+              for
+              <br className="block md:hidden" /> Shopify Brands, <br className="hidden md:block" />
+              And
+              <br className="block md:hidden" /> How You Can Use It Too
             </h1>
             <p className="tracking-[0.04rem] leading-[1.5]">
-              Smart ideas. Clean execution. No filler.<br />
-              Just what you need to move faster<br className='block md:hidden'/> and grow better.
+              Smart ideas. Clean execution. No filler.
+              <br />
+              Just what you need to move faster
+              <br className="block md:hidden" /> and grow better.
             </p>
           </div>
         </div>
@@ -156,6 +60,7 @@ export default async function BlogListingPage({ searchParams }: { searchParams: 
         totalPages={pagination.totalPages}
         totalItems={pagination.totalDocs}
         itemsPerPage={pagination.limit}
+        paginationMode="path"
       />
     </div>
   );

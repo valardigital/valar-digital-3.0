@@ -9,31 +9,32 @@ export async function fetchToolsListing(page: number) {
   const payload = await getPayload({ config: configPromise });
   const { isEnabled: draft } = await draftMode();
 
-  const featuredRes = await payload.find({
-    collection: 'tools',
-    where: draft
-      ? { isFeatured: { equals: true } }
-      : {
-          _status: { equals: 'published' },
-          isFeatured: { equals: true },
-        },
-    sort: '-publishedAt',
-    limit: 4,
-    draft,
-    overrideAccess: draft,
-    depth: 2,
-  });
+  const publishedWhere = { _status: { equals: 'published' as const } };
+  const featuredWhere = draft
+    ? { isFeatured: { equals: true } }
+    : { ...publishedWhere, isFeatured: { equals: true } };
 
-  const toolsRes = await payload.find({
-    collection: 'tools',
-    where: draft ? {} : { _status: { equals: 'published' } },
-    sort: '-publishedAt',
-    limit: GRID_LIMIT,
-    page,
-    draft,
-    overrideAccess: draft,
-    depth: 2,
-  });
+  const [featuredRes, toolsRes] = await Promise.all([
+    payload.find({
+      collection: 'tools',
+      where: featuredWhere,
+      sort: '-publishedAt',
+      limit: 4,
+      draft,
+      overrideAccess: draft,
+      depth: 1,
+    }),
+    payload.find({
+      collection: 'tools',
+      where: draft ? {} : publishedWhere,
+      sort: '-publishedAt',
+      limit: GRID_LIMIT,
+      page,
+      draft,
+      overrideAccess: draft,
+      depth: 1,
+    }),
+  ]);
 
   const featuredTools = (featuredRes.docs || [])
     .map(mapToolDocToCard)

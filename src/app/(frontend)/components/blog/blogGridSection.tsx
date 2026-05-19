@@ -39,6 +39,7 @@ interface BlogGridSectionProps {
     totalPages?: number;
     totalItems?: number;
     itemsPerPage?: number;
+    paginationMode?: 'query' | 'path';
 }
 
 const BlogGridSection: React.FC<BlogGridSectionProps> = ({
@@ -48,7 +49,8 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
     page = 1,
     totalPages = 1,
     totalItems = 0,
-    itemsPerPage = 6
+    itemsPerPage = 6,
+    paginationMode = 'query',
 }) => {
     const [selectedType, setSelectedType] = useState("All Types");
     const [searchQuery, setSearchQuery] = useState('');
@@ -313,6 +315,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
             totalItems={effectiveTotalItems}
             itemsPerPage={itemsPerPage}
             baseUrl="/blog"
+            paginationMode={paginationMode}
         />
         </>
     );

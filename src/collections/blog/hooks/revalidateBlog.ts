@@ -8,7 +8,7 @@ export const revalidateBlog = async (doc: any, operation: 'create' | 'update' | 
 
     if (doc.slug) paths.push(`/blog/${doc.slug}`)
     paths.push('/blog', '/blog/page', '/sitemap.xml')
-    tags.push('blog-sitemap')
+    tags.push('blog-sitemap', 'blogs')
 
     if (operation === 'delete') {
       paths.push('/blog', '/blog/page')
