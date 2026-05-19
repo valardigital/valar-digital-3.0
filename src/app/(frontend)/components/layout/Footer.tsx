@@ -67,7 +67,7 @@ const Footer = () => {
                 <li className='hover:text-primary'><Link href="/case-studies" className={`transition-colors ${pathname === '/case-studies' ? 'text-primary' : 'hover:text-primary'}`}>Case Studies</Link></li>
                 <li className='hover:text-primary'><Link href="/contact" className={`transition-colors ${pathname === '/contact' ? 'text-primary' : 'hover:text-primary'}`}>Contact</Link></li>
                 <li className='hover:text-primary'><Link href="/blog" className={`transition-colors ${pathname === '/blog' ? 'text-primary' : 'hover:text-primary'}`}>Blogs</Link></li>
-                <li className='hover:text-primary'><Link href="/tools" className={`transition-colors ${pathname === '/tools' ? 'text-primary' : 'hover:text-primary'}`}>Tools</Link></li>
+                <li className='hover:text-primary'><Link href="/tools" prefetch={false} className={`transition-colors ${pathname === '/tools' ? 'text-primary' : 'hover:text-primary'}`}>Tools</Link></li>
               </ul>
             </div>
 

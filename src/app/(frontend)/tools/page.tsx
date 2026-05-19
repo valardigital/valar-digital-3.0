@@ -4,7 +4,8 @@ import { fetchToolsListing } from '@/utilities/fetchTools';
 import FeaturedToolsSection from '../components/tools/featuredToolsSection';
 import ToolsGridSection from '../components/tools/toolsGridSection';
 
-export const dynamic = 'force-dynamic';
+/** ISR — avoid force-dynamic so nav prefetch from /blog does not hammer the server */
+export const revalidate = 60;
 
 const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://valardigital.com';
 const toolsListingUrl = `${siteUrl}/tools`;

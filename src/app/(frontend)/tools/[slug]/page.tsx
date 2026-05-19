@@ -5,7 +5,6 @@ import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import type { Tool } from '@/payload-types';
-import { LivePreviewListener } from '@/components/LivePreviewListener';
 import ToolRenderer from '../../components/tools/ToolRenderer';
 import { buildToolMetadata } from '@/utilities/buildToolMetadata';
 type Args = {
@@ -35,7 +34,6 @@ export default async function ToolDetailPage({ params: paramsPromise }: Args) {
 
   return (
     <div className="bg-background-muted mt-[64px] md:mt-[80px] min-h-screen">
-      <LivePreviewListener />
       <ToolRenderer
         toolComponent={tool.toolComponent as string}
         customHtml={tool.customHtml}

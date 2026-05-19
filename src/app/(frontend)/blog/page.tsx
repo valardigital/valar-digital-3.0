@@ -38,14 +38,6 @@ async function fetchBlogs(page: number) {
     depth: 2,
   });
 
-  // Debug: inspect raw docs from backend to see available fields
-  console.log('[Blog] Featured raw docs:', featuredRes?.docs?.map?.((d: any) => ({ slug: d?.slug, publishedAt: d?.publishedAt, createdAt: d?.createdAt, _status: d?._status })) ?? featuredRes?.docs);
-  console.log('[Blog] Grid raw docs:', postsRes?.docs?.map?.((d: any) => ({ slug: d?.slug, publishedAt: d?.publishedAt, createdAt: d?.createdAt, _status: d?._status })) ?? postsRes?.docs);
-  // Full objects (all fields)
-  // Note: These can be large. Comment out after inspection.
-  console.dir({ featuredDocsFull: featuredRes?.docs }, { depth: null });
-  console.dir({ gridDocsFull: postsRes?.docs }, { depth: null });
-
   const computeReadTime = (data: unknown, type: string | undefined): string => {
     try {
       const text = JSON.stringify(data ?? '')
@@ -136,7 +128,6 @@ export default async function BlogListingPage({ searchParams }: { searchParams: 
   const { page: pageParam } = await searchParams;
   const currentPage = Math.max(1, parseInt(pageParam || '1', 10) || 1);
   const { featuredPosts, posts, pagination } = await fetchBlogs(currentPage);
-  console.log('featuredPosts:', featuredPosts);
 
   return (
     <div className="bg-background-muted mt-[64px] md:mt-[80px]">

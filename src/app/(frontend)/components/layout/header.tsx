@@ -41,7 +41,7 @@ const Header = () => {
                   <Link href="/services"><li className={`uppercase h-max p-0 text-base ${getTextColor('/services')}`}>Services</li></Link>
                   <Link href="/case-studies"><li className={`uppercase h-max p-0 text-base ${getTextColor('/case-studies')}`}>Case Studies</li></Link>
                   <Link href="/blog"><li className={`uppercase h-max p-0 text-base ${getTextColor('/blog')}`}>Blogs</li></Link>
-                  <Link href="/tools"><li className={`uppercase h-max p-0 text-base ${getTextColor('/tools')}`}>Tools</li></Link>
+                  <Link href="/tools" prefetch={false}><li className={`uppercase h-max p-0 text-base ${getTextColor('/tools')}`}>Tools</li></Link>
                 </ul>
               </nav>
 
@@ -142,6 +142,7 @@ const Header = () => {
               }`}>
               <Link
                 href="/tools"
+                prefetch={false}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block border-b border-border py-6"
               >

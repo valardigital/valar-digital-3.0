@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation'
 import { draftMode } from 'next/headers'
 import Image from 'next/image'
 import Link from 'next/link'
-import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { RichText } from '@/components/RichText'
 import type { Metadata } from 'next'
 import { cache } from 'react'
@@ -66,7 +65,6 @@ export default async function BlogPostPage({ params: paramsPromise }: Args) {
 
   return (
     <div className="bg-background-muted mt-[64px] md:mt-[80px] min-h-screen">
-      <LivePreviewListener />
       <div className="mx-auto md:px-0 px-6 pt-6 max-w-4xl">
         <Link 
           href="/blog" 
