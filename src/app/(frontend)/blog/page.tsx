@@ -108,8 +108,7 @@ const categories = [
   'Videos'
 ]
 
-// Force static generation for the root listing page
-export const dynamic = 'force-static';
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Valar Digital Blog – Shopify Insights & Strategies',

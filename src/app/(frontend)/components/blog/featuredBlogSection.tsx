@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { getMediaUrl } from '@/utilities/getMediaUrl'
+import { blogImageSrc } from '@/utilities/blogImageSrc'
 import Link from 'next/link';
 import play from "@/assets/images/home/play.svg";
 
@@ -64,7 +65,7 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
                     ) : (
                       <>
                         <Image
-                          src={typeof mainFeaturedPost.image === 'string' ? getMediaUrl(mainFeaturedPost.image) : mainFeaturedPost.image}
+                          src={blogImageSrc(mainFeaturedPost.image)}
                           alt={mainFeaturedPost.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -91,7 +92,7 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
                     </div>
 
                     <div className="flex flex-wrap gap-2 mb-4 text-sm text-text-dark tracking-[0.04rem] order-3 lg:order-0 mt-4 lg:mt-0">
-                      {mainFeaturedPost.categories.map((category, index) => {
+                      {(mainFeaturedPost.categories ?? []).map((category, index) => {
                         return (
                           <span key={index} className="px-3 py-2 bg-primary/5 border rounded-[4px]">
                             {category}
@@ -141,7 +142,7 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
                     ) : (
                       <>
                         <Image
-                          src={typeof post.image === 'string' ? getMediaUrl(post.image) : post.image}
+                          src={blogImageSrc(post.image)}
                           alt={post.title}
                           fill
                           className="object-cover object-left group-hover:scale-105 transition-transform duration-300"
@@ -177,26 +178,26 @@ const FeaturedBlogsSection: React.FC<FeaturedBlogsSectionProps> = ({ posts }) =>
 
                     <div className="flex flex-wrap gap-1 text-sm text-text-dark tracking-[0.04rem]">
                       {/* Desktop: Show 2 categories */}
-                      {post.categories.slice(0, 2).map((category, index) => (
+                      {(post.categories ?? []).slice(0, 2).map((category, index) => (
                         <span key={index} className="hidden md:inline-block px-3 py-1 md:py-2 bg-primary/5 border rounded-[4px]">
                           {category}
                         </span>
                       ))}
-                      {post.categories.length > 2 && (
+                      {(post.categories ?? []).length > 2 && (
                         <span className="hidden md:inline-block px-3 py-2 bg-primary/5 border rounded-[4px]">
-                          +{post.categories.length - 2}
+                          +{(post.categories ?? []).length - 2}
                         </span>
                       )}
 
                       {/* Mobile: Show 1 category */}
-                      {post.categories.slice(0, 1).map((category, index) => (
+                      {(post.categories ?? []).slice(0, 1).map((category, index) => (
                         <span key={index} className="md:hidden px-3 py-2 bg-primary/5 border rounded-[4px]">
                           {category}
                         </span>
                       ))}
-                      {post.categories.length > 1 && (
+                      {(post.categories ?? []).length > 1 && (
                         <span className="md:hidden px-3 py-2 bg-primary/5 border rounded-[4px]">
-                          +{post.categories.length - 1}
+                          +{(post.categories ?? []).length - 1}
                         </span>
                       )}
                     </div>

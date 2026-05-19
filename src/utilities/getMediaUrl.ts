@@ -1,7 +1,7 @@
 import { getClientSideURL } from './getURL'
 
 export const getMediaUrl = (url: string | null | undefined): string => {
-  if (!url) return ''
+  if (!url || typeof url !== 'string') return ''
 
   // If absolute URL, normalize to relative when same-origin to satisfy next/image without extra whitelisting
   try {

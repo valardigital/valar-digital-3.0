@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { getMediaUrl } from '@/utilities/getMediaUrl'
+import { blogImageSrc } from '@/utilities/blogImageSrc'
 import Link from 'next/link';
 import { Button } from '../ui/button';
 import play from "@/assets/images/home/play.svg";
@@ -62,7 +63,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
         return (
             normalize(post.title).includes(q) ||
             normalize(post.excerpt).includes(q) ||
-            post.categories.some(c => normalize(c).includes(q))
+            (post.categories ?? []).some(c => normalize(c).includes(q))
         );
     };
 
@@ -182,7 +183,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
                                                 ) : (
                                                     <>
                                                         <Image
-                                                            src={typeof post.image === 'string' ? getMediaUrl(post.image) : post.image}
+                                                            src={blogImageSrc(post.image)}
                                                             alt={post.title}
                                                             fill
                                                             className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -218,7 +219,7 @@ const BlogGridSection: React.FC<BlogGridSectionProps> = ({
                                                 </p>
 
                                                 <div className="flex flex-wrap gap-2 mt-4 text-sm text-text-dark tracking-[0.04rem]">
-                                                    {post.categories.map((category, index) => {
+                                                    {(post.categories ?? []).map((category, index) => {
                                                         return (
                                                         <span key={index} className="px-3 py-2 bg-primary/5 border rounded-[4px]">
                                                             {category}

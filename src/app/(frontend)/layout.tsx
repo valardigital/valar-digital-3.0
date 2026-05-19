@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import Header from "./components/layout/header";
 import Footer from "./components/layout/Footer";
-import { LivePreviewWrapper } from "@/components/LivePreviewListener/LivePreviewWrapper";
+import { LivePreviewGate } from "@/components/LivePreviewListener/LivePreviewGate";
 import localFont from "next/font/local";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -83,7 +83,7 @@ window._linkedin_data_partner_ids.push(_linkedin_partner_id);
               '<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=9044801&fmt=gif" />',
           }}
         />
-        <LivePreviewWrapper />
+        <LivePreviewGate />
         <Header />
         {children}
         <Footer />
