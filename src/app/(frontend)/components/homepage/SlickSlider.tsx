@@ -1,22 +1,22 @@
+"use client";
+
 import React, { memo } from "react";
 import sls3 from "@/assets/images/home/sls3.png";
-import paddock from "@/assets/images/home/paddock.png";
 import nutriburst from "@/assets/images/home/nutriburst.png";
-import kair from "@/assets/images/home/kair.png";
-import audenza from "@/assets/images/home/audenza-logo.png";
 import hanx from "@/assets/images/home/hanx.png";
 import pfImage from "@/assets/images/home/pf.png";
 import fleet from "@/assets/images/home/logo-fleet.png";
-import loveraw from "@/assets/images/home/eatloveraw.png";
 import eyecon from "@/assets/images/home/eyecon.png";
-import oscar from "@/assets/images/home/oscar.png";
-import clasiq from "@/assets/images/home/clasiq.png";
-import skinsapiens from "@/assets/images/home/skin-sapiens.png";
 import ample from "@/assets/images/home/ample.png";
 import zimadental from "@/assets/images/home/zima-dental-logo.png";
 import r180 from "@/assets/images/home/r180.png";
 import blueVoucher from "@/assets/images/home/blue-voucher.png";
 import philippaherbert from "@/assets/images/home/philippa-herbert.png"
+import superfoodio from "@/assets/images/home/superfoodio.png";
+import rheal from "@/assets/images/home/rheal.png";
+import tws from "@/assets/images/home/tws.png";
+import soto from "@/assets/images/home/soto.png";
+import omi from "@/assets/images/home/omi.png";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
@@ -25,41 +25,47 @@ const SlickSlider: React.FC = memo(() => {
   const isServiceDetailsPage = pathname === '/services';
 
   const slides = [
-    sls3,
-    paddock,
-    nutriburst,
+    pfImage,
     zimadental,
+    omi,
+    rheal,
+    sls3,
+    nutriburst,
     r180,
     philippaherbert,
     blueVoucher,
-    kair,
-    audenza,
     hanx,
-    pfImage,
     fleet,
-    loveraw,
     eyecon,
-    oscar,
-    clasiq,
-    skinsapiens,
-    ample
+    ample,
+    superfoodio,
+    tws,
+    soto,
   ];
 
   return (
     <div className="w-full relative">
       <div className="logo-slider">
         <div className="logo-slider-content">
-          {/* Duplicate slides multiple times for seamless loop */}
-          {[...slides, ...slides, ...slides].map((src, index) => (
-            <div key={index} className="logo-slider-item">
-              <Image 
-                src={src} 
-                alt={`Logo ${index % slides.length + 1}`} 
-                width={100}
-                height={32} 
-                className="w-auto h-8" 
-                loading="lazy"
-              />
+          {[0, 1].map((track) => (
+            <div
+              key={track}
+              className="logo-slider-track"
+              aria-hidden={track === 1}
+            >
+              {slides.map((src, index) => (
+                <div key={`${track}-${index}`} className="logo-slider-item">
+                  <Image
+                    src={src}
+                    alt={track === 0 ? `Logo ${index + 1}` : ""}
+                    width={100}
+                    height={32}
+                    className="w-auto h-8"
+                    loading="eager"
+                    draggable={false}
+                  />
+                </div>
+              ))}
             </div>
           ))}
         </div>
