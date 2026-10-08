@@ -2,6 +2,7 @@ import type { Block } from 'payload'
 import { CtaBannerEnd } from '@/blocks/CtaBannerEnd/config'
 import { CtaBannerMid } from '@/blocks/CtaBannerMid/config'
 import { DataTable } from '@/blocks/DataTable/config'
+import { VideoTestimonial } from '@/blocks/VideoTestimonial/config'
 import { lexicalWithTableAndBlocks } from '@/fields/lexicalWithTable'
 
 export const RichTextSection: Block = {
@@ -29,7 +30,12 @@ export const RichTextSection: Block = {
       type: 'richText',
       name: 'content',
       required: true,
-      editor: lexicalWithTableAndBlocks([DataTable, CtaBannerMid, CtaBannerEnd]),
+      editor: lexicalWithTableAndBlocks([
+        DataTable,
+        CtaBannerMid,
+        CtaBannerEnd,
+        VideoTestimonial,
+      ]),
     },
   ],
 }

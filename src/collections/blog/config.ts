@@ -5,6 +5,7 @@ import { CtaBannerMid } from '@/blocks/CtaBannerMid/config';
 import { DataTable } from '@/blocks/DataTable/config';
 import { DotSeparator } from '@/blocks/DotSeparator/config';
 import { TableOfContents } from '@/blocks/TableOfContents/config';
+import { VideoTestimonial } from '@/blocks/VideoTestimonial/config';
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
 import { generatePreviewPath } from '@/utilities/generatePreviewPath';
 import { revalidateBlog } from './hooks/revalidateBlog';
@@ -149,6 +150,7 @@ const Blog: CollectionConfig = {
                 DataTable,
                 CtaBannerMid,
                 CtaBannerEnd,
+                VideoTestimonial,
               ]),
             },
           ],

@@ -13,6 +13,7 @@ import { RichTextSection } from '@/blocks/RichTextSection/Component'
 import { DataTable } from '@/blocks/DataTable/Component'
 import { CtaBannerMid } from '@/blocks/CtaBannerMid/Component'
 import { CtaBannerEnd } from '@/blocks/CtaBannerEnd/Component'
+import { VideoTestimonial } from '@/blocks/VideoTestimonial/Component'
 import type { 
   ContentWithMedia as ContentWithMediaType, 
   TableOfContents as TableOfContentsType,
@@ -26,6 +27,7 @@ import type {
   DataTable as DataTableType,
   CtaBannerMid as CtaBannerMidType,
   CtaBannerEnd as CtaBannerEndType,
+  VideoTestimonial as VideoTestimonialType,
 } from '@/payload-types'
 import { Fragment } from 'react'
 
@@ -45,6 +47,7 @@ const blockComponents = {
   dataTable: DataTable,
   ctaBannerMid: CtaBannerMid,
   ctaBannerEnd: CtaBannerEnd,
+  videoTestimonial: VideoTestimonial,
 }
 
 export const RenderBlocks: React.FC<{
@@ -61,7 +64,8 @@ export const RenderBlocks: React.FC<{
     OutcomeSectionType |
     DataTableType |
     CtaBannerMidType |
-    CtaBannerEndType
+    CtaBannerEndType |
+    VideoTestimonialType
   )[]
 }> = (props) => {
   const {blocks} = props

@@ -12,6 +12,7 @@ import type {
   DataTable as DataTableType,
   CtaBannerMid as CtaBannerMidType,
   CtaBannerEnd as CtaBannerEndType,
+  VideoTestimonial as VideoTestimonialType,
 } from '@/payload-types'
 import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
 import { JSXConvertersFunction, LinkJSXConverter } from '@payloadcms/richtext-lexical/react'
@@ -32,6 +33,7 @@ import { InsightsListSection } from '@/blocks/InsightsListSection/Component'
 import { DataTable } from '@/blocks/DataTable/Component'
 import { CtaBannerMid } from '@/blocks/CtaBannerMid/Component'
 import { CtaBannerEnd } from '@/blocks/CtaBannerEnd/Component'
+import { VideoTestimonial } from '@/blocks/VideoTestimonial/Component'
 
 // Extend NodeTypes to include all block node payloads
  type NodeTypes =
@@ -50,6 +52,7 @@ import { CtaBannerEnd } from '@/blocks/CtaBannerEnd/Component'
       | DataTableType
       | CtaBannerMidType
       | CtaBannerEndType
+      | VideoTestimonialType
       | { id?: string }
     >
 
@@ -78,6 +81,9 @@ export const jsxConverter: JSXConvertersFunction<NodeTypes> = ({defaultConverter
     ),
     ctaBannerEnd: ({node}: { node: SerializedBlockNode<CtaBannerEndType> }) => (
       <CtaBannerEnd {...node.fields} />
+    ),
+    videoTestimonial: ({node}: { node: SerializedBlockNode<VideoTestimonialType> }) => (
+      <VideoTestimonial {...node.fields} />
     ),
   }
 })

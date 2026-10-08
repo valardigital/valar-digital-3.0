@@ -12,6 +12,7 @@ import { ContentWithMedia } from '@/blocks/ContentWithMedia/config'
 import { CtaBannerEnd } from '@/blocks/CtaBannerEnd/config'
 import { CtaBannerMid } from '@/blocks/CtaBannerMid/config'
 import { DataTable } from '@/blocks/DataTable/config'
+import { VideoTestimonial } from '@/blocks/VideoTestimonial/config'
 import { DotSeparator } from '@/blocks/DotSeparator/config'
 import { RichTextSection } from '@/blocks/RichTextSection/config'
 import { TableOfContents } from '@/blocks/TableOfContents/config'
@@ -176,6 +177,7 @@ const CaseStudy: CollectionConfig = {
                 DataTable,
                 CtaBannerMid,
                 CtaBannerEnd,
+                VideoTestimonial,
               ],
             },
           ],

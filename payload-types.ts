@@ -345,6 +345,7 @@ export interface CaseStudy {
         | DataTable
         | CtaBannerMid
         | CtaBannerEnd
+        | VideoTestimonial
       )[]
     | null;
   meta?: {
@@ -1040,6 +1041,47 @@ export interface CtaBannerEnd {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoTestimonial".
+ */
+export interface VideoTestimonial {
+  /**
+   * Upload an MP4 (or other video) from Media
+   */
+  video: string | Media;
+  /**
+   * Custom poster / branded frame shown before play
+   */
+  thumbnail?: (string | null) | Media;
+  /**
+   * Small eyebrow above the quote (e.g. “In their words”)
+   */
+  label?: string | null;
+  /**
+   * Short pull quote — one or two sentences from the video
+   */
+  quote: string;
+  /**
+   * e.g. Jack Rubin
+   */
+  speakerName: string;
+  /**
+   * e.g. Co-Founder
+   */
+  speakerRole?: string | null;
+  /**
+   * e.g. Purdy & Figg
+   */
+  company?: string | null;
+  /**
+   * Optional company logo
+   */
+  companyLogo?: (string | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'videoTestimonial';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tools".
  */
 export interface Tool {
@@ -1379,6 +1421,7 @@ export interface CaseStudySelect<T extends boolean = true> {
         dataTable?: T | DataTableSelect<T>;
         ctaBannerMid?: T | CtaBannerMidSelect<T>;
         ctaBannerEnd?: T | CtaBannerEndSelect<T>;
+        videoTestimonial?: T | VideoTestimonialSelect<T>;
       };
   meta?:
     | T
@@ -1666,6 +1709,22 @@ export interface CtaBannerEndSelect<T extends boolean = true> {
       };
   mobileButtonLabel?: T;
   buttonUrl?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoTestimonial_select".
+ */
+export interface VideoTestimonialSelect<T extends boolean = true> {
+  video?: T;
+  thumbnail?: T;
+  label?: T;
+  quote?: T;
+  speakerName?: T;
+  speakerRole?: T;
+  company?: T;
+  companyLogo?: T;
   id?: T;
   blockName?: T;
 }
