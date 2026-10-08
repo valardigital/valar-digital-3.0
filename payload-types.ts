@@ -338,6 +338,7 @@ export interface CaseStudy {
         | TableOfContents
         | DotSeparator
         | RichTextSection
+        | DataTable
       )[]
     | null;
   meta?: {
@@ -888,6 +889,43 @@ export interface RichTextSection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DataTable".
+ */
+export interface DataTable {
+  /**
+   * Optional caption shown above the table
+   */
+  caption?: string | null;
+  /**
+   * Column headers (left to right)
+   */
+  headers: {
+    label: string;
+    id?: string | null;
+  }[];
+  /**
+   * Add rows in order. Each row should have one cell per column.
+   */
+  rows: {
+    cells: {
+      content: string;
+      id?: string | null;
+    }[];
+    id?: string | null;
+  }[];
+  bordered?: boolean | null;
+  striped?: boolean | null;
+  compact?: boolean | null;
+  fullWidth?: boolean | null;
+  stickyHeader?: boolean | null;
+  headerBackground?: ('default' | 'muted' | 'primary' | 'dark') | null;
+  textAlign?: ('left' | 'center' | 'right') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'dataTable';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tools".
  */
 export interface Tool {
@@ -1219,6 +1257,7 @@ export interface CaseStudySelect<T extends boolean = true> {
         tableOfContents?: T | TableOfContentsSelect<T>;
         dotSeparator?: T | DotSeparatorSelect<T>;
         richTextSection?: T | RichTextSectionSelect<T>;
+        dataTable?: T | DataTableSelect<T>;
       };
   meta?:
     | T
@@ -1422,6 +1461,39 @@ export interface DotSeparatorSelect<T extends boolean = true> {
 export interface RichTextSectionSelect<T extends boolean = true> {
   backgroundColor?: T;
   content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DataTable_select".
+ */
+export interface DataTableSelect<T extends boolean = true> {
+  caption?: T;
+  headers?:
+    | T
+    | {
+        label?: T;
+        id?: T;
+      };
+  rows?:
+    | T
+    | {
+        cells?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  bordered?: T;
+  striped?: T;
+  compact?: T;
+  fullWidth?: T;
+  stickyHeader?: T;
+  headerBackground?: T;
+  textAlign?: T;
   id?: T;
   blockName?: T;
 }

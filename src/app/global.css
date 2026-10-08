@@ -211,6 +211,29 @@ html, body {
     --tw-prose-bullets: var(--muted-foreground);
     --tw-prose-hr: var(--border);
   }
+
+  /* Lexical / prose tables inserted via EXPERIMENTAL_TableFeature */
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .prose thead th {
+    background: var(--color-background-muted, #f1f5f9);
+    font-weight: 600;
+    color: var(--color-text-dark, #0f172a);
+  }
+
+  .prose th,
+  .prose td {
+    border: 1px solid var(--color-border, #e2e8f0);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    vertical-align: top;
+  }
 }
 
 .container {

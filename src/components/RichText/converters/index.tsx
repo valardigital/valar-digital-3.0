@@ -9,6 +9,7 @@ import type {
   ProcessDetailsSection as ProcessDetailsSectionProps,
   OutcomeSection as OutcomeSectionProps,
   InsightsListSection as InsightsListSectionProps,
+  DataTable as DataTableType,
 } from '@/payload-types'
 import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
 import { JSXConvertersFunction, LinkJSXConverter } from '@payloadcms/richtext-lexical/react'
@@ -25,6 +26,7 @@ import { BeforeAfterSection } from '@/blocks/BeforeAfterSection/Component'
 import { ProcessDetailsSection } from '@/blocks/ProcessDetailsSection/Component'
 import { OutcomeSection } from '@/blocks/OutcomeSection/Component'
 import { InsightsListSection } from '@/blocks/InsightsListSection/Component'
+import { DataTable } from '@/blocks/DataTable/Component'
 
 // Extend NodeTypes to include all block node payloads
  type NodeTypes =
@@ -40,6 +42,7 @@ import { InsightsListSection } from '@/blocks/InsightsListSection/Component'
       | ProcessDetailsSectionProps
       | OutcomeSectionProps
       | InsightsListSectionProps
+      | DataTableType
       | { id?: string }
     >
 
@@ -59,5 +62,8 @@ export const jsxConverter: JSXConvertersFunction<NodeTypes> = ({defaultConverter
     beforeAfterSection: ({node}) => <BeforeAfterSection {...node.fields} />,
     processDetailsSection: ({node}) => <ProcessDetailsSection {...node.fields} />,
     outcomeSection: ({node}) => <OutcomeSection {...node.fields} />,
+    dataTable: ({node}: { node: SerializedBlockNode<DataTableType> }) => (
+      <DataTable {...node.fields} />
+    ),
   }
 })

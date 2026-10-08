@@ -1,13 +1,14 @@
 import type { CollectionConfig } from 'payload';
 import { ContentWithMedia } from '@/blocks/ContentWithMedia/config';
+import { DataTable } from '@/blocks/DataTable/config';
 import { DotSeparator } from '@/blocks/DotSeparator/config';
 import { TableOfContents } from '@/blocks/TableOfContents/config';
-import { BlocksFeature, lexicalEditor, FixedToolbarFeature } from '@payloadcms/richtext-lexical';
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
 import { generatePreviewPath } from '@/utilities/generatePreviewPath';
 import { revalidateBlog } from './hooks/revalidateBlog';
 import { SEOFields } from '@/fields/seoFields';
 import { slugField } from '@/fields/slugField';
+import { lexicalWithTableAndBlocks } from '@/fields/lexicalWithTable';
 
 export const BLOG_CATEGORY_OPTIONS = [
   { label: 'AI', value: 'AI' },
@@ -139,13 +140,12 @@ const Blog: CollectionConfig = {
             {
               name: 'content',
               type: 'richText',
-              editor: lexicalEditor({
-                features: ({ defaultFeatures }) => [
-                  ...defaultFeatures,
-                  BlocksFeature({ blocks: [ContentWithMedia, TableOfContents, DotSeparator] }),
-                  FixedToolbarFeature(),
-                ],
-              }),
+              editor: lexicalWithTableAndBlocks([
+                ContentWithMedia,
+                TableOfContents,
+                DotSeparator,
+                DataTable,
+              ]),
             },
           ],
         },

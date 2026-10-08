@@ -1,5 +1,5 @@
 import type { Block } from 'payload'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { lexicalWithTable } from '@/fields/lexicalWithTable'
 
 export const RichTextSection: Block = {
   slug: 'richTextSection',
@@ -26,7 +26,7 @@ export const RichTextSection: Block = {
       type: 'richText',
       name: 'content',
       required: true,
-      editor: lexicalEditor(),
+      editor: lexicalWithTable,
     },
   ],
 }

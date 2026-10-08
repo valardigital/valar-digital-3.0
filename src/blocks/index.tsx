@@ -10,6 +10,7 @@ import { BeforeAfterSection } from '@/blocks/BeforeAfterSection/Component'
 import { ProcessDetailsSection } from '@/blocks/ProcessDetailsSection/Component'
 import { OutcomeSection } from '@/blocks/OutcomeSection/Component'
 import { RichTextSection } from '@/blocks/RichTextSection/Component'
+import { DataTable } from '@/blocks/DataTable/Component'
 import type { 
   ContentWithMedia as ContentWithMediaType, 
   TableOfContents as TableOfContentsType,
@@ -19,7 +20,8 @@ import type {
   ProcessSection as ProcessSectionType,
   BeforeAfterSection as BeforeAfterSectionType,
   ProcessDetailsSection as ProcessDetailsSectionType,
-  OutcomeSection as OutcomeSectionType
+  OutcomeSection as OutcomeSectionType,
+  DataTable as DataTableType,
 } from '@/payload-types'
 import { Fragment } from 'react'
 
@@ -36,6 +38,7 @@ const blockComponents = {
   processDetailsSection: ProcessDetailsSection,
   outcomeSection: OutcomeSection,
   richTextSection: RichTextSection,
+  dataTable: DataTable,
 }
 
 export const RenderBlocks: React.FC<{
@@ -49,7 +52,8 @@ export const RenderBlocks: React.FC<{
     ProcessSectionType |
     BeforeAfterSectionType |
     ProcessDetailsSectionType |
-    OutcomeSectionType
+    OutcomeSectionType |
+    DataTableType
   )[]
 }> = (props) => {
   const {blocks} = props

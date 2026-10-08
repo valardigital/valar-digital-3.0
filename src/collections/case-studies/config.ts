@@ -9,9 +9,9 @@ import { BeforeAfterSection } from '@/blocks/BeforeAfterSection/config'
 import { ProcessDetailsSection } from '@/blocks/ProcessDetailsSection/config'
 import { OutcomeSection } from '@/blocks/OutcomeSection/config'
 import { ContentWithMedia } from '@/blocks/ContentWithMedia/config'
+import { DataTable } from '@/blocks/DataTable/config'
 import { DotSeparator } from '@/blocks/DotSeparator/config'
 import { RichTextSection } from '@/blocks/RichTextSection/config'
-import { BlocksFeature, FixedToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { TableOfContents } from '@/blocks/TableOfContents/config'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
@@ -171,6 +171,7 @@ const CaseStudy: CollectionConfig = {
                 TableOfContents,
                 DotSeparator,
                 RichTextSection,
+                DataTable,
               ],
             },
           ],

@@ -1,5 +1,5 @@
 import type { Block } from 'payload'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { lexicalWithTable } from '@/fields/lexicalWithTable'
 
 export const ContentWithMedia: Block = {
   slug: 'contentWithMedia',
@@ -12,11 +12,7 @@ export const ContentWithMedia: Block = {
     {
       type: 'richText',
       name: 'content',
-      editor: lexicalEditor({
-        features: ({ defaultFeatures }) => [
-          ...defaultFeatures,
-        ],
-      }),
+      editor: lexicalWithTable,
     },
     {
       type: 'upload',
