@@ -1,5 +1,6 @@
 import type { Block } from 'payload'
-import { lexicalWithTable } from '@/fields/lexicalWithTable'
+import { DataTable } from '@/blocks/DataTable/config'
+import { lexicalWithTableAndBlocks } from '@/fields/lexicalWithTable'
 
 export const RichTextSection: Block = {
   slug: 'richTextSection',
@@ -26,9 +27,8 @@ export const RichTextSection: Block = {
       type: 'richText',
       name: 'content',
       required: true,
-      editor: lexicalWithTable,
+      // Native Lexical tables + insertable Table block via /
+      editor: lexicalWithTableAndBlocks([DataTable]),
     },
   ],
 }
-
-

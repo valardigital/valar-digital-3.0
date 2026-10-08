@@ -893,7 +893,29 @@ export interface RichTextSection {
  */
 export interface DataTable {
   /**
-   * Optional caption shown above the table
+   * Background color for the table section
+   */
+  backgroundColor: 'white' | 'muted';
+  /**
+   * Optional rich text shown above the table
+   */
+  contentAbove?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Optional short caption shown directly above the table
    */
   caption?: string | null;
   /**
@@ -913,6 +935,24 @@ export interface DataTable {
     }[];
     id?: string | null;
   }[];
+  /**
+   * Optional rich text shown below the table
+   */
+  contentBelow?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   bordered?: boolean | null;
   striped?: boolean | null;
   compact?: boolean | null;
@@ -1469,6 +1509,8 @@ export interface RichTextSectionSelect<T extends boolean = true> {
  * via the `definition` "DataTable_select".
  */
 export interface DataTableSelect<T extends boolean = true> {
+  backgroundColor?: T;
+  contentAbove?: T;
   caption?: T;
   headers?:
     | T
@@ -1487,6 +1529,7 @@ export interface DataTableSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  contentBelow?: T;
   bordered?: T;
   striped?: T;
   compact?: T;

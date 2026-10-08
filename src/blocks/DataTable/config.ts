@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { lexicalWithTable } from '@/fields/lexicalWithTable'
 
 export const DataTable: Block = {
   slug: 'dataTable',
@@ -9,10 +10,32 @@ export const DataTable: Block = {
   },
   fields: [
     {
+      name: 'backgroundColor',
+      type: 'select',
+      required: true,
+      defaultValue: 'white',
+      admin: {
+        description: 'Background color for the table section',
+      },
+      options: [
+        { label: 'White', value: 'white' },
+        { label: 'Muted', value: 'muted' },
+      ],
+    },
+    {
+      type: 'richText',
+      name: 'contentAbove',
+      label: 'Content above table',
+      editor: lexicalWithTable,
+      admin: {
+        description: 'Optional rich text shown above the table',
+      },
+    },
+    {
       name: 'caption',
       type: 'text',
       admin: {
-        description: 'Optional caption shown above the table',
+        description: 'Optional short caption shown directly above the table',
       },
     },
     {
@@ -66,6 +89,15 @@ export const DataTable: Block = {
           ],
         },
       ],
+    },
+    {
+      type: 'richText',
+      name: 'contentBelow',
+      label: 'Content below table',
+      editor: lexicalWithTable,
+      admin: {
+        description: 'Optional rich text shown below the table',
+      },
     },
     {
       type: 'collapsible',
