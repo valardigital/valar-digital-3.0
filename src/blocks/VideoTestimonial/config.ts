@@ -49,6 +49,14 @@ export const VideoTestimonial: Block = {
       },
     },
     {
+      name: 'supportingLine',
+      type: 'textarea',
+      admin: {
+        description:
+          'Optional smaller line below the quote (extra context from the video)',
+      },
+    },
+    {
       type: 'row',
       fields: [
         {

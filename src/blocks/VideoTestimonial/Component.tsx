@@ -19,6 +19,7 @@ export type VideoTestimonialProps = {
   thumbnail?: MediaRef
   label?: string | null
   quote?: string | null
+  supportingLine?: string | null
   speakerName?: string | null
   speakerRole?: string | null
   company?: string | null
@@ -132,6 +133,12 @@ export const VideoTestimonial: React.FC<VideoTestimonialProps> = (block) => {
             <blockquote className="text-xl md:text-2xl font-medium leading-[1.35] tracking-[0.02rem] text-text-dark">
               “{block.quote}”
             </blockquote>
+
+            {block.supportingLine ? (
+              <p className="mt-4 text-base md:text-lg leading-[1.55] tracking-[0.04rem] text-text-light">
+                {block.supportingLine}
+              </p>
+            ) : null}
 
             <div className="mt-6 flex flex-wrap items-center gap-4">
               {logoSrc ? (

@@ -1061,6 +1061,10 @@ export interface VideoTestimonial {
    */
   quote: string;
   /**
+   * Optional smaller line below the quote (extra context from the video)
+   */
+  supportingLine?: string | null;
+  /**
    * e.g. Jack Rubin
    */
   speakerName: string;
@@ -1721,6 +1725,7 @@ export interface VideoTestimonialSelect<T extends boolean = true> {
   thumbnail?: T;
   label?: T;
   quote?: T;
+  supportingLine?: T;
   speakerName?: T;
   speakerRole?: T;
   company?: T;
