@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload';
 import { ContentWithMedia } from '@/blocks/ContentWithMedia/config';
+import { CtaBannerEnd } from '@/blocks/CtaBannerEnd/config';
+import { CtaBannerMid } from '@/blocks/CtaBannerMid/config';
 import { DataTable } from '@/blocks/DataTable/config';
 import { DotSeparator } from '@/blocks/DotSeparator/config';
 import { TableOfContents } from '@/blocks/TableOfContents/config';
@@ -145,6 +147,8 @@ const Blog: CollectionConfig = {
                 TableOfContents,
                 DotSeparator,
                 DataTable,
+                CtaBannerMid,
+                CtaBannerEnd,
               ]),
             },
           ],

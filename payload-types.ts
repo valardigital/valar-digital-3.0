@@ -243,6 +243,10 @@ export interface Blog {
      */
     image?: (string | null) | Media;
     description?: string | null;
+    /**
+     * Paste full JSON-LD for this page (Organization, Article, BreadcrumbList, etc.). It is injected into the page head as application/ld+json. Leave empty to skip.
+     */
+    jsonLd?: string | null;
   };
   /**
    * Automatically set to current user
@@ -339,6 +343,8 @@ export interface CaseStudy {
         | DotSeparator
         | RichTextSection
         | DataTable
+        | CtaBannerMid
+        | CtaBannerEnd
       )[]
     | null;
   meta?: {
@@ -348,7 +354,15 @@ export interface CaseStudy {
      */
     image?: (string | null) | Media;
     description?: string | null;
+    /**
+     * Paste full JSON-LD for this page (Organization, Article, BreadcrumbList, etc.). It is injected into the page head as application/ld+json. Leave empty to skip.
+     */
+    jsonLd?: string | null;
   };
+  /**
+   * Show the Calendly booking section at the bottom of this case study
+   */
+  showCalendar?: boolean | null;
   /**
    * When this case study should be published
    */
@@ -966,6 +980,66 @@ export interface DataTable {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBannerMid".
+ */
+export interface CtaBannerMid {
+  /**
+   * Large number in the badge (e.g. 30)
+   */
+  badgeValue?: string | null;
+  /**
+   * Small label under the badge number
+   */
+  badgeUnit?: string | null;
+  eyebrow?: string | null;
+  heading?: string | null;
+  description?: string | null;
+  buttonLabel?: string | null;
+  /**
+   * CTA link (defaults to site calendar)
+   */
+  buttonUrl?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ctaBannerMid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBannerEnd".
+ */
+export interface CtaBannerEnd {
+  desktopEyebrow?: string | null;
+  desktopHeading?: string | null;
+  desktopIntro?: string | null;
+  steps?:
+    | {
+        number: string;
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  desktopButtonLabel?: string | null;
+  mobileEyebrow?: string | null;
+  mobileHeading?: string | null;
+  mobileIntro?: string | null;
+  checks?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  mobileButtonLabel?: string | null;
+  /**
+   * CTA link (defaults to site calendar)
+   */
+  buttonUrl?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ctaBannerEnd';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tools".
  */
 export interface Tool {
@@ -1010,6 +1084,10 @@ export interface Tool {
      */
     image?: (string | null) | Media;
     description?: string | null;
+    /**
+     * Paste full JSON-LD for this page (Organization, Article, BreadcrumbList, etc.). It is injected into the page head as application/ld+json. Leave empty to skip.
+     */
+    jsonLd?: string | null;
   };
   /**
    * Automatically set to current user
@@ -1256,6 +1334,7 @@ export interface BlogSelect<T extends boolean = true> {
         title?: T;
         image?: T;
         description?: T;
+        jsonLd?: T;
       };
   author?: T;
   publishedAt?: T;
@@ -1298,6 +1377,8 @@ export interface CaseStudySelect<T extends boolean = true> {
         dotSeparator?: T | DotSeparatorSelect<T>;
         richTextSection?: T | RichTextSectionSelect<T>;
         dataTable?: T | DataTableSelect<T>;
+        ctaBannerMid?: T | CtaBannerMidSelect<T>;
+        ctaBannerEnd?: T | CtaBannerEndSelect<T>;
       };
   meta?:
     | T
@@ -1305,7 +1386,9 @@ export interface CaseStudySelect<T extends boolean = true> {
         title?: T;
         image?: T;
         description?: T;
+        jsonLd?: T;
       };
+  showCalendar?: T;
   publishedAt?: T;
   slug?: T;
   updatedAt?: T;
@@ -1542,6 +1625,52 @@ export interface DataTableSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBannerMid_select".
+ */
+export interface CtaBannerMidSelect<T extends boolean = true> {
+  badgeValue?: T;
+  badgeUnit?: T;
+  eyebrow?: T;
+  heading?: T;
+  description?: T;
+  buttonLabel?: T;
+  buttonUrl?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBannerEnd_select".
+ */
+export interface CtaBannerEndSelect<T extends boolean = true> {
+  desktopEyebrow?: T;
+  desktopHeading?: T;
+  desktopIntro?: T;
+  steps?:
+    | T
+    | {
+        number?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  desktopButtonLabel?: T;
+  mobileEyebrow?: T;
+  mobileHeading?: T;
+  mobileIntro?: T;
+  checks?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  mobileButtonLabel?: T;
+  buttonUrl?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tools_select".
  */
 export interface ToolsSelect<T extends boolean = true> {
@@ -1560,6 +1689,7 @@ export interface ToolsSelect<T extends boolean = true> {
         title?: T;
         image?: T;
         description?: T;
+        jsonLd?: T;
       };
   author?: T;
   publishedAt?: T;

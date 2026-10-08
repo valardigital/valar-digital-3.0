@@ -9,6 +9,8 @@ import { BeforeAfterSection } from '@/blocks/BeforeAfterSection/config'
 import { ProcessDetailsSection } from '@/blocks/ProcessDetailsSection/config'
 import { OutcomeSection } from '@/blocks/OutcomeSection/config'
 import { ContentWithMedia } from '@/blocks/ContentWithMedia/config'
+import { CtaBannerEnd } from '@/blocks/CtaBannerEnd/config'
+import { CtaBannerMid } from '@/blocks/CtaBannerMid/config'
 import { DataTable } from '@/blocks/DataTable/config'
 import { DotSeparator } from '@/blocks/DotSeparator/config'
 import { RichTextSection } from '@/blocks/RichTextSection/config'
@@ -172,6 +174,8 @@ const CaseStudy: CollectionConfig = {
                 DotSeparator,
                 RichTextSection,
                 DataTable,
+                CtaBannerMid,
+                CtaBannerEnd,
               ],
             },
           ],
@@ -183,7 +187,16 @@ const CaseStudy: CollectionConfig = {
         },
       ],
     },
-    // Removed Featured flag as not needed for case studies
+    {
+      name: 'showCalendar',
+      type: 'checkbox',
+      label: 'Show calendar',
+      defaultValue: true,
+      admin: {
+        position: 'sidebar',
+        description: 'Show the Calendly booking section at the bottom of this case study',
+      },
+    },
     {
       name: 'publishedAt',
       type: 'date',

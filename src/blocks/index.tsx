@@ -11,6 +11,8 @@ import { ProcessDetailsSection } from '@/blocks/ProcessDetailsSection/Component'
 import { OutcomeSection } from '@/blocks/OutcomeSection/Component'
 import { RichTextSection } from '@/blocks/RichTextSection/Component'
 import { DataTable } from '@/blocks/DataTable/Component'
+import { CtaBannerMid } from '@/blocks/CtaBannerMid/Component'
+import { CtaBannerEnd } from '@/blocks/CtaBannerEnd/Component'
 import type { 
   ContentWithMedia as ContentWithMediaType, 
   TableOfContents as TableOfContentsType,
@@ -22,6 +24,8 @@ import type {
   ProcessDetailsSection as ProcessDetailsSectionType,
   OutcomeSection as OutcomeSectionType,
   DataTable as DataTableType,
+  CtaBannerMid as CtaBannerMidType,
+  CtaBannerEnd as CtaBannerEndType,
 } from '@/payload-types'
 import { Fragment } from 'react'
 
@@ -39,6 +43,8 @@ const blockComponents = {
   outcomeSection: OutcomeSection,
   richTextSection: RichTextSection,
   dataTable: DataTable,
+  ctaBannerMid: CtaBannerMid,
+  ctaBannerEnd: CtaBannerEnd,
 }
 
 export const RenderBlocks: React.FC<{
@@ -53,7 +59,9 @@ export const RenderBlocks: React.FC<{
     BeforeAfterSectionType |
     ProcessDetailsSectionType |
     OutcomeSectionType |
-    DataTableType
+    DataTableType |
+    CtaBannerMidType |
+    CtaBannerEndType
   )[]
 }> = (props) => {
   const {blocks} = props

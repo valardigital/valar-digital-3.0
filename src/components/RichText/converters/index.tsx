@@ -10,6 +10,8 @@ import type {
   OutcomeSection as OutcomeSectionProps,
   InsightsListSection as InsightsListSectionProps,
   DataTable as DataTableType,
+  CtaBannerMid as CtaBannerMidType,
+  CtaBannerEnd as CtaBannerEndType,
 } from '@/payload-types'
 import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
 import { JSXConvertersFunction, LinkJSXConverter } from '@payloadcms/richtext-lexical/react'
@@ -27,6 +29,8 @@ import { ProcessDetailsSection } from '@/blocks/ProcessDetailsSection/Component'
 import { OutcomeSection } from '@/blocks/OutcomeSection/Component'
 import { InsightsListSection } from '@/blocks/InsightsListSection/Component'
 import { DataTable } from '@/blocks/DataTable/Component'
+import { CtaBannerMid } from '@/blocks/CtaBannerMid/Component'
+import { CtaBannerEnd } from '@/blocks/CtaBannerEnd/Component'
 
 // Extend NodeTypes to include all block node payloads
  type NodeTypes =
@@ -43,6 +47,8 @@ import { DataTable } from '@/blocks/DataTable/Component'
       | OutcomeSectionProps
       | InsightsListSectionProps
       | DataTableType
+      | CtaBannerMidType
+      | CtaBannerEndType
       | { id?: string }
     >
 
@@ -64,6 +70,12 @@ export const jsxConverter: JSXConvertersFunction<NodeTypes> = ({defaultConverter
     outcomeSection: ({node}) => <OutcomeSection {...node.fields} />,
     dataTable: ({node}: { node: SerializedBlockNode<DataTableType> }) => (
       <DataTable {...node.fields} />
+    ),
+    ctaBannerMid: ({node}: { node: SerializedBlockNode<CtaBannerMidType> }) => (
+      <CtaBannerMid {...node.fields} />
+    ),
+    ctaBannerEnd: ({node}: { node: SerializedBlockNode<CtaBannerEndType> }) => (
+      <CtaBannerEnd {...node.fields} />
     ),
   }
 })

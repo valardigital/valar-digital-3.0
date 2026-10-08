@@ -1,4 +1,6 @@
 import type { Block } from 'payload'
+import { CtaBannerEnd } from '@/blocks/CtaBannerEnd/config'
+import { CtaBannerMid } from '@/blocks/CtaBannerMid/config'
 import { DataTable } from '@/blocks/DataTable/config'
 import { lexicalWithTableAndBlocks } from '@/fields/lexicalWithTable'
 
@@ -27,8 +29,7 @@ export const RichTextSection: Block = {
       type: 'richText',
       name: 'content',
       required: true,
-      // Native Lexical tables + insertable Table block via /
-      editor: lexicalWithTableAndBlocks([DataTable]),
+      editor: lexicalWithTableAndBlocks([DataTable, CtaBannerMid, CtaBannerEnd]),
     },
   ],
 }

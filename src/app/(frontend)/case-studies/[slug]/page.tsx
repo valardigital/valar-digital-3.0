@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import RichText from '@/components/RichText'
 import { RenderBlocks } from '@/blocks'
 import CTASection from '@/app/(frontend)/components/shared/CTASection'
+import { JsonLd } from '@/components/JsonLd'
 import { cache } from 'react'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
@@ -52,18 +53,21 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
   }
 
   return (
-    <div className="bg-background-muted mt-[64px] md:mt-[80px]">
-      {caseStudy.content && (
-        Array.isArray((caseStudy as any).content) ? (
-          // Blocks-based content
-          <RenderBlocks blocks={(caseStudy as any).content} />
-        ) : (
-          // Legacy richText content
-          <RichText data={caseStudy.content as any} />
-        )
-      )}
-      <CTASection />
-    </div>
+    <>
+      <JsonLd data={(caseStudy as any)?.meta?.jsonLd} />
+      <div className="bg-background-muted mt-[64px] md:mt-[80px]">
+        {caseStudy.content && (
+          Array.isArray((caseStudy as any).content) ? (
+            // Blocks-based content
+            <RenderBlocks blocks={(caseStudy as any).content} />
+          ) : (
+            // Legacy richText content
+            <RichText data={caseStudy.content as any} />
+          )
+        )}
+        {(caseStudy as any).showCalendar !== false && <CTASection />}
+      </div>
+    </>
   )
 }
 

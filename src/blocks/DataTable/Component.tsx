@@ -70,53 +70,51 @@ export const DataTable: React.FC<DataTableProps> = (block) => {
     block.backgroundColor === 'muted' ? 'bg-background-muted' : 'bg-white'
 
   return (
-    <section className={`md:px-0 px-4 ${backgroundClass} ${block.className || ''}`}>
-      <div className="container mx-auto text-text-dark">
-        {hasLexicalContent(block.contentAbove) ? (
-          <RichText
-            data={block.contentAbove as SerializedEditorState}
-            className={`${styles.richText} tracking-[0.04rem] leading-[1.6] mb-4`}
-          />
-        ) : null}
+    <div className={`${styles.root} not-prose ${backgroundClass} text-text-dark ${block.className || ''}`}>
+      {hasLexicalContent(block.contentAbove) ? (
+        <RichText
+          data={block.contentAbove as SerializedEditorState}
+          className={`${styles.richText} tracking-[0.04rem] leading-[1.6] mb-4`}
+        />
+      ) : null}
 
-        {(headers.length > 0 || rows.length > 0) && (
-          <div className={styles.wrap}>
-            {block.caption ? <p className={styles.caption}>{block.caption}</p> : null}
-            <table className={tableClassName}>
-              {headers.length > 0 ? (
-                <thead>
-                  <tr>
-                    {Array.from({ length: columnCount }).map((_, i) => (
-                      <th key={headers[i]?.id ?? `h-${i}`}>{headers[i]?.label ?? ''}</th>
-                    ))}
-                  </tr>
-                </thead>
-              ) : null}
-              <tbody>
-                {rows.map((row, rowIndex) => (
-                  <tr key={row.id ?? `r-${rowIndex}`}>
-                    {Array.from({ length: columnCount }).map((_, cellIndex) => (
-                      <td
-                        key={row.cells?.[cellIndex]?.id ?? `c-${rowIndex}-${cellIndex}`}
-                        className={styles.cell}
-                      >
-                        {row.cells?.[cellIndex]?.content ?? ''}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+      {(headers.length > 0 || rows.length > 0) && (
+        <div className={styles.wrap}>
+          {block.caption ? <p className={styles.caption}>{block.caption}</p> : null}
+          <table className={tableClassName}>
+            {headers.length > 0 ? (
+              <thead>
+                <tr>
+                  {Array.from({ length: columnCount }).map((_, i) => (
+                    <th key={headers[i]?.id ?? `h-${i}`}>{headers[i]?.label ?? ''}</th>
+                  ))}
+                </tr>
+              </thead>
+            ) : null}
+            <tbody>
+              {rows.map((row, rowIndex) => (
+                <tr key={row.id ?? `r-${rowIndex}`}>
+                  {Array.from({ length: columnCount }).map((_, cellIndex) => (
+                    <td
+                      key={row.cells?.[cellIndex]?.id ?? `c-${rowIndex}-${cellIndex}`}
+                      className={styles.cell}
+                    >
+                      {row.cells?.[cellIndex]?.content ?? ''}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
-        {hasLexicalContent(block.contentBelow) ? (
-          <RichText
-            data={block.contentBelow as SerializedEditorState}
-            className={`${styles.richText} tracking-[0.04rem] leading-[1.6] mt-4`}
-          />
-        ) : null}
-      </div>
-    </section>
+      {hasLexicalContent(block.contentBelow) ? (
+        <RichText
+          data={block.contentBelow as SerializedEditorState}
+          className={`${styles.richText} tracking-[0.04rem] leading-[1.6] mt-4`}
+        />
+      ) : null}
+    </div>
   )
 }

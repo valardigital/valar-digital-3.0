@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 import type { Tool } from '@/payload-types';
 import ToolRenderer from '../../components/tools/ToolRenderer';
 import { buildToolMetadata } from '@/utilities/buildToolMetadata';
+import { JsonLd } from '@/components/JsonLd';
 type Args = {
   params: Promise<{ slug?: string }>;
 };
@@ -36,14 +37,17 @@ export default async function ToolDetailPage({ params: paramsPromise }: Args) {
   if (!tool) return notFound();
 
   return (
-    <div className="bg-background-muted mt-[64px] md:mt-[80px] min-h-screen">
-      <ToolRenderer
-        toolComponent={tool.toolComponent as string}
-        customHtml={tool.customHtml}
-        customCss={tool.customCss}
-        customJs={tool.customJs}
-      />
-    </div>
+    <>
+      <JsonLd data={(tool as any)?.meta?.jsonLd} />
+      <div className="bg-background-muted mt-[64px] md:mt-[80px] min-h-screen">
+        <ToolRenderer
+          toolComponent={tool.toolComponent as string}
+          customHtml={tool.customHtml}
+          customCss={tool.customCss}
+          customJs={tool.customJs}
+        />
+      </div>
+    </>
   );
 }
 

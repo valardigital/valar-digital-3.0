@@ -10,6 +10,7 @@ import { cache } from 'react'
 import { RenderBlocks } from '@/blocks'
 import arrowLeft from "@/assets/images/arrow-left-blog.svg";
 import RelatedPosts from '@/app/(frontend)/components/blog/RelatedPosts'
+import { JsonLd } from '@/components/JsonLd'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
 
 type Args = {
@@ -64,7 +65,9 @@ export default async function BlogPostPage({ params: paramsPromise }: Args) {
   })()
 
   return (
-    <div className="bg-background-muted mt-[64px] md:mt-[80px] min-h-screen">
+    <>
+      <JsonLd data={(post as any)?.meta?.jsonLd} />
+      <div className="bg-background-muted mt-[64px] md:mt-[80px] min-h-screen">
       <div className="mx-auto md:px-0 px-6 pt-6 max-w-4xl">
         <Link 
           href="/blog" 
@@ -141,6 +144,7 @@ export default async function BlogPostPage({ params: paramsPromise }: Args) {
         <RelatedPosts posts={await getRelatedPosts(slug as string)} />
       </article>
     </div>
+    </>
   )
 }
 
