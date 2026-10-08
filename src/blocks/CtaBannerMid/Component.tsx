@@ -1,11 +1,5 @@
-import { Plus_Jakarta_Sans } from 'next/font/google'
+import { ctaBannerFont } from '../CtaBanners/font'
 import styles from '../CtaBanners/CtaBanner.module.css'
-
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
-  display: 'swap',
-})
 
 export type CtaBannerMidProps = {
   id?: string
@@ -45,10 +39,7 @@ export const CtaBannerMid: React.FC<CtaBannerMidProps> = (block) => {
   const buttonUrl = block.buttonUrl || '/#calendar'
 
   return (
-    <div
-      className={`${styles.root} ${plusJakarta.className} not-prose ${block.className || ''}`}
-      style={{ ['--font-cta-banner' as string]: plusJakarta.style.fontFamily }}
-    >
+    <div className={`${styles.root} ${ctaBannerFont.className} ${ctaBannerFont.variable} not-prose ${block.className || ''}`}>
       <section className={`${styles.vb} ${styles.b1}`} aria-label="Book a free growth session">
         <div className={styles.badge} aria-hidden="true">
           <b>{badgeValue}</b>
