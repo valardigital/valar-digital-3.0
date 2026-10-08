@@ -70,7 +70,7 @@ export const DataTable: React.FC<DataTableProps> = (block) => {
     block.backgroundColor === 'muted' ? 'bg-background-muted' : 'bg-white'
 
   return (
-    <section className={`py-4 md:py-8 md:px-0 px-4 ${backgroundClass} ${block.className || ''}`}>
+    <section className={`md:px-0 px-4 ${backgroundClass} ${block.className || ''}`}>
       <div className="container mx-auto text-text-dark">
         {hasLexicalContent(block.contentAbove) ? (
           <RichText
