@@ -20,6 +20,7 @@ import { TableOfContents } from '@/blocks/TableOfContents/Component'
 import { DotSeparator } from '@/blocks/DotSeparator/Component'
 import { internalDocToHref } from '@/components/RichText/converters/internalLink'
 import { headingConverter } from '@/components/RichText/converters/headingConverter'
+import { uploadConverter } from '@/components/RichText/converters/uploadConverter'
 import { HeroSection } from '@/blocks/HeroSection/Component'
 import { ResultsSection } from '@/blocks/ResultsSection/Component'
 import { InsightsSection } from '@/blocks/InsightsSection/Component'
@@ -56,6 +57,7 @@ export const jsxConverter: JSXConvertersFunction<NodeTypes> = ({defaultConverter
   ...defaultConverters,
   ...LinkJSXConverter({internalDocToHref}),
   ...headingConverter,
+  ...uploadConverter,
   blocks: {
     contentWithMedia: ({node}) => <ContentWithMedia {...node.fields} />,
     tableOfContents: ({node}) => <TableOfContents {...node.fields} />,
